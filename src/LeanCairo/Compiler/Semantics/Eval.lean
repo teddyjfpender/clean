@@ -8,21 +8,51 @@ open LeanCairo.Core.Domain
 
 structure EvalContext where
   feltVars : String -> Int := fun _ => 0
+  i8Vars : String -> Int := fun _ => 0
+  i16Vars : String -> Int := fun _ => 0
+  i32Vars : String -> Int := fun _ => 0
+  i64Vars : String -> Int := fun _ => 0
+  i128Vars : String -> Int := fun _ => 0
   u128Vars : String -> Nat := fun _ => 0
+  u8Vars : String -> Nat := fun _ => 0
+  u16Vars : String -> Nat := fun _ => 0
+  u32Vars : String -> Nat := fun _ => 0
+  u64Vars : String -> Nat := fun _ => 0
   u256Vars : String -> Nat := fun _ => 0
+  qm31Vars : String -> Nat := fun _ => 0
   boolVars : String -> Bool := fun _ => false
   feltStorage : String -> Int := fun _ => 0
+  i8Storage : String -> Int := fun _ => 0
+  i16Storage : String -> Int := fun _ => 0
+  i32Storage : String -> Int := fun _ => 0
+  i64Storage : String -> Int := fun _ => 0
+  i128Storage : String -> Int := fun _ => 0
   u128Storage : String -> Nat := fun _ => 0
+  u8Storage : String -> Nat := fun _ => 0
+  u16Storage : String -> Nat := fun _ => 0
+  u32Storage : String -> Nat := fun _ => 0
+  u64Storage : String -> Nat := fun _ => 0
   u256Storage : String -> Nat := fun _ => 0
+  qm31Storage : String -> Nat := fun _ => 0
   boolStorage : String -> Bool := fun _ => false
 
 namespace EvalContext
 
 def readVar (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
   match ty with
-  | .felt252 | .i8 | .i16 | .i32 | .i64 | .i128 => ctx.feltVars name
-  | .u128 | .u8 | .u16 | .u32 | .u64 | .qm31 => ctx.u128Vars name
+  | .felt252 => ctx.feltVars name
+  | .i8 => ctx.i8Vars name
+  | .i16 => ctx.i16Vars name
+  | .i32 => ctx.i32Vars name
+  | .i64 => ctx.i64Vars name
+  | .i128 => ctx.i128Vars name
+  | .u128 => ctx.u128Vars name
+  | .u8 => ctx.u8Vars name
+  | .u16 => ctx.u16Vars name
+  | .u32 => ctx.u32Vars name
+  | .u64 => ctx.u64Vars name
   | .u256 => ctx.u256Vars name
+  | .qm31 => ctx.qm31Vars name
   | .bool => ctx.boolVars name
   | .tuple _ => ()
   | .structTy _ => ()
@@ -40,9 +70,19 @@ def readVar (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
 
 def readStorage (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
   match ty with
-  | .felt252 | .i8 | .i16 | .i32 | .i64 | .i128 => ctx.feltStorage name
-  | .u128 | .u8 | .u16 | .u32 | .u64 | .qm31 => ctx.u128Storage name
+  | .felt252 => ctx.feltStorage name
+  | .i8 => ctx.i8Storage name
+  | .i16 => ctx.i16Storage name
+  | .i32 => ctx.i32Storage name
+  | .i64 => ctx.i64Storage name
+  | .i128 => ctx.i128Storage name
+  | .u128 => ctx.u128Storage name
+  | .u8 => ctx.u8Storage name
+  | .u16 => ctx.u16Storage name
+  | .u32 => ctx.u32Storage name
+  | .u64 => ctx.u64Storage name
   | .u256 => ctx.u256Storage name
+  | .qm31 => ctx.qm31Storage name
   | .bool => ctx.boolStorage name
   | .tuple _ => ()
   | .structTy _ => ()
@@ -60,11 +100,30 @@ def readStorage (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
 
 def bindVar (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) : EvalContext :=
   match ty with
-  | .felt252 | .i8 | .i16 | .i32 | .i64 | .i128 =>
+  | .felt252 =>
       { ctx with feltVars := fun n => if n = name then value else ctx.feltVars n }
-  | .u128 | .u8 | .u16 | .u32 | .u64 | .qm31 =>
+  | .i8 =>
+      { ctx with i8Vars := fun n => if n = name then value else ctx.i8Vars n }
+  | .i16 =>
+      { ctx with i16Vars := fun n => if n = name then value else ctx.i16Vars n }
+  | .i32 =>
+      { ctx with i32Vars := fun n => if n = name then value else ctx.i32Vars n }
+  | .i64 =>
+      { ctx with i64Vars := fun n => if n = name then value else ctx.i64Vars n }
+  | .i128 =>
+      { ctx with i128Vars := fun n => if n = name then value else ctx.i128Vars n }
+  | .u128 =>
       { ctx with u128Vars := fun n => if n = name then value else ctx.u128Vars n }
+  | .u8 =>
+      { ctx with u8Vars := fun n => if n = name then value else ctx.u8Vars n }
+  | .u16 =>
+      { ctx with u16Vars := fun n => if n = name then value else ctx.u16Vars n }
+  | .u32 =>
+      { ctx with u32Vars := fun n => if n = name then value else ctx.u32Vars n }
+  | .u64 =>
+      { ctx with u64Vars := fun n => if n = name then value else ctx.u64Vars n }
   | .u256 => { ctx with u256Vars := fun n => if n = name then value else ctx.u256Vars n }
+  | .qm31 => { ctx with qm31Vars := fun n => if n = name then value else ctx.qm31Vars n }
   | .bool => { ctx with boolVars := fun n => if n = name then value else ctx.boolVars n }
   | .tuple _ => ctx
   | .structTy _ => ctx
@@ -82,11 +141,31 @@ def bindVar (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty)
 
 def bindStorage (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) : EvalContext :=
   match ty with
-  | .felt252 | .i8 | .i16 | .i32 | .i64 | .i128 =>
+  | .felt252 =>
       { ctx with feltStorage := fun n => if n = name then value else ctx.feltStorage n }
-  | .u128 | .u8 | .u16 | .u32 | .u64 | .qm31 =>
+  | .i8 =>
+      { ctx with i8Storage := fun n => if n = name then value else ctx.i8Storage n }
+  | .i16 =>
+      { ctx with i16Storage := fun n => if n = name then value else ctx.i16Storage n }
+  | .i32 =>
+      { ctx with i32Storage := fun n => if n = name then value else ctx.i32Storage n }
+  | .i64 =>
+      { ctx with i64Storage := fun n => if n = name then value else ctx.i64Storage n }
+  | .i128 =>
+      { ctx with i128Storage := fun n => if n = name then value else ctx.i128Storage n }
+  | .u128 =>
       { ctx with u128Storage := fun n => if n = name then value else ctx.u128Storage n }
+  | .u8 =>
+      { ctx with u8Storage := fun n => if n = name then value else ctx.u8Storage n }
+  | .u16 =>
+      { ctx with u16Storage := fun n => if n = name then value else ctx.u16Storage n }
+  | .u32 =>
+      { ctx with u32Storage := fun n => if n = name then value else ctx.u32Storage n }
+  | .u64 =>
+      { ctx with u64Storage := fun n => if n = name then value else ctx.u64Storage n }
   | .u256 => { ctx with u256Storage := fun n => if n = name then value else ctx.u256Storage n }
+  | .qm31 =>
+      { ctx with qm31Storage := fun n => if n = name then value else ctx.qm31Storage n }
   | .bool => { ctx with boolStorage := fun n => if n = name then value else ctx.boolStorage n }
   | .tuple _ => ctx
   | .structTy _ => ctx
