@@ -28,7 +28,7 @@ Maintain a strict, auditable ledger of direct Sierra subset coverage with comple
 ## Milestone status ledger
 
 ### DSR-1 Create dedicated subset coverage ledger
-- Status: NOT DONE
+- Status: DONE - a6374f8
 - Acceptance tests:
 1. Ledger file exists with completed and pending subset sections.
 2. Ledger status lines use strict status format.
