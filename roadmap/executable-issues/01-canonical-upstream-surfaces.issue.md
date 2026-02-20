@@ -36,7 +36,7 @@ Guarantee all coverage and compatibility claims are derived from pinned upstream
 2. Artificial pin mismatch is detected and fails.
 
 ### M-01-2: Inventory drift gate
-- Status: NOT DONE
+- Status: DONE - 569a0bf
 - Required work:
 1. Add snapshot gate for all `roadmap/inventory/*.md` files.
 2. Add CI target that regenerates and diffs inventories.
