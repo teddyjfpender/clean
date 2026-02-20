@@ -1,4 +1,5 @@
 import LeanCairo.Core.Spec.FuncSpec
+import LeanCairo.Core.Spec.Storage
 import LeanCairo.Core.Validation.Context
 import LeanCairo.Core.Validation.Errors
 import LeanCairo.Core.Validation.Expr
@@ -11,6 +12,9 @@ open LeanCairo.Core.Spec
 
 private def argEnv (args : List Param) : TypeEnv :=
   args.map (fun arg => (arg.name, arg.ty))
+
+private def storageEnv (fields : List StorageField) : TypeEnv :=
+  fields.map (fun field => (field.name, field.ty))
 
 private def validateArgumentNames (fnName : String) (args : List Param) : List ValidationError :=
   let invalidNameErrors :=
@@ -26,18 +30,45 @@ private def validateArgumentNames (fnName : String) (args : List Param) : List V
       ValidationError.duplicateArgumentName fnName dup)
   invalidNameErrors ++ duplicateErrors
 
-def validateFunction (fnSpec : FuncSpec) : List ValidationError :=
+private def validateWrite (knownStorage : TypeEnv) (writeSpec : StorageWrite) : List ValidationError :=
+  let fieldNameErrors :=
+    if isValidIdentifier writeSpec.field then
+      []
+    else
+      [.invalidIdentifier "storage write field name" writeSpec.field]
+  let fieldTypeErrors :=
+    match lookupType knownStorage writeSpec.field with
+    | none => [.unknownStorageField writeSpec.field]
+    | some declaredTy =>
+        if declaredTy == writeSpec.ty then
+          []
+        else
+          [.storageFieldTypeMismatch writeSpec.field writeSpec.ty declaredTy]
+  fieldNameErrors ++ fieldTypeErrors
+
+def validateFunction (storageFields : List StorageField) (fnSpec : FuncSpec) : List ValidationError :=
+  let knownStorage := storageEnv storageFields
   let nameErrors :=
     if isValidIdentifier fnSpec.name then
       []
     else
       [.invalidIdentifier "function name" fnSpec.name]
-  let mutabilityErrors :=
-    match fnSpec.mutability with
-    | .view => []
-    | other => [.unsupportedMutability fnSpec.name other]
   let argErrors := validateArgumentNames fnSpec.name fnSpec.args
-  let bodyErrors := validateExpr (argEnv fnSpec.args) fnSpec.body
-  nameErrors ++ mutabilityErrors ++ argErrors ++ bodyErrors
+  let bodyErrors := validateExpr (argEnv fnSpec.args) knownStorage fnSpec.body
+  let writeSpecErrors :=
+    fnSpec.writes.foldl
+      (fun errors writeSpec =>
+        errors ++ validateWrite knownStorage writeSpec ++ validateExpr (argEnv fnSpec.args) knownStorage writeSpec.value)
+      []
+  let writeMutabilityErrors :=
+    match fnSpec.mutability with
+    | .view =>
+        if fnSpec.writes.isEmpty then
+          []
+        else
+          [.writesNotAllowedInViewFunction fnSpec.name]
+    | .externalMutable =>
+        []
+  nameErrors ++ argErrors ++ bodyErrors ++ writeSpecErrors ++ writeMutabilityErrors
 
 end LeanCairo.Core.Validation

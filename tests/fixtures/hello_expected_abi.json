@@ -36,6 +36,18 @@
         { "name": "rhs", "type": "u128" }
       ],
       "outputs": [{ "type": "u128" }]
+    },
+    {
+      "name": "read_counter",
+      "state_mutability": "view",
+      "inputs": [],
+      "outputs": [{ "type": "u128" }]
+    },
+    {
+      "name": "increment_counter",
+      "state_mutability": "external",
+      "inputs": [{ "name": "amount", "type": "u128" }],
+      "outputs": [{ "type": "u128" }]
     }
   ]
 }

@@ -1,3 +1,4 @@
+import LeanCairo.Core.Domain.Mutability
 import LeanCairo.Core.Domain.Ty
 import LeanCairo.Core.Syntax.Expr
 import LeanCairo.Core.Spec.ContractSpec
@@ -35,9 +36,24 @@ private def maxU128Body : Expr .u128 :=
       (Expr.var (ty := .u128) "rhs")
       (Expr.var (ty := .u128) "lhs"))
 
+private def readCounterBody : Expr .u128 :=
+  Expr.storageRead (ty := .u128) "counter"
+
+private def incrementCounterValue : Expr .u128 :=
+  Expr.addU128
+    (Expr.storageRead (ty := .u128) "counter")
+    (Expr.var (ty := .u128) "amount")
+
 def contract : ContractSpec :=
   {
     contractName := "HelloContract"
+    storage :=
+      [
+        {
+          name := "counter"
+          ty := .u128
+        }
+      ]
     functions :=
       [
         {
@@ -63,6 +79,27 @@ def contract : ContractSpec :=
           args := [{ name := "lhs", ty := .u128 }, { name := "rhs", ty := .u128 }]
           ret := .u128
           body := maxU128Body
+        },
+        {
+          name := "readCounter"
+          args := []
+          ret := .u128
+          body := readCounterBody
+        },
+        {
+          name := "incrementCounter"
+          args := [{ name := "amount", ty := .u128 }]
+          ret := .u128
+          body := incrementCounterValue
+          mutability := .externalMutable
+          writes :=
+            [
+              {
+                field := "counter"
+                ty := .u128
+                value := incrementCounterValue
+              }
+            ]
         }
       ]
   }

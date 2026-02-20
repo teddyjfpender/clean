@@ -4,12 +4,18 @@ pub trait IHelloContract<TContractState> {
     fn add_u256(self: @TContractState, lhs: u256, rhs: u256) -> u256;
     fn eq_felt252(self: @TContractState, lhs: felt252, rhs: felt252) -> bool;
     fn max_u128(self: @TContractState, lhs: u128, rhs: u128) -> u128;
+    fn read_counter(self: @TContractState) -> u128;
+    fn increment_counter(ref self: TContractState, amount: u128) -> u128;
 }
 
 #[starknet::contract]
 mod HelloContract {
+    use starknet::storage::{StoragePointerReadAccess, StoragePointerWriteAccess};
+
     #[storage]
-    struct Storage {}
+    struct Storage {
+        counter: u128,
+    }
 
     #[abi(embed_v0)]
     impl HelloContractImpl of super::IHelloContract<ContractState> {
@@ -34,6 +40,15 @@ mod HelloContract {
                     lhs
                 }
             }
+        }
+
+        fn read_counter(self: @ContractState) -> u128 {
+            self.counter.read()
+        }
+
+        fn increment_counter(ref self: ContractState, amount: u128) -> u128 {
+            self.counter.write((self.counter.read() + amount));
+            (self.counter.read() + amount)
         }
     }
 }

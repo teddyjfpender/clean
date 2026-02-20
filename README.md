@@ -6,17 +6,18 @@ Status: Lean -> Cairo -> Scarb is wired and passing end-to-end in this repositor
 
 ## What You Can Do Now
 
-1. Define pure contract behavior in Lean as `ContractSpec` data.
+1. Define contract behavior in Lean as `ContractSpec` data, including storage fields.
 2. Generate Starknet Cairo contract source deterministically from that Lean spec.
 3. Compile generated Cairo with Scarb to Sierra artifacts.
 4. Optionally emit CASM by passing `--emit-casm true`.
 5. Validate generated ABI surface automatically against expected signatures.
 6. Run a full quality gate (`./scripts/workflow/run-mvp-checks.sh`) covering lint + snapshot + build + ABI checks.
+7. Generate both `view` and `external` entrypoints from Lean mutability settings.
+8. Generate storage reads/writes for mutable functions.
 
 ## Current MVP Limits
 
-- View-only functions (no state mutation support yet).
-- No storage modeling beyond empty boilerplate, no events, no syscalls, no cross-contract calls.
+- No events, no syscalls, no cross-contract calls.
 - Expression language is intentionally small and pure (no loops, no recursion, no dynamic memory structures).
 - Felt arithmetic is restricted to pass-through/equality semantics in this MVP.
 
@@ -99,6 +100,7 @@ Example module in this repo: `src/MyLeanContract.lean`.
 
 ## Notes
 
-- MVP mutability is restricted to `view`.
+- Mutability supports both `view` and `externalMutable`.
+- Storage writes are declared explicitly per function (`FuncSpec.writes`).
 - Felt arithmetic is limited to pass-through/equality semantics in this MVP.
 - Artifact location uses `*.starknet_artifacts.json` instead of hardcoded filenames.

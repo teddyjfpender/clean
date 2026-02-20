@@ -2,6 +2,7 @@ import LeanCairo.Core.Domain.Identifier
 import LeanCairo.Core.Domain.Ty
 import LeanCairo.Core.Domain.Mutability
 import LeanCairo.Core.Syntax.Expr
+import LeanCairo.Core.Spec.Storage
 import LeanCairo.Core.Spec.FuncSpec
 import LeanCairo.Core.Spec.ContractSpec
 import LeanCairo.Core.Validation.Errors

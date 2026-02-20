@@ -11,6 +11,13 @@ open LeanCairo.Core.Spec
 private def renderParam (param : Param) : String :=
   toCairoLocalName param.name ++ ": " ++ Ty.toCairo param.ty
 
+private def renderStorageWriteStatement (writeSpec : StorageWrite) : String :=
+  "self."
+    ++ toCairoStorageFieldName writeSpec.field
+    ++ ".write("
+    ++ emitExpr writeSpec.value
+    ++ ");"
+
 def emitTraitFunctionSignature (fnSpec : FuncSpec) : String :=
   let functionName := toCairoFunctionName fnSpec.name
   let selfParam := Mutability.toInterfaceSelf fnSpec.mutability
@@ -36,7 +43,11 @@ def emitImplFunction (indentDepth : Nat) (fnSpec : FuncSpec) : String :=
       ++ ") -> "
       ++ Ty.toCairo fnSpec.ret
       ++ " {"
-  let body := indentLines (indentDepth + 1) <| emitExpr fnSpec.body
+  let writeLines :=
+    fnSpec.writes.map (fun writeSpec =>
+      indent (indentDepth + 1) ++ renderStorageWriteStatement writeSpec)
+  let returnExprLines := indentLines (indentDepth + 1) (emitExpr fnSpec.body)
+  let body := String.intercalate "\n" <| writeLines ++ [returnExprLines]
   let footer := indent indentDepth ++ "}"
   String.intercalate "\n" [header, body, footer]
 

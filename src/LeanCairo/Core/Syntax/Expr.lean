@@ -7,6 +7,7 @@ open LeanCairo.Core.Domain
 
 inductive Expr : Ty -> Type where
   | var (name : Ident) : Expr ty
+  | storageRead (name : Ident) : Expr ty
   | litU128 (value : Nat) : Expr .u128
   | litU256 (value : Nat) : Expr .u256
   | litBool (value : Bool) : Expr .bool

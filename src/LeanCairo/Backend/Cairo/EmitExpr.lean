@@ -16,6 +16,7 @@ private def renderU256Literal (value : Nat) : String :=
 
 partial def emitExpr : Expr ty -> String
   | .var name => toCairoLocalName name
+  | .storageRead name => "self." ++ toCairoStorageFieldName name ++ ".read()"
   | .litU128 value => s!"{value}_u128"
   | .litU256 value => renderU256Literal value
   | .litBool value => if value then "true" else "false"

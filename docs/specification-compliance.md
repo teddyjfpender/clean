@@ -22,5 +22,5 @@
 
 ## Explicit non-goal enforcement
 
-- No stateful mutation in MVP: validator rejects non-view mutability in `src/LeanCairo/Core/Validation/Function.lean`.
+- Extension note: stateful mutation is now supported via `externalMutable` + explicit storage writes in `FuncSpec.writes`.
 - No unsupported constructs (loops/recursion/etc.): AST surface in `Expr` excludes them by construction.

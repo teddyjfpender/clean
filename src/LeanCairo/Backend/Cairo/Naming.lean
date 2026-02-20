@@ -53,6 +53,9 @@ def toCairoFunctionName (value : String) : String :=
 def toCairoLocalName (value : String) : String :=
   sanitizeIdentifier <| toSnakeCase value
 
+def toCairoStorageFieldName (value : String) : String :=
+  sanitizeIdentifier <| toSnakeCase value
+
 def toScarbPackageName (contractName : String) : String :=
   String.ofList <| (toSnakeCase contractName).toList.map Char.toLower
 

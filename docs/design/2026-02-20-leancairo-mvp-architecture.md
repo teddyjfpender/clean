@@ -47,7 +47,8 @@ Expected downstream build artifacts (via `scarb build`):
 - No duplicate argument names inside a function.
 - Every variable reference is bound in lexical scope (`args` + `let`).
 - Variable references use the same type as their binding.
-- MVP mutability is `view` only.
+- Storage reads/writes must reference declared storage fields with matching types.
+- View functions cannot declare storage writes.
 
 ### Codegen invariants
 
@@ -70,7 +71,7 @@ Expected downstream build artifacts (via `scarb build`):
 - CLI argument parse failure: missing/invalid flags.
 - Invalid module token (unsafe import path characters).
 - Module import or `contract` symbol resolution failure.
-- Contract validation failure (duplicate names, unbound vars, type mismatch, unsupported mutability).
+- Contract validation failure (duplicate names, unbound vars, type mismatch, invalid storage access/write declarations).
 - File system write failure.
 - `scarb build` failure in downstream checks.
 - ABI mismatch against expected signatures.
@@ -98,4 +99,3 @@ Internal formatting details, script templates, and naming helper internals remai
 - Allowed-libfunc constraints are delegated to Scarb default validation.
 - No hidden network dependencies in tests.
 - ABI checks consume the generated artifacts index and do not hardcode class filenames.
-
