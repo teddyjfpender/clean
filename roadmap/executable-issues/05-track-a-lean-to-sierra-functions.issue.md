@@ -33,7 +33,9 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 ## Milestone status ledger
 
 ### A0 Surface synchronization and autogeneration
-- Status: NOT DONE
+- Status: DONE - 6a1f5ce
+- Evidence tests: `scripts/test/sierra_surface_codegen.sh`; `python3 scripts/roadmap/generate_inventory_docs.py && git diff --exit-code roadmap/inventory`
+- Evidence proofs: `N/A`
 - Acceptance tests:
 1. `./scripts/test/sierra_surface_codegen.sh`
 2. `python3 scripts/roadmap/generate_inventory_docs.py && git diff --exit-code roadmap/inventory`
@@ -118,4 +120,3 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 1. All A0-A8 milestones are `DONE - <commit>`.
 2. All strict tests above are in CI and passing.
 3. Coverage report and proof report are attached for release.
-
