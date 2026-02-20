@@ -27,7 +27,9 @@ Generalize MIR to express full function-level semantics required by pinned Sierr
 ## Milestones
 
 ### M-03-1: Type universe expansion
-- Status: NOT DONE
+- Status: DONE - ef4b922
+- Evidence tests: `scripts/test/type_universe_regression.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`; `src/LeanCairo/Compiler/Proof/CSELetNormSound.lean`
 - Required work:
 1. Add generic scalar/compound types and wrappers.
 2. Preserve exhaustive pattern matching across compiler stages.
@@ -58,4 +60,3 @@ Generalize MIR to express full function-level semantics required by pinned Sierr
 1. MIR supports targeted families without backend leakage.
 2. Effects/resources are explicit and test-covered.
 3. Canonicalization is deterministic and law-checked.
-
