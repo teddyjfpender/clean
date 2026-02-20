@@ -6,6 +6,58 @@ namespace LeanCairo.Compiler.Semantics
 open LeanCairo.Compiler.IR
 open LeanCairo.Core.Domain
 
+namespace IntegerDomains
+
+def pow2 (bits : Nat) : Nat :=
+  Nat.pow 2 bits
+
+def normalizeUnsigned (bits : Nat) (value : Nat) : Nat :=
+  value % pow2 bits
+
+def unsignedAdd (bits : Nat) (lhs rhs : Nat) : Nat :=
+  normalizeUnsigned bits (lhs + rhs)
+
+def unsignedSub (bits : Nat) (lhs rhs : Nat) : Nat :=
+  let modulus := pow2 bits
+  (lhs + (modulus - (rhs % modulus))) % modulus
+
+def unsignedMul (bits : Nat) (lhs rhs : Nat) : Nat :=
+  normalizeUnsigned bits (lhs * rhs)
+
+def normalizeSigned (bits : Nat) (value : Int) : Int :=
+  let modulusNat := pow2 bits
+  let halfNat := pow2 (bits - 1)
+  let modulus := Int.ofNat modulusNat
+  let half := Int.ofNat halfNat
+  let residue := Int.emod value modulus
+  if residue < half then residue else residue - modulus
+
+def signedAdd (bits : Nat) (lhs rhs : Int) : Int :=
+  normalizeSigned bits (lhs + rhs)
+
+def signedSub (bits : Nat) (lhs rhs : Int) : Int :=
+  normalizeSigned bits (lhs - rhs)
+
+def signedMul (bits : Nat) (lhs rhs : Int) : Int :=
+  normalizeSigned bits (lhs * rhs)
+
+def qm31Modulus : Nat := 2 ^ 31 - 1
+
+def normalizeQm31 (value : Nat) : Nat :=
+  value % qm31Modulus
+
+def qm31Add (lhs rhs : Nat) : Nat :=
+  normalizeQm31 (lhs + rhs)
+
+def qm31Sub (lhs rhs : Nat) : Nat :=
+  let rhsNorm := normalizeQm31 rhs
+  (normalizeQm31 lhs + (qm31Modulus - rhsNorm)) % qm31Modulus
+
+def qm31Mul (lhs rhs : Nat) : Nat :=
+  normalizeQm31 (lhs * rhs)
+
+end IntegerDomains
+
 structure EvalContext where
   feltVars : String -> Int := fun _ => 0
   i8Vars : String -> Int := fun _ => 0
@@ -48,6 +100,36 @@ def supportsRuntimeBinding : Ty -> Bool
 def unsupportedDomainMessage (op : String) (ty : Ty) (name : String) : String :=
   s!"unsupported evaluator {op} for type '{Ty.toCairo ty}' (family '{Ty.familyTag ty}') at symbol '{name}'"
 
+def normalizeRuntimeValue (ty : Ty) : Ty.denote ty -> Ty.denote ty :=
+  match ty with
+  | .felt252 => id
+  | .i8 => IntegerDomains.normalizeSigned 8
+  | .i16 => IntegerDomains.normalizeSigned 16
+  | .i32 => IntegerDomains.normalizeSigned 32
+  | .i64 => IntegerDomains.normalizeSigned 64
+  | .i128 => IntegerDomains.normalizeSigned 128
+  | .u128 => IntegerDomains.normalizeUnsigned 128
+  | .u8 => IntegerDomains.normalizeUnsigned 8
+  | .u16 => IntegerDomains.normalizeUnsigned 16
+  | .u32 => IntegerDomains.normalizeUnsigned 32
+  | .u64 => IntegerDomains.normalizeUnsigned 64
+  | .u256 => IntegerDomains.normalizeUnsigned 256
+  | .qm31 => IntegerDomains.normalizeQm31
+  | .bool => id
+  | .tuple _ => id
+  | .structTy _ => id
+  | .enumTy _ => id
+  | .array _ => id
+  | .span _ => id
+  | .nullable _ => id
+  | .boxed _ => id
+  | .dict _ _ => id
+  | .nonZero _ => id
+  | .rangeCheck => id
+  | .gasBuiltin => id
+  | .segmentArena => id
+  | .panicSignal => id
+
 def readVar (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
   match ty with
   | .felt252 => ctx.feltVars name
@@ -80,7 +162,7 @@ def readVar (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
 
 def readVarStrict (ctx : EvalContext) (ty : Ty) (name : String) : Except String (Ty.denote ty) :=
   if supportsRuntimeBinding ty then
-    .ok (readVar ctx ty name)
+    .ok (normalizeRuntimeValue ty (readVar ctx ty name))
   else
     .error (unsupportedDomainMessage "variable read" ty name)
 
@@ -116,7 +198,7 @@ def readStorage (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
 
 def readStorageStrict (ctx : EvalContext) (ty : Ty) (name : String) : Except String (Ty.denote ty) :=
   if supportsRuntimeBinding ty then
-    .ok (readStorage ctx ty name)
+    .ok (normalizeRuntimeValue ty (readStorage ctx ty name))
   else
     .error (unsupportedDomainMessage "storage read" ty name)
 
@@ -164,7 +246,7 @@ def bindVar (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty)
 def bindVarStrict (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) :
     Except String EvalContext :=
   if supportsRuntimeBinding ty then
-    .ok (bindVar ctx ty name value)
+    .ok (bindVar ctx ty name (normalizeRuntimeValue ty value))
   else
     .error (unsupportedDomainMessage "variable bind" ty name)
 
@@ -213,13 +295,31 @@ def bindStorage (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote
 def bindStorageStrict (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) :
     Except String EvalContext :=
   if supportsRuntimeBinding ty then
-    .ok (bindStorage ctx ty name value)
+    .ok (bindStorage ctx ty name (normalizeRuntimeValue ty value))
   else
     .error (unsupportedDomainMessage "storage bind" ty name)
 
 theorem readVar_bindVar_same (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) :
     readVar (bindVar ctx ty name value) ty name = value := by
   cases ty <;> simp [readVar, bindVar]
+
+theorem readVar_bindVar_type_non_interference
+    (ctx : EvalContext)
+    (tyWrite tyRead : Ty)
+    (nameWrite nameRead : String)
+    (value : Ty.denote tyWrite)
+    (hTy : tyRead ≠ tyWrite) :
+    readVar (bindVar ctx tyWrite nameWrite value) tyRead nameRead = readVar ctx tyRead nameRead := by
+  cases tyWrite <;> cases tyRead <;> simp [readVar, bindVar] at hTy ⊢ <;> contradiction
+
+theorem readStorage_bindStorage_type_non_interference
+    (ctx : EvalContext)
+    (tyWrite tyRead : Ty)
+    (nameWrite nameRead : String)
+    (value : Ty.denote tyWrite)
+    (hTy : tyRead ≠ tyWrite) :
+    readStorage (bindStorage ctx tyWrite nameWrite value) tyRead nameRead = readStorage ctx tyRead nameRead := by
+  cases tyWrite <;> cases tyRead <;> simp [readStorage, bindStorage] at hTy ⊢ <;> contradiction
 
 end EvalContext
 
@@ -278,8 +378,8 @@ def evalExpr (ctx : EvalContext) : IRExpr ty -> Ty.denote ty
 def evalExprStrict (ctx : EvalContext) : IRExpr ty -> Except String (Ty.denote ty)
   | .var name => EvalContext.readVarStrict ctx ty name
   | .storageRead name => EvalContext.readStorageStrict ctx ty name
-  | .litU128 value => .ok value
-  | .litU256 value => .ok value
+  | .litU128 value => .ok (IntegerDomains.normalizeUnsigned 128 value)
+  | .litU256 value => .ok (IntegerDomains.normalizeUnsigned 256 value)
   | .litBool value => .ok value
   | .litFelt252 value => .ok value
   | .addFelt252 lhs rhs => do
@@ -297,27 +397,27 @@ def evalExprStrict (ctx : EvalContext) : IRExpr ty -> Except String (Ty.denote t
   | .addU128 lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
-      pure (left + right)
+      pure (IntegerDomains.unsignedAdd 128 left right)
   | .subU128 lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
-      pure (left - right)
+      pure (IntegerDomains.unsignedSub 128 left right)
   | .mulU128 lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
-      pure (left * right)
+      pure (IntegerDomains.unsignedMul 128 left right)
   | .addU256 lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
-      pure (left + right)
+      pure (IntegerDomains.unsignedAdd 256 left right)
   | .subU256 lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
-      pure (left - right)
+      pure (IntegerDomains.unsignedSub 256 left right)
   | .mulU256 lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
-      pure (left * right)
+      pure (IntegerDomains.unsignedMul 256 left right)
   | @IRExpr.eq ty lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
