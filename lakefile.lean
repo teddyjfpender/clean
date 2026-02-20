@@ -12,6 +12,8 @@ lean_lib MyLeanContract where
 
 lean_lib MyLeanContractCSEBench where
 
+lean_lib MyLeanFixedPointBench where
+
 @[default_target]
 lean_exe «leancairo-gen» where
   root := `LeanCairo.CLI.Main

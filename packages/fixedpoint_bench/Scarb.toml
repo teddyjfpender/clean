@@ -1,0 +1,63 @@
+[package]
+name = "fixedpoint_bench"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+cairo_execute = "2.14.0"
+
+[dev-dependencies]
+cairo_test = "2.14.0"
+
+[cairo]
+enable-gas = false
+
+[[target.executable]]
+name = "bench_qmul_hand"
+function = "fixedpoint_bench::bench_qmul_hand"
+sierra = true
+
+[[target.executable]]
+name = "bench_qmul_opt"
+function = "fixedpoint_bench::bench_qmul_opt"
+sierra = true
+
+[[target.executable]]
+name = "bench_qexp_hand"
+function = "fixedpoint_bench::bench_qexp_hand"
+sierra = true
+
+[[target.executable]]
+name = "bench_qexp_opt"
+function = "fixedpoint_bench::bench_qexp_opt"
+sierra = true
+
+[[target.executable]]
+name = "bench_qlog_hand"
+function = "fixedpoint_bench::bench_qlog_hand"
+sierra = true
+
+[[target.executable]]
+name = "bench_qlog_opt"
+function = "fixedpoint_bench::bench_qlog_opt"
+sierra = true
+
+[[target.executable]]
+name = "bench_qnewton_hand"
+function = "fixedpoint_bench::bench_qnewton_hand"
+sierra = true
+
+[[target.executable]]
+name = "bench_qnewton_opt"
+function = "fixedpoint_bench::bench_qnewton_opt"
+sierra = true
+
+[[target.executable]]
+name = "bench_fib_naive"
+function = "fixedpoint_bench::bench_fib_naive"
+sierra = true
+
+[[target.executable]]
+name = "bench_fib_fast"
+function = "fixedpoint_bench::bench_fib_fast"
+sierra = true

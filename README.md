@@ -41,6 +41,7 @@ Current proof scope:
 7. Generate both `view` and `external` entrypoints from Lean mutability settings.
 8. Generate storage reads/writes for mutable functions.
 9. Run an optimizer non-regression benchmark gate (optimized score must be <= baseline score).
+10. Run deterministic step-comparison benchmarks for arithmetic/control-flow kernels in `packages/fixedpoint_bench`.
 
 ## Current MVP Limits
 
@@ -65,6 +66,16 @@ Current proof scope:
   - richer typed IR passes (CSE, let normalization, storage-access optimization, specialization/inlining),
   - stronger cost model tied to Sierra/Cairo execution metrics,
   - benchmark suites representing realistic workloads.
+
+Measured sample benchmark deltas (from `packages/fixedpoint_bench`):
+
+- `qmul`: `721 -> 255` steps (64.63% fewer, 2.83x faster)
+- `qexp`: `1605 -> 384` steps (76.07% fewer, 4.18x faster)
+- `qlog`: `973 -> 401` steps (58.79% fewer, 2.43x faster)
+- `qnewton`: `1195 -> 512` steps (57.15% fewer, 2.33x faster)
+- `fib`: `1117620 -> 711` steps (99.94% fewer, 1571.90x faster)
+
+See `docs/fixed-point/benchmark-results.md` for measurement method and reproducible commands.
 
 ## Quick Start Guides
 
@@ -103,6 +114,18 @@ Guide 4: Run the CSE-focused benchmark gate:
 
 ```bash
 ./scripts/bench/check_optimizer_non_regression.sh MyLeanContractCSEBench CSEBenchContract
+```
+
+Guide 5: Run fixed-point/Fibonacci equivalence + step benchmarks:
+
+```bash
+./scripts/bench/compare_fixedpoint_steps.sh
+```
+
+Guide 6: Regenerate benchmark function source used by `fixedpoint_bench`:
+
+```bash
+./scripts/bench/generate_fixedpoint_bench.sh
 ```
 
 Notes:
@@ -148,6 +171,8 @@ Example module in this repo: `src/MyLeanContract.lean`.
 - `scripts/test/e2e.sh` runs Lean generation + `scarb build` + ABI checks.
 - `scripts/test/abi_surface.sh` validates ABI against expected signatures.
 - `scripts/bench/check_optimizer_non_regression.sh` compares optimized vs baseline CASM/Sierra score.
+- `scripts/bench/generate_fixedpoint_bench.sh` regenerates `packages/fixedpoint_bench/src/lib.cairo` from Lean IR outputs (`--optimize false` and `--optimize true`).
+- `scripts/bench/compare_fixedpoint_steps.sh` enforces hand-vs-optimized equivalence and reports Cairo step deltas for fixed-point + Fibonacci examples.
 - `scripts/workflow/run-mvp-checks.sh` runs optimizer non-regression on both baseline example and CSE-focused benchmark contract.
 - `scripts/bench/check_artifact_passes.sh` validates post-build artifact passes preserve semantic signatures.
 - `scripts/bench/tune_inlining_strategy.sh` sweeps compiler inlining strategies and reports the best score.
@@ -175,6 +200,8 @@ Example module in this repo: `src/MyLeanContract.lean`.
 - `src/Examples/Hello.lean`, `src/MyLeanContract.lean`: example contracts
 - `tests/golden/...`, `tests/fixtures/...`: snapshot and ABI fixtures
 - `docs/design/...`: design note and invariants
+- `docs/fixed-point/...`: SQ128.128 examples + code comparisons + benchmark reports (`mul/div`, `exp/log`, Newton, compositions, Fibonacci, measured deltas)
+- `src/Examples/FixedPointBench.lean`, `src/MyLeanFixedPointBench.lean`: Lean IR source for fixed-point benchmark kernels
 
 ## Notes
 
