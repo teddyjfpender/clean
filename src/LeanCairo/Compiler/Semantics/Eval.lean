@@ -38,6 +38,16 @@ structure EvalContext where
 
 namespace EvalContext
 
+def supportsRuntimeBinding : Ty -> Bool
+  | .felt252 | .u128 | .u256 | .bool => true
+  | .i8 | .i16 | .i32 | .i64 | .i128 => true
+  | .u8 | .u16 | .u32 | .u64 => true
+  | .qm31 => true
+  | _ => false
+
+def unsupportedDomainMessage (op : String) (ty : Ty) (name : String) : String :=
+  s!"unsupported evaluator {op} for type '{Ty.toCairo ty}' (family '{Ty.familyTag ty}') at symbol '{name}'"
+
 def readVar (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
   match ty with
   | .felt252 => ctx.feltVars name
@@ -68,6 +78,12 @@ def readVar (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
   | .segmentArena => ()
   | .panicSignal => ()
 
+def readVarStrict (ctx : EvalContext) (ty : Ty) (name : String) : Except String (Ty.denote ty) :=
+  if supportsRuntimeBinding ty then
+    .ok (readVar ctx ty name)
+  else
+    .error (unsupportedDomainMessage "variable read" ty name)
+
 def readStorage (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
   match ty with
   | .felt252 => ctx.feltStorage name
@@ -97,6 +113,12 @@ def readStorage (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
   | .gasBuiltin => ()
   | .segmentArena => ()
   | .panicSignal => ()
+
+def readStorageStrict (ctx : EvalContext) (ty : Ty) (name : String) : Except String (Ty.denote ty) :=
+  if supportsRuntimeBinding ty then
+    .ok (readStorage ctx ty name)
+  else
+    .error (unsupportedDomainMessage "storage read" ty name)
 
 def bindVar (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) : EvalContext :=
   match ty with
@@ -139,6 +161,13 @@ def bindVar (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty)
   | .segmentArena => ctx
   | .panicSignal => ctx
 
+def bindVarStrict (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) :
+    Except String EvalContext :=
+  if supportsRuntimeBinding ty then
+    .ok (bindVar ctx ty name value)
+  else
+    .error (unsupportedDomainMessage "variable bind" ty name)
+
 def bindStorage (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) : EvalContext :=
   match ty with
   | .felt252 =>
@@ -180,6 +209,13 @@ def bindStorage (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote
   | .gasBuiltin => ctx
   | .segmentArena => ctx
   | .panicSignal => ctx
+
+def bindStorageStrict (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) :
+    Except String EvalContext :=
+  if supportsRuntimeBinding ty then
+    .ok (bindStorage ctx ty name value)
+  else
+    .error (unsupportedDomainMessage "storage bind" ty name)
 
 theorem readVar_bindVar_same (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) :
     readVar (bindVar ctx ty name value) ty name = value := by
@@ -238,6 +274,81 @@ def evalExpr (ctx : EvalContext) : IRExpr ty -> Ty.denote ty
       let value := evalExpr ctx bound
       let ctx' := EvalContext.bindVar ctx boundTy name value
       evalExpr ctx' body
+
+def evalExprStrict (ctx : EvalContext) : IRExpr ty -> Except String (Ty.denote ty)
+  | .var name => EvalContext.readVarStrict ctx ty name
+  | .storageRead name => EvalContext.readStorageStrict ctx ty name
+  | .litU128 value => .ok value
+  | .litU256 value => .ok value
+  | .litBool value => .ok value
+  | .litFelt252 value => .ok value
+  | .addFelt252 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left + right)
+  | .subFelt252 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left - right)
+  | .mulFelt252 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left * right)
+  | .addU128 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left + right)
+  | .subU128 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left - right)
+  | .mulU128 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left * right)
+  | .addU256 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left + right)
+  | .subU256 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left - right)
+  | .mulU256 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left * right)
+  | @IRExpr.eq ty lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      let _ : DecidableEq (Ty.denote ty) := Ty.denoteDecidableEq ty
+      pure (decide (left = right))
+  | .ltU128 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left < right)
+  | .leU128 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left <= right)
+  | .ltU256 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left < right)
+  | .leU256 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (left <= right)
+  | .ite cond thenBranch elseBranch => do
+      let condition <- evalExprStrict ctx cond
+      if condition then
+        evalExprStrict ctx thenBranch
+      else
+        evalExprStrict ctx elseBranch
+  | .letE name boundTy bound body => do
+      let value <- evalExprStrict ctx bound
+      let ctx' <- EvalContext.bindVarStrict ctx boundTy name value
+      evalExprStrict ctx' body
 
 def resourceCost : IRExpr ty -> ResourceCarriers
   | .var _ => {}
@@ -308,9 +419,26 @@ def evalExprState (state : SemanticState) (expr : IRExpr ty) :
         { state with resources := ResourceCarriers.merge state.resources consumed }
       .ok (value, nextState)
 
+def evalExprStateStrict (state : SemanticState) (expr : IRExpr ty) :
+    Except String (Ty.denote ty × SemanticState) := do
+  match state.failure with
+  | some err => .error err
+  | none =>
+      let value <- evalExprStrict state.context expr
+      let consumed := resourceCost expr
+      let nextState : SemanticState :=
+        { state with resources := ResourceCarriers.merge state.resources consumed }
+      .ok (value, nextState)
+
 def evalEffectExprState (state : SemanticState) (effectExpr : EffectExpr ty) :
     Except String (Ty.denote ty × SemanticState) :=
   evalExprState
+    { state with resources := ResourceCarriers.merge state.resources effectExpr.resources }
+    effectExpr.expr
+
+def evalEffectExprStateStrict (state : SemanticState) (effectExpr : EffectExpr ty) :
+    Except String (Ty.denote ty × SemanticState) :=
+  evalExprStateStrict
     { state with resources := ResourceCarriers.merge state.resources effectExpr.resources }
     effectExpr.expr
 
