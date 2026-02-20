@@ -8,6 +8,7 @@ export PATH="$HOME/.elan/bin:$PATH"
 "$ROOT_DIR/scripts/roadmap/check_issue_statuses.sh"
 "$ROOT_DIR/scripts/roadmap/check_issue_dependencies.sh"
 "$ROOT_DIR/scripts/roadmap/check_pin_consistency.sh"
+"$ROOT_DIR/scripts/roadmap/check_inventory_freshness.sh"
 (
   cd "$ROOT_DIR"
   lake build

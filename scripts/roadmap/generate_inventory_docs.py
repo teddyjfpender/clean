@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import urllib.request
 from collections import Counter
@@ -28,6 +29,16 @@ TREE_URL = (
 )
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--out-dir",
+        default=str(INVENTORY_DIR),
+        help="Output directory for generated inventory markdown files.",
+    )
+    return parser.parse_args()
+
+
 def fetch_tree_paths() -> list[str]:
     request = urllib.request.Request(
         TREE_URL,
@@ -45,7 +56,7 @@ def fetch_tree_paths() -> list[str]:
     )
 
 
-def write_corelib_inventory(paths: list[str]) -> None:
+def write_corelib_inventory(paths: list[str], out_dir: Path) -> None:
     core_files = [p for p in paths if p.startswith("corelib/src/") and p.endswith(".cairo")]
     by_dir = Counter("/".join(p.split("/")[:3]) for p in core_files)
 
@@ -66,10 +77,10 @@ def write_corelib_inventory(paths: list[str]) -> None:
     lines.extend(f"- `{path}`" for path in core_files)
     lines.append("")
 
-    (INVENTORY_DIR / "corelib-src-inventory.md").write_text("\n".join(lines), encoding="utf-8")
+    (out_dir / "corelib-src-inventory.md").write_text("\n".join(lines), encoding="utf-8")
 
 
-def write_sierra_inventory(paths: list[str]) -> None:
+def write_sierra_inventory(paths: list[str], out_dir: Path) -> None:
     sierra_rs = [p for p in paths if p.startswith("crates/cairo-lang-sierra/src/") and p.endswith(".rs")]
     extension_modules = [
         p for p in sierra_rs if p.startswith("crates/cairo-lang-sierra/src/extensions/modules/")
@@ -108,10 +119,10 @@ def write_sierra_inventory(paths: list[str]) -> None:
     lines.extend(f"- `{path}`" for path in extension_modules)
     lines.append("")
 
-    (INVENTORY_DIR / "sierra-extensions-inventory.md").write_text("\n".join(lines), encoding="utf-8")
+    (out_dir / "sierra-extensions-inventory.md").write_text("\n".join(lines), encoding="utf-8")
 
 
-def write_crates_inventory(paths: list[str]) -> None:
+def write_crates_inventory(paths: list[str], out_dir: Path) -> None:
     crate_paths = [p for p in paths if p.startswith("crates/")]
     crate_counts = Counter(p.split("/")[1] for p in crate_paths)
 
@@ -151,15 +162,17 @@ def write_crates_inventory(paths: list[str]) -> None:
         lines.append(f"- `{name}`: `{crate_counts.get(name, 0)}` files")
     lines.append("")
 
-    (INVENTORY_DIR / "compiler-crates-inventory.md").write_text("\n".join(lines), encoding="utf-8")
+    (out_dir / "compiler-crates-inventory.md").write_text("\n".join(lines), encoding="utf-8")
 
 
 def main() -> int:
-    INVENTORY_DIR.mkdir(parents=True, exist_ok=True)
+    args = parse_args()
+    out_dir = Path(args.out_dir).resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
     paths = fetch_tree_paths()
-    write_corelib_inventory(paths)
-    write_sierra_inventory(paths)
-    write_crates_inventory(paths)
+    write_corelib_inventory(paths, out_dir)
+    write_sierra_inventory(paths, out_dir)
+    write_crates_inventory(paths, out_dir)
     return 0
 
 
