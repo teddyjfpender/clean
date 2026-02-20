@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/03-typed-ir-generalization-plan.md`](../03-typed-ir-generalization-plan.md)
 - Issue class: MIR generalization
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - 8f98a1d
+- Completion evidence tests: `scripts/test/type_universe_regression.sh`; `scripts/test/effect_resource_regression.sh`; `scripts/test/canonicalization_regression.sh`
+- Completion evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/Optimize/Canonicalize.lean`
 
 ## Objective
 
@@ -49,7 +51,9 @@ Generalize MIR to express full function-level semantics required by pinned Sierr
 2. Evaluator tests cover resource-sensitive expressions.
 
 ### M-03-3: Canonical form and ANF policies
-- Status: NOT DONE
+- Status: DONE - 8f98a1d
+- Evidence tests: `scripts/test/canonicalization_regression.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Optimize/Canonicalize.lean`
 - Required work:
 1. Define canonicalization algorithm and laws.
 2. Integrate deterministic normalization pass.
