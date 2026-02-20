@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/00-charter-and-completion-definition.md`](../00-charter-and-completion-definition.md)
 - Issue class: Definition of done and governance
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - 9d1b150
+- Completion evidence tests: `scripts/roadmap/check_completion_contract.sh --track primary`; `scripts/roadmap/check_completion_contract.sh --track secondary`; `scripts/roadmap/check_issue_evidence.sh`; `scripts/roadmap/check_failfast_policy_lock.sh`
+- Completion evidence proofs: `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`
 
 ## Objective
 
@@ -26,7 +28,9 @@ Enforce a strict completion contract for both tracks so "supported" claims requi
 ## Milestones
 
 ### M-00-1: Encode completion predicates
-- Status: NOT DONE
+- Status: DONE - 9d1b150
+- Evidence tests: `scripts/roadmap/check_completion_contract.sh --track primary`; `scripts/roadmap/check_completion_contract.sh --track secondary`
+- Evidence proofs: `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`
 - Required work:
 1. Define machine-checkable predicates for primary and secondary track completion.
 2. Add CLI/script to evaluate predicates.
@@ -35,7 +39,9 @@ Enforce a strict completion contract for both tracks so "supported" claims requi
 2. `scripts/roadmap/check_completion_contract.sh --track secondary` returns non-zero until all predicates are satisfied.
 
 ### M-00-2: Enforce evidence linkage
-- Status: NOT DONE
+- Status: DONE - 9d1b150
+- Evidence tests: `scripts/roadmap/check_issue_evidence.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`
 - Required work:
 1. Require every completed item to reference test outputs and proof modules.
 2. Add CI check preventing unbacked `DONE - <commit>` status changes.
@@ -44,7 +50,9 @@ Enforce a strict completion contract for both tracks so "supported" claims requi
 2. Evidence links resolve to existing files/commands.
 
 ### M-00-3: Fail-fast policy lock
-- Status: NOT DONE
+- Status: DONE - 9d1b150
+- Evidence tests: `scripts/roadmap/check_failfast_policy_lock.sh`; `scripts/test/sierra_failfast_unsupported.sh`
+- Evidence proofs: `N/A`
 - Required work:
 1. Define canonical error-contract tests for unsupported families.
 2. Gate release on those tests.
@@ -57,4 +65,3 @@ Enforce a strict completion contract for both tracks so "supported" claims requi
 1. Completion predicates are executable and versioned.
 2. Governance checks are in CI and blocking.
 3. Status claims are auditable by commit and evidence.
-

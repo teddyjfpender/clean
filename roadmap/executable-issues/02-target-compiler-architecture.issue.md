@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/02-target-compiler-architecture.md`](../02-target-compiler-architecture.md)
 - Issue class: Architecture enforcement
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - 208e39b
+- Completion evidence tests: `scripts/roadmap/check_architecture_boundaries.sh`; `scripts/test/sierra_primary_without_cairo.sh`; `scripts/test/deterministic_codegen.sh`; `scripts/test/sierra_hash_policy.sh`
+- Completion evidence proofs: `N/A`
 
 ## Objective
 
