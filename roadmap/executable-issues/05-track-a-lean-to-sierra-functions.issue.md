@@ -19,6 +19,7 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 6. `tools/sierra_toolchain/**`
 7. `scripts/test/sierra_*.sh`
 8. `scripts/bench/**`
+9. `roadmap/12-direct-sierra-subset-coverage-ledger.md`
 
 ## Formal method requirements
 
@@ -51,6 +52,7 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 
 ### A2 Range-checked integer families
 - Status: NOT DONE
+- Evidence tests (in progress): `scripts/test/sierra_u128_range_checked_e2e.sh`; `scripts/test/sierra_failfast_unsupported.sh`
 - Acceptance tests:
 1. Integer fixtures compile and validate with explicit range-check resources.
 2. Unsupported integer variants fail fast with exact error contracts.

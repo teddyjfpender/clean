@@ -21,7 +21,7 @@ if ! grep -q "cycle" "$LOG_FILE"; then
   exit 1
 fi
 
-if "$CHECKER" --extra-edge "A0:A1" >"$LOG_FILE" 2>&1; then
+if "$CHECKER" --extra-edge "E5:B0" >"$LOG_FILE" 2>&1; then
   echo "expected milestone checker to fail when done milestone depends on not-done milestone"
   exit 1
 fi

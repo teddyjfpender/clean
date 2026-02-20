@@ -29,6 +29,7 @@ This plan treats `spec.md` and `spec2.md` as canonical constraints and assumes p
 - [`roadmap/09-milestones-and-execution-order.md`](09-milestones-and-execution-order.md): phased delivery order.
 - [`roadmap/10-risk-register-and-mitigations.md`](10-risk-register-and-mitigations.md): risk control plan.
 - [`roadmap/11-evaluator-type-domain-separation.md`](11-evaluator-type-domain-separation.md): typed evaluator domains, fail-fast semantics, and proof closure for non-interference.
+- [`roadmap/12-direct-sierra-subset-coverage-ledger.md`](12-direct-sierra-subset-coverage-ledger.md): strict completed/pending subset ledger for the direct Sierra emitter lane.
 - [`roadmap/inventory/corelib-src-inventory.md`](inventory/corelib-src-inventory.md): pinned corelib source inventory.
 - [`roadmap/inventory/sierra-extensions-inventory.md`](inventory/sierra-extensions-inventory.md): pinned Sierra module inventory.
 - [`roadmap/inventory/compiler-crates-inventory.md`](inventory/compiler-crates-inventory.md): pinned compiler crate focus inventory.
@@ -50,7 +51,6 @@ This plan treats `spec.md` and `spec2.md` as canonical constraints and assumes p
 ## Current Baseline (as of 2026-02-20)
 
 1. Direct Sierra subset lane exists and is validated end-to-end.
-2. Supported direct Sierra subset today:
-- signatures: `felt252`, `u128`
-- expressions: `var`, `letE`, `litFelt252`, `litU128`, `felt252 add/sub/mul`
-3. Explicit fail-fast exists for unsupported families such as `u128/u256` arithmetic.
+2. Supported direct Sierra subset and pending closure items are tracked in:
+- [`roadmap/12-direct-sierra-subset-coverage-ledger.md`](12-direct-sierra-subset-coverage-ledger.md)
+3. Explicit fail-fast exists for unsupported families such as range-checked integer arithmetic and `u256` lowering.

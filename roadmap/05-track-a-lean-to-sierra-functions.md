@@ -10,6 +10,10 @@ Deliver full function-level compilation from Lean MIR to Sierra for the pinned u
 
 Targeted families are derived from pinned Sierra modules inventory and generic IDs.
 
+Direct-emitter subset progress tracking (completed vs pending) is maintained in:
+
+1. `roadmap/12-direct-sierra-subset-coverage-ledger.md`
+
 ## Family Groups
 
 1. Core control/memory:
@@ -61,6 +65,11 @@ Steps:
 1. model range-check resources explicitly in MIR state
 2. implement u8/u16/u32/u64/u128/signed families with overflow variants
 3. implement u256/u512 helpers and multi-limb semantics
+
+Current progress snapshot:
+1. Direct emitter now supports `u128 add/sub` wrapping lowering with explicit `RangeCheck` signature threading and CASM-legal branch/join shaping.
+2. Dedicated gate added: `scripts/test/sierra_u128_range_checked_e2e.sh`.
+3. Remaining scope: checked/panic-aware integer result typing, `mulU128`, and non-`u128` integer families.
 
 Proof obligations:
 1. resource-threading preservation

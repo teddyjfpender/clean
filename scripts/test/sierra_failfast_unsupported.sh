@@ -30,7 +30,7 @@ check_fail() {
 
 check_fail \
   MyLeanSierraSubsetUnsupportedU128Arith \
-  "unsupported u128 arithmetic (add)" \
+  "unsupported u128 arithmetic (mul)" \
   "u128_arith"
 
 check_fail \

@@ -34,6 +34,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 "$ROOT_DIR/scripts/roadmap/check_failfast_policy_lock.sh"
 "$ROOT_DIR/scripts/test/sierra_e2e.sh"
 "$ROOT_DIR/scripts/test/sierra_scalar_e2e.sh"
+"$ROOT_DIR/scripts/test/sierra_u128_range_checked_e2e.sh"
 "$ROOT_DIR/scripts/test/sierra_differential.sh"
 
 echo "all Sierra pipeline checks passed"

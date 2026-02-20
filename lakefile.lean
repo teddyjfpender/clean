@@ -22,6 +22,8 @@ lean_lib MyLeanSierraSubsetUnsupportedU256Sig where
 
 lean_lib MyLeanSierraScalar where
 
+lean_lib MyLeanSierraU128RangeChecked where
+
 @[default_target]
 lean_exe «leancairo-gen» where
   root := `LeanCairo.CLI.Main
