@@ -13,7 +13,7 @@ status_of_issue() {
   local issue_file="$1"
   grep -E '^[[:space:]]*-[[:space:]]+Overall status:[[:space:]]+(NOT DONE|DONE - [0-9a-f]{7,40})$' "$issue_file" \
     | head -n 1 \
-    | sed 's/^[[:space:]]*-[[:space:]]\+Overall status:[[:space:]]\+//' || true
+    | sed -E 's/^[[:space:]]*-[[:space:]]+Overall status:[[:space:]]+//' || true
 }
 
 is_done() {

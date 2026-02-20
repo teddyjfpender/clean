@@ -33,6 +33,8 @@ without reintroducing IR -> DSL -> IR loops.
 
 ### M-02-1: Module boundary policy
 - Status: DONE - b37260d
+- Evidence tests: `scripts/roadmap/check_architecture_boundaries.sh`; `scripts/test/architecture_boundaries.sh`
+- Evidence proofs: `N/A`
 - Required work:
 1. Define allowed import DAG by layer.
 2. Add automated boundary checker.
@@ -42,6 +44,8 @@ without reintroducing IR -> DSL -> IR loops.
 
 ### M-02-2: Primary path purity
 - Status: DONE - cfcce6d
+- Evidence tests: `scripts/test/sierra_primary_without_cairo.sh`; `scripts/test/sierra_primary_cairo_coupling_guard.sh`
+- Evidence proofs: `N/A`
 - Required work:
 1. Ensure primary path never depends on Cairo textual emission.
 2. Add regression test to prevent accidental coupling.
@@ -51,6 +55,8 @@ without reintroducing IR -> DSL -> IR loops.
 
 ### M-02-3: Deterministic output contracts
 - Status: DONE - 208e39b
+- Evidence tests: `scripts/test/deterministic_codegen.sh`; `scripts/test/sierra_hash_policy.sh`; `scripts/test/sierra_codegen_snapshot.sh`
+- Evidence proofs: `N/A`
 - Required work:
 1. Stable symbol and declaration ordering policy.
 2. Deterministic hashing policy and tests.

@@ -1,5 +1,27 @@
 # Spec Compliance Matrix (`spec.md`)
 
+## Completion Contract Predicates
+
+- Primary track gate command: `scripts/roadmap/check_completion_contract.sh --track primary`
+- Secondary track gate command: `scripts/roadmap/check_completion_contract.sh --track secondary`
+- Predicate classes:
+  - issue closure predicates (`roadmap/executable-issues/*.issue.md` overall status)
+  - proof artifact predicates (`src/LeanCairo/Compiler/Proof/*.lean`)
+  - deterministic test gate predicates (`scripts/test/*.sh`)
+  - benchmark/performance predicates (`scripts/bench/check_optimizer_non_regression.sh`)
+- Completion semantics:
+  - command exit `0` only when all predicates for the selected track are satisfied
+  - command exit non-zero while any predicate remains unsatisfied
+
+## Canonical Fail-Fast Policy Contract
+
+- Unsupported Sierra families must fail with explicit error messages before emission.
+- Canonical regression gate: `scripts/test/sierra_failfast_unsupported.sh`
+- Canonical fixtures:
+  - `src/MyLeanSierraSubsetUnsupportedU128Arith.lean`
+  - `src/MyLeanSierraSubsetUnsupportedU256Sig.lean`
+- Release workflows must continue running this gate; removal is treated as policy regression.
+
 ## Required deliverables
 
 - `leancairo-gen` CLI executable: `lakefile.lean`, `src/LeanCairo/CLI/Main.lean`

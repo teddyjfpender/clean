@@ -4,6 +4,8 @@
 - Issue class: Source-of-truth and pin discipline
 - Priority: P0
 - Overall status: DONE - 6a1f5ce
+- Completion evidence tests: `scripts/roadmap/check_pin_consistency.sh`; `scripts/roadmap/check_inventory_freshness.sh`; `scripts/roadmap/check_coverage_matrix_freshness.sh`
+- Completion evidence proofs: `N/A`
 
 ## Objective
 
@@ -28,6 +30,8 @@ Guarantee all coverage and compatibility claims are derived from pinned upstream
 
 ### M-01-1: Unified pin configuration
 - Status: DONE - 3c0770a
+- Evidence tests: `scripts/roadmap/check_pin_consistency.sh`; `scripts/roadmap/check_pin_consistency.sh --expected-commit 0000000000000000000000000000000000000000`
+- Evidence proofs: `N/A`
 - Required work:
 1. Centralize pin in one config file consumed by all generators.
 2. Detect mismatched pins across artifacts.
@@ -37,6 +41,8 @@ Guarantee all coverage and compatibility claims are derived from pinned upstream
 
 ### M-01-2: Inventory drift gate
 - Status: DONE - 569a0bf
+- Evidence tests: `scripts/roadmap/check_inventory_freshness.sh`; `python3 scripts/roadmap/generate_inventory_docs.py --out-dir .artifacts/tmp_inventory_check`
+- Evidence proofs: `N/A`
 - Required work:
 1. Add snapshot gate for all `roadmap/inventory/*.md` files.
 2. Add CI target that regenerates and diffs inventories.
@@ -46,6 +52,8 @@ Guarantee all coverage and compatibility claims are derived from pinned upstream
 
 ### M-01-3: Coverage matrix bootstrap
 - Status: DONE - 6a1f5ce
+- Evidence tests: `scripts/roadmap/render_coverage_matrix.py`; `scripts/roadmap/check_coverage_matrix_freshness.sh`
+- Evidence proofs: `N/A`
 - Required work:
 1. Generate machine-readable coverage matrix from inventory + implementation map.
 2. Publish unresolved IDs/families with explicit statuses.

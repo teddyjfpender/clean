@@ -4,6 +4,8 @@
 - Issue class: Program orchestration
 - Priority: P0
 - Overall status: DONE - 5e04928
+- Completion evidence tests: `scripts/roadmap/check_issue_statuses.sh`; `scripts/roadmap/check_issue_dependencies.sh`; `scripts/roadmap/report_issue_progress.sh`
+- Completion evidence proofs: `N/A`
 
 ## Objective
 
@@ -27,6 +29,8 @@ Execute the complete roadmap as an auditable program of work where every milesto
 
 ### M-README-1: Status governance and machine-readability
 - Status: DONE - 7544a63
+- Evidence tests: `scripts/roadmap/check_issue_statuses.sh`
+- Evidence proofs: `N/A`
 - Required work:
 1. Add status parser script for `roadmap/executable-issues/**/*.issue.md`.
 2. Reject invalid status tokens in CI.
@@ -36,6 +40,8 @@ Execute the complete roadmap as an auditable program of work where every milesto
 
 ### M-README-2: End-to-end roadmap closure report
 - Status: DONE - 5e04928
+- Evidence tests: `scripts/roadmap/check_issue_dependencies.sh`; `scripts/roadmap/report_issue_progress.sh`
+- Evidence proofs: `N/A`
 - Required work:
 1. Add generated closure report summarizing completed vs pending issues.
 2. Add strict dependency ordering checks.
