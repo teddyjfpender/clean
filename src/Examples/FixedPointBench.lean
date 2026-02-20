@@ -13,8 +13,8 @@ private def varU256 (name : String) : Expr .u256 :=
 
 private def qmulKernelBody : Expr .u256 :=
   let ab := Expr.mulU256 (varU256 "a") (varU256 "b")
-  let pair := Expr.mulU256 ab ab
-  Expr.addU256 pair pair
+  let abc := Expr.mulU256 ab (varU256 "c")
+  Expr.addU256 abc abc
 
 private def qexpTaylorBody : Expr .u256 :=
   let x := varU256 "x"

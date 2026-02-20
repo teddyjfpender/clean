@@ -21,7 +21,7 @@ Hand (Lean-generated, `--optimize false`):
 
 ```cairo
 fn qmul_kernel_hand(a: u256, b: u256, c: u256) -> u256 {
-    (((a * b) * (a * b)) + ((a * b) * (a * b)))
+    (((a * b) * c) + ((a * b) * c))
 }
 ```
 
@@ -30,10 +30,7 @@ Optimized (Lean-generated, `--optimize true`):
 ```cairo
 fn qmul_kernel_opt(a: u256, b: u256, c: u256) -> u256 {
     {
-        let __leancairo_internal_cse_u256: u256 = {
-            let __leancairo_internal_cse_u256: u256 = (a * b);
-            (__leancairo_internal_cse_u256 * __leancairo_internal_cse_u256)
-        };
+        let __leancairo_internal_cse_u256: u256 = ((a * b) * c);
         (__leancairo_internal_cse_u256 + __leancairo_internal_cse_u256)
     }
 }
@@ -43,12 +40,9 @@ Visual diff:
 
 ```diff
  fn qmul_kernel_(a: u256, b: u256, c: u256) -> u256 {
--    (((a * b) * (a * b)) + ((a * b) * (a * b)))
+-    (((a * b) * c) + ((a * b) * c))
 +    {
-+        let __leancairo_internal_cse_u256: u256 = {
-+            let __leancairo_internal_cse_u256: u256 = (a * b);
-+            (__leancairo_internal_cse_u256 * __leancairo_internal_cse_u256)
-+        };
++        let __leancairo_internal_cse_u256: u256 = ((a * b) * c);
 +        (__leancairo_internal_cse_u256 + __leancairo_internal_cse_u256)
 +    }
  }

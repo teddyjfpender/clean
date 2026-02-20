@@ -69,7 +69,7 @@ Current proof scope:
 
 Measured sample benchmark deltas (from `packages/fixedpoint_bench`):
 
-- `qmul`: `721 -> 255` steps (64.63% fewer, 2.83x faster)
+- `qmul`: `499 -> 255` steps (48.90% fewer, 1.96x faster)
 - `qexp`: `1605 -> 384` steps (76.07% fewer, 4.18x faster)
 - `qlog`: `973 -> 401` steps (58.79% fewer, 2.43x faster)
 - `qnewton`: `1195 -> 512` steps (57.15% fewer, 2.33x faster)

@@ -4,15 +4,12 @@
 use core::integer::u256;
 
 fn qmul_kernel_hand(a: u256, b: u256, c: u256) -> u256 {
-            (((a * b) * (a * b)) + ((a * b) * (a * b)))
+            (((a * b) * c) + ((a * b) * c))
         }
 
 fn qmul_kernel_opt(a: u256, b: u256, c: u256) -> u256 {
             {
-                let __leancairo_internal_cse_u256: u256 = {
-                let __leancairo_internal_cse_u256: u256 = (a * b);
-                (__leancairo_internal_cse_u256 * __leancairo_internal_cse_u256)
-            };
+                let __leancairo_internal_cse_u256: u256 = ((a * b) * c);
                 (__leancairo_internal_cse_u256 + __leancairo_internal_cse_u256)
             }
         }
