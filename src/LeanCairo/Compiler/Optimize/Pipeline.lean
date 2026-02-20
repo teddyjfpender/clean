@@ -1,7 +1,6 @@
 import LeanCairo.Compiler.Optimize.Expr
-import LeanCairo.Compiler.Optimize.CSELetNorm
+import LeanCairo.Compiler.Optimize.Canonicalize
 import LeanCairo.Compiler.Optimize.Pass
-import LeanCairo.Compiler.Proof.CSELetNormSound
 import LeanCairo.Compiler.Proof.OptimizeSound
 
 namespace LeanCairo.Compiler.Optimize
@@ -15,15 +14,8 @@ def algebraicFoldPass : VerifiedExprPass where
     intro ctx ty expr
     simpa using LeanCairo.Compiler.Proof.optimizeExprSound ctx expr
 
-def cseLetNormPass : VerifiedExprPass where
-  name := "cse-let-normalization"
-  run := fun expr => cseLetNormExpr expr
-  sound := by
-    intro ctx ty expr
-    simpa using LeanCairo.Compiler.Proof.cseLetNormExprSound ctx expr
-
 def optimizerPasses : List VerifiedExprPass :=
-  [algebraicFoldPass, cseLetNormPass]
+  [algebraicFoldPass, canonicalizePass]
 
 def optimizerPass : VerifiedExprPass :=
   VerifiedExprPass.composeMany optimizerPasses
