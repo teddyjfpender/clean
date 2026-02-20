@@ -2,8 +2,6 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-OUT_JSON="$ROOT_DIR/roadmap/inventory/corelib-parity-report.json"
-OUT_MD="$ROOT_DIR/roadmap/inventory/corelib-parity-report.md"
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 

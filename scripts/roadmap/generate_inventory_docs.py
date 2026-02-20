@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 INVENTORY_DIR = ROOT / "roadmap" / "inventory"
 DEFAULT_PINNED_SURFACE = ROOT / "generated" / "sierra" / "surface" / "pinned_surface.json"
 DEFAULT_PINNED_COMMIT_FILE = ROOT / "config" / "cairo_pinned_commit.txt"
+DEFAULT_TREE_CACHE = ROOT / "roadmap" / "inventory" / "pinned-tree-paths.json"
 
 
 def load_pinned_commit(commit_file: Path) -> str:
@@ -39,10 +40,20 @@ def parse_args() -> argparse.Namespace:
         default=str(DEFAULT_PINNED_COMMIT_FILE),
         help="Path to pinned Cairo commit file.",
     )
+    parser.add_argument(
+        "--tree-cache",
+        default=str(DEFAULT_TREE_CACHE),
+        help="Path to cached pinned Cairo tree paths json.",
+    )
+    parser.add_argument(
+        "--refresh-tree-cache",
+        action="store_true",
+        help="Fetch tree paths from GitHub API and refresh cache before generation.",
+    )
     return parser.parse_args()
 
 
-def fetch_tree_paths(pinned_commit: str) -> list[str]:
+def fetch_tree_paths_remote(pinned_commit: str) -> list[str]:
     tree_url = (
         "https://api.github.com/repos/starkware-libs/cairo/git/trees/"
         f"{pinned_commit}?recursive=1"
@@ -61,6 +72,31 @@ def fetch_tree_paths(pinned_commit: str) -> list[str]:
         for entry in payload.get("tree", [])
         if entry.get("type") == "blob" and isinstance(entry.get("path"), str)
     )
+
+
+def load_tree_paths_from_cache(cache_path: Path, pinned_commit: str) -> list[str]:
+    if not cache_path.exists():
+        raise FileNotFoundError(
+            f"missing tree cache file: {cache_path} (run with --refresh-tree-cache to regenerate)"
+        )
+    payload = json.loads(cache_path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"invalid tree cache payload: {cache_path}")
+    cache_commit = payload.get("pinned_commit")
+    if cache_commit != pinned_commit:
+        raise ValueError(
+            f"tree cache commit mismatch: expected {pinned_commit}, got {cache_commit} in {cache_path}"
+        )
+    paths = payload.get("paths")
+    if not isinstance(paths, list) or not all(isinstance(item, str) for item in paths):
+        raise ValueError(f"invalid tree cache path list in {cache_path}")
+    return sorted(paths)
+
+
+def write_tree_cache(cache_path: Path, pinned_commit: str, paths: list[str]) -> None:
+    payload = {"pinned_commit": pinned_commit, "paths": sorted(paths)}
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    cache_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
 def write_corelib_inventory(paths: list[str], out_dir: Path, pinned_commit: str) -> None:
@@ -179,9 +215,14 @@ def main() -> int:
     out_dir = Path(args.out_dir).resolve()
     pinned_surface = Path(args.pinned_surface).resolve()
     commit_file = Path(args.pinned_commit_file).resolve()
+    tree_cache = Path(args.tree_cache).resolve()
     pinned_commit = load_pinned_commit(commit_file)
     out_dir.mkdir(parents=True, exist_ok=True)
-    paths = fetch_tree_paths(pinned_commit)
+    if args.refresh_tree_cache:
+        paths = fetch_tree_paths_remote(pinned_commit)
+        write_tree_cache(tree_cache, pinned_commit, paths)
+    else:
+        paths = load_tree_paths_from_cache(tree_cache, pinned_commit)
     write_corelib_inventory(paths, out_dir, pinned_commit)
     write_sierra_inventory(paths, out_dir, pinned_commit, pinned_surface)
     write_crates_inventory(paths, out_dir, pinned_commit)

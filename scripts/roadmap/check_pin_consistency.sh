@@ -6,6 +6,7 @@ PIN_FILE="$ROOT_DIR/config/cairo_pinned_commit.txt"
 PINNED_SURFACE_JSON="$ROOT_DIR/generated/sierra/surface/pinned_surface.json"
 SURFACE_LEAN="$ROOT_DIR/src/LeanCairo/Backend/Sierra/Generated/Surface.lean"
 CARGO_TOML="$ROOT_DIR/tools/sierra_toolchain/Cargo.toml"
+TREE_CACHE_JSON="$ROOT_DIR/roadmap/inventory/pinned-tree-paths.json"
 
 EXPECTED_COMMIT=""
 while [[ "$#" -gt 0 ]]; do
@@ -89,6 +90,22 @@ else
       assert_eq "$PINNED_COMMIT" "$rev" "$CARGO_TOML"
     done <<< "$CARGO_REV_LINES"
   fi
+fi
+
+if [[ ! -f "$TREE_CACHE_JSON" ]]; then
+  echo "missing pinned tree cache file: $TREE_CACHE_JSON"
+  ERRORS=$((ERRORS + 1))
+else
+  TREE_CACHE_PIN="$(python3 - <<'PY' "$TREE_CACHE_JSON"
+import json
+import sys
+path = sys.argv[1]
+with open(path, encoding='utf-8') as f:
+    payload = json.load(f)
+print(payload.get('pinned_commit', ''))
+PY
+)"
+  assert_eq "$PINNED_COMMIT" "$TREE_CACHE_PIN" "$TREE_CACHE_JSON"
 fi
 
 INVENTORY_FILES="$(find "$ROOT_DIR/roadmap/inventory" -type f -name '*.md' | sort)"

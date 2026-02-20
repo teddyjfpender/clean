@@ -6,6 +6,7 @@ export PATH="$HOME/.elan/bin:$PATH"
 
 "$ROOT_DIR/scripts/lint/pedantic.sh"
 "$ROOT_DIR/scripts/roadmap/check_issue_statuses.sh"
+"$ROOT_DIR/scripts/roadmap/list_quality_gates.sh" --validate-workflows
 "$ROOT_DIR/scripts/roadmap/check_issue_dependencies.sh"
 "$ROOT_DIR/scripts/roadmap/check_milestone_dependencies.py"
 "$ROOT_DIR/scripts/roadmap/check_issue_evidence.sh"
@@ -20,7 +21,9 @@ export PATH="$HOME/.elan/bin:$PATH"
 "$ROOT_DIR/scripts/roadmap/check_crate_dependency_matrix_freshness.sh"
 "$ROOT_DIR/scripts/roadmap/check_coverage_matrix_freshness.sh"
 "$ROOT_DIR/scripts/roadmap/check_sierra_coverage_report_freshness.sh"
+"$ROOT_DIR/scripts/roadmap/check_release_reports_freshness.sh"
 "$ROOT_DIR/scripts/roadmap/check_subset_ledger_sync.py"
+"$ROOT_DIR/scripts/roadmap/check_risk_controls.sh" --validate-mapping
 "$ROOT_DIR/scripts/roadmap/check_effect_isolation.sh"
 "$ROOT_DIR/scripts/roadmap/check_proof_obligations.sh"
 (

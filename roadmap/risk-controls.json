@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "risks": [
+    {
+      "risk_id": "R1",
+      "severity": "high",
+      "controls": [
+        {
+          "id": "pin_consistency",
+          "command": "scripts/roadmap/check_pin_consistency.sh"
+        },
+        {
+          "id": "inventory_freshness",
+          "command": "scripts/roadmap/check_inventory_freshness.sh"
+        },
+        {
+          "id": "primary_closure_gate",
+          "command": "scripts/roadmap/check_sierra_primary_closure.sh"
+        }
+      ]
+    },
+    {
+      "risk_id": "R2",
+      "severity": "high",
+      "controls": [
+        {
+          "id": "effect_isolation",
+          "command": "scripts/roadmap/check_effect_isolation.sh"
+        },
+        {
+          "id": "typed_resource_mixed",
+          "command": "scripts/test/eval_typed_resource_mixed.sh"
+        }
+      ]
+    },
+    {
+      "risk_id": "R3",
+      "severity": "high",
+      "controls": [
+        {
+          "id": "proof_obligation_gate",
+          "command": "scripts/roadmap/check_proof_obligations.sh"
+        }
+      ]
+    },
+    {
+      "risk_id": "R4",
+      "severity": "medium",
+      "controls": [
+        {
+          "id": "optimizer_non_regression",
+          "command": "scripts/bench/check_optimizer_non_regression.sh"
+        },
+        {
+          "id": "artifact_pass_gate",
+          "command": "scripts/bench/check_artifact_passes.sh"
+        }
+      ]
+    },
+    {
+      "risk_id": "R5",
+      "severity": "medium",
+      "controls": [
+        {
+          "id": "sierra_differential",
+          "command": "scripts/test/sierra_differential.sh"
+        },
+        {
+          "id": "sierra_primary_without_cairo",
+          "command": "scripts/test/sierra_primary_without_cairo.sh"
+        }
+      ]
+    },
+    {
+      "risk_id": "R6",
+      "severity": "medium",
+      "controls": [
+        {
+          "id": "architecture_boundary",
+          "command": "scripts/test/architecture_boundaries.sh"
+        },
+        {
+          "id": "coupling_guard",
+          "command": "scripts/test/sierra_primary_cairo_coupling_guard.sh"
+        }
+      ]
+    },
+    {
+      "risk_id": "R7",
+      "severity": "medium",
+      "controls": [
+        {
+          "id": "milestone_dependency_gate",
+          "command": "scripts/roadmap/check_milestone_dependencies.py"
+        },
+        {
+          "id": "issue_dependency_gate",
+          "command": "scripts/roadmap/check_issue_dependencies.sh"
+        }
+      ]
+    }
+  ]
+}
