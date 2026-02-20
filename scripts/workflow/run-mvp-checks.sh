@@ -5,6 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 export PATH="$HOME/.elan/bin:$PATH"
 
 "$ROOT_DIR/scripts/lint/pedantic.sh"
+"$ROOT_DIR/scripts/roadmap/check_issue_statuses.sh"
 (
   cd "$ROOT_DIR"
   lake build
