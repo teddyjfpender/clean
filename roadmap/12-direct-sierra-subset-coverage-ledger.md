@@ -87,6 +87,23 @@ This file is a strict status ledger for `src/LeanCairo/Backend/Sierra/Emit/Subse
 1. Full non-Starknet family closure from pinned inventory.
 2. `Coverage = implemented_families / targeted_families = 1.0`.
 
+## Closure Metric Snapshot
+
+This snapshot is machine-checked against `roadmap/inventory/sierra-coverage-matrix.json`.
+Values must be updated in the same commit as coverage/status changes and must satisfy
+`python3 scripts/roadmap/check_subset_ledger_sync.py`.
+
+- `pinned_surface_commit`: `e56055c87a9db4e3dbb91c82ccb2ea751a8dc617`
+- `target_non_starknet_extension_modules`: `52`
+- `implemented_non_starknet_extension_modules`: `4`
+- `fail_fast_non_starknet_extension_modules`: `13`
+- `unresolved_non_starknet_extension_modules`: `35`
+- `implemented_non_starknet_closure_ratio`: `0.076923`
+- `bounded_non_starknet_closure_ratio`: `0.326923`
+- `done_subset_milestones`: `2`
+- `total_subset_milestones`: `8`
+- `subset_milestone_progress_ratio`: `0.250000`
+
 ## Required Evidence For Status Promotion
 
 Each subset item can move from `NOT DONE` to `DONE - <commit>` only when all are present:
