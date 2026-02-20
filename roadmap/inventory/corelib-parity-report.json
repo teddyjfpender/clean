@@ -1,0 +1,974 @@
+{
+  "counts": {
+    "excluded": 157,
+    "partial": 2,
+    "supported": 1
+  },
+  "entries": [
+    {
+      "module_id": "array",
+      "path": "corelib/src/array.cairo",
+      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/blake.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "boolean",
+      "path": "corelib/src/boolean.cairo",
+      "reason": "mapped Sierra module is fail-fast bounded in current direct backend lane",
+      "status": "partial"
+    },
+    {
+      "module_id": "boxing",
+      "path": "corelib/src/box.cairo",
+      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/byte_array.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "bytes31",
+      "path": "corelib/src/bytes_31.cairo",
+      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/circuit.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/clone.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/cmp.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/debug.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "felt252_dict",
+      "path": "corelib/src/dict.cairo",
+      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/ec.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/ecdsa.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "felt252",
+      "path": "corelib/src/felt_252.cairo",
+      "reason": "mapped Sierra module is implemented in current direct backend lane",
+      "status": "supported"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/fixed_size_array.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/fmt.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/gas.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/hash.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "int/mod",
+      "path": "corelib/src/integer.cairo",
+      "reason": "mapped Sierra module is fail-fast bounded in current direct backend lane",
+      "status": "partial"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/internal.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/internal/bounded_int.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/internal/num.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/adapters.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/adapters/chain.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/adapters/enumerate.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/adapters/filter.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/adapters/map.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/adapters/peekable.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/adapters/take.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/adapters/zip.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/traits.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/traits/accum.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/traits/collect.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/iter/traits/iterator.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/keccak.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/keyword_docs.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/lib.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/math.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/metaprogramming.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "nullable",
+      "path": "corelib/src/nullable.cairo",
+      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/bit_size.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/bounded.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/one.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/ops.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/ops/checked.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/ops/divrem.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/ops/overflowing.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/ops/pow.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/ops/saturating.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/ops/split.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/ops/sqrt.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/ops/widemul.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/ops/widesquare.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/ops/wrapping.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/num/traits/zero.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/ops.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/ops/arith.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/ops/deref.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/ops/function.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/ops/get.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/ops/index.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/ops/range.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/option.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/panics.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/pedersen.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/poseidon.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/prelude.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/prelude/v2023_01.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/prelude/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/prelude/v2023_10.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/prelude/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/prelude/v2024_07.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/prelude/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "qm31",
+      "path": "corelib/src/qm31.cairo",
+      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/result.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/serde.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/sha256.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/account.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/class_hash.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/contract_address.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/deployment.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/eth_address.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/eth_signature.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/event.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/info.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/secp256_trait.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/secp256k1.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/secp256r1.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/storage.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/storage/map.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/storage/storage_base.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/storage/storage_node.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/storage/sub_pointers.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/storage/vec.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/storage_access.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/syscalls.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/starknet/testing.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/starknet/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/string.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/array_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/bool_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/box_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/byte_array_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/bytes31_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/circuit_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/clone_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/cmp_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/coupon_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/deref_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/dict_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/ec_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/felt_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/fmt_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/gas_reserve_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/hash_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/integer_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/iter_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/keccak_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/block_level_items_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/box_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/closure_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/const_folding_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/const_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/early_return_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/for_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/glob_use_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/macro_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/match_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/other_paths/a.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/other_paths/b.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/other_paths/c.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/other_paths/define_c.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/other_paths/inner/a.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/other_paths/inner/b.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/panics_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/path_attr_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/trait_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/language_features/while_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/let_else_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/math_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/nullable_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/num_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/option_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/plugins_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/print_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/qm31_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/range_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/result_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/secp256k1_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/secp256r1_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/sha256_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/test_utils.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/testing_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/test/to_byte_array_test.cairo",
+      "reason": "excluded by scope prefix 'corelib/src/test/'",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/testing.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/to_byte_array.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/traits.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/tuple.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    },
+    {
+      "module_id": "",
+      "path": "corelib/src/zeroable.cairo",
+      "reason": "no direct Sierra module mapping in current parity rules",
+      "status": "excluded"
+    }
+  ],
+  "inputs": {
+    "corelib_inventory": "roadmap/inventory/corelib-src-inventory.md",
+    "sierra_coverage_matrix": "roadmap/inventory/sierra-coverage-matrix.json"
+  },
+  "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617"
+}

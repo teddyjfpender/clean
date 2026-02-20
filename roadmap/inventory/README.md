@@ -17,6 +17,8 @@ Prerequisite:
 ## Files
 
 - `corelib-src-inventory.md`
+- `corelib-parity-report.json`
+- `corelib-parity-report.md`
 - `sierra-extensions-inventory.md`
 - `compiler-crates-inventory.md`
 - `compiler-crates-dependency-matrix.md`
