@@ -30,7 +30,9 @@ Deliver a type-faithful, fail-fast evaluator semantics layer that is suitable fo
 ## Milestone status ledger
 
 ### E1 Typed scalar variable/storage separation
-- Status: NOT DONE
+- Status: DONE - 8beef38
+- Evidence tests: `~/.elan/bin/lake build LeanCairo.Compiler.Semantics.Eval`; `scripts/test/eval_scalar_domain_isolation.sh`; `scripts/test/semantic_state_regression.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`
 - Required work:
 1. Add separate variable and storage slots for each scalar family (`felt252`, `bool`, `u128`, `u256`, `u8/u16/u32/u64`, `i8/i16/i32/i64/i128`, `qm31`).
 2. Remove all scalar-family collapsing in evaluator read/bind functions.
@@ -39,8 +41,6 @@ Deliver a type-faithful, fail-fast evaluator semantics layer that is suitable fo
 1. `~/.elan/bin/lake build LeanCairo.Compiler.Semantics.Eval`
 2. `scripts/test/eval_scalar_domain_isolation.sh`
 3. `scripts/test/semantic_state_regression.sh`
-- Evidence proofs:
-1. `src/LeanCairo/Compiler/Semantics/Eval.lean`
 
 ### E2 Fail-fast unsupported-domain evaluator interfaces
 - Status: NOT DONE
