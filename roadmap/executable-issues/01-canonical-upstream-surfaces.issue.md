@@ -27,7 +27,7 @@ Guarantee all coverage and compatibility claims are derived from pinned upstream
 ## Milestones
 
 ### M-01-1: Unified pin configuration
-- Status: NOT DONE
+- Status: DONE - 3c0770a
 - Required work:
 1. Centralize pin in one config file consumed by all generators.
 2. Detect mismatched pins across artifacts.
@@ -58,4 +58,3 @@ Guarantee all coverage and compatibility claims are derived from pinned upstream
 1. All source surfaces are generated, pinned, and drift-gated.
 2. Coverage reporting is inventory-derived and reproducible.
 3. No handwritten ID list is treated as authoritative.
-
