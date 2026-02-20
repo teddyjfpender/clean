@@ -9,7 +9,7 @@ Status legend:
 
 - `roadmap/README.md` -> `roadmap/executable-issues/README.issue.md` (`DONE - 5e04928`)
 - `roadmap/00-charter-and-completion-definition.md` -> `roadmap/executable-issues/00-charter-and-completion-definition.issue.md` (`NOT DONE`)
-- `roadmap/01-canonical-upstream-surfaces.md` -> `roadmap/executable-issues/01-canonical-upstream-surfaces.issue.md` (`NOT DONE`)
+- `roadmap/01-canonical-upstream-surfaces.md` -> `roadmap/executable-issues/01-canonical-upstream-surfaces.issue.md` (`DONE - 6a1f5ce`)
 - `roadmap/02-target-compiler-architecture.md` -> `roadmap/executable-issues/02-target-compiler-architecture.issue.md` (`NOT DONE`)
 - `roadmap/03-typed-ir-generalization-plan.md` -> `roadmap/executable-issues/03-typed-ir-generalization-plan.issue.md` (`NOT DONE`)
 - `roadmap/04-semantics-proof-and-law-plan.md` -> `roadmap/executable-issues/04-semantics-proof-and-law-plan.issue.md` (`NOT DONE`)

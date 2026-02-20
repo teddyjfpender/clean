@@ -3,7 +3,7 @@
 - Source roadmap file: [`roadmap/01-canonical-upstream-surfaces.md`](../01-canonical-upstream-surfaces.md)
 - Issue class: Source-of-truth and pin discipline
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - 6a1f5ce
 
 ## Objective
 
@@ -45,7 +45,7 @@ Guarantee all coverage and compatibility claims are derived from pinned upstream
 2. Manual edit to inventory file causes gate failure.
 
 ### M-01-3: Coverage matrix bootstrap
-- Status: NOT DONE
+- Status: DONE - 6a1f5ce
 - Required work:
 1. Generate machine-readable coverage matrix from inventory + implementation map.
 2. Publish unresolved IDs/families with explicit statuses.
