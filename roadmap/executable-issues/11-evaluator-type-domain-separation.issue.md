@@ -69,7 +69,9 @@ Deliver a type-faithful, fail-fast evaluator semantics layer that is suitable fo
 3. `scripts/workflow/run-sierra-checks.sh`
 
 ### E4 Resource/failure integration over typed domains
-- Status: NOT DONE
+- Status: DONE - cd45c22
+- Evidence tests: `scripts/test/semantic_state_regression.sh`; `scripts/test/effect_resource_regression.sh`; `scripts/roadmap/check_effect_isolation.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/Proof/CSELetNormSound.lean`
 - Required work:
 1. Prove typed-domain refactors preserve resource/failure state transitions.
 2. Add mixed workloads exercising typed state + resource channels.
@@ -78,9 +80,6 @@ Deliver a type-faithful, fail-fast evaluator semantics layer that is suitable fo
 1. `scripts/test/semantic_state_regression.sh`
 2. `scripts/test/effect_resource_regression.sh`
 3. `scripts/roadmap/check_effect_isolation.sh`
-- Evidence proofs:
-1. `src/LeanCairo/Compiler/Semantics/Eval.lean`
-2. `src/LeanCairo/Compiler/Proof/CSELetNormSound.lean`
 
 ### E5 Proof/CI closure and dependency gating
 - Status: NOT DONE
