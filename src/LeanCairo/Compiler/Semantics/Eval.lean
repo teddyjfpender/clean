@@ -213,4 +213,45 @@ def evalEffectExpr (ctx : EvalContext) (effectExpr : EffectExpr ty) :
     Ty.denote ty × ResourceCarriers :=
   evalExprWithResources ctx effectExpr.resources effectExpr.expr
 
+structure SemanticState where
+  context : EvalContext
+  resources : ResourceCarriers := {}
+  failure : Option String := none
+
+def evalExprState (state : SemanticState) (expr : IRExpr ty) :
+    Except String (Ty.denote ty × SemanticState) := do
+  match state.failure with
+  | some err => .error err
+  | none =>
+      let value := evalExpr state.context expr
+      let consumed := resourceCost expr
+      let nextState : SemanticState :=
+        { state with resources := ResourceCarriers.merge state.resources consumed }
+      .ok (value, nextState)
+
+def evalEffectExprState (state : SemanticState) (effectExpr : EffectExpr ty) :
+    Except String (Ty.denote ty × SemanticState) :=
+  evalExprState
+    { state with resources := ResourceCarriers.merge state.resources effectExpr.resources }
+    effectExpr.expr
+
+theorem evalExprState_success_transition
+    (state : SemanticState)
+    (expr : IRExpr ty)
+    (h : state.failure = none) :
+    evalExprState state expr =
+      .ok
+        ( evalExpr state.context expr,
+          { state with resources := ResourceCarriers.merge state.resources (resourceCost expr) } ) := by
+  simp [evalExprState, h]
+
+theorem evalExprState_failure_channel
+    (state : SemanticState)
+    (expr : IRExpr ty)
+    (err : String)
+    (h : state.failure = some err) :
+    evalExprState state expr = .error err := by
+  unfold evalExprState
+  simp [h]
+
 end LeanCairo.Compiler.Semantics

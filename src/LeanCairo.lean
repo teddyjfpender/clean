@@ -13,6 +13,7 @@ import LeanCairo.Compiler.Semantics.Eval
 import LeanCairo.Compiler.Semantics.ContractEval
 import LeanCairo.Compiler.Optimize.Expr
 import LeanCairo.Compiler.Optimize.CSELetNorm
+import LeanCairo.Compiler.Optimize.Canonicalize
 import LeanCairo.Compiler.Optimize.Pass
 import LeanCairo.Compiler.Optimize.Pipeline
 import LeanCairo.Compiler.Optimize.Contract
@@ -20,6 +21,7 @@ import LeanCairo.Compiler.Optimize.IRSpec
 import LeanCairo.Compiler.Proof.OptimizeSound
 import LeanCairo.Compiler.Proof.CSELetNormSound
 import LeanCairo.Compiler.Proof.IRSpecSound
+import LeanCairo.Compiler.Proof.TranslationRelation
 import LeanCairo.Core.Validation.Errors
 import LeanCairo.Core.Validation.Context
 import LeanCairo.Core.Validation.Utils
