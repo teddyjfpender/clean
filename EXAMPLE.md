@@ -1,5 +1,16 @@
 # Example: Lean -> Optimized Cairo vs Hand-Written Cairo
 
+Status note (2026-02-20):
+
+1. This file is a visual comparison example for the Lean -> Cairo backend.
+2. It is not the canonical feature-coverage contract for the Lean -> Sierra primary track.
+3. For roadmap status and strict coverage tracking, use:
+- `roadmap/README.md`
+- `roadmap/executable-issues/INDEX.md`
+4. For benchmarked fixed-point/fibonacci function comparisons, use:
+- `docs/fixed-point/benchmark-results.md`
+- `docs/fixed-point/code-comparisons.md`
+
 This example shows a medium-complexity pricing-style function with nested `let` bindings, branching, and repeated arithmetic subexpressions.
 
 ## Lean DSL Source

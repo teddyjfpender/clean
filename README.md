@@ -1,10 +1,22 @@
 # LeanCairoMVP
 
-Lean 4 EDSL -> Cairo Starknet contract generator (MVP), aligned to [`spec.md`](spec.md).
+Lean 4 EDSL compiler project with a primary Lean -> Sierra function pipeline and secondary Lean -> Cairo source pipeline.
 
-Status: Lean -> Cairo -> Scarb is wired and passing end-to-end, and a direct Lean -> Sierra subset lane is now implemented and validated with upstream Sierra tooling.
+Status: Lean -> Cairo -> Scarb is wired and passing end-to-end, and a direct Lean -> Sierra subset lane is implemented and validated with upstream Sierra tooling.
 
-Comprehensive full-support roadmap: [`roadmap/README.md`](roadmap/README.md).
+## Canonical Documents
+
+Document precedence for active delivery:
+
+1. [`roadmap/executable-issues/INDEX.md`](roadmap/executable-issues/INDEX.md) (active execution tracker)
+2. [`roadmap/README.md`](roadmap/README.md) (full roadmap and milestones)
+3. [`spec2.md`](spec2.md) (architecture direction note: Lean -> Sierra primary)
+4. [`spec.md`](spec.md) (historical MVP baseline specification)
+
+Interpretation rule:
+
+1. If roadmap/executable issues conflict with `spec.md` wording, roadmap/executable issues govern active implementation planning.
+2. `spec.md` is preserved for MVP baseline context and auditability.
 
 ## What This Is (and Is Not)
 

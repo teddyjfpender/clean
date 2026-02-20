@@ -1,4 +1,12 @@
-Lean → Cairo (→ Sierra/CASM) MVP engineering specification
+Lean -> Cairo (-> Sierra/CASM) MVP engineering specification
+
+Status note (2026-02-20):
+
+1. This file is the historical MVP baseline spec.
+2. Active implementation planning and progress tracking now live in:
+- `roadmap/README.md`
+- `roadmap/executable-issues/INDEX.md`
+3. This file remains in-repo for audit/history and backward traceability.
 
 0. Document metadata
 	•	Project name: LeanCairoMVP

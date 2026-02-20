@@ -1,40 +1,39 @@
-Short answer: go straight Lean -> Sierra for the optimizing compiler path, and keep Lean -> Cairo as a secondary review/debug backend.
+# Spec2: Architecture Direction (Pinned)
 
-  Why this is the better fit for your goal:
+Date: 2026-02-20
+Status: active architecture direction note
 
-  1. cairo-lang-sierra is already the canonical typed IR surface (program structure, ids, specialization, validation), so targeting it avoids
-     frontend duplication.
-      - Program / artifact model: https://raw.githubusercontent.com/starkware-libs/cairo/e56055c87a9db4e3dbb91c82ccb2ea751a8dc617/crates/cairo-lang-
-        sierra/src/program.rs
-      - Registry/validation layer: https://raw.githubusercontent.com/starkware-libs/cairo/e56055c87a9db4e3dbb91c82ccb2ea751a8dc617/crates/cairo-lang-
-        sierra/src/program_registry.rs
-  2. The Sierra core surface is large and explicit (many modules/libfunc families), and it is already organized for specialization by IDs/signatures.
-      - Core type/libfunc hierarchy: https://raw.githubusercontent.com/starkware-libs/cairo/e56055c87a9db4e3dbb91c82ccb2ea751a8dc617/crates/cairo-
-        lang-sierra/src/extensions/core.rs
-      - Hierarchy macros (good codegen anchor): https://raw.githubusercontent.com/starkware-libs/cairo/e56055c87a9db4e3dbb91c82ccb2ea751a8dc617/
-        crates/cairo-lang-sierra/src/extensions/lib_func.rs
-      - Type hierarchy macro: https://raw.githubusercontent.com/starkware-libs/cairo/e56055c87a9db4e3dbb91c82ccb2ea751a8dc617/crates/cairo-lang-
-        sierra/src/extensions/types.rs
-  3. “Add all Cairo types” in Lean->Cairo means re-implementing huge corelib/frontend behavior, then still relying on Cairo lowering to Sierra. That
-     is slower and less controllable for optimization goals.
-      - Corelib scope: https://github.com/starkware-libs/cairo/tree/e56055c87a9db4e3dbb91c82ccb2ea751a8dc617/corelib/src
-      - Example breadth (integer.cairo, circuit.cairo):
-        https://raw.githubusercontent.com/starkware-libs/cairo/e56055c87a9db4e3dbb91c82ccb2ea751a8dc617/corelib/src/integer.cairo
-        https://raw.githubusercontent.com/starkware-libs/cairo/e56055c87a9db4e3dbb91c82ccb2ea751a8dc617/corelib/src/circuit.cairo
-  4. The downstream toolchain is already Sierra-native (gas, ap-change, CASM compilation).
-      - Sierra -> CASM: https://raw.githubusercontent.com/starkware-libs/cairo/e56055c87a9db4e3dbb91c82ccb2ea751a8dc617/crates/cairo-lang-sierra-to-
-        casm/src/compiler.rs
-      - Gas/AP change:
-        https://raw.githubusercontent.com/starkware-libs/cairo/e56055c87a9db4e3dbb91c82ccb2ea751a8dc617/crates/cairo-lang-sierra-gas/src/lib.rs
-        https://raw.githubusercontent.com/starkware-libs/cairo/e56055c87a9db4e3dbb91c82ccb2ea751a8dc617/crates/cairo-lang-sierra-ap-change/src/lib.rs
+## Decision
 
-  What to do (not handwritten):
+Primary compiler direction is:
 
-  1. Auto-generate Lean Sierra schema/bindings from pinned cairo-lang-sierra sources (extensions/core.rs + extensions/modules/* + ids/signatures).
-  2. Emit Sierra Program directly from Lean IR.
-  3. Validate against ProgramRegistry at the same pinned commit.
-  4. Compile to CASM with official Sierra crates.
-  5. Keep optional Cairo output only for human review, not as the primary lowering path.
+1. Lean -> Sierra -> CASM for optimization/correctness-critical compilation.
+2. Lean -> Cairo as a secondary review/debug backend.
 
-  Inference: for your stated objective (“maximize on-chain efficiency and optimize Sierra/CASM directly”), this architecture is the highest-leverage
-  path.
+## Rationale
+
+1. Sierra is the canonical typed IR surface used by upstream validation and CASM compilation.
+2. Targeting Sierra directly avoids duplicating large frontend/corelib behavior before optimization.
+3. Performance and low-level control objectives are best served by direct Sierra/CASM-aware optimization.
+
+## Explicit non-goals (current stage)
+
+1. Not a compiler from arbitrary Lean programs to Cairo.
+2. Not formally verified semantics-preserving compilation for all families yet.
+
+## Required next trajectory
+
+1. Introduce and expand generic typed MIR.
+2. Perform optimizations MIR-to-MIR and Sierra-aware, not via IR -> DSL -> IR loops.
+3. Define semantics and prove pass/lowering preservation incrementally.
+4. Keep benchmark and non-regression gates mandatory.
+
+## Canonical execution plan
+
+The actionable plan is tracked in:
+
+1. `roadmap/README.md`
+2. `roadmap/executable-issues/INDEX.md`
+
+When this note and executable issues differ in operational detail, executable issues govern implementation sequencing.
+
