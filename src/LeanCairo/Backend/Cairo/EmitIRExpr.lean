@@ -21,6 +21,9 @@ partial def emitIRExpr : IRExpr ty -> String
   | .litU256 value => renderU256Literal value
   | .litBool value => if value then "true" else "false"
   | .litFelt252 value => toString value
+  | .addFelt252 lhs rhs => s!"({emitIRExpr lhs} + {emitIRExpr rhs})"
+  | .subFelt252 lhs rhs => s!"({emitIRExpr lhs} - {emitIRExpr rhs})"
+  | .mulFelt252 lhs rhs => s!"({emitIRExpr lhs} * {emitIRExpr rhs})"
   | .addU128 lhs rhs => s!"({emitIRExpr lhs} + {emitIRExpr rhs})"
   | .subU128 lhs rhs => s!"({emitIRExpr lhs} - {emitIRExpr rhs})"
   | .mulU128 lhs rhs => s!"({emitIRExpr lhs} * {emitIRExpr rhs})"

@@ -7,6 +7,22 @@ open LeanCairo.Compiler.IR
 open LeanCairo.Compiler.Optimize
 open LeanCairo.Compiler.Semantics
 
+private theorem evalCseAddFelt252 (ctx : EvalContext) (lhs rhs : IRExpr .felt252) :
+    evalExpr ctx (cseAddFelt252 lhs rhs) = evalExpr ctx (.addFelt252 lhs rhs) := by
+  unfold cseAddFelt252
+  by_cases h : lhs = rhs
+  · subst h
+    simp [cseTempFelt252, evalExpr, EvalContext.readVar, EvalContext.bindVar]
+  · simp [h, evalExpr]
+
+private theorem evalCseMulFelt252 (ctx : EvalContext) (lhs rhs : IRExpr .felt252) :
+    evalExpr ctx (cseMulFelt252 lhs rhs) = evalExpr ctx (.mulFelt252 lhs rhs) := by
+  unfold cseMulFelt252
+  by_cases h : lhs = rhs
+  · subst h
+    simp [cseTempFelt252, evalExpr, EvalContext.readVar, EvalContext.bindVar]
+  · simp [h, evalExpr]
+
 private theorem evalCseAddU128 (ctx : EvalContext) (lhs rhs : IRExpr .u128) :
     evalExpr ctx (cseAddU128 lhs rhs) = evalExpr ctx (.addU128 lhs rhs) := by
   unfold cseAddU128
@@ -70,6 +86,12 @@ private theorem evalNormalizeLet (ctx : EvalContext) (name : String) (boundTy : 
       simp [normalizeLet, evalExpr]
   | litFelt252 value =>
       simp [normalizeLet, evalExpr]
+  | addFelt252 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | subFelt252 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | mulFelt252 lhs rhs =>
+      simp [normalizeLet, evalExpr]
   | addU128 lhs rhs =>
       simp [normalizeLet, evalExpr]
   | subU128 lhs rhs =>
@@ -112,6 +134,22 @@ theorem cseLetNormExprSound (ctx : EvalContext) (expr : IRExpr ty) :
       simp [cseLetNormExpr, evalExpr]
   | litFelt252 value =>
       simp [cseLetNormExpr, evalExpr]
+  | addFelt252 lhs rhs ihLhs ihRhs =>
+      calc
+        evalExpr ctx (cseLetNormExpr (.addFelt252 lhs rhs)) =
+            evalExpr ctx (.addFelt252 (cseLetNormExpr lhs) (cseLetNormExpr rhs)) := by
+              simpa [cseLetNormExpr] using evalCseAddFelt252 ctx (cseLetNormExpr lhs) (cseLetNormExpr rhs)
+        _ = evalExpr ctx (.addFelt252 lhs rhs) := by
+              simp [evalExpr, ihLhs ctx, ihRhs ctx]
+  | subFelt252 lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | mulFelt252 lhs rhs ihLhs ihRhs =>
+      calc
+        evalExpr ctx (cseLetNormExpr (.mulFelt252 lhs rhs)) =
+            evalExpr ctx (.mulFelt252 (cseLetNormExpr lhs) (cseLetNormExpr rhs)) := by
+              simpa [cseLetNormExpr] using evalCseMulFelt252 ctx (cseLetNormExpr lhs) (cseLetNormExpr rhs)
+        _ = evalExpr ctx (.mulFelt252 lhs rhs) := by
+              simp [evalExpr, ihLhs ctx, ihRhs ctx]
   | addU128 lhs rhs ihLhs ihRhs =>
       calc
         evalExpr ctx (cseLetNormExpr (.addU128 lhs rhs)) =

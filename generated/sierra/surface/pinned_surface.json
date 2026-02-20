@@ -1,0 +1,620 @@
+{
+  "generic_libfunc_ids": [
+    "add_circuit_input",
+    "alloc_local",
+    "array_append",
+    "array_get",
+    "array_len",
+    "array_new",
+    "array_pop_front",
+    "array_pop_front_consume",
+    "array_slice",
+    "array_snapshot_multi_pop_back",
+    "array_snapshot_multi_pop_front",
+    "array_snapshot_pop_back",
+    "array_snapshot_pop_front",
+    "bitwise",
+    "blake2s_compress",
+    "blake2s_finalize",
+    "bool_and_impl",
+    "bool_not_impl",
+    "bool_or_impl",
+    "bool_to_felt252",
+    "bool_xor_impl",
+    "bounded_int_add",
+    "bounded_int_constrain",
+    "bounded_int_div_rem",
+    "bounded_int_is_zero",
+    "bounded_int_mul",
+    "bounded_int_sub",
+    "bounded_int_wrap_non_zero",
+    "box_forward_snapshot",
+    "branch_align",
+    "bytes31_const",
+    "bytes31_to_felt252",
+    "bytes31_try_from_felt252",
+    "call_contract_syscall",
+    "cheatcode",
+    "circuit_failure_guarantee_verify",
+    "class_hash_const",
+    "class_hash_to_felt252",
+    "class_hash_try_from_felt252",
+    "const_as_box",
+    "const_as_immediate",
+    "contract_address_const",
+    "contract_address_to_felt252",
+    "contract_address_try_from_felt252",
+    "core::starknet::secp256k1::Secp256k1Point",
+    "core::starknet::secp256r1::Secp256r1Point",
+    "coupon_buy",
+    "coupon_call",
+    "coupon_refund",
+    "deploy_syscall",
+    "disable_ap_tracking",
+    "downcast",
+    "drop",
+    "dummy_function_call",
+    "dup",
+    "ec_neg",
+    "ec_neg_nz",
+    "ec_point_from_x_nz",
+    "ec_point_is_zero",
+    "ec_point_try_new_nz",
+    "ec_point_unwrap",
+    "ec_point_zero",
+    "ec_state_add",
+    "ec_state_add_mul",
+    "ec_state_init",
+    "ec_state_try_finalize_nz",
+    "emit_event_syscall",
+    "enable_ap_tracking",
+    "enum_boxed_match",
+    "enum_from_bounded_int",
+    "enum_init",
+    "enum_match",
+    "enum_snapshot_match",
+    "eval_circuit",
+    "felt252_add",
+    "felt252_add_const",
+    "felt252_const",
+    "felt252_dict_entry_finalize",
+    "felt252_dict_entry_get",
+    "felt252_dict_new",
+    "felt252_dict_squash",
+    "felt252_div",
+    "felt252_div_const",
+    "felt252_is_zero",
+    "felt252_mul",
+    "felt252_mul_const",
+    "felt252_sub",
+    "felt252_sub_const",
+    "finalize_locals",
+    "function_call",
+    "gas_reserve_create",
+    "gas_reserve_utilize",
+    "get_available_gas",
+    "get_block_hash_syscall",
+    "get_builtin_costs",
+    "get_circuit_descriptor",
+    "get_circuit_output",
+    "get_class_hash_at_syscall",
+    "get_execution_info_syscall",
+    "get_execution_info_v2_syscall",
+    "get_execution_info_v3_syscall",
+    "get_unspent_gas",
+    "hades_permutation",
+    "i128_const",
+    "i128_diff",
+    "i128_eq",
+    "i128_overflowing_add_impl",
+    "i128_overflowing_sub_impl",
+    "i128_to_felt252",
+    "i128_try_from_felt252",
+    "i16_const",
+    "i16_diff",
+    "i16_eq",
+    "i16_overflowing_add_impl",
+    "i16_overflowing_sub_impl",
+    "i16_to_felt252",
+    "i16_try_from_felt252",
+    "i16_wide_mul",
+    "i32_const",
+    "i32_diff",
+    "i32_eq",
+    "i32_overflowing_add_impl",
+    "i32_overflowing_sub_impl",
+    "i32_to_felt252",
+    "i32_try_from_felt252",
+    "i32_wide_mul",
+    "i64_const",
+    "i64_diff",
+    "i64_eq",
+    "i64_overflowing_add_impl",
+    "i64_overflowing_sub_impl",
+    "i64_to_felt252",
+    "i64_try_from_felt252",
+    "i64_wide_mul",
+    "i8_const",
+    "i8_diff",
+    "i8_eq",
+    "i8_overflowing_add_impl",
+    "i8_overflowing_sub_impl",
+    "i8_to_felt252",
+    "i8_try_from_felt252",
+    "i8_wide_mul",
+    "init_circuit_data",
+    "int_range_pop_front",
+    "int_range_try_new",
+    "into_box",
+    "into_u96_guarantee",
+    "jump",
+    "keccak_syscall",
+    "library_call_syscall",
+    "local_into_box",
+    "m31_add",
+    "m31_div",
+    "m31_mul",
+    "m31_sub",
+    "match_nullable",
+    "meta_tx_v0_syscall",
+    "null",
+    "nullable_forward_snapshot",
+    "nullable_from_box",
+    "pedersen",
+    "print",
+    "qm31_add",
+    "qm31_const",
+    "qm31_div",
+    "qm31_from_m31",
+    "qm31_is_zero",
+    "qm31_mul",
+    "qm31_pack",
+    "qm31_sub",
+    "qm31_unpack",
+    "redeposit_gas",
+    "rename",
+    "replace_class_syscall",
+    "revoke_ap_tracking",
+    "secp256k1_add_syscall",
+    "secp256k1_get_point_from_x_syscall",
+    "secp256k1_get_xy_syscall",
+    "secp256k1_mul_syscall",
+    "secp256k1_new_syscall",
+    "secp256r1_add_syscall",
+    "secp256r1_get_point_from_x_syscall",
+    "secp256r1_get_xy_syscall",
+    "secp256r1_mul_syscall",
+    "secp256r1_new_syscall",
+    "send_message_to_l1_syscall",
+    "sha256_process_block_syscall",
+    "sha256_state_handle_digest",
+    "sha256_state_handle_init",
+    "snapshot_take",
+    "span_from_tuple",
+    "squashed_felt252_dict_entries",
+    "storage_address_from_base",
+    "storage_address_from_base_and_offset",
+    "storage_address_to_felt252",
+    "storage_address_try_from_felt252",
+    "storage_base_address_from_felt252",
+    "storage_read_syscall",
+    "storage_write_syscall",
+    "store_local",
+    "store_temp",
+    "struct_boxed_deconstruct",
+    "struct_construct",
+    "struct_deconstruct",
+    "struct_snapshot_deconstruct",
+    "trace",
+    "try_into_circuit_modulus",
+    "tuple_from_span",
+    "u128_byte_reverse",
+    "u128_const",
+    "u128_eq",
+    "u128_guarantee_mul",
+    "u128_is_zero",
+    "u128_mul_guarantee_verify",
+    "u128_overflowing_add",
+    "u128_overflowing_sub",
+    "u128_safe_divmod",
+    "u128_sqrt",
+    "u128_to_felt252",
+    "u128_try_from_felt252",
+    "u128s_from_felt252",
+    "u16_bitwise",
+    "u16_const",
+    "u16_eq",
+    "u16_is_zero",
+    "u16_overflowing_add",
+    "u16_overflowing_sub",
+    "u16_safe_divmod",
+    "u16_sqrt",
+    "u16_to_felt252",
+    "u16_try_from_felt252",
+    "u16_wide_mul",
+    "u256_guarantee_inv_mod_n",
+    "u256_is_zero",
+    "u256_safe_divmod",
+    "u256_sqrt",
+    "u32_bitwise",
+    "u32_const",
+    "u32_eq",
+    "u32_is_zero",
+    "u32_overflowing_add",
+    "u32_overflowing_sub",
+    "u32_safe_divmod",
+    "u32_sqrt",
+    "u32_to_felt252",
+    "u32_try_from_felt252",
+    "u32_wide_mul",
+    "u512_safe_divmod_by_u256",
+    "u64_bitwise",
+    "u64_const",
+    "u64_eq",
+    "u64_is_zero",
+    "u64_overflowing_add",
+    "u64_overflowing_sub",
+    "u64_safe_divmod",
+    "u64_sqrt",
+    "u64_to_felt252",
+    "u64_try_from_felt252",
+    "u64_wide_mul",
+    "u8_bitwise",
+    "u8_const",
+    "u8_eq",
+    "u8_is_zero",
+    "u8_overflowing_add",
+    "u8_overflowing_sub",
+    "u8_safe_divmod",
+    "u8_sqrt",
+    "u8_to_felt252",
+    "u8_try_from_felt252",
+    "u8_wide_mul",
+    "u96_guarantee_verify",
+    "u96_limbs_less_than_guarantee_verify",
+    "u96_single_limb_less_than_guarantee_verify",
+    "unbox",
+    "unsafe_panic",
+    "unwrap_non_zero",
+    "upcast",
+    "withdraw_gas",
+    "withdraw_gas_all"
+  ],
+  "generic_type_ids": [
+    "AddMod",
+    "AddModGate",
+    "Array",
+    "Bitwise",
+    "Blake2sState",
+    "BoundedInt",
+    "Box",
+    "BuiltinCosts",
+    "Circuit",
+    "CircuitData",
+    "CircuitDescriptor",
+    "CircuitFailureGuarantee",
+    "CircuitInput",
+    "CircuitInputAccumulator",
+    "CircuitModulus",
+    "CircuitOutputs",
+    "CircuitPartialOutputs",
+    "ClassHash",
+    "Const",
+    "ContractAddress",
+    "Coupon",
+    "EcOp",
+    "EcPoint",
+    "EcState",
+    "Enum",
+    "Felt252Dict",
+    "Felt252DictEntry",
+    "GasBuiltin",
+    "GasReserve",
+    "IntRange",
+    "InverseGate",
+    "MulMod",
+    "MulModGate",
+    "NonZero",
+    "Nullable",
+    "Pedersen",
+    "Poseidon",
+    "RangeCheck",
+    "RangeCheck96",
+    "Secp256k1Point",
+    "Secp256r1Point",
+    "SegmentArena",
+    "Sha256StateHandle",
+    "Snapshot",
+    "Span",
+    "SquashedFelt252Dict",
+    "StorageAddress",
+    "StorageBaseAddress",
+    "Struct",
+    "SubModGate",
+    "System",
+    "U128MulGuarantee",
+    "U96Guarantee",
+    "U96LimbsLtGuarantee",
+    "Uninitialized",
+    "bytes31",
+    "felt252",
+    "i128",
+    "i16",
+    "i32",
+    "i64",
+    "i8",
+    "qm31",
+    "u128",
+    "u16",
+    "u32",
+    "u64",
+    "u8"
+  ],
+  "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617",
+  "sources": [
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/core.rs",
+      "sha256": "91211f7f3a5608246e435521cbf73622904f8db2cef5bdd1a8fb29e48f5e3c5f"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/lib_func.rs",
+      "sha256": "a0ce27d0d8152f7866332d2637d896dd74ce595206d2248c16bfdec142a7b35f"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/ap_tracking.rs",
+      "sha256": "3e32039a5d495c6834359dbd6547ea9cd93d7bc6fe841163851d6746fa0d6988"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/array.rs",
+      "sha256": "58857c3f5c6e0287dea3dfbd80ab9a882449b65e07357d86a3c11dba27fd47e1"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/bitwise.rs",
+      "sha256": "2c065f36227f4da6bea2f9dfc4f3217a2a9ef54ea32b36687169968495939606"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/blake.rs",
+      "sha256": "1ed957eb0e1ce1f13fe342b9bc6b78e0b1327ed911ab1df82ee3be6c519ab301"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/boolean.rs",
+      "sha256": "fcde0ca79f812dd763504a64825dd789c1e2a6b8c65ad699a143608d50d9dc42"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/bounded_int.rs",
+      "sha256": "099bf35fafe8bc5884168c658dc3a1af42e336ad2eb0ee05910b91d218b4dd8c"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/boxing.rs",
+      "sha256": "84f669b7bfa932e686586ca1b2c1b604c8de1834e150b48d100caf3b42f7c7ce"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/branch_align.rs",
+      "sha256": "f9093feda987fa961ce60a7f849766d234ab9f93f4ca3e7e4c48e306c7c4963e"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/bytes31.rs",
+      "sha256": "5befd20c5c674587804b97520480c6339f0ab588b1cb44a96bdc4113174de58e"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/casts.rs",
+      "sha256": "c74e099a84afdc29e5be387bb926054e43ad7f3de379dcd95d8c450112553e11"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/circuit.rs",
+      "sha256": "f352e9348400eccf0fd66222b87f99da42078b817767affa071e79ebc8185856"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/const_type.rs",
+      "sha256": "d0ac79d0352aaa7bb7f0a4f694d1af4be271a6837358293588a832c74e0a1b94"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/consts.rs",
+      "sha256": "384cb110f98a3b58adc499036dc2fefadd2dfa4b668838c2018824f9196d6a88"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/coupon.rs",
+      "sha256": "cd80877e7d0a39c7f42070a90f7497be533e3c277ef786424b0adee7a094823a"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/debug.rs",
+      "sha256": "3867fe6c80209032d80cf22a74a99b879d6b7b04abe34899427e67d3efb66678"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/drop.rs",
+      "sha256": "a3405fb27939b034641dd54649e2fa3f96fff749bc014efdff16c2bebe0143d3"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/duplicate.rs",
+      "sha256": "7c838ab049544ce49b84574d8edf643909d34841073f203158724528b016ed55"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/ec.rs",
+      "sha256": "e4a18cd51071a02258d67b928ecdd63e765bd67d6fd9c0effd96901871585108"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/enm.rs",
+      "sha256": "384df8f36e72e0f4550bec605353a3ece5156797b9fcdfa22fe79f860a5e5231"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/felt252.rs",
+      "sha256": "8490f76e62a5723a0d642bc8682b3ec532ea62c7e3ca66b3e16f304c9a4f7e05"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/felt252_dict.rs",
+      "sha256": "3940d9dd71cea68af1e4231e8135f7085bda229df4b38819c50fb869a1114566"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/function_call.rs",
+      "sha256": "0e6d0eb128810df637cead6afcfe5d9f19247765aaddc3bd41f95c12c2675db8"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/gas.rs",
+      "sha256": "577fb9c695f8d18aace98187617f6000464c61b9cbcbeca3914f9caf9bca37f8"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/gas_reserve.rs",
+      "sha256": "68db4423be4185a3c5cb4bec4df7bb1f535456b56960c17d0002e9fde767d0d9"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/mod.rs",
+      "sha256": "9d7af18faf9766f7606b32d5cc33180f0775de041b0a126b1a1994a7b1b70e36"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/signed.rs",
+      "sha256": "c082c8e36d63c71ed1bdb57d8cb027cfbd262e91f5d9d8ed26691939ad5c423a"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/signed128.rs",
+      "sha256": "3ce148e0c3b1a40012678f28db2ba9bf3167eeff7bfd37514dd7c2ec6cf7acd5"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned.rs",
+      "sha256": "2a75a977fc80d9a78df0edd65aee4766c309652fbc57abd3b833eb02e9dea4a3"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned128.rs",
+      "sha256": "4775854d8f3ad67615b08ee902b3703efdaf0543fc37fa98d6c10cd95ab834b6"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned256.rs",
+      "sha256": "ebafd86d50b98750940da6ce1bb6646bf5846ea5d17828a6a6b1b6588ba18296"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned512.rs",
+      "sha256": "b9690b437bbd86f4b1b1899215f3821c4b9f4be5c32ec507b3b1db934b3d2748"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/is_zero.rs",
+      "sha256": "e0ba001d8b5d00882db8531b12fcda3ae6809889189a0b91a4107281c939cd33"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/mem.rs",
+      "sha256": "57b1216779b3956cccb893ad49c8eb5d802ab8e52bea6db6bcab59e28b452031"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/mod.rs",
+      "sha256": "5c343d1bed023e3bfbedd528f516865d46c05e9b2213d601bf7d4c3f2e54c712"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/non_zero.rs",
+      "sha256": "51ad34a10e5558c7a2dc943f73474090f579359899133b995e632cdecb26bbbe"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/nullable.rs",
+      "sha256": "69ef87ec759089f92563da902949a59fe5c38f157935d9eac24b020f8c42a1cc"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/pedersen.rs",
+      "sha256": "76d48e9980b9df519671b5816f345a6718c770d94bc59b932cb1a17888eddeef"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/poseidon.rs",
+      "sha256": "64ce45d4428488b0d68ee1ccf3f66c0ae9baa41b9ee5bd100c103c29d0d354e3"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/qm31.rs",
+      "sha256": "37b1898865b7c471c029a72d267887c2d42a0198fa658fc8f7d4bfa7022d5f72"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/range.rs",
+      "sha256": "bb010429fc59189e097ebf7b2bb7f5d5e30a22d6f456a46cfb12b5b841b34dc8"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/range_check.rs",
+      "sha256": "af4f9d0735fb8ffb1b68a280953d810bedde54ab9da44b4d3c0c60e38d5e7e5a"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/segment_arena.rs",
+      "sha256": "709ed651bbafec9c427297d1d01ac3a6511372a99a3ab116feb7185b226dda21"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/snapshot.rs",
+      "sha256": "06e8993661dbc615c40f1a2b3f43be703cd36a7f744808aa1cdfdce4f610545f"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/span.rs",
+      "sha256": "d2f49a2faec4e3f8b327038338aa7fd1ddf842641ef11f150b003ccaa1ee9a41"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/squashed_felt252_dict.rs",
+      "sha256": "c3504bfe2316a7042ff55882b594830803295cf3fdd65acda4817cb102641e55"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/emit_event.rs",
+      "sha256": "549e50cc6af3ef5cdd4f5666d92d900907a647bd911c645270c69c443644fe8e"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/getter.rs",
+      "sha256": "08be307df3478990035bd150c89a492b4df5de3da5593343114a9d3c50b92482"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/interoperability.rs",
+      "sha256": "b6aaf1652db2e6e03ea43565e3db3b6900efef6929634b8acace63f2511e23a7"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/mod.rs",
+      "sha256": "5ba0521c197c4e55a8a1b04347144d7fa9632e5f9279010ffe7c67acd718f678"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256.rs",
+      "sha256": "f82f3b08cb95fbe11b3b44b103e93b0fc66b2b7a64ea416213e1ca07ac07bfc3"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256k1.rs",
+      "sha256": "f70b17f0e1a3712c435d57454dafcc965c5ec630d25dfc4eb20eee65c69ba357"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256r1.rs",
+      "sha256": "ea55c773bb58e7acfcbceb07facbcc6bfa84c30ce09fe1f46e8b37ed5caf13f2"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/storage.rs",
+      "sha256": "9b2f35658e7435a320bf653102690b7f8743d1f493b0e5bb2a47043a7e76bc6a"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/syscalls.rs",
+      "sha256": "d473d2bf66f5569cf32cc5d88f6f0967fea05256462a0bd51f65630fdc877dd4"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/testing.rs",
+      "sha256": "5975c1af60f29262bc204cda1f83be695ba25130b20da1b9a03df73dcf7e5ac0"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/structure.rs",
+      "sha256": "1431e0fcec16fcfa80d47dda8d054867fd4556b99c41c04c7d7d009351175a7e"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/trace.rs",
+      "sha256": "b799e19357f5b970d824f3c40173aec91ab60c2fbdaf200137b3b16de6c3109c"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/try_from_felt252.rs",
+      "sha256": "ba43ddb6eb5a4716c1e5f27ee82838bb288e00fc5caed2c924658afca204fab8"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/unconditional_jump.rs",
+      "sha256": "6d6f93b0dd5be172a5ac2701344f7a6cde02d5d47c48964ac2c3c9ff03544a3a"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/uninitialized.rs",
+      "sha256": "e6d3e7aa67958e2389be9f1de38b22a84638023f029c00d61c617d05dc8aec7f"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/unsafe_panic.rs",
+      "sha256": "27213b591fa1666788899d9c9d80bb06269b8b9f4817277f30aad07d0d65cab3"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/utils.rs",
+      "sha256": "dc94ee073f5653b9a08162cc6ab975e1bd1fa1dfea6c549380cc172b8f392193"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/extensions/types.rs",
+      "sha256": "d3c7e74495e5dc6326498aab23a6e1ae64f0ad9b62e3a2ec7fda9b5b3ab226e4"
+    },
+    {
+      "path": "crates/cairo-lang-sierra/src/ids.rs",
+      "sha256": "060c9c53bd269e24de6c90d317c3384b0b0db27ba4fd8c2fdc5146cd1d00f40a"
+    }
+  ]
+}

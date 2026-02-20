@@ -12,6 +12,9 @@ inductive Expr : Ty -> Type where
   | litU256 (value : Nat) : Expr .u256
   | litBool (value : Bool) : Expr .bool
   | litFelt252 (value : Int) : Expr .felt252
+  | addFelt252 (lhs rhs : Expr .felt252) : Expr .felt252
+  | subFelt252 (lhs rhs : Expr .felt252) : Expr .felt252
+  | mulFelt252 (lhs rhs : Expr .felt252) : Expr .felt252
   | addU128 (lhs rhs : Expr .u128) : Expr .u128
   | subU128 (lhs rhs : Expr .u128) : Expr .u128
   | mulU128 (lhs rhs : Expr .u128) : Expr .u128

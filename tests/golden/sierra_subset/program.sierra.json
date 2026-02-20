@@ -1,0 +1,221 @@
+{"version": 1,
+ "type_declarations":
+ [{"long_id": {"generic_id": "felt252", "generic_args": []},
+   "id": {"id": 18197987107266074389, "debug_name": "felt252"},
+   "declared_type_info": null},
+  {"long_id": {"generic_id": "u128", "generic_args": []},
+   "id": {"id": 10698497612269247729, "debug_name": "u128"},
+   "declared_type_info": null}],
+ "statements":
+ [{"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4989442307435606125,
+        "debug_name": "identityFelt::tmp::store_temp::0"}]}],
+    "args":
+    [{"id": 2765112820072434177, "debug_name": "identityFelt::param::x"}]}},
+  {"Return":
+   [{"id": 4989442307435606125,
+     "debug_name": "identityFelt::tmp::store_temp::0"}]},
+  {"Invocation":
+   {"libfunc_id": {"id": 11881856011480806563, "debug_name": "dup_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 5953444874398086345,
+        "debug_name": "feltAffine::tmp::dup_keep::0"},
+       {"id": 3092956702601727720,
+        "debug_name": "feltAffine::tmp::dup_use::1"}]}],
+    "args":
+    [{"id": 3892603842120781108, "debug_name": "feltAffine::param::x"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 7210606354227723938, "debug_name": "felt252_const_pos_7"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 1602183029633801934,
+        "debug_name": "feltAffine::tmp::felt_const_raw::2"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2447428959341327481,
+        "debug_name": "feltAffine::tmp::store_temp::3"}]}],
+    "args":
+    [{"id": 1602183029633801934,
+      "debug_name": "feltAffine::tmp::felt_const_raw::2"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5573091817713561949, "debug_name": "felt252_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8143371735684302372,
+        "debug_name": "feltAffine::tmp::felt_add_raw::4"}]}],
+    "args":
+    [{"id": 3092956702601727720, "debug_name": "feltAffine::tmp::dup_use::1"},
+     {"id": 2447428959341327481,
+      "debug_name": "feltAffine::tmp::store_temp::3"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2447431158364583903,
+        "debug_name": "feltAffine::tmp::store_temp::5"}]}],
+    "args":
+    [{"id": 8143371735684302372,
+      "debug_name": "feltAffine::tmp::felt_add_raw::4"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16735586749622859144, "debug_name": "felt252_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13091282710968900201,
+        "debug_name": "feltAffine::tmp::felt_mul_raw::6"}]}],
+    "args":
+    [{"id": 2447431158364583903,
+      "debug_name": "feltAffine::tmp::store_temp::5"},
+     {"id": 3892604941632409319, "debug_name": "feltAffine::param::y"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2447433357387840325,
+        "debug_name": "feltAffine::tmp::store_temp::7"}]}],
+    "args":
+    [{"id": 13091282710968900201,
+      "debug_name": "feltAffine::tmp::felt_mul_raw::6"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 12829813583981032364, "debug_name": "felt252_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17075576409749834483,
+        "debug_name": "feltAffine::tmp::felt_sub_raw::8"}]}],
+    "args":
+    [{"id": 2447433357387840325,
+      "debug_name": "feltAffine::tmp::store_temp::7"},
+     {"id": 5953444874398086345,
+      "debug_name": "feltAffine::tmp::dup_keep::0"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2447435556411096747,
+        "debug_name": "feltAffine::tmp::store_temp::9"}]}],
+    "args":
+    [{"id": 17075576409749834483,
+      "debug_name": "feltAffine::tmp::felt_sub_raw::8"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4749320791244701305,
+        "debug_name": "feltAffine::tmp::store_temp::10"}]}],
+    "args":
+    [{"id": 2447435556411096747,
+      "debug_name": "feltAffine::tmp::store_temp::9"}]}},
+  {"Return":
+   [{"id": 4749320791244701305,
+     "debug_name": "feltAffine::tmp::store_temp::10"}]},
+  {"Invocation":
+   {"libfunc_id": {"id": 6142720019225980360, "debug_name": "u128_const_42"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 12813172369951150156,
+        "debug_name": "constU128::tmp::u128_const_raw::0"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 16193538348029762264,
+        "debug_name": "constU128::tmp::store_temp::1"}]}],
+    "args":
+    [{"id": 12813172369951150156,
+      "debug_name": "constU128::tmp::u128_const_raw::0"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 16193541646564646897,
+        "debug_name": "constU128::tmp::store_temp::2"}]}],
+    "args":
+    [{"id": 16193538348029762264,
+      "debug_name": "constU128::tmp::store_temp::1"}]}},
+  {"Return":
+   [{"id": 16193541646564646897,
+     "debug_name": "constU128::tmp::store_temp::2"}]}],
+ "libfunc_declarations":
+ [{"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 18197987107266074389, "debug_name": "felt252"}}]},
+   "id": {"id": 14115798396771957644, "debug_name": "store_temp_felt252"}},
+  {"long_id":
+   {"generic_id": "dup",
+    "generic_args":
+    [{"Type": {"id": 18197987107266074389, "debug_name": "felt252"}}]},
+   "id": {"id": 11881856011480806563, "debug_name": "dup_felt252"}},
+  {"long_id":
+   {"generic_id": "felt252_const", "generic_args": [{"Value": [1, [7]]}]},
+   "id": {"id": 7210606354227723938, "debug_name": "felt252_const_pos_7"}},
+  {"long_id": {"generic_id": "felt252_add", "generic_args": []},
+   "id": {"id": 5573091817713561949, "debug_name": "felt252_add"}},
+  {"long_id": {"generic_id": "felt252_mul", "generic_args": []},
+   "id": {"id": 16735586749622859144, "debug_name": "felt252_mul"}},
+  {"long_id": {"generic_id": "felt252_sub", "generic_args": []},
+   "id": {"id": 12829813583981032364, "debug_name": "felt252_sub"}},
+  {"long_id":
+   {"generic_id": "u128_const", "generic_args": [{"Value": [1, [42]]}]},
+   "id": {"id": 6142720019225980360, "debug_name": "u128_const_42"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}}]},
+   "id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"}}],
+ "funcs":
+ [{"signature":
+   {"ret_types": [{"id": 18197987107266074389, "debug_name": "felt252"}],
+    "param_types": [{"id": 18197987107266074389, "debug_name": "felt252"}]},
+   "params":
+   [{"ty": {"id": 18197987107266074389, "debug_name": "felt252"},
+     "id":
+     {"id": 2765112820072434177, "debug_name": "identityFelt::param::x"}}],
+   "id": {"id": 298194639673944318, "debug_name": "identityFelt"},
+   "entry_point": 0},
+  {"signature":
+   {"ret_types": [{"id": 18197987107266074389, "debug_name": "felt252"}],
+    "param_types":
+    [{"id": 18197987107266074389, "debug_name": "felt252"},
+     {"id": 18197987107266074389, "debug_name": "felt252"}]},
+   "params":
+   [{"ty": {"id": 18197987107266074389, "debug_name": "felt252"},
+     "id": {"id": 3892603842120781108, "debug_name": "feltAffine::param::x"}},
+    {"ty": {"id": 18197987107266074389, "debug_name": "felt252"},
+     "id": {"id": 3892604941632409319, "debug_name": "feltAffine::param::y"}}],
+   "id": {"id": 2590880651581120667, "debug_name": "feltAffine"},
+   "entry_point": 2},
+  {"signature":
+   {"ret_types": [{"id": 10698497612269247729, "debug_name": "u128"}],
+    "param_types": []},
+   "params": [],
+   "id": {"id": 11895218003380178156, "debug_name": "constU128"},
+   "entry_point": 13}]}

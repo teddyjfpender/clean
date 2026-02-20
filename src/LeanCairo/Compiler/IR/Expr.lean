@@ -12,6 +12,9 @@ inductive IRExpr : Ty -> Type where
   | litU256 (value : Nat) : IRExpr .u256
   | litBool (value : Bool) : IRExpr .bool
   | litFelt252 (value : Int) : IRExpr .felt252
+  | addFelt252 (lhs rhs : IRExpr .felt252) : IRExpr .felt252
+  | subFelt252 (lhs rhs : IRExpr .felt252) : IRExpr .felt252
+  | mulFelt252 (lhs rhs : IRExpr .felt252) : IRExpr .felt252
   | addU128 (lhs rhs : IRExpr .u128) : IRExpr .u128
   | subU128 (lhs rhs : IRExpr .u128) : IRExpr .u128
   | mulU128 (lhs rhs : IRExpr .u128) : IRExpr .u128

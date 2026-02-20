@@ -11,8 +11,25 @@ def cseTempU128 : String :=
 def cseTempU256 : String :=
   "__leancairo_internal_cse_u256"
 
+def cseTempFelt252 : String :=
+  "__leancairo_internal_cse_felt252"
+
 def cseTempEq : String :=
   "__leancairo_internal_cse_eq"
+
+def cseAddFelt252 (lhs rhs : IRExpr .felt252) : IRExpr .felt252 :=
+  if lhs = rhs then
+    .letE cseTempFelt252 .felt252 lhs
+      (.addFelt252 (.var (ty := .felt252) cseTempFelt252) (.var (ty := .felt252) cseTempFelt252))
+  else
+    .addFelt252 lhs rhs
+
+def cseMulFelt252 (lhs rhs : IRExpr .felt252) : IRExpr .felt252 :=
+  if lhs = rhs then
+    .letE cseTempFelt252 .felt252 lhs
+      (.mulFelt252 (.var (ty := .felt252) cseTempFelt252) (.var (ty := .felt252) cseTempFelt252))
+  else
+    .mulFelt252 lhs rhs
 
 def cseAddU128 (lhs rhs : IRExpr .u128) : IRExpr .u128 :=
   if lhs = rhs then
@@ -69,6 +86,9 @@ def cseLetNormExpr : IRExpr ty -> IRExpr ty
   | .litU256 value => .litU256 value
   | .litBool value => .litBool value
   | .litFelt252 value => .litFelt252 value
+  | .addFelt252 lhs rhs => cseAddFelt252 (cseLetNormExpr lhs) (cseLetNormExpr rhs)
+  | .subFelt252 lhs rhs => .subFelt252 (cseLetNormExpr lhs) (cseLetNormExpr rhs)
+  | .mulFelt252 lhs rhs => cseMulFelt252 (cseLetNormExpr lhs) (cseLetNormExpr rhs)
   | .addU128 lhs rhs => cseAddU128 (cseLetNormExpr lhs) (cseLetNormExpr rhs)
   | .subU128 lhs rhs => .subU128 (cseLetNormExpr lhs) (cseLetNormExpr rhs)
   | .mulU128 lhs rhs => cseMulU128 (cseLetNormExpr lhs) (cseLetNormExpr rhs)

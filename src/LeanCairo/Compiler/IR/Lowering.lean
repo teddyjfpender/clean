@@ -12,6 +12,9 @@ def lowerExpr : Expr ty -> IRExpr ty
   | .litU256 value => .litU256 value
   | .litBool value => .litBool value
   | .litFelt252 value => .litFelt252 value
+  | .addFelt252 lhs rhs => .addFelt252 (lowerExpr lhs) (lowerExpr rhs)
+  | .subFelt252 lhs rhs => .subFelt252 (lowerExpr lhs) (lowerExpr rhs)
+  | .mulFelt252 lhs rhs => .mulFelt252 (lowerExpr lhs) (lowerExpr rhs)
   | .addU128 lhs rhs => .addU128 (lowerExpr lhs) (lowerExpr rhs)
   | .subU128 lhs rhs => .subU128 (lowerExpr lhs) (lowerExpr rhs)
   | .mulU128 lhs rhs => .mulU128 (lowerExpr lhs) (lowerExpr rhs)
@@ -33,6 +36,9 @@ def raiseExpr : IRExpr ty -> Expr ty
   | .litU256 value => .litU256 value
   | .litBool value => .litBool value
   | .litFelt252 value => .litFelt252 value
+  | .addFelt252 lhs rhs => .addFelt252 (raiseExpr lhs) (raiseExpr rhs)
+  | .subFelt252 lhs rhs => .subFelt252 (raiseExpr lhs) (raiseExpr rhs)
+  | .mulFelt252 lhs rhs => .mulFelt252 (raiseExpr lhs) (raiseExpr rhs)
   | .addU128 lhs rhs => .addU128 (raiseExpr lhs) (raiseExpr rhs)
   | .subU128 lhs rhs => .subU128 (raiseExpr lhs) (raiseExpr rhs)
   | .mulU128 lhs rhs => .mulU128 (raiseExpr lhs) (raiseExpr rhs)
@@ -61,6 +67,12 @@ theorem raiseLowerExpr (expr : Expr ty) : raiseExpr (lowerExpr expr) = expr := b
       simp [lowerExpr, raiseExpr]
   | litFelt252 value =>
       simp [lowerExpr, raiseExpr]
+  | addFelt252 lhs rhs ihLhs ihRhs =>
+      simp [lowerExpr, raiseExpr, ihLhs, ihRhs]
+  | subFelt252 lhs rhs ihLhs ihRhs =>
+      simp [lowerExpr, raiseExpr, ihLhs, ihRhs]
+  | mulFelt252 lhs rhs ihLhs ihRhs =>
+      simp [lowerExpr, raiseExpr, ihLhs, ihRhs]
   | addU128 lhs rhs ihLhs ihRhs =>
       simp [lowerExpr, raiseExpr, ihLhs, ihRhs]
   | subU128 lhs rhs ihLhs ihRhs =>
@@ -102,6 +114,12 @@ theorem lowerRaiseExpr (expr : IRExpr ty) : lowerExpr (raiseExpr expr) = expr :=
       simp [lowerExpr, raiseExpr]
   | litFelt252 value =>
       simp [lowerExpr, raiseExpr]
+  | addFelt252 lhs rhs ihLhs ihRhs =>
+      simp [lowerExpr, raiseExpr, ihLhs, ihRhs]
+  | subFelt252 lhs rhs ihLhs ihRhs =>
+      simp [lowerExpr, raiseExpr, ihLhs, ihRhs]
+  | mulFelt252 lhs rhs ihLhs ihRhs =>
+      simp [lowerExpr, raiseExpr, ihLhs, ihRhs]
   | addU128 lhs rhs ihLhs ihRhs =>
       simp [lowerExpr, raiseExpr, ihLhs, ihRhs]
   | subU128 lhs rhs ihLhs ihRhs =>

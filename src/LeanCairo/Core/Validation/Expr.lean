@@ -29,6 +29,9 @@ partial def validateExpr (varEnv : TypeEnv) (storageEnv : TypeEnv) : Expr ty -> 
   | .litU256 _ => []
   | .litBool _ => []
   | .litFelt252 _ => []
+  | .addFelt252 lhs rhs => validateExpr varEnv storageEnv lhs ++ validateExpr varEnv storageEnv rhs
+  | .subFelt252 lhs rhs => validateExpr varEnv storageEnv lhs ++ validateExpr varEnv storageEnv rhs
+  | .mulFelt252 lhs rhs => validateExpr varEnv storageEnv lhs ++ validateExpr varEnv storageEnv rhs
   | .addU128 lhs rhs => validateExpr varEnv storageEnv lhs ++ validateExpr varEnv storageEnv rhs
   | .subU128 lhs rhs => validateExpr varEnv storageEnv lhs ++ validateExpr varEnv storageEnv rhs
   | .mulU128 lhs rhs => validateExpr varEnv storageEnv lhs ++ validateExpr varEnv storageEnv rhs

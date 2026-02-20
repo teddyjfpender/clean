@@ -2,12 +2,15 @@
 
 Lean 4 EDSL -> Cairo Starknet contract generator (MVP), aligned to [`spec.md`](spec.md).
 
-Status: Lean -> Cairo -> Scarb is wired and passing end-to-end in this repository.
+Status: Lean -> Cairo -> Scarb is wired and passing end-to-end, and a direct Lean -> Sierra subset lane is now implemented and validated with upstream Sierra tooling.
+
+Comprehensive full-support roadmap: [`roadmap/README.md`](roadmap/README.md).
 
 ## What This Is (and Is Not)
 
 - This is a constrained Lean DSL -> Cairo compiler pipeline (not just a shell wrapper around templates).
 - It compiles typed `ContractSpec`/`Expr` data from Lean into deterministic Cairo contract source and Scarb artifacts.
+- It also includes a direct Lean IR -> Sierra Program subset backend (phase-2 typed subset, explicit constraints).
 - It is **not** a compiler from arbitrary Lean programs to Cairo.
 - It is **not yet** a full end-to-end formally verified semantics-preserving Lean->Cairo compiler.
 
@@ -65,12 +68,15 @@ sequenceDiagram
 8. Generate storage reads/writes for mutable functions.
 9. Run an optimizer non-regression benchmark gate (optimized score must be <= baseline score).
 10. Run deterministic step-comparison benchmarks for arithmetic/control-flow kernels in [`packages/fixedpoint_bench`](packages/fixedpoint_bench).
+11. Generate direct Sierra JSON from Lean IR for the subset backend via `lake exe leancairo-sierra-gen`.
+12. Validate generated Sierra directly against upstream `ProgramRegistry` at pinned Cairo commit using [`tools/sierra_toolchain`](tools/sierra_toolchain).
+13. Compile generated Sierra directly to CASM using the same pinned upstream Sierra toolchain.
 
 ## Current MVP Limits
 
 - No events, no syscalls, no cross-contract calls.
 - Expression language is intentionally small and pure (no loops, no recursion, no dynamic memory structures).
-- Felt arithmetic is restricted to pass-through/equality semantics in this MVP.
+- Direct Sierra subset arithmetic currently supports `felt252` (`add/sub/mul`) plus literals (`felt252`, `u128`), with explicit fail-fast rejection for unmodeled `u128/u256` arithmetic.
 - Optimization currently includes algebraic simplification plus a non-trivial CSE + let-normalization pass over typed IR.
 
 ## Mutable Execution Law
@@ -106,6 +112,7 @@ Prerequisites:
 
 - Lean/Lake installed (typically via `elan`)
 - Scarb installed
+- Rust/Cargo installed (for pinned Sierra validator/compiler helper)
 
 Guide 1: Generate + build the canonical contract:
 
@@ -151,6 +158,12 @@ Guide 6: Regenerate benchmark function source used by [`packages/fixedpoint_benc
 ./scripts/bench/generate_fixedpoint_bench.sh
 ```
 
+Guide 7: Run the direct Lean -> Sierra subset quality gate:
+
+```bash
+./scripts/workflow/run-sierra-checks.sh
+```
+
 Notes:
 
 - Workflow scripts in [`scripts/workflow`](scripts/workflow) and [`scripts/test`](scripts/test) prepend `~/.elan/bin` automatically.
@@ -165,6 +178,15 @@ lake exe leancairo-gen \
   [--emit-casm true|false] \
   [--optimize true|false] \
   [--inlining-strategy default|avoid|<n>]
+```
+
+Direct Sierra subset generator:
+
+```bash
+lake exe leancairo-sierra-gen \
+  --module <LeanModule> \
+  --out <OutputDirectory> \
+  [--optimize true|false]
 ```
 
 `<LeanModule>` must define:
@@ -185,14 +207,20 @@ Example module in this repo: [`src/MyLeanContract.lean`](src/MyLeanContract.lean
 
 - [`scripts/workflow/generate-example.sh`](scripts/workflow/generate-example.sh) runs the canonical `MyLeanContract` flow
 - [`scripts/workflow/generate-from-lean.sh`](scripts/workflow/generate-from-lean.sh)
+- [`scripts/workflow/generate-sierra-from-lean.sh`](scripts/workflow/generate-sierra-from-lean.sh)
 - [`scripts/workflow/build-generated-contract.sh`](scripts/workflow/build-generated-contract.sh)
 - [`scripts/workflow/run-mvp-checks.sh`](scripts/workflow/run-mvp-checks.sh)
+- [`scripts/workflow/run-sierra-checks.sh`](scripts/workflow/run-sierra-checks.sh)
 
 ## Test and verification scripts
 
 - [`scripts/test/codegen_snapshot.sh`](scripts/test/codegen_snapshot.sh) checks deterministic Cairo output.
 - [`scripts/test/e2e.sh`](scripts/test/e2e.sh) runs Lean generation + `scarb build` + ABI checks.
 - [`scripts/test/abi_surface.sh`](scripts/test/abi_surface.sh) validates ABI against expected signatures.
+- [`scripts/test/sierra_surface_codegen.sh`](scripts/test/sierra_surface_codegen.sh) verifies generated pinned Sierra surface bindings are deterministic.
+- [`scripts/test/sierra_codegen_snapshot.sh`](scripts/test/sierra_codegen_snapshot.sh) checks deterministic direct Lean -> Sierra JSON output.
+- [`scripts/test/sierra_failfast_unsupported.sh`](scripts/test/sierra_failfast_unsupported.sh) enforces fail-fast behavior for unsupported direct Sierra families (`u128` arithmetic, `u256` signatures/arithmetic).
+- [`scripts/test/sierra_e2e.sh`](scripts/test/sierra_e2e.sh) runs direct Sierra validation (`ProgramRegistry`) and Sierra -> CASM compilation with pinned upstream crates.
 - [`scripts/bench/check_optimizer_non_regression.sh`](scripts/bench/check_optimizer_non_regression.sh) compares optimized vs baseline CASM/Sierra score.
 - [`scripts/bench/generate_fixedpoint_bench.sh`](scripts/bench/generate_fixedpoint_bench.sh) regenerates [`packages/fixedpoint_bench/src/lib.cairo`](packages/fixedpoint_bench/src/lib.cairo) from Lean IR outputs (`--optimize false` and `--optimize true`).
 - [`scripts/bench/compare_fixedpoint_steps.sh`](scripts/bench/compare_fixedpoint_steps.sh) enforces hand-vs-optimized equivalence and reports Cairo step deltas for fixed-point + Fibonacci examples.
@@ -214,16 +242,22 @@ Example module in this repo: [`src/MyLeanContract.lean`](src/MyLeanContract.lean
 
 - [`src/LeanCairo/Core`](src/LeanCairo/Core): DSL types, syntax, spec structures, validator
 - [`src/LeanCairo/Backend/Cairo`](src/LeanCairo/Backend/Cairo): Cairo rendering backend
+- [`src/LeanCairo/Backend/Sierra`](src/LeanCairo/Backend/Sierra): direct Sierra subset backend + generated pinned surface bindings
 - [`src/LeanCairo/Backend/Scarb`](src/LeanCairo/Backend/Scarb): manifest and helper script rendering
 - [`src/LeanCairo/Pipeline/Generation`](src/LeanCairo/Pipeline/Generation): render plan and write boundary
+- [`src/LeanCairo/Pipeline/Sierra`](src/LeanCairo/Pipeline/Sierra): direct Sierra subset pipeline entrypoint/renderer/write boundary
 - [`src/LeanCairo/Compiler/IR/Spec.lean`](src/LeanCairo/Compiler/IR/Spec.lean), [`src/LeanCairo/Pipeline/Generation/IRRenderer.lean`](src/LeanCairo/Pipeline/Generation/IRRenderer.lean): IR-native contract rendering lane
 - [`src/LeanCairo/Compiler/Optimize/Pass.lean`](src/LeanCairo/Compiler/Optimize/Pass.lean), [`src/LeanCairo/Compiler/Optimize/Pipeline.lean`](src/LeanCairo/Compiler/Optimize/Pipeline.lean): typed pass interface + composed optimizer pipeline
 - [`src/LeanCairo/Compiler/Semantics/ContractEval.lean`](src/LeanCairo/Compiler/Semantics/ContractEval.lean), [`src/LeanCairo/Compiler/Proof/IRSpecSound.lean`](src/LeanCairo/Compiler/Proof/IRSpecSound.lean): contract-level execution law + optimizer soundness
 - [`src/LeanCairo/CLI`](src/LeanCairo/CLI): argument parser + module invocation flow
-- [`src/Examples/Hello.lean`](src/Examples/Hello.lean), [`src/MyLeanContract.lean`](src/MyLeanContract.lean): example contracts
+- [`src/Examples/Hello.lean`](src/Examples/Hello.lean), [`src/MyLeanContract.lean`](src/MyLeanContract.lean): canonical Lean -> Cairo example contracts
+- [`src/Examples/SierraSubset.lean`](src/Examples/SierraSubset.lean), [`src/MyLeanSierraSubset.lean`](src/MyLeanSierraSubset.lean): direct Lean -> Sierra subset success fixture (`var`/`letE`, `felt252` arithmetic, `u128` literal)
+- [`src/Examples/SierraSubsetUnsupportedU128Arith.lean`](src/Examples/SierraSubsetUnsupportedU128Arith.lean), [`src/Examples/SierraSubsetUnsupportedU256Sig.lean`](src/Examples/SierraSubsetUnsupportedU256Sig.lean): direct Sierra fail-fast fixtures for unsupported families
 - [`tests/golden`](tests/golden), [`tests/fixtures`](tests/fixtures): snapshot and ABI fixtures
 - [`docs/design`](docs/design): design note and invariants
 - [`docs/fixed-point`](docs/fixed-point): SQ128.128 examples + code comparisons + benchmark reports (`mul/div`, `exp/log`, Newton, compositions, Fibonacci, measured deltas)
+- [`generated/sierra/surface`](generated/sierra/surface): generated pinned upstream Sierra surface metadata (commit/source hashes + extracted IDs)
+- [`tools/sierra_toolchain`](tools/sierra_toolchain): pinned upstream Sierra validator/compiler wrapper (`ProgramRegistry` + Sierra->CASM)
 - [`src/Examples/FixedPointBench.lean`](src/Examples/FixedPointBench.lean), [`src/MyLeanFixedPointBench.lean`](src/MyLeanFixedPointBench.lean): Lean IR source for fixed-point benchmark kernels
 
 ## Notes
@@ -233,8 +267,10 @@ Example module in this repo: [`src/MyLeanContract.lean`](src/MyLeanContract.lean
 - User identifiers using reserved internal prefix `__leancairo_internal_` are rejected by validation.
 - Optimizer is enabled by default (`--optimize true`) and can be disabled for baseline benchmarking.
 - `--inlining-strategy` controls low-level Cairo compiler inlining (`default`, `avoid`, or numeric bound).
-- Felt arithmetic is limited to pass-through/equality semantics in this MVP.
+- Direct Sierra subset currently supports `var`/`letE` + `felt252` arithmetic + `felt252/u128` literals, and intentionally fails fast for unsupported `u128/u256` arithmetic.
 - Artifact location uses `*.starknet_artifacts.json` instead of hardcoded filenames.
 - There is no exact Sierra/CASM -> Cairo decompiler in this repository; `scarb expand` is used for human-reviewable expanded Cairo.
 - A validated artifact-pass lane now exists ([`scripts/bench/optimize_artifacts.py`](scripts/bench/optimize_artifacts.py)), currently with conservative pass `strip_sierra_debug_info`.
 - Artifact passes are guarded by semantic signatures over critical Sierra/CASM fields before acceptance.
+- Pinned Sierra surface bindings are generated by [`scripts/sierra/generate_surface_bindings.py`](scripts/sierra/generate_surface_bindings.py), not handwritten.
+- Current direct Lean -> Sierra backend is intentionally constrained (view/no-storage, `felt252/u128` signature subset, `var`/`letE` + `felt252` arithmetic + literals) and fails fast outside that subset.

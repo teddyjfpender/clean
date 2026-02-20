@@ -11,6 +11,10 @@ export PATH="$HOME/.elan/bin:$PATH"
 )
 "$ROOT_DIR/scripts/test/codegen_snapshot.sh"
 "$ROOT_DIR/scripts/test/e2e.sh"
+"$ROOT_DIR/scripts/test/sierra_surface_codegen.sh"
+"$ROOT_DIR/scripts/test/sierra_codegen_snapshot.sh"
+"$ROOT_DIR/scripts/test/sierra_failfast_unsupported.sh"
+"$ROOT_DIR/scripts/test/sierra_e2e.sh"
 "$ROOT_DIR/scripts/bench/check_optimizer_non_regression.sh"
 "$ROOT_DIR/scripts/bench/check_optimizer_non_regression.sh" MyLeanContractCSEBench CSEBenchContract
 "$ROOT_DIR/scripts/bench/check_artifact_passes.sh"

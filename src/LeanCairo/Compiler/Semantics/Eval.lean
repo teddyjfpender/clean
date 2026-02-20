@@ -59,6 +59,9 @@ def evalExpr (ctx : EvalContext) : IRExpr ty -> Ty.denote ty
   | .litU256 value => value
   | .litBool value => value
   | .litFelt252 value => value
+  | .addFelt252 lhs rhs => evalExpr ctx lhs + evalExpr ctx rhs
+  | .subFelt252 lhs rhs => evalExpr ctx lhs - evalExpr ctx rhs
+  | .mulFelt252 lhs rhs => evalExpr ctx lhs * evalExpr ctx rhs
   | .addU128 lhs rhs => evalExpr ctx lhs + evalExpr ctx rhs
   | .subU128 lhs rhs => evalExpr ctx lhs - evalExpr ctx rhs
   | .mulU128 lhs rhs => evalExpr ctx lhs * evalExpr ctx rhs

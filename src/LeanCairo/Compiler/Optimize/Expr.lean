@@ -4,6 +4,22 @@ namespace LeanCairo.Compiler.Optimize
 
 open LeanCairo.Compiler.IR
 
+def foldAddFelt252 (lhs rhs : IRExpr .felt252) : IRExpr .felt252 :=
+  if lhs = .litFelt252 0 then rhs
+  else if rhs = .litFelt252 0 then lhs
+  else .addFelt252 lhs rhs
+
+def foldSubFelt252 (lhs rhs : IRExpr .felt252) : IRExpr .felt252 :=
+  if rhs = .litFelt252 0 then lhs
+  else .subFelt252 lhs rhs
+
+def foldMulFelt252 (lhs rhs : IRExpr .felt252) : IRExpr .felt252 :=
+  if lhs = .litFelt252 0 then .litFelt252 0
+  else if rhs = .litFelt252 0 then .litFelt252 0
+  else if lhs = .litFelt252 1 then rhs
+  else if rhs = .litFelt252 1 then lhs
+  else .mulFelt252 lhs rhs
+
 def foldAddU128 (lhs rhs : IRExpr .u128) : IRExpr .u128 :=
   if lhs = .litU128 0 then rhs
   else if rhs = .litU128 0 then lhs
@@ -49,6 +65,9 @@ def optimizeExpr : IRExpr ty -> IRExpr ty
   | .litU256 value => .litU256 value
   | .litBool value => .litBool value
   | .litFelt252 value => .litFelt252 value
+  | .addFelt252 lhs rhs => foldAddFelt252 (optimizeExpr lhs) (optimizeExpr rhs)
+  | .subFelt252 lhs rhs => foldSubFelt252 (optimizeExpr lhs) (optimizeExpr rhs)
+  | .mulFelt252 lhs rhs => foldMulFelt252 (optimizeExpr lhs) (optimizeExpr rhs)
   | .addU128 lhs rhs => foldAddU128 (optimizeExpr lhs) (optimizeExpr rhs)
   | .subU128 lhs rhs => foldSubU128 (optimizeExpr lhs) (optimizeExpr rhs)
   | .mulU128 lhs rhs => foldMulU128 (optimizeExpr lhs) (optimizeExpr rhs)

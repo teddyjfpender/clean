@@ -7,6 +7,35 @@ open LeanCairo.Compiler.IR
 open LeanCairo.Compiler.Optimize
 open LeanCairo.Compiler.Semantics
 
+private theorem evalFoldAddFelt252 (ctx : EvalContext) (lhs rhs : IRExpr .felt252) :
+    evalExpr ctx (foldAddFelt252 lhs rhs) = evalExpr ctx lhs + evalExpr ctx rhs := by
+  unfold foldAddFelt252
+  by_cases hLhs : lhs = .litFelt252 0
+  · simp [hLhs, evalExpr]
+  · by_cases hRhs : rhs = .litFelt252 0
+    · simp [hLhs, hRhs, evalExpr]
+    · simp [hLhs, hRhs, evalExpr]
+
+private theorem evalFoldSubFelt252 (ctx : EvalContext) (lhs rhs : IRExpr .felt252) :
+    evalExpr ctx (foldSubFelt252 lhs rhs) = evalExpr ctx lhs - evalExpr ctx rhs := by
+  unfold foldSubFelt252
+  by_cases hRhs : rhs = .litFelt252 0
+  · simp [hRhs, evalExpr]
+  · simp [hRhs, evalExpr]
+
+private theorem evalFoldMulFelt252 (ctx : EvalContext) (lhs rhs : IRExpr .felt252) :
+    evalExpr ctx (foldMulFelt252 lhs rhs) = evalExpr ctx lhs * evalExpr ctx rhs := by
+  unfold foldMulFelt252
+  by_cases hLhsZero : lhs = .litFelt252 0
+  · simp [hLhsZero, evalExpr]
+  · by_cases hRhsZero : rhs = .litFelt252 0
+    · simp [hLhsZero, hRhsZero, evalExpr]
+    · by_cases hLhsOne : lhs = .litFelt252 1
+      · simp [hRhsZero, hLhsOne, evalExpr]
+      · by_cases hRhsOne : rhs = .litFelt252 1
+        · simp [hLhsZero, hLhsOne, hRhsOne, evalExpr]
+        · simp [hLhsZero, hRhsZero, hLhsOne, hRhsOne, evalExpr]
+
 private theorem evalFoldAddU128 (ctx : EvalContext) (lhs rhs : IRExpr .u128) :
     evalExpr ctx (foldAddU128 lhs rhs) = evalExpr ctx lhs + evalExpr ctx rhs := by
   unfold foldAddU128
@@ -88,6 +117,12 @@ theorem optimizeExprSound (ctx : EvalContext) (expr : IRExpr ty) :
       simp [optimizeExpr, evalExpr]
   | litFelt252 value =>
       simp [optimizeExpr, evalExpr]
+  | addFelt252 lhs rhs ihLhs ihRhs =>
+      simpa [ihLhs ctx, ihRhs ctx] using evalFoldAddFelt252 ctx (optimizeExpr lhs) (optimizeExpr rhs)
+  | subFelt252 lhs rhs ihLhs ihRhs =>
+      simpa [ihLhs ctx, ihRhs ctx] using evalFoldSubFelt252 ctx (optimizeExpr lhs) (optimizeExpr rhs)
+  | mulFelt252 lhs rhs ihLhs ihRhs =>
+      simpa [ihLhs ctx, ihRhs ctx] using evalFoldMulFelt252 ctx (optimizeExpr lhs) (optimizeExpr rhs)
   | addU128 lhs rhs ihLhs ihRhs =>
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldAddU128 ctx (optimizeExpr lhs) (optimizeExpr rhs)
   | subU128 lhs rhs ihLhs ihRhs =>

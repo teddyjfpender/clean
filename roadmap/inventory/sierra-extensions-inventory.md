@@ -1,0 +1,82 @@
+# Sierra Extensions Inventory (Pinned)
+
+- Commit: `e56055c87a9db4e3dbb91c82ccb2ea751a8dc617`
+- Source: `crates/cairo-lang-sierra/src`
+- Rust source files under `src`: `88`
+- Extension module files: `62`
+- Extracted generic type IDs: `68`
+- Extracted generic libfunc IDs: `279`
+
+## Core Surface Files
+
+- `crates/cairo-lang-sierra/src/program.rs`
+- `crates/cairo-lang-sierra/src/program_registry.rs`
+- `crates/cairo-lang-sierra/src/extensions/core.rs`
+- `crates/cairo-lang-sierra/src/extensions/lib_func.rs`
+- `crates/cairo-lang-sierra/src/extensions/types.rs`
+- `crates/cairo-lang-sierra/src/ids.rs`
+
+## Extension Module Files
+
+- `crates/cairo-lang-sierra/src/extensions/modules/ap_tracking.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/array.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/bitwise.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/blake.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/boolean.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/bounded_int.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/boxing.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/branch_align.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/bytes31.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/casts.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/circuit.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/const_type.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/consts.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/coupon.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/debug.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/drop.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/duplicate.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/ec.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/enm.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/felt252.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/felt252_dict.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/function_call.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/gas.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/gas_reserve.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/int/mod.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/int/signed.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/int/signed128.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/int/unsigned.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/int/unsigned128.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/int/unsigned256.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/int/unsigned512.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/is_zero.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/mem.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/mod.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/non_zero.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/nullable.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/pedersen.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/poseidon.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/qm31.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/range.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/range_check.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/segment_arena.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/snapshot.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/span.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/squashed_felt252_dict.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/starknet/emit_event.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/starknet/getter.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/starknet/interoperability.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/starknet/mod.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256k1.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256r1.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/starknet/storage.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/starknet/syscalls.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/starknet/testing.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/structure.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/trace.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/try_from_felt252.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/unconditional_jump.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/uninitialized.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/unsafe_panic.rs`
+- `crates/cairo-lang-sierra/src/extensions/modules/utils.rs`

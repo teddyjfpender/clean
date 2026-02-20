@@ -1,0 +1,224 @@
+# Corelib Src Inventory (Pinned)
+
+- Commit: `e56055c87a9db4e3dbb91c82ccb2ea751a8dc617`
+- Source: `corelib/src`
+- Cairo files: `160`
+
+## Directory Summary
+
+- `corelib/src/array.cairo`: `1`
+- `corelib/src/blake.cairo`: `1`
+- `corelib/src/boolean.cairo`: `1`
+- `corelib/src/box.cairo`: `1`
+- `corelib/src/byte_array.cairo`: `1`
+- `corelib/src/bytes_31.cairo`: `1`
+- `corelib/src/circuit.cairo`: `1`
+- `corelib/src/clone.cairo`: `1`
+- `corelib/src/cmp.cairo`: `1`
+- `corelib/src/debug.cairo`: `1`
+- `corelib/src/dict.cairo`: `1`
+- `corelib/src/ec.cairo`: `1`
+- `corelib/src/ecdsa.cairo`: `1`
+- `corelib/src/felt_252.cairo`: `1`
+- `corelib/src/fixed_size_array.cairo`: `1`
+- `corelib/src/fmt.cairo`: `1`
+- `corelib/src/gas.cairo`: `1`
+- `corelib/src/hash.cairo`: `1`
+- `corelib/src/integer.cairo`: `1`
+- `corelib/src/internal`: `2`
+- `corelib/src/internal.cairo`: `1`
+- `corelib/src/iter`: `12`
+- `corelib/src/iter.cairo`: `1`
+- `corelib/src/keccak.cairo`: `1`
+- `corelib/src/keyword_docs.cairo`: `1`
+- `corelib/src/lib.cairo`: `1`
+- `corelib/src/math.cairo`: `1`
+- `corelib/src/metaprogramming.cairo`: `1`
+- `corelib/src/nullable.cairo`: `1`
+- `corelib/src/num`: `16`
+- `corelib/src/num.cairo`: `1`
+- `corelib/src/ops`: `6`
+- `corelib/src/ops.cairo`: `1`
+- `corelib/src/option.cairo`: `1`
+- `corelib/src/panics.cairo`: `1`
+- `corelib/src/pedersen.cairo`: `1`
+- `corelib/src/poseidon.cairo`: `1`
+- `corelib/src/prelude`: `3`
+- `corelib/src/prelude.cairo`: `1`
+- `corelib/src/qm31.cairo`: `1`
+- `corelib/src/result.cairo`: `1`
+- `corelib/src/serde.cairo`: `1`
+- `corelib/src/sha256.cairo`: `1`
+- `corelib/src/starknet`: `20`
+- `corelib/src/starknet.cairo`: `1`
+- `corelib/src/string.cairo`: `1`
+- `corelib/src/test`: `55`
+- `corelib/src/test.cairo`: `1`
+- `corelib/src/testing.cairo`: `1`
+- `corelib/src/to_byte_array.cairo`: `1`
+- `corelib/src/traits.cairo`: `1`
+- `corelib/src/tuple.cairo`: `1`
+- `corelib/src/zeroable.cairo`: `1`
+
+## Full File List
+
+- `corelib/src/array.cairo`
+- `corelib/src/blake.cairo`
+- `corelib/src/boolean.cairo`
+- `corelib/src/box.cairo`
+- `corelib/src/byte_array.cairo`
+- `corelib/src/bytes_31.cairo`
+- `corelib/src/circuit.cairo`
+- `corelib/src/clone.cairo`
+- `corelib/src/cmp.cairo`
+- `corelib/src/debug.cairo`
+- `corelib/src/dict.cairo`
+- `corelib/src/ec.cairo`
+- `corelib/src/ecdsa.cairo`
+- `corelib/src/felt_252.cairo`
+- `corelib/src/fixed_size_array.cairo`
+- `corelib/src/fmt.cairo`
+- `corelib/src/gas.cairo`
+- `corelib/src/hash.cairo`
+- `corelib/src/integer.cairo`
+- `corelib/src/internal.cairo`
+- `corelib/src/internal/bounded_int.cairo`
+- `corelib/src/internal/num.cairo`
+- `corelib/src/iter.cairo`
+- `corelib/src/iter/adapters.cairo`
+- `corelib/src/iter/adapters/chain.cairo`
+- `corelib/src/iter/adapters/enumerate.cairo`
+- `corelib/src/iter/adapters/filter.cairo`
+- `corelib/src/iter/adapters/map.cairo`
+- `corelib/src/iter/adapters/peekable.cairo`
+- `corelib/src/iter/adapters/take.cairo`
+- `corelib/src/iter/adapters/zip.cairo`
+- `corelib/src/iter/traits.cairo`
+- `corelib/src/iter/traits/accum.cairo`
+- `corelib/src/iter/traits/collect.cairo`
+- `corelib/src/iter/traits/iterator.cairo`
+- `corelib/src/keccak.cairo`
+- `corelib/src/keyword_docs.cairo`
+- `corelib/src/lib.cairo`
+- `corelib/src/math.cairo`
+- `corelib/src/metaprogramming.cairo`
+- `corelib/src/nullable.cairo`
+- `corelib/src/num.cairo`
+- `corelib/src/num/traits.cairo`
+- `corelib/src/num/traits/bit_size.cairo`
+- `corelib/src/num/traits/bounded.cairo`
+- `corelib/src/num/traits/one.cairo`
+- `corelib/src/num/traits/ops.cairo`
+- `corelib/src/num/traits/ops/checked.cairo`
+- `corelib/src/num/traits/ops/divrem.cairo`
+- `corelib/src/num/traits/ops/overflowing.cairo`
+- `corelib/src/num/traits/ops/pow.cairo`
+- `corelib/src/num/traits/ops/saturating.cairo`
+- `corelib/src/num/traits/ops/split.cairo`
+- `corelib/src/num/traits/ops/sqrt.cairo`
+- `corelib/src/num/traits/ops/widemul.cairo`
+- `corelib/src/num/traits/ops/widesquare.cairo`
+- `corelib/src/num/traits/ops/wrapping.cairo`
+- `corelib/src/num/traits/zero.cairo`
+- `corelib/src/ops.cairo`
+- `corelib/src/ops/arith.cairo`
+- `corelib/src/ops/deref.cairo`
+- `corelib/src/ops/function.cairo`
+- `corelib/src/ops/get.cairo`
+- `corelib/src/ops/index.cairo`
+- `corelib/src/ops/range.cairo`
+- `corelib/src/option.cairo`
+- `corelib/src/panics.cairo`
+- `corelib/src/pedersen.cairo`
+- `corelib/src/poseidon.cairo`
+- `corelib/src/prelude.cairo`
+- `corelib/src/prelude/v2023_01.cairo`
+- `corelib/src/prelude/v2023_10.cairo`
+- `corelib/src/prelude/v2024_07.cairo`
+- `corelib/src/qm31.cairo`
+- `corelib/src/result.cairo`
+- `corelib/src/serde.cairo`
+- `corelib/src/sha256.cairo`
+- `corelib/src/starknet.cairo`
+- `corelib/src/starknet/account.cairo`
+- `corelib/src/starknet/class_hash.cairo`
+- `corelib/src/starknet/contract_address.cairo`
+- `corelib/src/starknet/deployment.cairo`
+- `corelib/src/starknet/eth_address.cairo`
+- `corelib/src/starknet/eth_signature.cairo`
+- `corelib/src/starknet/event.cairo`
+- `corelib/src/starknet/info.cairo`
+- `corelib/src/starknet/secp256_trait.cairo`
+- `corelib/src/starknet/secp256k1.cairo`
+- `corelib/src/starknet/secp256r1.cairo`
+- `corelib/src/starknet/storage.cairo`
+- `corelib/src/starknet/storage/map.cairo`
+- `corelib/src/starknet/storage/storage_base.cairo`
+- `corelib/src/starknet/storage/storage_node.cairo`
+- `corelib/src/starknet/storage/sub_pointers.cairo`
+- `corelib/src/starknet/storage/vec.cairo`
+- `corelib/src/starknet/storage_access.cairo`
+- `corelib/src/starknet/syscalls.cairo`
+- `corelib/src/starknet/testing.cairo`
+- `corelib/src/string.cairo`
+- `corelib/src/test.cairo`
+- `corelib/src/test/array_test.cairo`
+- `corelib/src/test/bool_test.cairo`
+- `corelib/src/test/box_test.cairo`
+- `corelib/src/test/byte_array_test.cairo`
+- `corelib/src/test/bytes31_test.cairo`
+- `corelib/src/test/circuit_test.cairo`
+- `corelib/src/test/clone_test.cairo`
+- `corelib/src/test/cmp_test.cairo`
+- `corelib/src/test/coupon_test.cairo`
+- `corelib/src/test/deref_test.cairo`
+- `corelib/src/test/dict_test.cairo`
+- `corelib/src/test/ec_test.cairo`
+- `corelib/src/test/felt_test.cairo`
+- `corelib/src/test/fmt_test.cairo`
+- `corelib/src/test/gas_reserve_test.cairo`
+- `corelib/src/test/hash_test.cairo`
+- `corelib/src/test/integer_test.cairo`
+- `corelib/src/test/iter_test.cairo`
+- `corelib/src/test/keccak_test.cairo`
+- `corelib/src/test/language_features/block_level_items_test.cairo`
+- `corelib/src/test/language_features/box_test.cairo`
+- `corelib/src/test/language_features/closure_test.cairo`
+- `corelib/src/test/language_features/const_folding_test.cairo`
+- `corelib/src/test/language_features/const_test.cairo`
+- `corelib/src/test/language_features/early_return_test.cairo`
+- `corelib/src/test/language_features/for_test.cairo`
+- `corelib/src/test/language_features/glob_use_test.cairo`
+- `corelib/src/test/language_features/macro_test.cairo`
+- `corelib/src/test/language_features/match_test.cairo`
+- `corelib/src/test/language_features/other_paths/a.cairo`
+- `corelib/src/test/language_features/other_paths/b.cairo`
+- `corelib/src/test/language_features/other_paths/c.cairo`
+- `corelib/src/test/language_features/other_paths/define_c.cairo`
+- `corelib/src/test/language_features/other_paths/inner/a.cairo`
+- `corelib/src/test/language_features/other_paths/inner/b.cairo`
+- `corelib/src/test/language_features/panics_test.cairo`
+- `corelib/src/test/language_features/path_attr_test.cairo`
+- `corelib/src/test/language_features/trait_test.cairo`
+- `corelib/src/test/language_features/while_test.cairo`
+- `corelib/src/test/let_else_test.cairo`
+- `corelib/src/test/math_test.cairo`
+- `corelib/src/test/nullable_test.cairo`
+- `corelib/src/test/num_test.cairo`
+- `corelib/src/test/option_test.cairo`
+- `corelib/src/test/plugins_test.cairo`
+- `corelib/src/test/print_test.cairo`
+- `corelib/src/test/qm31_test.cairo`
+- `corelib/src/test/range_test.cairo`
+- `corelib/src/test/result_test.cairo`
+- `corelib/src/test/secp256k1_test.cairo`
+- `corelib/src/test/secp256r1_test.cairo`
+- `corelib/src/test/sha256_test.cairo`
+- `corelib/src/test/test_utils.cairo`
+- `corelib/src/test/testing_test.cairo`
+- `corelib/src/test/to_byte_array_test.cairo`
+- `corelib/src/testing.cairo`
+- `corelib/src/to_byte_array.cairo`
+- `corelib/src/traits.cairo`
+- `corelib/src/tuple.cairo`
+- `corelib/src/zeroable.cairo`

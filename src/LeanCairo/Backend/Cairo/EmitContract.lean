@@ -52,6 +52,9 @@ private partial def exprUsesStorageRead : Expr ty -> Bool
   | .litU256 _ => false
   | .litBool _ => false
   | .litFelt252 _ => false
+  | .addFelt252 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .subFelt252 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .mulFelt252 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .addU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .subU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .mulU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
