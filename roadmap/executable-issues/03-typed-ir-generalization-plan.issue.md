@@ -38,7 +38,9 @@ Generalize MIR to express full function-level semantics required by pinned Sierr
 2. Constructor-specific regression tests added for every new family.
 
 ### M-03-2: Effect/resource MIR
-- Status: NOT DONE
+- Status: DONE - 41dae18
+- Evidence tests: `scripts/roadmap/check_effect_isolation.sh`; `scripts/test/effect_resource_regression.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/IR/Lowering.lean`
 - Required work:
 1. Add typed effect/resource carriers (range-check, gas, arena, panic channel).
 2. Thread effects explicitly in evaluators/lowering.
