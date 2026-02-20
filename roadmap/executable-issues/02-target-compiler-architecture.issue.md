@@ -50,7 +50,7 @@ without reintroducing IR -> DSL -> IR loops.
 2. Any primary-path dependency on Cairo emitter fails boundary checks.
 
 ### M-02-3: Deterministic output contracts
-- Status: NOT DONE
+- Status: DONE - 208e39b
 - Required work:
 1. Stable symbol and declaration ordering policy.
 2. Deterministic hashing policy and tests.
