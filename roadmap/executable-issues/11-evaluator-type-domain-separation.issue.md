@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/11-evaluator-type-domain-separation.md`](../11-evaluator-type-domain-separation.md)
 - Issue class: Evaluator semantics closure
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - 9461b3d
+- Completion evidence tests: `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`; `scripts/roadmap/check_proof_obligations.sh`
+- Completion evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/Proof/CSELetNormSound.lean`
 
 ## Objective
 
@@ -82,7 +84,9 @@ Deliver a type-faithful, fail-fast evaluator semantics layer that is suitable fo
 3. `scripts/roadmap/check_effect_isolation.sh`
 
 ### E5 Proof/CI closure and dependency gating
-- Status: NOT DONE
+- Status: DONE - 9461b3d
+- Evidence tests: `scripts/roadmap/check_proof_obligations.sh`; `scripts/roadmap/check_milestone_dependencies.py`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `scripts/roadmap/check_milestone_dependencies.py`
 - Required work:
 1. Add evaluator non-interference and fail-fast law theorems to mandatory proof checks.
 2. Integrate evaluator gate scripts into Sierra and MVP workflows.
@@ -91,9 +95,6 @@ Deliver a type-faithful, fail-fast evaluator semantics layer that is suitable fo
 1. `scripts/roadmap/check_proof_obligations.sh`
 2. `scripts/roadmap/check_milestone_dependencies.py`
 3. `scripts/workflow/run-mvp-checks.sh`
-- Evidence proofs:
-1. `src/LeanCairo/Compiler/Proof/*.lean`
-2. `scripts/roadmap/check_milestone_dependencies.py`
 
 ## Global strict acceptance tests
 

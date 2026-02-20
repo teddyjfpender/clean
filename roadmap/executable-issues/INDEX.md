@@ -19,7 +19,7 @@ Status legend:
 - `roadmap/08-quality-gates-bench-and-release.md` -> `roadmap/executable-issues/08-quality-gates-bench-and-release.issue.md` (`NOT DONE`)
 - `roadmap/09-milestones-and-execution-order.md` -> `roadmap/executable-issues/09-milestones-and-execution-order.issue.md` (`DONE - f6efdea`)
 - `roadmap/10-risk-register-and-mitigations.md` -> `roadmap/executable-issues/10-risk-register-and-mitigations.issue.md` (`NOT DONE`)
-- `roadmap/11-evaluator-type-domain-separation.md` -> `roadmap/executable-issues/11-evaluator-type-domain-separation.issue.md` (`NOT DONE`)
+- `roadmap/11-evaluator-type-domain-separation.md` -> `roadmap/executable-issues/11-evaluator-type-domain-separation.issue.md` (`DONE - 9461b3d`)
 
 ## Inventory files -> executable issues
 
