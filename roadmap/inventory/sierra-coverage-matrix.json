@@ -1,0 +1,1727 @@
+{
+  "counts": {
+    "extension_modules_by_status": {
+      "fail_fast": 13,
+      "implemented": 4,
+      "unresolved": 45
+    },
+    "extension_modules_total": 62,
+    "generic_libfunc_ids_by_status": {
+      "fail_fast": 5,
+      "implemented": 8,
+      "unresolved": 266
+    },
+    "generic_libfunc_ids_total": 279,
+    "generic_type_ids_by_status": {
+      "fail_fast": 0,
+      "implemented": 2,
+      "unresolved": 66
+    },
+    "generic_type_ids_total": 68
+  },
+  "extension_modules": [
+    {
+      "module_id": "ap_tracking",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/ap_tracking.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "array",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/array.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "bitwise",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/bitwise.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "blake",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/blake.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "boolean",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/boolean.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "bounded_int",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/bounded_int.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "boxing",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/boxing.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "branch_align",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/branch_align.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "bytes31",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/bytes31.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "casts",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/casts.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "circuit",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/circuit.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "const_type",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/const_type.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "consts",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/consts.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "coupon",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/coupon.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "debug",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/debug.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "drop",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/drop.rs",
+      "status": "implemented"
+    },
+    {
+      "module_id": "duplicate",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/duplicate.rs",
+      "status": "implemented"
+    },
+    {
+      "module_id": "ec",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/ec.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "enm",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/enm.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "felt252",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/felt252.rs",
+      "status": "implemented"
+    },
+    {
+      "module_id": "felt252_dict",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/felt252_dict.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "function_call",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/function_call.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "gas",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/gas.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "gas_reserve",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/gas_reserve.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "int/mod",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/mod.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "int/signed",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/signed.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "int/signed128",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/signed128.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "int/unsigned",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "int/unsigned128",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned128.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "int/unsigned256",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned256.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "int/unsigned512",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned512.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "is_zero",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/is_zero.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "mem",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/mem.rs",
+      "status": "implemented"
+    },
+    {
+      "module_id": "mod",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/mod.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "non_zero",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/non_zero.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "nullable",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/nullable.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "pedersen",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/pedersen.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "poseidon",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/poseidon.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "qm31",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/qm31.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "range",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/range.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "range_check",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/range_check.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "segment_arena",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/segment_arena.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "snapshot",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/snapshot.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "span",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/span.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "squashed_felt252_dict",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/squashed_felt252_dict.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "starknet/emit_event",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/emit_event.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "starknet/getter",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/getter.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "starknet/interoperability",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/interoperability.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "starknet/mod",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/mod.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "starknet/secp256",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "starknet/secp256k1",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256k1.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "starknet/secp256r1",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256r1.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "starknet/storage",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/storage.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "starknet/syscalls",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/syscalls.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "starknet/testing",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/testing.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "structure",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/structure.rs",
+      "status": "fail_fast"
+    },
+    {
+      "module_id": "trace",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/trace.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "try_from_felt252",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/try_from_felt252.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "unconditional_jump",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/unconditional_jump.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "uninitialized",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/uninitialized.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "unsafe_panic",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/unsafe_panic.rs",
+      "status": "unresolved"
+    },
+    {
+      "module_id": "utils",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/utils.rs",
+      "status": "unresolved"
+    }
+  ],
+  "generic_libfunc_ids": [
+    {
+      "id": "add_circuit_input",
+      "status": "unresolved"
+    },
+    {
+      "id": "alloc_local",
+      "status": "unresolved"
+    },
+    {
+      "id": "array_append",
+      "status": "unresolved"
+    },
+    {
+      "id": "array_get",
+      "status": "unresolved"
+    },
+    {
+      "id": "array_len",
+      "status": "unresolved"
+    },
+    {
+      "id": "array_new",
+      "status": "unresolved"
+    },
+    {
+      "id": "array_pop_front",
+      "status": "unresolved"
+    },
+    {
+      "id": "array_pop_front_consume",
+      "status": "unresolved"
+    },
+    {
+      "id": "array_slice",
+      "status": "unresolved"
+    },
+    {
+      "id": "array_snapshot_multi_pop_back",
+      "status": "unresolved"
+    },
+    {
+      "id": "array_snapshot_multi_pop_front",
+      "status": "unresolved"
+    },
+    {
+      "id": "array_snapshot_pop_back",
+      "status": "unresolved"
+    },
+    {
+      "id": "array_snapshot_pop_front",
+      "status": "unresolved"
+    },
+    {
+      "id": "bitwise",
+      "status": "unresolved"
+    },
+    {
+      "id": "blake2s_compress",
+      "status": "unresolved"
+    },
+    {
+      "id": "blake2s_finalize",
+      "status": "unresolved"
+    },
+    {
+      "id": "bool_and_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "bool_not_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "bool_or_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "bool_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "bool_xor_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "bounded_int_add",
+      "status": "unresolved"
+    },
+    {
+      "id": "bounded_int_constrain",
+      "status": "unresolved"
+    },
+    {
+      "id": "bounded_int_div_rem",
+      "status": "unresolved"
+    },
+    {
+      "id": "bounded_int_is_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "bounded_int_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "bounded_int_sub",
+      "status": "unresolved"
+    },
+    {
+      "id": "bounded_int_wrap_non_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "box_forward_snapshot",
+      "status": "unresolved"
+    },
+    {
+      "id": "branch_align",
+      "status": "unresolved"
+    },
+    {
+      "id": "bytes31_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "bytes31_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "bytes31_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "call_contract_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "cheatcode",
+      "status": "unresolved"
+    },
+    {
+      "id": "circuit_failure_guarantee_verify",
+      "status": "unresolved"
+    },
+    {
+      "id": "class_hash_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "class_hash_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "class_hash_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "const_as_box",
+      "status": "unresolved"
+    },
+    {
+      "id": "const_as_immediate",
+      "status": "unresolved"
+    },
+    {
+      "id": "contract_address_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "contract_address_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "contract_address_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "core::starknet::secp256k1::Secp256k1Point",
+      "status": "unresolved"
+    },
+    {
+      "id": "core::starknet::secp256r1::Secp256r1Point",
+      "status": "unresolved"
+    },
+    {
+      "id": "coupon_buy",
+      "status": "unresolved"
+    },
+    {
+      "id": "coupon_call",
+      "status": "unresolved"
+    },
+    {
+      "id": "coupon_refund",
+      "status": "unresolved"
+    },
+    {
+      "id": "deploy_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "disable_ap_tracking",
+      "status": "unresolved"
+    },
+    {
+      "id": "downcast",
+      "status": "unresolved"
+    },
+    {
+      "id": "drop",
+      "status": "implemented"
+    },
+    {
+      "id": "dummy_function_call",
+      "status": "unresolved"
+    },
+    {
+      "id": "dup",
+      "status": "implemented"
+    },
+    {
+      "id": "ec_neg",
+      "status": "unresolved"
+    },
+    {
+      "id": "ec_neg_nz",
+      "status": "unresolved"
+    },
+    {
+      "id": "ec_point_from_x_nz",
+      "status": "unresolved"
+    },
+    {
+      "id": "ec_point_is_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "ec_point_try_new_nz",
+      "status": "unresolved"
+    },
+    {
+      "id": "ec_point_unwrap",
+      "status": "unresolved"
+    },
+    {
+      "id": "ec_point_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "ec_state_add",
+      "status": "unresolved"
+    },
+    {
+      "id": "ec_state_add_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "ec_state_init",
+      "status": "unresolved"
+    },
+    {
+      "id": "ec_state_try_finalize_nz",
+      "status": "unresolved"
+    },
+    {
+      "id": "emit_event_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "enable_ap_tracking",
+      "status": "unresolved"
+    },
+    {
+      "id": "enum_boxed_match",
+      "status": "unresolved"
+    },
+    {
+      "id": "enum_from_bounded_int",
+      "status": "unresolved"
+    },
+    {
+      "id": "enum_init",
+      "status": "unresolved"
+    },
+    {
+      "id": "enum_match",
+      "status": "unresolved"
+    },
+    {
+      "id": "enum_snapshot_match",
+      "status": "unresolved"
+    },
+    {
+      "id": "eval_circuit",
+      "status": "unresolved"
+    },
+    {
+      "id": "felt252_add",
+      "status": "implemented"
+    },
+    {
+      "id": "felt252_add_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "felt252_const",
+      "status": "implemented"
+    },
+    {
+      "id": "felt252_dict_entry_finalize",
+      "status": "unresolved"
+    },
+    {
+      "id": "felt252_dict_entry_get",
+      "status": "unresolved"
+    },
+    {
+      "id": "felt252_dict_new",
+      "status": "unresolved"
+    },
+    {
+      "id": "felt252_dict_squash",
+      "status": "unresolved"
+    },
+    {
+      "id": "felt252_div",
+      "status": "unresolved"
+    },
+    {
+      "id": "felt252_div_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "felt252_is_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "felt252_mul",
+      "status": "implemented"
+    },
+    {
+      "id": "felt252_mul_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "felt252_sub",
+      "status": "implemented"
+    },
+    {
+      "id": "felt252_sub_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "finalize_locals",
+      "status": "unresolved"
+    },
+    {
+      "id": "function_call",
+      "status": "unresolved"
+    },
+    {
+      "id": "gas_reserve_create",
+      "status": "unresolved"
+    },
+    {
+      "id": "gas_reserve_utilize",
+      "status": "unresolved"
+    },
+    {
+      "id": "get_available_gas",
+      "status": "unresolved"
+    },
+    {
+      "id": "get_block_hash_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "get_builtin_costs",
+      "status": "unresolved"
+    },
+    {
+      "id": "get_circuit_descriptor",
+      "status": "unresolved"
+    },
+    {
+      "id": "get_circuit_output",
+      "status": "unresolved"
+    },
+    {
+      "id": "get_class_hash_at_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "get_execution_info_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "get_execution_info_v2_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "get_execution_info_v3_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "get_unspent_gas",
+      "status": "unresolved"
+    },
+    {
+      "id": "hades_permutation",
+      "status": "unresolved"
+    },
+    {
+      "id": "i128_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "i128_diff",
+      "status": "unresolved"
+    },
+    {
+      "id": "i128_eq",
+      "status": "unresolved"
+    },
+    {
+      "id": "i128_overflowing_add_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "i128_overflowing_sub_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "i128_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "i128_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "i16_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "i16_diff",
+      "status": "unresolved"
+    },
+    {
+      "id": "i16_eq",
+      "status": "unresolved"
+    },
+    {
+      "id": "i16_overflowing_add_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "i16_overflowing_sub_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "i16_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "i16_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "i16_wide_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "i32_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "i32_diff",
+      "status": "unresolved"
+    },
+    {
+      "id": "i32_eq",
+      "status": "unresolved"
+    },
+    {
+      "id": "i32_overflowing_add_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "i32_overflowing_sub_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "i32_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "i32_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "i32_wide_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "i64_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "i64_diff",
+      "status": "unresolved"
+    },
+    {
+      "id": "i64_eq",
+      "status": "unresolved"
+    },
+    {
+      "id": "i64_overflowing_add_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "i64_overflowing_sub_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "i64_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "i64_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "i64_wide_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "i8_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "i8_diff",
+      "status": "unresolved"
+    },
+    {
+      "id": "i8_eq",
+      "status": "unresolved"
+    },
+    {
+      "id": "i8_overflowing_add_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "i8_overflowing_sub_impl",
+      "status": "unresolved"
+    },
+    {
+      "id": "i8_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "i8_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "i8_wide_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "init_circuit_data",
+      "status": "unresolved"
+    },
+    {
+      "id": "int_range_pop_front",
+      "status": "unresolved"
+    },
+    {
+      "id": "int_range_try_new",
+      "status": "unresolved"
+    },
+    {
+      "id": "into_box",
+      "status": "unresolved"
+    },
+    {
+      "id": "into_u96_guarantee",
+      "status": "unresolved"
+    },
+    {
+      "id": "jump",
+      "status": "unresolved"
+    },
+    {
+      "id": "keccak_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "library_call_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "local_into_box",
+      "status": "unresolved"
+    },
+    {
+      "id": "m31_add",
+      "status": "unresolved"
+    },
+    {
+      "id": "m31_div",
+      "status": "unresolved"
+    },
+    {
+      "id": "m31_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "m31_sub",
+      "status": "unresolved"
+    },
+    {
+      "id": "match_nullable",
+      "status": "unresolved"
+    },
+    {
+      "id": "meta_tx_v0_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "null",
+      "status": "unresolved"
+    },
+    {
+      "id": "nullable_forward_snapshot",
+      "status": "unresolved"
+    },
+    {
+      "id": "nullable_from_box",
+      "status": "unresolved"
+    },
+    {
+      "id": "pedersen",
+      "status": "unresolved"
+    },
+    {
+      "id": "print",
+      "status": "unresolved"
+    },
+    {
+      "id": "qm31_add",
+      "status": "unresolved"
+    },
+    {
+      "id": "qm31_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "qm31_div",
+      "status": "unresolved"
+    },
+    {
+      "id": "qm31_from_m31",
+      "status": "unresolved"
+    },
+    {
+      "id": "qm31_is_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "qm31_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "qm31_pack",
+      "status": "unresolved"
+    },
+    {
+      "id": "qm31_sub",
+      "status": "unresolved"
+    },
+    {
+      "id": "qm31_unpack",
+      "status": "unresolved"
+    },
+    {
+      "id": "redeposit_gas",
+      "status": "unresolved"
+    },
+    {
+      "id": "rename",
+      "status": "unresolved"
+    },
+    {
+      "id": "replace_class_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "revoke_ap_tracking",
+      "status": "unresolved"
+    },
+    {
+      "id": "secp256k1_add_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "secp256k1_get_point_from_x_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "secp256k1_get_xy_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "secp256k1_mul_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "secp256k1_new_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "secp256r1_add_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "secp256r1_get_point_from_x_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "secp256r1_get_xy_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "secp256r1_mul_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "secp256r1_new_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "send_message_to_l1_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "sha256_process_block_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "sha256_state_handle_digest",
+      "status": "unresolved"
+    },
+    {
+      "id": "sha256_state_handle_init",
+      "status": "unresolved"
+    },
+    {
+      "id": "snapshot_take",
+      "status": "unresolved"
+    },
+    {
+      "id": "span_from_tuple",
+      "status": "unresolved"
+    },
+    {
+      "id": "squashed_felt252_dict_entries",
+      "status": "unresolved"
+    },
+    {
+      "id": "storage_address_from_base",
+      "status": "unresolved"
+    },
+    {
+      "id": "storage_address_from_base_and_offset",
+      "status": "unresolved"
+    },
+    {
+      "id": "storage_address_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "storage_address_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "storage_base_address_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "storage_read_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "storage_write_syscall",
+      "status": "unresolved"
+    },
+    {
+      "id": "store_local",
+      "status": "unresolved"
+    },
+    {
+      "id": "store_temp",
+      "status": "implemented"
+    },
+    {
+      "id": "struct_boxed_deconstruct",
+      "status": "unresolved"
+    },
+    {
+      "id": "struct_construct",
+      "status": "unresolved"
+    },
+    {
+      "id": "struct_deconstruct",
+      "status": "unresolved"
+    },
+    {
+      "id": "struct_snapshot_deconstruct",
+      "status": "unresolved"
+    },
+    {
+      "id": "trace",
+      "status": "unresolved"
+    },
+    {
+      "id": "try_into_circuit_modulus",
+      "status": "unresolved"
+    },
+    {
+      "id": "tuple_from_span",
+      "status": "unresolved"
+    },
+    {
+      "id": "u128_byte_reverse",
+      "status": "unresolved"
+    },
+    {
+      "id": "u128_const",
+      "status": "implemented"
+    },
+    {
+      "id": "u128_eq",
+      "status": "unresolved"
+    },
+    {
+      "id": "u128_guarantee_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "u128_is_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "u128_mul_guarantee_verify",
+      "status": "unresolved"
+    },
+    {
+      "id": "u128_overflowing_add",
+      "status": "fail_fast"
+    },
+    {
+      "id": "u128_overflowing_sub",
+      "status": "fail_fast"
+    },
+    {
+      "id": "u128_safe_divmod",
+      "status": "unresolved"
+    },
+    {
+      "id": "u128_sqrt",
+      "status": "unresolved"
+    },
+    {
+      "id": "u128_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "u128_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "u128s_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "u16_bitwise",
+      "status": "unresolved"
+    },
+    {
+      "id": "u16_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "u16_eq",
+      "status": "unresolved"
+    },
+    {
+      "id": "u16_is_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "u16_overflowing_add",
+      "status": "unresolved"
+    },
+    {
+      "id": "u16_overflowing_sub",
+      "status": "unresolved"
+    },
+    {
+      "id": "u16_safe_divmod",
+      "status": "unresolved"
+    },
+    {
+      "id": "u16_sqrt",
+      "status": "unresolved"
+    },
+    {
+      "id": "u16_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "u16_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "u16_wide_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "u256_guarantee_inv_mod_n",
+      "status": "unresolved"
+    },
+    {
+      "id": "u256_is_zero",
+      "status": "fail_fast"
+    },
+    {
+      "id": "u256_safe_divmod",
+      "status": "fail_fast"
+    },
+    {
+      "id": "u256_sqrt",
+      "status": "fail_fast"
+    },
+    {
+      "id": "u32_bitwise",
+      "status": "unresolved"
+    },
+    {
+      "id": "u32_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "u32_eq",
+      "status": "unresolved"
+    },
+    {
+      "id": "u32_is_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "u32_overflowing_add",
+      "status": "unresolved"
+    },
+    {
+      "id": "u32_overflowing_sub",
+      "status": "unresolved"
+    },
+    {
+      "id": "u32_safe_divmod",
+      "status": "unresolved"
+    },
+    {
+      "id": "u32_sqrt",
+      "status": "unresolved"
+    },
+    {
+      "id": "u32_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "u32_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "u32_wide_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "u512_safe_divmod_by_u256",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64_bitwise",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64_eq",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64_is_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64_overflowing_add",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64_overflowing_sub",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64_safe_divmod",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64_sqrt",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64_wide_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8_bitwise",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8_const",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8_eq",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8_is_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8_overflowing_add",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8_overflowing_sub",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8_safe_divmod",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8_sqrt",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8_to_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8_try_from_felt252",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8_wide_mul",
+      "status": "unresolved"
+    },
+    {
+      "id": "u96_guarantee_verify",
+      "status": "unresolved"
+    },
+    {
+      "id": "u96_limbs_less_than_guarantee_verify",
+      "status": "unresolved"
+    },
+    {
+      "id": "u96_single_limb_less_than_guarantee_verify",
+      "status": "unresolved"
+    },
+    {
+      "id": "unbox",
+      "status": "unresolved"
+    },
+    {
+      "id": "unsafe_panic",
+      "status": "unresolved"
+    },
+    {
+      "id": "unwrap_non_zero",
+      "status": "unresolved"
+    },
+    {
+      "id": "upcast",
+      "status": "unresolved"
+    },
+    {
+      "id": "withdraw_gas",
+      "status": "unresolved"
+    },
+    {
+      "id": "withdraw_gas_all",
+      "status": "unresolved"
+    }
+  ],
+  "generic_type_ids": [
+    {
+      "id": "AddMod",
+      "status": "unresolved"
+    },
+    {
+      "id": "AddModGate",
+      "status": "unresolved"
+    },
+    {
+      "id": "Array",
+      "status": "unresolved"
+    },
+    {
+      "id": "Bitwise",
+      "status": "unresolved"
+    },
+    {
+      "id": "Blake2sState",
+      "status": "unresolved"
+    },
+    {
+      "id": "BoundedInt",
+      "status": "unresolved"
+    },
+    {
+      "id": "Box",
+      "status": "unresolved"
+    },
+    {
+      "id": "BuiltinCosts",
+      "status": "unresolved"
+    },
+    {
+      "id": "Circuit",
+      "status": "unresolved"
+    },
+    {
+      "id": "CircuitData",
+      "status": "unresolved"
+    },
+    {
+      "id": "CircuitDescriptor",
+      "status": "unresolved"
+    },
+    {
+      "id": "CircuitFailureGuarantee",
+      "status": "unresolved"
+    },
+    {
+      "id": "CircuitInput",
+      "status": "unresolved"
+    },
+    {
+      "id": "CircuitInputAccumulator",
+      "status": "unresolved"
+    },
+    {
+      "id": "CircuitModulus",
+      "status": "unresolved"
+    },
+    {
+      "id": "CircuitOutputs",
+      "status": "unresolved"
+    },
+    {
+      "id": "CircuitPartialOutputs",
+      "status": "unresolved"
+    },
+    {
+      "id": "ClassHash",
+      "status": "unresolved"
+    },
+    {
+      "id": "Const",
+      "status": "unresolved"
+    },
+    {
+      "id": "ContractAddress",
+      "status": "unresolved"
+    },
+    {
+      "id": "Coupon",
+      "status": "unresolved"
+    },
+    {
+      "id": "EcOp",
+      "status": "unresolved"
+    },
+    {
+      "id": "EcPoint",
+      "status": "unresolved"
+    },
+    {
+      "id": "EcState",
+      "status": "unresolved"
+    },
+    {
+      "id": "Enum",
+      "status": "unresolved"
+    },
+    {
+      "id": "Felt252Dict",
+      "status": "unresolved"
+    },
+    {
+      "id": "Felt252DictEntry",
+      "status": "unresolved"
+    },
+    {
+      "id": "GasBuiltin",
+      "status": "unresolved"
+    },
+    {
+      "id": "GasReserve",
+      "status": "unresolved"
+    },
+    {
+      "id": "IntRange",
+      "status": "unresolved"
+    },
+    {
+      "id": "InverseGate",
+      "status": "unresolved"
+    },
+    {
+      "id": "MulMod",
+      "status": "unresolved"
+    },
+    {
+      "id": "MulModGate",
+      "status": "unresolved"
+    },
+    {
+      "id": "NonZero",
+      "status": "unresolved"
+    },
+    {
+      "id": "Nullable",
+      "status": "unresolved"
+    },
+    {
+      "id": "Pedersen",
+      "status": "unresolved"
+    },
+    {
+      "id": "Poseidon",
+      "status": "unresolved"
+    },
+    {
+      "id": "RangeCheck",
+      "status": "unresolved"
+    },
+    {
+      "id": "RangeCheck96",
+      "status": "unresolved"
+    },
+    {
+      "id": "Secp256k1Point",
+      "status": "unresolved"
+    },
+    {
+      "id": "Secp256r1Point",
+      "status": "unresolved"
+    },
+    {
+      "id": "SegmentArena",
+      "status": "unresolved"
+    },
+    {
+      "id": "Sha256StateHandle",
+      "status": "unresolved"
+    },
+    {
+      "id": "Snapshot",
+      "status": "unresolved"
+    },
+    {
+      "id": "Span",
+      "status": "unresolved"
+    },
+    {
+      "id": "SquashedFelt252Dict",
+      "status": "unresolved"
+    },
+    {
+      "id": "StorageAddress",
+      "status": "unresolved"
+    },
+    {
+      "id": "StorageBaseAddress",
+      "status": "unresolved"
+    },
+    {
+      "id": "Struct",
+      "status": "unresolved"
+    },
+    {
+      "id": "SubModGate",
+      "status": "unresolved"
+    },
+    {
+      "id": "System",
+      "status": "unresolved"
+    },
+    {
+      "id": "U128MulGuarantee",
+      "status": "unresolved"
+    },
+    {
+      "id": "U96Guarantee",
+      "status": "unresolved"
+    },
+    {
+      "id": "U96LimbsLtGuarantee",
+      "status": "unresolved"
+    },
+    {
+      "id": "Uninitialized",
+      "status": "unresolved"
+    },
+    {
+      "id": "bytes31",
+      "status": "unresolved"
+    },
+    {
+      "id": "felt252",
+      "status": "implemented"
+    },
+    {
+      "id": "i128",
+      "status": "unresolved"
+    },
+    {
+      "id": "i16",
+      "status": "unresolved"
+    },
+    {
+      "id": "i32",
+      "status": "unresolved"
+    },
+    {
+      "id": "i64",
+      "status": "unresolved"
+    },
+    {
+      "id": "i8",
+      "status": "unresolved"
+    },
+    {
+      "id": "qm31",
+      "status": "unresolved"
+    },
+    {
+      "id": "u128",
+      "status": "implemented"
+    },
+    {
+      "id": "u16",
+      "status": "unresolved"
+    },
+    {
+      "id": "u32",
+      "status": "unresolved"
+    },
+    {
+      "id": "u64",
+      "status": "unresolved"
+    },
+    {
+      "id": "u8",
+      "status": "unresolved"
+    }
+  ],
+  "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617"
+}

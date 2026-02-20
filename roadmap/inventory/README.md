@@ -19,4 +19,5 @@ Prerequisite:
 - `corelib-src-inventory.md`
 - `sierra-extensions-inventory.md`
 - `compiler-crates-inventory.md`
-
+- `sierra-coverage-matrix.json`
+- `sierra-coverage-summary.md`
