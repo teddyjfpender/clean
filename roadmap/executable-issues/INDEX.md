@@ -7,7 +7,7 @@ Status legend:
 
 ## Root roadmap files -> executable issues
 
-- `roadmap/README.md` -> `roadmap/executable-issues/README.issue.md` (`NOT DONE`)
+- `roadmap/README.md` -> `roadmap/executable-issues/README.issue.md` (`DONE - 5e04928`)
 - `roadmap/00-charter-and-completion-definition.md` -> `roadmap/executable-issues/00-charter-and-completion-definition.issue.md` (`NOT DONE`)
 - `roadmap/01-canonical-upstream-surfaces.md` -> `roadmap/executable-issues/01-canonical-upstream-surfaces.issue.md` (`NOT DONE`)
 - `roadmap/02-target-compiler-architecture.md` -> `roadmap/executable-issues/02-target-compiler-architecture.issue.md` (`NOT DONE`)
@@ -26,4 +26,3 @@ Status legend:
 - `roadmap/inventory/corelib-src-inventory.md` -> `roadmap/executable-issues/inventory/corelib-src-inventory.issue.md` (`NOT DONE`)
 - `roadmap/inventory/sierra-extensions-inventory.md` -> `roadmap/executable-issues/inventory/sierra-extensions-inventory.issue.md` (`NOT DONE`)
 - `roadmap/inventory/compiler-crates-inventory.md` -> `roadmap/executable-issues/inventory/compiler-crates-inventory.issue.md` (`NOT DONE`)
-

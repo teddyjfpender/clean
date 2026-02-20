@@ -3,7 +3,7 @@
 - Source roadmap file: [`roadmap/README.md`](../README.md)
 - Issue class: Program orchestration
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - 5e04928
 
 ## Objective
 
@@ -35,7 +35,7 @@ Execute the complete roadmap as an auditable program of work where every milesto
 2. `scripts/roadmap/check_issue_statuses.sh` exits `0` only when all statuses are valid.
 
 ### M-README-2: End-to-end roadmap closure report
-- Status: NOT DONE
+- Status: DONE - 5e04928
 - Required work:
 1. Add generated closure report summarizing completed vs pending issues.
 2. Add strict dependency ordering checks.
