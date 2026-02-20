@@ -145,11 +145,10 @@ fn qnewton_recip_opt(x: u256) -> u256 {
 Hand:
 
 ```cairo
-fn fib_naive(n: u32) -> u128 {
-    if n <= 1 {
-        n.into()
-    } else {
-        fib_naive(n - 1) + fib_naive(n - 2)
+pub fn fib(a: felt252, b: felt252, n: felt252) -> felt252 {
+    match n {
+        0 => a,
+        _ => fib(b, a + b, n - 1),
     }
 }
 ```
@@ -157,7 +156,7 @@ fn fib_naive(n: u32) -> u128 {
 Optimized:
 
 ```cairo
-fn fib_pair_fast(n: u32) -> (u128, u128) {
+fn fib_pair_fast(n: u32) -> (felt252, felt252) {
     if n == 0 {
         (0, 1)
     } else {
@@ -172,7 +171,7 @@ fn fib_pair_fast(n: u32) -> (u128, u128) {
     }
 }
 
-fn fib_fast(n: u32) -> u128 {
+fn fib_fast(n: u32) -> felt252 {
     let (f, _) = fib_pair_fast(n);
     f
 }

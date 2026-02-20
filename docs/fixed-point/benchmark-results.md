@@ -67,7 +67,7 @@ The first command produces deterministic summary data at:
 | `qexp` | 1605 | 384 | 1221 | 76.07% | 4.18x |
 | `qlog` | 973 | 401 | 572 | 58.79% | 2.43x |
 | `qnewton` | 1195 | 512 | 683 | 57.15% | 2.33x |
-| `fib` | 1117620 | 711 | 1116909 | 99.94% | 1571.90x |
+| `fib` | 1226 | 299 | 927 | 75.61% | 4.10x |
 
 ## Interpretation
 

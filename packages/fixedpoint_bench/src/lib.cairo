@@ -78,15 +78,27 @@ fn u256_from_u128(v: u128) -> u256 {
     u256 { low: v, high: 0 }
 }
 
-fn fib_naive(n: u32) -> u128 {
-    if n <= 1 {
-        n.into()
-    } else {
-        fib_naive(n - 1) + fib_naive(n - 2)
+/// Calculate fibonacci sequence value at the nth position
+///
+/// This function computes the fibonacci number at position n using a recursive approach.
+/// The sequence starts with the provided initial values a and b, and continues according
+/// to the fibonacci rule where each number is the sum of the two preceding ones.
+///
+/// #### Arguments
+/// * `a` - The first number in the sequence (F₀)
+/// * `b` - The second number in the sequence (F₁)
+/// * `n` - The position in the sequence to calculate (0-indexed)
+///
+/// #### Returns
+/// * `felt252` - The nth number in the fibonacci sequence
+pub fn fib(a: felt252, b: felt252, n: felt252) -> felt252 {
+    match n {
+        0 => a,
+        _ => fib(b, a + b, n - 1),
     }
 }
 
-fn fib_pair_fast(n: u32) -> (u128, u128) {
+fn fib_pair_fast(n: u32) -> (felt252, felt252) {
     if n == 0 {
         (0, 1)
     } else {
@@ -101,7 +113,7 @@ fn fib_pair_fast(n: u32) -> (u128, u128) {
     }
 }
 
-fn fib_fast(n: u32) -> u128 {
+fn fib_fast(n: u32) -> felt252 {
     let (f, _) = fib_pair_fast(n);
     f
 }
@@ -147,13 +159,13 @@ fn bench_qnewton_opt() -> u256 {
 }
 
 #[executable]
-fn bench_fib_naive() -> u128 {
-    fib_naive(22)
+fn bench_fib_naive() -> felt252 {
+    fib(0, 1, 200)
 }
 
 #[executable]
-fn bench_fib_fast() -> u128 {
-    fib_fast(22)
+fn bench_fib_fast() -> felt252 {
+    fib_fast(200)
 }
 
 #[cfg(test)]
@@ -167,7 +179,7 @@ mod tests {
         qlog1p_taylor_opt,
         qnewton_recip_hand,
         qnewton_recip_opt,
-        fib_naive,
+        fib,
         fib_fast,
         u256_from_u128,
     };
@@ -200,6 +212,6 @@ mod tests {
 
     #[test]
     fn test_fib_equivalence() {
-        assert_eq!(fib_naive(22), fib_fast(22));
+        assert_eq!(fib(0, 1, 200), fib_fast(200));
     }
 }

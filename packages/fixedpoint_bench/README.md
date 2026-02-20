@@ -21,7 +21,7 @@ Deterministic Cairo benchmark package used to compare hand-written vs optimized 
 - `bench_qexp_hand` vs `bench_qexp_opt`
 - `bench_qlog_hand` vs `bench_qlog_opt`
 - `bench_qnewton_hand` vs `bench_qnewton_opt`
-- `bench_fib_naive` vs `bench_fib_fast`
+- `bench_fib_naive` (recursive `fib(a, b, n)` baseline) vs `bench_fib_fast`
 
 Note:
 - The first four kernel pairs are Lean IR derived (baseline `--optimize false` vs optimized `--optimize true`).

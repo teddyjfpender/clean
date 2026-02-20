@@ -1,41 +1,41 @@
-# Fibonacci: Naive Recursion vs Fast Doubling
+# Fibonacci: Tail Recursion Baseline vs Fast Doubling
 
 This example is a high-step control-flow benchmark that complements the SQ128.128 arithmetic kernels.
 
 ## Why this example is included
 
 - It is not fixed-point arithmetic by itself.
-- It is useful for validating optimizer behavior on deep call trees and repeated subproblems.
-- It demonstrates a large asymptotic win from IR-level algorithm selection.
+- It is useful for validating optimizer behavior on recursive call structure.
+- It demonstrates a measurable algorithmic win from fast doubling against a realistic recursive baseline.
 
 ## Input/output contract
 
-- Input: `n : u32`
-- Output: `F(n) : u128`
-- Invariant: both implementations return the same `F(n)` for the tested domain.
+- Baseline input: `(a: felt252, b: felt252, n: felt252)`
+- Optimized input: `(n: u32)`
+- Output: Fibonacci value represented in `felt252`
+- Invariant: both implementations return equal value for benchmarked `n`.
 - Failure mode: if outputs diverge, benchmark numbers must be discarded.
 
-## Baseline shape (handwritten naive recursion)
+## Baseline shape (recursive fib with accumulators)
 
 ```cairo
-fn fib_naive(n: u32) -> u128 {
-    if n <= 1 {
-        n.into()
-    } else {
-        fib_naive(n - 1) + fib_naive(n - 2)
+pub fn fib(a: felt252, b: felt252, n: felt252) -> felt252 {
+    match n {
+        0 => a,
+        _ => fib(b, a + b, n - 1),
     }
 }
 ```
 
 Characteristics:
-- straightforward
-- exponential call growth
-- very high Cairo step count for medium `n`
+- straightforward recursive implementation
+- linear recursion depth in `n`
+- good baseline for “simple handwritten recursive Cairo”
 
 ## Optimized shape (fast doubling)
 
 ```cairo
-fn fib_pair_fast(n: u32) -> (u128, u128) {
+fn fib_pair_fast(n: u32) -> (felt252, felt252) {
     if n == 0 {
         (0, 1)
     } else {
@@ -46,7 +46,7 @@ fn fib_pair_fast(n: u32) -> (u128, u128) {
     }
 }
 
-fn fib_fast(n: u32) -> u128 {
+fn fib_fast(n: u32) -> felt252 {
     let (f, _) = fib_pair_fast(n);
     f
 }
@@ -55,24 +55,25 @@ fn fib_fast(n: u32) -> u128 {
 Characteristics:
 - logarithmic recursion depth
 - explicit reuse of intermediate products
-- deterministic and easier to cost-model
+- deterministic and easier to cost-model for larger `n`
 
-## Measured benchmark (`n = 22`)
+## Measured benchmark (`n = 200`)
 
 | Variant | Steps |
 |---|---:|
-| `bench_fib_naive` | 1117620 |
-| `bench_fib_fast` | 711 |
+| `bench_fib_naive` (`fib(0, 1, 200)`) | 1226 |
+| `bench_fib_fast` (`fib_fast(200)`) | 299 |
 
 Delta:
-- Saved steps: `1116909`
-- Improvement: `99.94%`
-- Speedup: `1571.90x`
+- Saved steps: `927`
+- Improvement: `75.61%`
+- Speedup: `4.10x`
 
 ## How this maps to Lean -> IR optimizer goals
 
-- The large gain comes from representation and algorithm shape, not cosmetic rewrites.
-- This is exactly the direction for constrained Lean subset compilation:
+- This benchmark now uses a realistic recursive baseline rather than exponential naive recursion.
+- It still validates the core principle: algorithm/IR shape dominates performance.
+- For the constrained Lean subset, this supports the same strategy:
   - lower to typed IR,
   - apply semantics-preserving IR-to-IR passes,
   - benchmark non-regression continuously.
