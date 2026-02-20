@@ -29,6 +29,15 @@ def lowerExpr : Expr ty -> IRExpr ty
   | .ite cond thenBranch elseBranch => .ite (lowerExpr cond) (lowerExpr thenBranch) (lowerExpr elseBranch)
   | .letE name boundTy bound body => .letE name boundTy (lowerExpr bound) (lowerExpr body)
 
+def lowerExprWithResources (resources : ResourceCarriers) (expr : Expr ty) : EffectExpr ty :=
+  {
+    expr := lowerExpr expr
+    resources := resources
+  }
+
+def lowerExprPure (expr : Expr ty) : EffectExpr ty :=
+  lowerExprWithResources {} expr
+
 def raiseExpr : IRExpr ty -> Expr ty
   | .var name => .var name
   | .storageRead name => .storageRead name

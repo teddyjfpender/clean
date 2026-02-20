@@ -15,11 +15,13 @@ export PATH="$HOME/.elan/bin:$PATH"
 "$ROOT_DIR/scripts/roadmap/check_pin_consistency.sh"
 "$ROOT_DIR/scripts/roadmap/check_inventory_freshness.sh"
 "$ROOT_DIR/scripts/roadmap/check_coverage_matrix_freshness.sh"
+"$ROOT_DIR/scripts/roadmap/check_effect_isolation.sh"
 (
   cd "$ROOT_DIR"
   lake build
 )
 "$ROOT_DIR/scripts/test/type_universe_regression.sh"
+"$ROOT_DIR/scripts/test/effect_resource_regression.sh"
 "$ROOT_DIR/scripts/test/codegen_snapshot.sh"
 "$ROOT_DIR/scripts/test/e2e.sh"
 "$ROOT_DIR/scripts/test/sierra_surface_codegen.sh"

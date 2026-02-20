@@ -108,6 +108,27 @@ theorem readVar_bindVar_same (ctx : EvalContext) (ty : Ty) (name : String) (valu
 
 end EvalContext
 
+namespace ResourceCarriers
+
+def merge (lhs rhs : ResourceCarriers) : ResourceCarriers :=
+  {
+    rangeCheck := lhs.rangeCheck + rhs.rangeCheck
+    gas := lhs.gas + rhs.gas
+    segmentArena := lhs.segmentArena + rhs.segmentArena
+    panicChannel :=
+      match rhs.panicChannel with
+      | some value => some value
+      | none => lhs.panicChannel
+  }
+
+def bumpGas (state : ResourceCarriers) (delta : Nat := 1) : ResourceCarriers :=
+  { state with gas := state.gas + delta }
+
+def bumpRangeCheck (state : ResourceCarriers) (delta : Nat := 1) : ResourceCarriers :=
+  { state with rangeCheck := state.rangeCheck + delta }
+
+end ResourceCarriers
+
 def evalExpr (ctx : EvalContext) : IRExpr ty -> Ty.denote ty
   | .var name => EvalContext.readVar ctx ty name
   | .storageRead name => EvalContext.readStorage ctx ty name
@@ -138,5 +159,58 @@ def evalExpr (ctx : EvalContext) : IRExpr ty -> Ty.denote ty
       let value := evalExpr ctx bound
       let ctx' := EvalContext.bindVar ctx boundTy name value
       evalExpr ctx' body
+
+def resourceCost : IRExpr ty -> ResourceCarriers
+  | .var _ => {}
+  | .storageRead _ => {}
+  | .litU128 _ => {}
+  | .litU256 _ => {}
+  | .litBool _ => {}
+  | .litFelt252 _ => {}
+  | .addFelt252 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .subFelt252 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .mulFelt252 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .addU128 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .subU128 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .mulU128 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .addU256 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .subU256 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .mulU256 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .eq lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .ltU128 lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .leU128 lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .ltU256 lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .leU256 lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .ite cond thenBranch elseBranch =>
+      ResourceCarriers.bumpGas <|
+        ResourceCarriers.merge
+          (resourceCost cond)
+          (ResourceCarriers.merge (resourceCost thenBranch) (resourceCost elseBranch))
+  | .letE _ _ bound body =>
+      ResourceCarriers.merge (resourceCost bound) (resourceCost body)
+
+def evalExprWithResources (ctx : EvalContext) (resources : ResourceCarriers) (expr : IRExpr ty) :
+    Ty.denote ty × ResourceCarriers :=
+  let value := evalExpr ctx expr
+  let consumed := resourceCost expr
+  (value, ResourceCarriers.merge resources consumed)
+
+def evalEffectExpr (ctx : EvalContext) (effectExpr : EffectExpr ty) :
+    Ty.denote ty × ResourceCarriers :=
+  evalExprWithResources ctx effectExpr.resources effectExpr.expr
 
 end LeanCairo.Compiler.Semantics

@@ -30,4 +30,16 @@ inductive IRExpr : Ty -> Type where
   | letE (name : Ident) (boundTy : Ty) (bound : IRExpr boundTy) (body : IRExpr bodyTy) : IRExpr bodyTy
   deriving Repr, DecidableEq
 
+structure ResourceCarriers where
+  rangeCheck : Nat := 0
+  gas : Nat := 0
+  segmentArena : Nat := 0
+  panicChannel : Option String := none
+  deriving Repr, DecidableEq, Inhabited
+
+structure EffectExpr (ty : Ty) where
+  expr : IRExpr ty
+  resources : ResourceCarriers := {}
+  deriving Repr, DecidableEq
+
 end LeanCairo.Compiler.IR
