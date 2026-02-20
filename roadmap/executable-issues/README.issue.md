@@ -26,7 +26,7 @@ Execute the complete roadmap as an auditable program of work where every milesto
 ## Milestones
 
 ### M-README-1: Status governance and machine-readability
-- Status: NOT DONE
+- Status: DONE - 7544a63
 - Required work:
 1. Add status parser script for `roadmap/executable-issues/**/*.issue.md`.
 2. Reject invalid status tokens in CI.
@@ -48,4 +48,3 @@ Execute the complete roadmap as an auditable program of work where every milesto
 1. All roadmap issue files exist and are linked from `roadmap/README.md`.
 2. Status and progress scripts are integrated into workflow CI.
 3. No invalid status states are present.
-
