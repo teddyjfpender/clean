@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/10-risk-register-and-mitigations.md`](../10-risk-register-and-mitigations.md)
 - Issue class: Risk control and escalation
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - 1607761
+- Completion evidence tests: `scripts/roadmap/check_risk_controls.sh --validate-mapping`; `scripts/test/release_risk_gate_negative.sh`; `scripts/workflow/run-release-candidate-checks.sh`
+- Completion evidence proofs: `roadmap/10-risk-register-and-mitigations.md`; `roadmap/risk-controls.json`; `scripts/roadmap/check_risk_controls.py`; `scripts/roadmap/check_risk_controls.sh`
 
 ## Objective
 
@@ -25,18 +27,18 @@ Operationalize risk controls so critical failure modes are detected early and ga
 ## Milestones
 
 ### R1 Risk-to-control mapping file
-- Status: NOT DONE
+- Status: DONE - 1607761
 - Acceptance tests:
 1. `scripts/roadmap/check_risk_controls.sh --validate-mapping` exits `0` only when every risk ID has at least one control.
 
 ### R2 Control implementation coverage
-- Status: NOT DONE
+- Status: DONE - 1607761
 - Acceptance tests:
 1. Missing mandatory control script causes checker failure.
 2. Checker output lists unresolved controls by risk ID.
 
 ### R3 Release risk gate
-- Status: NOT DONE
+- Status: DONE - 1607761
 - Acceptance tests:
 1. `scripts/workflow/run-release-candidate-checks.sh` fails when unresolved high-risk items remain.
 2. Gate passes only when risk controls are active and green.
@@ -46,4 +48,3 @@ Operationalize risk controls so critical failure modes are detected early and ga
 1. Risk register is linked to executable controls.
 2. Risk status is included in release reports.
 3. High-risk unresolved items block release.
-

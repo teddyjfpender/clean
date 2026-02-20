@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/08-quality-gates-bench-and-release.md`](../08-quality-gates-bench-and-release.md)
 - Issue class: Quality and release enforcement
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - 1607761
+- Completion evidence tests: `scripts/roadmap/list_quality_gates.sh --validate-workflows`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`; `scripts/workflow/run-release-candidate-checks.sh`; `scripts/roadmap/check_release_reports_freshness.sh`
+- Completion evidence proofs: `scripts/roadmap/list_quality_gates.sh`; `scripts/workflow/run-release-candidate-checks.sh`; `scripts/roadmap/generate_release_reports.py`; `roadmap/reports/release-compatibility-report.md`; `roadmap/reports/release-proof-report.md`; `roadmap/reports/release-benchmark-report.md`
 
 ## Objective
 
@@ -27,19 +29,19 @@ Define and enforce deterministic quality gates so release claims are mechanicall
 ## Milestones
 
 ### Q1 Gate taxonomy implementation
-- Status: NOT DONE
+- Status: DONE - 1607761
 - Acceptance tests:
 1. `scripts/roadmap/list_quality_gates.sh` enumerates all mandatory gates.
 2. Missing required gate in workflow triggers failure.
 
 ### Q2 Differential and failure-mode suites
-- Status: NOT DONE
+- Status: DONE - 1607761
 - Acceptance tests:
 1. Differential test suite exists and is deterministic.
 2. Fail-fast suite covers all unsupported families and exact messages.
 
 ### Q3 Release artifact reports
-- Status: NOT DONE
+- Status: DONE - 1607761
 - Acceptance tests:
 1. Compatibility report is generated and versioned.
 2. Proof report is generated and versioned.
@@ -56,4 +58,3 @@ Define and enforce deterministic quality gates so release claims are mechanicall
 1. All release predicates are executable scripts.
 2. All reports are generated from source artifacts, not manual text.
 3. Release lane is stable and blocking.
-

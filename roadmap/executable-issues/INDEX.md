@@ -16,9 +16,9 @@ Status legend:
 - `roadmap/05-track-a-lean-to-sierra-functions.md` -> `roadmap/executable-issues/05-track-a-lean-to-sierra-functions.issue.md` (`NOT DONE`)
 - `roadmap/06-track-b-lean-to-cairo-functions.md` -> `roadmap/executable-issues/06-track-b-lean-to-cairo-functions.issue.md` (`NOT DONE`)
 - `roadmap/07-low-level-optimization-sierra-casm.md` -> `roadmap/executable-issues/07-low-level-optimization-sierra-casm.issue.md` (`NOT DONE`)
-- `roadmap/08-quality-gates-bench-and-release.md` -> `roadmap/executable-issues/08-quality-gates-bench-and-release.issue.md` (`NOT DONE`)
+- `roadmap/08-quality-gates-bench-and-release.md` -> `roadmap/executable-issues/08-quality-gates-bench-and-release.issue.md` (`DONE - 1607761`)
 - `roadmap/09-milestones-and-execution-order.md` -> `roadmap/executable-issues/09-milestones-and-execution-order.issue.md` (`DONE - f6efdea`)
-- `roadmap/10-risk-register-and-mitigations.md` -> `roadmap/executable-issues/10-risk-register-and-mitigations.issue.md` (`NOT DONE`)
+- `roadmap/10-risk-register-and-mitigations.md` -> `roadmap/executable-issues/10-risk-register-and-mitigations.issue.md` (`DONE - 1607761`)
 - `roadmap/11-evaluator-type-domain-separation.md` -> `roadmap/executable-issues/11-evaluator-type-domain-separation.issue.md` (`DONE - 9461b3d`)
 - `roadmap/12-direct-sierra-subset-coverage-ledger.md` -> `roadmap/executable-issues/12-direct-sierra-subset-coverage-ledger.issue.md` (`DONE - 00057f5`)
 
