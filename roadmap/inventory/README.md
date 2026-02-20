@@ -24,3 +24,5 @@ Prerequisite:
 - `compiler-crates-dependency-matrix.md`
 - `sierra-coverage-matrix.json`
 - `sierra-coverage-summary.md`
+- `sierra-family-coverage-report.json`
+- `sierra-family-coverage-report.md`

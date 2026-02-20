@@ -1,0 +1,528 @@
+{
+  "counts": {
+    "fail_fast": 13,
+    "implemented": 4,
+    "unresolved": 45
+  },
+  "entries": [
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "ap_tracking",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/ap_tracking.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "array",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/array.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "bitwise",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/bitwise.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "blake",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/blake.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "boolean",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/boolean.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "bounded_int",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/bounded_int.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "boxing",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/boxing.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "branch_align",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/branch_align.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "bytes31",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/bytes31.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "casts",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/casts.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "circuit",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/circuit.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "const_type",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/const_type.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "consts",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/consts.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "coupon",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/coupon.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "debug",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/debug.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "src/LeanCairo/Backend/Sierra/Emit/SubsetProgram.lean",
+        "scripts/test/sierra_e2e.sh",
+        "scripts/test/sierra_scalar_e2e.sh"
+      ],
+      "module_id": "drop",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/drop.rs",
+      "status": "implemented"
+    },
+    {
+      "evidence_refs": [
+        "src/LeanCairo/Backend/Sierra/Emit/SubsetProgram.lean",
+        "scripts/test/sierra_e2e.sh",
+        "scripts/test/sierra_scalar_e2e.sh"
+      ],
+      "module_id": "duplicate",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/duplicate.rs",
+      "status": "implemented"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "ec",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/ec.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "enm",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/enm.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "src/LeanCairo/Backend/Sierra/Emit/SubsetProgram.lean",
+        "scripts/test/sierra_e2e.sh",
+        "scripts/test/sierra_scalar_e2e.sh"
+      ],
+      "module_id": "felt252",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/felt252.rs",
+      "status": "implemented"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "felt252_dict",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/felt252_dict.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "function_call",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/function_call.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "gas",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/gas.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "gas_reserve",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/gas_reserve.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "int/mod",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/mod.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "int/signed",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/signed.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "int/signed128",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/signed128.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "int/unsigned",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "int/unsigned128",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned128.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "int/unsigned256",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned256.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "int/unsigned512",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/int/unsigned512.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "is_zero",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/is_zero.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "src/LeanCairo/Backend/Sierra/Emit/SubsetProgram.lean",
+        "scripts/test/sierra_e2e.sh",
+        "scripts/test/sierra_scalar_e2e.sh"
+      ],
+      "module_id": "mem",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/mem.rs",
+      "status": "implemented"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "mod",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/mod.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "non_zero",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/non_zero.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "nullable",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/nullable.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "pedersen",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/pedersen.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "poseidon",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/poseidon.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "qm31",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/qm31.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "range",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/range.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "range_check",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/range_check.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "segment_arena",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/segment_arena.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "snapshot",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/snapshot.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "span",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/span.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "squashed_felt252_dict",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/squashed_felt252_dict.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "starknet/emit_event",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/emit_event.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "starknet/getter",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/getter.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "starknet/interoperability",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/interoperability.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "starknet/mod",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/mod.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "starknet/secp256",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "starknet/secp256k1",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256k1.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "starknet/secp256r1",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256r1.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "starknet/storage",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/storage.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "starknet/syscalls",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/syscalls.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "starknet/testing",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/testing.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
+      ],
+      "module_id": "structure",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/structure.rs",
+      "status": "fail_fast"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "trace",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/trace.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "try_from_felt252",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/try_from_felt252.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "unconditional_jump",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/unconditional_jump.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "uninitialized",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/uninitialized.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "unsafe_panic",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/unsafe_panic.rs",
+      "status": "unresolved"
+    },
+    {
+      "evidence_refs": [
+        "roadmap/05-track-a-lean-to-sierra-functions.md"
+      ],
+      "module_id": "utils",
+      "path": "crates/cairo-lang-sierra/src/extensions/modules/utils.rs",
+      "status": "unresolved"
+    }
+  ],
+  "input_matrix": "roadmap/inventory/sierra-coverage-matrix.json",
+  "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617"
+}
