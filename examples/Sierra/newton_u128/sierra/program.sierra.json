@@ -1,0 +1,1207 @@
+{"version": 1,
+ "type_declarations":
+ [{"long_id": {"generic_id": "RangeCheck", "generic_args": []},
+   "id": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+   "declared_type_info": null},
+  {"long_id": {"generic_id": "u128", "generic_args": []},
+   "id": {"id": 10698497612269247729, "debug_name": "u128"},
+   "declared_type_info": null},
+  {"long_id": {"generic_id": "U128MulGuarantee", "generic_args": []},
+   "id": {"id": 11371311946252800753, "debug_name": "U128MulGuarantee"},
+   "declared_type_info": null}],
+ "statements":
+ [{"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10354849516306779554,
+        "debug_name": "newtonReciprocalStep::tmp::dup_keep::0"},
+       {"id": 11122377587445023397,
+        "debug_name": "newtonReciprocalStep::tmp::dup_use::1"}]}],
+    "args":
+    [{"id": 8471880117959403391,
+      "debug_name": "newtonReciprocalStep::param::x"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 12502010953252483902,
+        "debug_name": "newtonReciprocalStep::tmp::u128_mul_high_raw::2"},
+       {"id": 16191726618019796133,
+        "debug_name": "newtonReciprocalStep::tmp::u128_mul_low_raw::3"},
+       {"id": 18031042551125727904,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_mul_guarantee_raw::4"}]}],
+    "args":
+    [{"id": 8471905406726852244,
+      "debug_name": "newtonReciprocalStep::param::a"},
+     {"id": 11122377587445023397,
+      "debug_name": "newtonReciprocalStep::tmp::dup_use::1"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 12502010953252483902,
+      "debug_name": "newtonReciprocalStep::tmp::u128_mul_high_raw::2"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15374652077359035016,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_mul_range_check_out::6"}]}],
+    "args":
+    [{"id": 5081398930599497103,
+      "debug_name": "newtonReciprocalStep::param::__range_check"},
+     {"id": 18031042551125727904,
+      "debug_name": "newtonReciprocalStep::tmp::u128_mul_guarantee_raw::4"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3430719152880963358,
+        "debug_name": "newtonReciprocalStep::tmp::store_temp::7"}]}],
+    "args":
+    [{"id": 16191726618019796133,
+      "debug_name": "newtonReciprocalStep::tmp::u128_mul_low_raw::3"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 15356848981526338808, "debug_name": "u128_const_2"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7503108174987220000,
+        "debug_name": "newtonReciprocalStep::tmp::u128_const_raw::8"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3430712555811194092,
+        "debug_name": "newtonReciprocalStep::tmp::store_temp::9"}]}],
+    "args":
+    [{"id": 7503108174987220000,
+      "debug_name": "newtonReciprocalStep::tmp::u128_const_raw::8"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14641423882098738837, "debug_name": "u128_overflowing_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13768422538921900897,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_sub_range_check_non_overflow::10"},
+       {"id": 6023925259235518901,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_sub_result_non_overflow::11"}]},
+     {"target": {"Statement": 12},
+      "results":
+      [{"id": 15709407631745247119,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_sub_range_check_overflow::12"},
+       {"id": 9385703741053272067,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_sub_result_overflow::13"}]}],
+    "args":
+    [{"id": 15374652077359035016,
+      "debug_name": "newtonReciprocalStep::tmp::u128_mul_range_check_out::6"},
+     {"id": 3430712555811194092,
+      "debug_name": "newtonReciprocalStep::tmp::store_temp::9"},
+     {"id": 3430719152880963358,
+      "debug_name": "newtonReciprocalStep::tmp::store_temp::7"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4562385157872323619,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_sub_range_check_merged::14"}]}],
+    "args":
+    [{"id": 13768422538921900897,
+      "debug_name":
+      "newtonReciprocalStep::tmp::u128_sub_range_check_non_overflow::10"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7008743705622569387,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_sub_result_merged::15"}]}],
+    "args":
+    [{"id": 6023925259235518901,
+      "debug_name":
+      "newtonReciprocalStep::tmp::u128_sub_result_non_overflow::11"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 15}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4562385157872323619,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_sub_range_check_merged::14"}]}],
+    "args":
+    [{"id": 15709407631745247119,
+      "debug_name":
+      "newtonReciprocalStep::tmp::u128_sub_range_check_overflow::12"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7008743705622569387,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_sub_result_merged::15"}]}],
+    "args":
+    [{"id": 9385703741053272067,
+      "debug_name":
+      "newtonReciprocalStep::tmp::u128_sub_result_overflow::13"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8704460512882885671,
+        "debug_name": "newtonReciprocalStep::tmp::u128_mul_high_raw::16"},
+       {"id": 2405201109120479384,
+        "debug_name": "newtonReciprocalStep::tmp::u128_mul_low_raw::17"},
+       {"id": 18439385532346628933,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_mul_guarantee_raw::18"}]}],
+    "args":
+    [{"id": 10354849516306779554,
+      "debug_name": "newtonReciprocalStep::tmp::dup_keep::0"},
+     {"id": 7008743705622569387,
+      "debug_name": "newtonReciprocalStep::tmp::u128_sub_result_merged::15"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8704460512882885671,
+      "debug_name": "newtonReciprocalStep::tmp::u128_mul_high_raw::16"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 14071404228891624684,
+        "debug_name":
+        "newtonReciprocalStep::tmp::u128_mul_range_check_out::20"}]}],
+    "args":
+    [{"id": 4562385157872323619,
+      "debug_name":
+      "newtonReciprocalStep::tmp::u128_sub_range_check_merged::14"},
+     {"id": 18439385532346628933,
+      "debug_name": "newtonReciprocalStep::tmp::u128_mul_guarantee_raw::18"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 9228442297313524036,
+        "debug_name": "newtonReciprocalStep::tmp::store_temp::21"}]}],
+    "args":
+    [{"id": 2405201109120479384,
+      "debug_name": "newtonReciprocalStep::tmp::u128_mul_low_raw::17"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 9228445595848408669,
+        "debug_name": "newtonReciprocalStep::tmp::store_temp::22"}]}],
+    "args":
+    [{"id": 14071404228891624684,
+      "debug_name":
+      "newtonReciprocalStep::tmp::u128_mul_range_check_out::20"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 9228444496336780458,
+        "debug_name": "newtonReciprocalStep::tmp::store_temp::23"}]}],
+    "args":
+    [{"id": 9228442297313524036,
+      "debug_name": "newtonReciprocalStep::tmp::store_temp::21"}]}},
+  {"Return":
+   [{"id": 9228445595848408669,
+     "debug_name": "newtonReciprocalStep::tmp::store_temp::22"},
+    {"id": 9228444496336780458,
+     "debug_name": "newtonReciprocalStep::tmp::store_temp::23"}]},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10341579818089330097,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::dup_keep::0"},
+       {"id": 8078959373875775728,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::dup_use::1"}]}],
+    "args":
+    [{"id": 17158028753124186727,
+      "debug_name": "newtonReciprocalTwoSteps::param::a"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10341577619066073675,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::dup_keep::2"},
+       {"id": 8078961572899032150,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::dup_use::3"}]}],
+    "args":
+    [{"id": 9494004803939848916,
+      "debug_name": "newtonReciprocalTwoSteps::param::x0"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13847625940168160133,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_high_raw::4"},
+       {"id": 3958947788108850392,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_low_raw::5"},
+       {"id": 14596635120107766381,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_mul_guarantee_raw::6"}]}],
+    "args":
+    [{"id": 8078959373875775728,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::dup_use::1"},
+     {"id": 8078961572899032150,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::dup_use::3"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 13847625940168160133,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_high_raw::4"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10955675225393541481,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_mul_range_check_out::8"}]}],
+    "args":
+    [{"id": 14239322064744664152,
+      "debug_name": "newtonReciprocalTwoSteps::param::__range_check"},
+     {"id": 14596635120107766381,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_mul_guarantee_raw::6"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17041517130757976147,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::9"}]}],
+    "args":
+    [{"id": 3958947788108850392,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_low_raw::5"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 15356848981526338808, "debug_name": "u128_const_2"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 466807977061588176,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::u128_const_raw::10"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7866363757521869166,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::11"}]}],
+    "args":
+    [{"id": 466807977061588176,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::u128_const_raw::10"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14641423882098738837, "debug_name": "u128_overflowing_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11190111714081568704,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_non_overflow::12"},
+       {"id": 10952952168654172278,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_result_non_overflow::13"}]},
+     {"target": {"Statement": 35},
+      "results":
+      [{"id": 4281730199125674926,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_overflow::14"},
+       {"id": 18360110418818890568,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_result_overflow::15"}]}],
+    "args":
+    [{"id": 10955675225393541481,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_mul_range_check_out::8"},
+     {"id": 7866363757521869166,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::11"},
+     {"id": 17041517130757976147,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::9"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 12037438665145198330,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_merged::16"}]}],
+    "args":
+    [{"id": 11190111714081568704,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_non_overflow::12"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8900248530175789268,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_result_merged::17"}]}],
+    "args":
+    [{"id": 10952952168654172278,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_result_non_overflow::13"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 38}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 12037438665145198330,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_merged::16"}]}],
+    "args":
+    [{"id": 4281730199125674926,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_overflow::14"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8900248530175789268,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_result_merged::17"}]}],
+    "args":
+    [{"id": 18360110418818890568,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_result_overflow::15"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13907548583774157402,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_high_raw::18"},
+       {"id": 16679326936719252423,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_low_raw::19"},
+       {"id": 4123370772504229731,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_mul_guarantee_raw::20"}]}],
+    "args":
+    [{"id": 10341577619066073675,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::dup_keep::2"},
+     {"id": 8900248530175789268,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_result_merged::17"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 13907548583774157402,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_high_raw::18"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8856315198818508843,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_mul_range_check_out::22"}]}],
+    "args":
+    [{"id": 12037438665145198330,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_merged::16"},
+     {"id": 4123370772504229731,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_mul_guarantee_raw::20"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7867355517010326263,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::23"}]}],
+    "args":
+    [{"id": 16679326936719252423,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_low_raw::19"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7971217236885360077,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::dup_keep::24"},
+       {"id": 3526643606065033204,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::dup_use::25"}]}],
+    "args":
+    [{"id": 7867355517010326263,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::23"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13906550227215931039,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_high_raw::26"},
+       {"id": 16682148283556674174,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_low_raw::27"},
+       {"id": 4123379568597255419,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_mul_guarantee_raw::28"}]}],
+    "args":
+    [{"id": 10341579818089330097,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::dup_keep::0"},
+     {"id": 3526643606065033204,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::dup_use::25"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 13906550227215931039,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_high_raw::26"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8855325638353308168,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_mul_range_check_out::30"}]}],
+    "args":
+    [{"id": 8856315198818508843,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_mul_range_check_out::22"},
+     {"id": 4123379568597255419,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_mul_guarantee_raw::28"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7868312092126680608,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::31"}]}],
+    "args":
+    [{"id": 16682148283556674174,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_low_raw::27"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 15356848981526338808, "debug_name": "u128_const_2"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 468648559526834940,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::u128_const_raw::32"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7868314291149937030,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::33"}]}],
+    "args":
+    [{"id": 468648559526834940,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::u128_const_raw::32"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14641423882098738837, "debug_name": "u128_overflowing_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11188301917941911848,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_non_overflow::34"},
+       {"id": 10951006033072617258,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_result_non_overflow::35"}]},
+     {"target": {"Statement": 54},
+      "results":
+      [{"id": 4279898412753453850,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_overflow::36"},
+       {"id": 18358265438307130960,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_result_overflow::37"}]}],
+    "args":
+    [{"id": 8855325638353308168,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_mul_range_check_out::30"},
+     {"id": 7868314291149937030,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::33"},
+     {"id": 7868312092126680608,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::31"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 12039406790959317570,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_merged::38"}]}],
+    "args":
+    [{"id": 11188301917941911848,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_non_overflow::34"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8902203461850369976,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_result_merged::39"}]}],
+    "args":
+    [{"id": 10951006033072617258,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_result_non_overflow::35"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 57}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 12039406790959317570,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_merged::38"}]}],
+    "args":
+    [{"id": 4279898412753453850,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_overflow::36"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8902203461850369976,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_sub_result_merged::39"}]}],
+    "args":
+    [{"id": 18358265438307130960,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_result_overflow::37"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13912322663262903439,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_high_raw::40"},
+       {"id": 16676516584998112782,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_low_raw::41"},
+       {"id": 4125352092457887503,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_mul_guarantee_raw::42"}]}],
+    "args":
+    [{"id": 7971217236885360077,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::dup_keep::24"},
+     {"id": 8902203461850369976,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_result_merged::39"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 13912322663262903439,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_high_raw::40"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8862087634865481243,
+        "debug_name":
+        "newtonReciprocalTwoSteps::tmp::u128_mul_range_check_out::44"}]}],
+    "args":
+    [{"id": 12039406790959317570,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_sub_range_check_merged::38"},
+     {"id": 4125352092457887503,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_mul_guarantee_raw::42"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7869301652591881283,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::45"}]}],
+    "args":
+    [{"id": 16676516584998112782,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::u128_mul_low_raw::41"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7869302752103509494,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::46"}]}],
+    "args":
+    [{"id": 8862087634865481243,
+      "debug_name":
+      "newtonReciprocalTwoSteps::tmp::u128_mul_range_check_out::44"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7869303851615137705,
+        "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::47"}]}],
+    "args":
+    [{"id": 7869301652591881283,
+      "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::45"}]}},
+  {"Return":
+   [{"id": 7869302752103509494,
+     "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::46"},
+    {"id": 7869303851615137705,
+     "debug_name": "newtonReciprocalTwoSteps::tmp::store_temp::47"}]},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 496543375675574797,
+        "debug_name": "newtonReciprocalResidualAfterStep::tmp::dup_keep::0"},
+       {"id": 5676022981278097380,
+        "debug_name": "newtonReciprocalResidualAfterStep::tmp::dup_use::1"}]}],
+    "args":
+    [{"id": 1713216284967632296,
+      "debug_name": "newtonReciprocalResidualAfterStep::param::x0"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 5788562890821740471,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_mul_high_raw::2"},
+       {"id": 14057580887222973270,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_mul_low_raw::3"},
+       {"id": 3769582609568839219,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_mul_guarantee_raw::4"}]}],
+    "args":
+    [{"id": 14378880500347732083,
+      "debug_name": "newtonReciprocalResidualAfterStep::param::a"},
+     {"id": 5676022981278097380,
+      "debug_name": "newtonReciprocalResidualAfterStep::tmp::dup_use::1"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 5788562890821740471,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_mul_high_raw::2"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6546246520688941899,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_mul_range_check_out::6"}]}],
+    "args":
+    [{"id": 12039451808511969852,
+      "debug_name": "newtonReciprocalResidualAfterStep::param::__range_check"},
+     {"id": 3769582609568839219,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_mul_guarantee_raw::4"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 1190222274005143281,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::store_temp::7"}]}],
+    "args":
+    [{"id": 14057580887222973270,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_mul_low_raw::3"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 15356848981526338808, "debug_name": "u128_const_2"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 16712876668945976487,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_const_raw::8"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 1190215676935374015,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::store_temp::9"}]}],
+    "args":
+    [{"id": 16712876668945976487,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_const_raw::8"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14641423882098738837, "debug_name": "u128_overflowing_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 5410118829746779042,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_non_overflow::10"},
+       {"id": 14553775721240434636,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_non_overflow::11"}]},
+     {"target": {"Statement": 76},
+      "results":
+      [{"id": 5010579056970439600,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_overflow::12"},
+       {"id": 11065829779774761174,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_overflow::13"}]}],
+    "args":
+    [{"id": 6546246520688941899,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_mul_range_check_out::6"},
+     {"id": 1190215676935374015,
+      "debug_name": "newtonReciprocalResidualAfterStep::tmp::store_temp::9"},
+     {"id": 1190222274005143281,
+      "debug_name": "newtonReciprocalResidualAfterStep::tmp::store_temp::7"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7826198746532566232,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_merged::14"}]}],
+    "args":
+    [{"id": 5410118829746779042,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_non_overflow::10"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10900213464624379822,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_merged::15"}]}],
+    "args":
+    [{"id": 14553775721240434636,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_non_overflow::11"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 79}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7826198746532566232,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_merged::14"}]}],
+    "args":
+    [{"id": 5010579056970439600,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_overflow::12"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10900213464624379822,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_merged::15"}]}],
+    "args":
+    [{"id": 11065829779774761174,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_overflow::13"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7841885901321932676,
+        "debug_name": "newtonReciprocalResidualAfterStep::tmp::dup_keep::16"},
+       {"id": 16292496721665348489,
+        "debug_name": "newtonReciprocalResidualAfterStep::tmp::dup_use::17"}]}],
+    "args":
+    [{"id": 496543375675574797,
+      "debug_name": "newtonReciprocalResidualAfterStep::tmp::dup_keep::0"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17350222936762889814,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_mul_high_raw::18"},
+       {"id": 13709505320637788811,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_mul_low_raw::19"},
+       {"id": 13521572902796939375,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_mul_guarantee_raw::20"}]}],
+    "args":
+    [{"id": 16292496721665348489,
+      "debug_name": "newtonReciprocalResidualAfterStep::tmp::dup_use::17"},
+     {"id": 10900213464624379822,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_merged::15"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 17350222936762889814,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_mul_high_raw::18"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3155235833855935711,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_mul_range_check_out::22"}]}],
+    "args":
+    [{"id": 7826198746532566232,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_merged::14"},
+     {"id": 13521572902796939375,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_mul_guarantee_raw::20"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 16629278489839328475,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::store_temp::23"}]}],
+    "args":
+    [{"id": 13709505320637788811,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_mul_low_raw::19"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14641423882098738837, "debug_name": "u128_overflowing_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 5409131468304834789,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_non_overflow::24"},
+       {"id": 14550974165612320683,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_non_overflow::25"}]},
+     {"target": {"Statement": 89},
+      "results":
+      [{"id": 5009618083807572411,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_overflow::26"},
+       {"id": 11063037020239672909,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_overflow::27"}]}],
+    "args":
+    [{"id": 3155235833855935711,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_mul_range_check_out::22"},
+     {"id": 16629278489839328475,
+      "debug_name": "newtonReciprocalResidualAfterStep::tmp::store_temp::23"},
+     {"id": 7841885901321932676,
+      "debug_name": "newtonReciprocalResidualAfterStep::tmp::dup_keep::16"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7829152034765373303,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_merged::28"}]}],
+    "args":
+    [{"id": 5409131468304834789,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_non_overflow::24"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10901185432903529121,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_merged::29"}]}],
+    "args":
+    [{"id": 14550974165612320683,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_non_overflow::25"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 92}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7829152034765373303,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_merged::28"}]}],
+    "args":
+    [{"id": 5009618083807572411,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_overflow::26"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10901185432903529121,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_merged::29"}]}],
+    "args":
+    [{"id": 11063037020239672909,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_overflow::27"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 16630130611351002775,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::store_temp::30"}]}],
+    "args":
+    [{"id": 7829152034765373303,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_range_check_merged::28"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 16630129511839374564,
+        "debug_name":
+        "newtonReciprocalResidualAfterStep::tmp::store_temp::31"}]}],
+    "args":
+    [{"id": 10901185432903529121,
+      "debug_name":
+      "newtonReciprocalResidualAfterStep::tmp::u128_sub_result_merged::29"}]}},
+  {"Return":
+   [{"id": 16630130611351002775,
+     "debug_name": "newtonReciprocalResidualAfterStep::tmp::store_temp::30"},
+    {"id": 16630129511839374564,
+     "debug_name": "newtonReciprocalResidualAfterStep::tmp::store_temp::31"}]}],
+ "libfunc_declarations":
+ [{"long_id":
+   {"generic_id": "dup",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}}]},
+   "id": {"id": 5357369253888360067, "debug_name": "dup_u128"}},
+  {"long_id": {"generic_id": "u128_guarantee_mul", "generic_args": []},
+   "id": {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"}},
+  {"long_id":
+   {"generic_id": "drop",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}}]},
+   "id": {"id": 8180805564406204157, "debug_name": "drop_u128"}},
+  {"long_id": {"generic_id": "u128_mul_guarantee_verify", "generic_args": []},
+   "id":
+   {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}}]},
+   "id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"}},
+  {"long_id":
+   {"generic_id": "u128_const", "generic_args": [{"Value": [1, [2]]}]},
+   "id": {"id": 15356848981526338808, "debug_name": "u128_const_2"}},
+  {"long_id": {"generic_id": "u128_overflowing_sub", "generic_args": []},
+   "id": {"id": 14641423882098738837, "debug_name": "u128_overflowing_sub"}},
+  {"long_id": {"generic_id": "branch_align", "generic_args": []},
+   "id": {"id": 3328301606880823183, "debug_name": "branch_align"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 5158587525321846130, "debug_name": "RangeCheck"}}]},
+   "id": {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"}},
+  {"long_id": {"generic_id": "jump", "generic_args": []},
+   "id": {"id": 16940139219101328589, "debug_name": "jump"}}],
+ "funcs":
+ [{"signature":
+   {"ret_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 10698497612269247729, "debug_name": "u128"}],
+    "param_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 10698497612269247729, "debug_name": "u128"},
+     {"id": 10698497612269247729, "debug_name": "u128"}]},
+   "params":
+   [{"ty": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     "id":
+     {"id": 5081398930599497103,
+      "debug_name": "newtonReciprocalStep::param::__range_check"}},
+    {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
+     "id":
+     {"id": 8471905406726852244,
+      "debug_name": "newtonReciprocalStep::param::a"}},
+    {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
+     "id":
+     {"id": 8471880117959403391,
+      "debug_name": "newtonReciprocalStep::param::x"}}],
+   "id": {"id": 1468022751490785200, "debug_name": "newtonReciprocalStep"},
+   "entry_point": 0},
+  {"signature":
+   {"ret_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 10698497612269247729, "debug_name": "u128"}],
+    "param_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 10698497612269247729, "debug_name": "u128"},
+     {"id": 10698497612269247729, "debug_name": "u128"}]},
+   "params":
+   [{"ty": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     "id":
+     {"id": 14239322064744664152,
+      "debug_name": "newtonReciprocalTwoSteps::param::__range_check"}},
+    {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
+     "id":
+     {"id": 17158028753124186727,
+      "debug_name": "newtonReciprocalTwoSteps::param::a"}},
+    {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
+     "id":
+     {"id": 9494004803939848916,
+      "debug_name": "newtonReciprocalTwoSteps::param::x0"}}],
+   "id": {"id": 15006677780431301651, "debug_name": "newtonReciprocalTwoSteps"},
+   "entry_point": 22},
+  {"signature":
+   {"ret_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 10698497612269247729, "debug_name": "u128"}],
+    "param_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 10698497612269247729, "debug_name": "u128"},
+     {"id": 10698497612269247729, "debug_name": "u128"}]},
+   "params":
+   [{"ty": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     "id":
+     {"id": 12039451808511969852,
+      "debug_name": "newtonReciprocalResidualAfterStep::param::__range_check"}},
+    {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
+     "id":
+     {"id": 14378880500347732083,
+      "debug_name": "newtonReciprocalResidualAfterStep::param::a"}},
+    {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
+     "id":
+     {"id": 1713216284967632296,
+      "debug_name": "newtonReciprocalResidualAfterStep::param::x0"}}],
+   "id":
+   {"id": 4724205963558212983,
+    "debug_name": "newtonReciprocalResidualAfterStep"},
+   "entry_point": 64}]}

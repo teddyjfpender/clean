@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "description": "Manifest for mirrored Lean/Sierra/Cairo example generation.",
+  "examples": [
+    {
+      "id": "newton_u128",
+      "module": "newton_u128.Example",
+      "lean_sources": [
+        "examples/Lean/newton_u128/Example.lean"
+      ]
+    },
+    {
+      "id": "scalar_core",
+      "module": "scalar_core.Example",
+      "lean_sources": [
+        "examples/Lean/scalar_core/Example.lean"
+      ]
+    },
+    {
+      "id": "u128_range_checked",
+      "module": "u128_range_checked.Example",
+      "lean_sources": [
+        "examples/Lean/u128_range_checked/Example.lean"
+      ]
+    }
+  ]
+}

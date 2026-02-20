@@ -22,6 +22,11 @@ private def boolLiteral (value : Bool) : String :=
 private def toTempSafeName (value : String) : String :=
   String.ofList <| value.toList.map (fun c => if c.isAlphanum then c else '_')
 
+private def moduleRootTarget (moduleName : String) : String :=
+  match moduleName.splitOn "." with
+  | [] => moduleName
+  | head :: _ => head
+
 private def renderInvocationScript (options : CliOptions) : String :=
   let escapedOutDir := escapeLeanStringLiteral options.outDir
   let optimizeLiteral := boolLiteral options.optimize
@@ -43,7 +48,8 @@ private def runLake (args : Array String) (errorContext : String) : IO Unit := d
           s!"{errorContext}\nstdout:\n{output.stdout}\nstderr:\n{output.stderr}"
 
 def runGeneratorInvocation (options : CliOptions) : IO Unit := do
-  runLake #["build", options.moduleName] s!"failed to build lake target '{options.moduleName}'"
+  let rootTarget := moduleRootTarget options.moduleName
+  runLake #["build", rootTarget] s!"failed to build module root target '{rootTarget}'"
   let tempName := s!".leancairo_generate_sierra_{toTempSafeName options.moduleName}.lean"
   let scriptPath := System.FilePath.mk tempName
   IO.FS.writeFile scriptPath (renderInvocationScript options)
