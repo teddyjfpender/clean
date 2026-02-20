@@ -321,6 +321,40 @@ theorem readStorage_bindStorage_type_non_interference
     readStorage (bindStorage ctx tyWrite nameWrite value) tyRead nameRead = readStorage ctx tyRead nameRead := by
   cases tyWrite <;> cases tyRead <;> simp [readStorage, bindStorage] at hTy ⊢ <;> contradiction
 
+theorem readVarStrict_unsupported_failfast
+    (ctx : EvalContext)
+    (ty : Ty)
+    (name : String)
+    (hUnsupported : supportsRuntimeBinding ty = false) :
+    readVarStrict ctx ty name = .error (unsupportedDomainMessage "variable read" ty name) := by
+  simp [readVarStrict, hUnsupported]
+
+theorem readStorageStrict_unsupported_failfast
+    (ctx : EvalContext)
+    (ty : Ty)
+    (name : String)
+    (hUnsupported : supportsRuntimeBinding ty = false) :
+    readStorageStrict ctx ty name = .error (unsupportedDomainMessage "storage read" ty name) := by
+  simp [readStorageStrict, hUnsupported]
+
+theorem bindVarStrict_unsupported_failfast
+    (ctx : EvalContext)
+    (ty : Ty)
+    (name : String)
+    (value : Ty.denote ty)
+    (hUnsupported : supportsRuntimeBinding ty = false) :
+    bindVarStrict ctx ty name value = .error (unsupportedDomainMessage "variable bind" ty name) := by
+  simp [bindVarStrict, hUnsupported]
+
+theorem bindStorageStrict_unsupported_failfast
+    (ctx : EvalContext)
+    (ty : Ty)
+    (name : String)
+    (value : Ty.denote ty)
+    (hUnsupported : supportsRuntimeBinding ty = false) :
+    bindStorageStrict ctx ty name value = .error (unsupportedDomainMessage "storage bind" ty name) := by
+  simp [bindStorageStrict, hUnsupported]
+
 end EvalContext
 
 namespace ResourceCarriers

@@ -13,8 +13,13 @@ REQUIRED_THEOREMS=(
   "optimizeExprPipelineSound"
   "sourceMIRRoundTrip_holds"
   "mirSourceRoundTrip_holds"
+  "readVar_bindVar_type_non_interference"
+  "readStorage_bindStorage_type_non_interference"
+  "readVarStrict_unsupported_failfast"
   "evalExprState_success_transition"
   "evalExprState_failure_channel"
+  "evalExprStateStrict_success_transition"
+  "evalExprStateStrict_failure_channel"
 )
 
 while [[ "$#" -gt 0 ]]; do
