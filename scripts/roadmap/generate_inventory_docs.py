@@ -8,15 +8,24 @@ import urllib.request
 from collections import Counter
 from pathlib import Path
 
-PINNED_COMMIT = "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617"
+ROOT = Path(__file__).resolve().parents[2]
+INVENTORY_DIR = ROOT / "roadmap" / "inventory"
+PINNED_SURFACE = ROOT / "generated" / "sierra" / "surface" / "pinned_surface.json"
+PINNED_COMMIT_FILE = ROOT / "config" / "cairo_pinned_commit.txt"
+
+
+def load_pinned_commit() -> str:
+    value = PINNED_COMMIT_FILE.read_text(encoding="utf-8").strip()
+    if not value:
+        raise ValueError(f"pinned commit file is empty: {PINNED_COMMIT_FILE}")
+    return value
+
+
+PINNED_COMMIT = load_pinned_commit()
 TREE_URL = (
     "https://api.github.com/repos/starkware-libs/cairo/git/trees/"
     f"{PINNED_COMMIT}?recursive=1"
 )
-
-ROOT = Path(__file__).resolve().parents[2]
-INVENTORY_DIR = ROOT / "roadmap" / "inventory"
-PINNED_SURFACE = ROOT / "generated" / "sierra" / "surface" / "pinned_surface.json"
 
 
 def fetch_tree_paths() -> list[str]:
