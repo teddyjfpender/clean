@@ -11,22 +11,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 INVENTORY_DIR = ROOT / "roadmap" / "inventory"
-PINNED_SURFACE = ROOT / "generated" / "sierra" / "surface" / "pinned_surface.json"
-PINNED_COMMIT_FILE = ROOT / "config" / "cairo_pinned_commit.txt"
+DEFAULT_PINNED_SURFACE = ROOT / "generated" / "sierra" / "surface" / "pinned_surface.json"
+DEFAULT_PINNED_COMMIT_FILE = ROOT / "config" / "cairo_pinned_commit.txt"
 
 
-def load_pinned_commit() -> str:
-    value = PINNED_COMMIT_FILE.read_text(encoding="utf-8").strip()
+def load_pinned_commit(commit_file: Path) -> str:
+    value = commit_file.read_text(encoding="utf-8").strip()
     if not value:
-        raise ValueError(f"pinned commit file is empty: {PINNED_COMMIT_FILE}")
+        raise ValueError(f"pinned commit file is empty: {commit_file}")
     return value
-
-
-PINNED_COMMIT = load_pinned_commit()
-TREE_URL = (
-    "https://api.github.com/repos/starkware-libs/cairo/git/trees/"
-    f"{PINNED_COMMIT}?recursive=1"
-)
 
 
 def parse_args() -> argparse.Namespace:
@@ -36,12 +29,26 @@ def parse_args() -> argparse.Namespace:
         default=str(INVENTORY_DIR),
         help="Output directory for generated inventory markdown files.",
     )
+    parser.add_argument(
+        "--pinned-surface",
+        default=str(DEFAULT_PINNED_SURFACE),
+        help="Path to pinned Sierra surface json.",
+    )
+    parser.add_argument(
+        "--pinned-commit-file",
+        default=str(DEFAULT_PINNED_COMMIT_FILE),
+        help="Path to pinned Cairo commit file.",
+    )
     return parser.parse_args()
 
 
-def fetch_tree_paths() -> list[str]:
+def fetch_tree_paths(pinned_commit: str) -> list[str]:
+    tree_url = (
+        "https://api.github.com/repos/starkware-libs/cairo/git/trees/"
+        f"{pinned_commit}?recursive=1"
+    )
     request = urllib.request.Request(
-        TREE_URL,
+        tree_url,
         headers={
             "Accept": "application/vnd.github+json",
             "User-Agent": "leancairo-roadmap-inventory-generator",
@@ -56,14 +63,14 @@ def fetch_tree_paths() -> list[str]:
     )
 
 
-def write_corelib_inventory(paths: list[str], out_dir: Path) -> None:
+def write_corelib_inventory(paths: list[str], out_dir: Path, pinned_commit: str) -> None:
     core_files = [p for p in paths if p.startswith("corelib/src/") and p.endswith(".cairo")]
     by_dir = Counter("/".join(p.split("/")[:3]) for p in core_files)
 
     lines: list[str] = [
         "# Corelib Src Inventory (Pinned)",
         "",
-        f"- Commit: `{PINNED_COMMIT}`",
+        f"- Commit: `{pinned_commit}`",
         "- Source: `corelib/src`",
         f"- Cairo files: `{len(core_files)}`",
         "",
@@ -80,17 +87,19 @@ def write_corelib_inventory(paths: list[str], out_dir: Path) -> None:
     (out_dir / "corelib-src-inventory.md").write_text("\n".join(lines), encoding="utf-8")
 
 
-def write_sierra_inventory(paths: list[str], out_dir: Path) -> None:
+def write_sierra_inventory(
+    paths: list[str], out_dir: Path, pinned_commit: str, pinned_surface: Path
+) -> None:
     sierra_rs = [p for p in paths if p.startswith("crates/cairo-lang-sierra/src/") and p.endswith(".rs")]
     extension_modules = [
         p for p in sierra_rs if p.startswith("crates/cairo-lang-sierra/src/extensions/modules/")
     ]
 
-    if not PINNED_SURFACE.exists():
+    if not pinned_surface.exists():
         raise FileNotFoundError(
-            f"missing pinned surface file: {PINNED_SURFACE} (run Sierra surface generator first)"
+            f"missing pinned surface file: {pinned_surface} (run Sierra surface generator first)"
         )
-    surface = json.loads(PINNED_SURFACE.read_text(encoding="utf-8"))
+    surface = json.loads(pinned_surface.read_text(encoding="utf-8"))
 
     core_files = [
         "crates/cairo-lang-sierra/src/program.rs",
@@ -104,7 +113,7 @@ def write_sierra_inventory(paths: list[str], out_dir: Path) -> None:
     lines: list[str] = [
         "# Sierra Extensions Inventory (Pinned)",
         "",
-        f"- Commit: `{PINNED_COMMIT}`",
+        f"- Commit: `{pinned_commit}`",
         "- Source: `crates/cairo-lang-sierra/src`",
         f"- Rust source files under `src`: `{len(sierra_rs)}`",
         f"- Extension module files: `{len(extension_modules)}`",
@@ -122,7 +131,7 @@ def write_sierra_inventory(paths: list[str], out_dir: Path) -> None:
     (out_dir / "sierra-extensions-inventory.md").write_text("\n".join(lines), encoding="utf-8")
 
 
-def write_crates_inventory(paths: list[str], out_dir: Path) -> None:
+def write_crates_inventory(paths: list[str], out_dir: Path, pinned_commit: str) -> None:
     crate_paths = [p for p in paths if p.startswith("crates/")]
     crate_counts = Counter(p.split("/")[1] for p in crate_paths)
 
@@ -151,7 +160,7 @@ def write_crates_inventory(paths: list[str], out_dir: Path) -> None:
     lines: list[str] = [
         "# Compiler Crates Focus Inventory (Pinned)",
         "",
-        f"- Commit: `{PINNED_COMMIT}`",
+        f"- Commit: `{pinned_commit}`",
         "- Source: `crates/`",
         f"- Total tracked crates in tree: `{len({p.split('/')[1] for p in crate_paths})}`",
         "",
@@ -168,11 +177,14 @@ def write_crates_inventory(paths: list[str], out_dir: Path) -> None:
 def main() -> int:
     args = parse_args()
     out_dir = Path(args.out_dir).resolve()
+    pinned_surface = Path(args.pinned_surface).resolve()
+    commit_file = Path(args.pinned_commit_file).resolve()
+    pinned_commit = load_pinned_commit(commit_file)
     out_dir.mkdir(parents=True, exist_ok=True)
-    paths = fetch_tree_paths()
-    write_corelib_inventory(paths, out_dir)
-    write_sierra_inventory(paths, out_dir)
-    write_crates_inventory(paths, out_dir)
+    paths = fetch_tree_paths(pinned_commit)
+    write_corelib_inventory(paths, out_dir, pinned_commit)
+    write_sierra_inventory(paths, out_dir, pinned_commit, pinned_surface)
+    write_crates_inventory(paths, out_dir, pinned_commit)
     return 0
 
 
