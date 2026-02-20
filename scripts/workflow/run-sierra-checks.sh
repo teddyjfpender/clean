@@ -5,6 +5,8 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 "$ROOT_DIR/scripts/roadmap/check_issue_statuses.sh"
 "$ROOT_DIR/scripts/roadmap/check_issue_dependencies.sh"
+"$ROOT_DIR/scripts/roadmap/check_architecture_boundaries.sh"
+"$ROOT_DIR/scripts/test/architecture_boundaries.sh"
 "$ROOT_DIR/scripts/roadmap/check_pin_consistency.sh"
 "$ROOT_DIR/scripts/roadmap/check_inventory_freshness.sh"
 "$ROOT_DIR/scripts/roadmap/check_coverage_matrix_freshness.sh"
