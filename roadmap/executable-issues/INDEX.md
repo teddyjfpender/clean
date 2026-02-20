@@ -20,7 +20,7 @@ Status legend:
 - `roadmap/09-milestones-and-execution-order.md` -> `roadmap/executable-issues/09-milestones-and-execution-order.issue.md` (`DONE - f6efdea`)
 - `roadmap/10-risk-register-and-mitigations.md` -> `roadmap/executable-issues/10-risk-register-and-mitigations.issue.md` (`NOT DONE`)
 - `roadmap/11-evaluator-type-domain-separation.md` -> `roadmap/executable-issues/11-evaluator-type-domain-separation.issue.md` (`DONE - 9461b3d`)
-- `roadmap/12-direct-sierra-subset-coverage-ledger.md` -> `roadmap/executable-issues/12-direct-sierra-subset-coverage-ledger.issue.md` (`NOT DONE`)
+- `roadmap/12-direct-sierra-subset-coverage-ledger.md` -> `roadmap/executable-issues/12-direct-sierra-subset-coverage-ledger.issue.md` (`DONE - 00057f5`)
 
 ## Inventory files -> executable issues
 

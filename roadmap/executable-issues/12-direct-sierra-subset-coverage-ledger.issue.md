@@ -3,8 +3,8 @@
 - Source roadmap file: [`roadmap/12-direct-sierra-subset-coverage-ledger.md`](../12-direct-sierra-subset-coverage-ledger.md)
 - Issue class: Subset tracking and evidence discipline
 - Priority: P0
-- Overall status: NOT DONE
-- Completion evidence tests: `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`; `scripts/roadmap/check_issue_statuses.sh`; `scripts/roadmap/check_issue_evidence.sh`
+- Overall status: DONE - 00057f5
+- Completion evidence tests: `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`; `scripts/roadmap/check_issue_statuses.sh`; `scripts/roadmap/check_issue_evidence.sh`; `scripts/roadmap/check_subset_ledger_sync.py`
 - Completion evidence proofs: `roadmap/12-direct-sierra-subset-coverage-ledger.md`; `roadmap/05-track-a-lean-to-sierra-functions.md`; `src/LeanCairo/Backend/Sierra/Emit/SubsetProgram.lean`
 
 ## Objective
@@ -35,13 +35,13 @@ Maintain a strict, auditable ledger of direct Sierra subset coverage with comple
 3. Scope and synchronization rules are explicit.
 
 ### DSR-2 Keep subset and Track-A statuses synchronized
-- Status: NOT DONE
+- Status: DONE - 00057f5
 - Acceptance tests:
 1. Subset status updates and Track-A milestone updates land in the same commit.
 2. Status drift between subset ledger and Track-A issue file is rejected in review.
 
 ### DSR-3 Add closure metric for subset progression
-- Status: NOT DONE
+- Status: DONE - 00057f5
 - Acceptance tests:
 1. Ledger includes measurable closure progress toward non-Starknet family completion.
 2. Progress references the pinned inventory outputs under `roadmap/inventory`.
