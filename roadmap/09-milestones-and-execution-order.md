@@ -32,6 +32,16 @@ Deliverables:
 Depends on:
 - M1
 
+## M2.5: Evaluator Type-Domain Separation
+
+Deliverables:
+1. scalar type-domain isolated evaluator context (no cross-family collapsing)
+2. strict fail-fast evaluator path for unsupported domains
+3. non-interference law tests and proof-gate wiring
+
+Depends on:
+- M2
+
 ## M3: Scalar Family Completion (Primary)
 
 Deliverables:
@@ -40,7 +50,7 @@ Deliverables:
 3. differential scalar test suite
 
 Depends on:
-- M2
+- M2.5
 
 ## M4: Integer Family Completion (Primary)
 

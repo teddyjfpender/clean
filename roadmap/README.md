@@ -28,6 +28,7 @@ This plan treats `spec.md` and `spec2.md` as canonical constraints and assumes p
 - [`roadmap/08-quality-gates-bench-and-release.md`](08-quality-gates-bench-and-release.md): deterministic gates and release criteria.
 - [`roadmap/09-milestones-and-execution-order.md`](09-milestones-and-execution-order.md): phased delivery order.
 - [`roadmap/10-risk-register-and-mitigations.md`](10-risk-register-and-mitigations.md): risk control plan.
+- [`roadmap/11-evaluator-type-domain-separation.md`](11-evaluator-type-domain-separation.md): typed evaluator domains, fail-fast semantics, and proof closure for non-interference.
 - [`roadmap/inventory/corelib-src-inventory.md`](inventory/corelib-src-inventory.md): pinned corelib source inventory.
 - [`roadmap/inventory/sierra-extensions-inventory.md`](inventory/sierra-extensions-inventory.md): pinned Sierra module inventory.
 - [`roadmap/inventory/compiler-crates-inventory.md`](inventory/compiler-crates-inventory.md): pinned compiler crate focus inventory.

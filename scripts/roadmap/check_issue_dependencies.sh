@@ -35,7 +35,7 @@ deps_for_issue() {
       echo "03-typed-ir-generalization-plan.issue.md"
       ;;
     05-track-a-lean-to-sierra-functions.issue.md)
-      echo "01-canonical-upstream-surfaces.issue.md 02-target-compiler-architecture.issue.md 03-typed-ir-generalization-plan.issue.md 04-semantics-proof-and-law-plan.issue.md"
+      echo "01-canonical-upstream-surfaces.issue.md 02-target-compiler-architecture.issue.md 03-typed-ir-generalization-plan.issue.md 04-semantics-proof-and-law-plan.issue.md 11-evaluator-type-domain-separation.issue.md"
       ;;
     06-track-b-lean-to-cairo-functions.issue.md)
       echo "02-target-compiler-architecture.issue.md 03-typed-ir-generalization-plan.issue.md 04-semantics-proof-and-law-plan.issue.md"
@@ -51,6 +51,9 @@ deps_for_issue() {
       ;;
     10-risk-register-and-mitigations.issue.md)
       echo "00-charter-and-completion-definition.issue.md 08-quality-gates-bench-and-release.issue.md"
+      ;;
+    11-evaluator-type-domain-separation.issue.md)
+      echo "03-typed-ir-generalization-plan.issue.md 04-semantics-proof-and-law-plan.issue.md"
       ;;
     inventory/README.issue.md)
       echo "01-canonical-upstream-surfaces.issue.md"
