@@ -28,7 +28,10 @@ MANDATORY_GATES=(
   "scripts/test/sierra_u128_range_checked_e2e.sh"
   "scripts/test/sierra_differential.sh"
   "scripts/test/sierra_u128_wrapping_differential.sh"
+  "scripts/test/backend_parity.sh"
+  "scripts/test/optimizer_pass_regression.sh"
   "scripts/bench/check_optimizer_non_regression.sh"
+  "scripts/bench/check_optimizer_family_thresholds.sh"
 )
 
 VALIDATE=0

@@ -1,6 +1,6 @@
+import LeanCairo.Backend.Cairo.Ast
 import LeanCairo.Backend.Cairo.EmitIRExpr
 import LeanCairo.Backend.Cairo.Naming
-import LeanCairo.Backend.Cairo.Pretty
 import LeanCairo.Compiler.IR.Spec
 import LeanCairo.Core.Spec.FuncSpec
 
@@ -20,9 +20,6 @@ private def renderStorageWriteStatementFromLocal (writeSpec : IRStorageWrite) (l
     ++ localName
     ++ ");"
 
-private def renderTempBinding (name : String) (ty : Ty) (valueExpr : String) : String :=
-  "let " ++ name ++ ": " ++ Ty.toCairo ty ++ " = " ++ valueExpr ++ ";"
-
 private def writeValueTempName (index : Nat) : String :=
   s!"__leancairo_internal_write_{index}"
 
@@ -35,50 +32,46 @@ private def enumerateWrites (writes : List IRStorageWrite) : List (Nat × IRStor
 def emitIRTraitFunctionSignature (fnSpec : IRFuncSpec) : String :=
   let functionName := toCairoFunctionName fnSpec.name
   let selfParam := Mutability.toInterfaceSelf fnSpec.mutability
-  let params := selfParam :: fnSpec.args.map renderParam
-  "fn "
-    ++ functionName
-    ++ "("
-    ++ String.intercalate ", " params
-    ++ ") -> "
-    ++ Ty.toCairo fnSpec.ret
-    ++ ";"
+  let signature : CairoFunctionSignature :=
+    {
+      name := functionName
+      params := selfParam :: fnSpec.args.map renderParam
+      ret := Ty.toCairo fnSpec.ret
+    }
+  renderFunctionSignature signature ++ ";"
 
-def emitIRImplFunction (indentDepth : Nat) (fnSpec : IRFuncSpec) : String :=
+def emitIRImplFunctionAst (fnSpec : IRFuncSpec) : CairoFunction :=
   let functionName := toCairoFunctionName fnSpec.name
   let selfParam := Mutability.toImplSelf fnSpec.mutability
-  let params := selfParam :: fnSpec.args.map renderParam
-  let header :=
-    indent indentDepth
-      ++ "fn "
-      ++ functionName
-      ++ "("
-      ++ String.intercalate ", " params
-      ++ ") -> "
-      ++ Ty.toCairo fnSpec.ret
-      ++ " {"
-  let bodyLines :=
+  let signature : CairoFunctionSignature :=
+    {
+      name := functionName
+      params := selfParam :: fnSpec.args.map renderParam
+      ret := Ty.toCairo fnSpec.ret
+    }
+  let bodyStmts :=
     if fnSpec.writes.isEmpty then
-      [indentLines (indentDepth + 1) (emitIRExpr fnSpec.body)]
+      [CairoStmt.expr (emitIRExpr fnSpec.body)]
     else
       let indexedWrites := enumerateWrites fnSpec.writes
       let writeValueBindings :=
         indexedWrites.map (fun (index, writeSpec) =>
-          indent (indentDepth + 1)
-            ++ renderTempBinding
-                (writeValueTempName index)
-                writeSpec.ty
-                (emitIRExpr writeSpec.value))
+          CairoStmt.letDecl
+            (writeValueTempName index)
+            (Ty.toCairo writeSpec.ty)
+            (emitIRExpr writeSpec.value))
       let returnValueBinding :=
-        indent (indentDepth + 1)
-          ++ renderTempBinding returnValueTempName fnSpec.ret (emitIRExpr fnSpec.body)
+        CairoStmt.letDecl returnValueTempName (Ty.toCairo fnSpec.ret) (emitIRExpr fnSpec.body)
       let writeLines :=
         indexedWrites.map (fun (index, writeSpec) =>
-          indent (indentDepth + 1)
-            ++ renderStorageWriteStatementFromLocal writeSpec (writeValueTempName index))
-      writeValueBindings ++ [returnValueBinding] ++ writeLines ++ [indent (indentDepth + 1) ++ returnValueTempName]
-  let body := String.intercalate "\n" bodyLines
-  let footer := indent indentDepth ++ "}"
-  String.intercalate "\n" [header, body, footer]
+          CairoStmt.expr (renderStorageWriteStatementFromLocal writeSpec (writeValueTempName index)))
+      writeValueBindings ++ [returnValueBinding] ++ writeLines ++ [CairoStmt.expr returnValueTempName]
+  {
+    signature := signature
+    body := bodyStmts
+  }
+
+def emitIRImplFunction (indentDepth : Nat) (fnSpec : IRFuncSpec) : String :=
+  renderFunctionAt indentDepth (emitIRImplFunctionAst fnSpec)
 
 end LeanCairo.Backend.Cairo

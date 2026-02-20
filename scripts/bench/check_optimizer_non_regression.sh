@@ -5,6 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 MODULE_NAME="${1:-MyLeanContract}"
 CONTRACT_NAME="${2:-HelloContract}"
 INLINE_STRATEGY="${3:-default}"
+MAX_REGRESSION_PCT="${4:-0}"
 MODULE_SAFE_NAME="$(printf '%s' "$MODULE_NAME" | tr -c 'A-Za-z0-9_' '_')"
 OUT_BASE="$ROOT_DIR/.artifacts/bench/$MODULE_SAFE_NAME"
 BASELINE_DIR="$OUT_BASE/baseline"
@@ -44,8 +45,27 @@ echo "Optimized metrics:"
 echo "$optimized_metrics"
 
 if (( optimized_score > baseline_score )); then
-  echo "optimizer regression: optimized score ($optimized_score) is worse than baseline ($baseline_score)" >&2
-  exit 1
+  if ! python3 - "$baseline_score" "$optimized_score" "$MAX_REGRESSION_PCT" <<'PY'
+import math
+import sys
+
+baseline = int(sys.argv[1])
+optimized = int(sys.argv[2])
+max_regression_pct = float(sys.argv[3])
+allowed = math.floor(baseline * (1.0 + (max_regression_pct / 100.0)))
+if optimized <= allowed:
+    sys.exit(0)
+print(
+    f"optimizer regression: optimized score ({optimized}) exceeds allowed "
+    f"threshold ({allowed}) derived from baseline ({baseline}) and "
+    f"max regression pct ({max_regression_pct})",
+    file=sys.stderr,
+)
+sys.exit(1)
+PY
+  then
+    exit 1
+  fi
 fi
 
-echo "optimizer non-regression passed: optimized score ($optimized_score) <= baseline ($baseline_score) [module=$MODULE_NAME contract=$CONTRACT_NAME inlining-strategy=$INLINE_STRATEGY]"
+echo "optimizer non-regression passed: optimized score ($optimized_score) <= allowed threshold [baseline=$baseline_score max_regression_pct=$MAX_REGRESSION_PCT module=$MODULE_NAME contract=$CONTRACT_NAME inlining-strategy=$INLINE_STRATEGY]"

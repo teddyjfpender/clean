@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "description": "Per-family optimizer regression thresholds (percent over baseline score).",
+  "targets": [
+    {
+      "family": "scalar-core",
+      "module": "MyLeanContract",
+      "contract": "HelloContract",
+      "inlining_strategy": "default",
+      "max_regression_pct": 0.0
+    },
+    {
+      "family": "cse-specialization",
+      "module": "MyLeanContractCSEBench",
+      "contract": "CSEBenchContract",
+      "inlining_strategy": "default",
+      "max_regression_pct": 0.0
+    }
+  ]
+}

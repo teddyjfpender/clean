@@ -31,6 +31,7 @@ import LeanCairo.Core.Validation.Contract
 import LeanCairo.Backend.Cairo.ReservedWords
 import LeanCairo.Backend.Cairo.Naming
 import LeanCairo.Backend.Cairo.Pretty
+import LeanCairo.Backend.Cairo.Ast
 import LeanCairo.Backend.Cairo.EmitExpr
 import LeanCairo.Backend.Cairo.EmitIRExpr
 import LeanCairo.Backend.Cairo.EmitFunction
