@@ -72,6 +72,7 @@ The backend returns explicit errors for:
   - `scripts/test/sierra_scalar_e2e.sh`
   - `scripts/test/sierra_u128_range_checked_e2e.sh`
   - `scripts/test/sierra_differential.sh`
+  - `scripts/test/sierra_u128_wrapping_differential.sh`
 
 ## Module Layout
 

@@ -235,6 +235,7 @@ Example module in this repo: [`src/MyLeanContract.lean`](src/MyLeanContract.lean
 - [`scripts/test/sierra_failfast_unsupported.sh`](scripts/test/sierra_failfast_unsupported.sh) enforces fail-fast behavior for unsupported direct Sierra families (`u128 mul`, `u256` signatures/arithmetic).
 - [`scripts/test/sierra_e2e.sh`](scripts/test/sierra_e2e.sh) runs direct Sierra validation (`ProgramRegistry`) and Sierra -> CASM compilation with pinned upstream crates.
 - [`scripts/test/sierra_u128_range_checked_e2e.sh`](scripts/test/sierra_u128_range_checked_e2e.sh) verifies explicit `RangeCheck` in/out threading for direct `u128 add/sub` lowering and CASM compilation.
+- [`scripts/test/sierra_u128_wrapping_differential.sh`](scripts/test/sierra_u128_wrapping_differential.sh) checks deterministic overflow-boundary differential behavior for `u128 add/sub` wrapping semantics.
 - [`scripts/bench/check_optimizer_non_regression.sh`](scripts/bench/check_optimizer_non_regression.sh) compares optimized vs baseline CASM/Sierra score.
 - [`scripts/bench/generate_fixedpoint_bench.sh`](scripts/bench/generate_fixedpoint_bench.sh) regenerates [`packages/fixedpoint_bench/src/lib.cairo`](packages/fixedpoint_bench/src/lib.cairo) from Lean IR outputs (`--optimize false` and `--optimize true`).
 - [`scripts/bench/compare_fixedpoint_steps.sh`](scripts/bench/compare_fixedpoint_steps.sh) enforces hand-vs-optimized equivalence and reports Cairo step deltas for fixed-point + Fibonacci examples.

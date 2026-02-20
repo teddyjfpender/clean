@@ -52,7 +52,7 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 
 ### A2 Range-checked integer families
 - Status: NOT DONE
-- Evidence tests (in progress): `scripts/test/sierra_u128_range_checked_e2e.sh`; `scripts/test/sierra_failfast_unsupported.sh`
+- Evidence tests (in progress): `scripts/test/sierra_u128_range_checked_e2e.sh`; `scripts/test/sierra_u128_wrapping_differential.sh`; `scripts/test/sierra_failfast_unsupported.sh`
 - Acceptance tests:
 1. Integer fixtures compile and validate with explicit range-check resources.
 2. Unsupported integer variants fail fast with exact error contracts.
