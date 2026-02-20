@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/04-semantics-proof-and-law-plan.md`](../04-semantics-proof-and-law-plan.md)
 - Issue class: Formal semantics and proof closure
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - 6647c8f
+- Completion evidence tests: `scripts/test/semantic_state_regression.sh`; `scripts/roadmap/check_proof_obligations.sh`; `scripts/test/proof_obligations_negative.sh`
+- Completion evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/Proof/TranslationRelation.lean`
 
 ## Objective
 
@@ -25,7 +27,9 @@ Establish compositional semantics and proof obligations for source/MIR/target tr
 ## Milestones
 
 ### M-04-1: Resource-aware state semantics
-- Status: NOT DONE
+- Status: DONE - 6647c8f
+- Evidence tests: `scripts/test/semantic_state_regression.sh`; `scripts/test/effect_resource_regression.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`
 - Required work:
 1. Define canonical semantic state including values, resources, and failure channel.
 2. Refactor evaluators to use this state.
@@ -34,7 +38,9 @@ Establish compositional semantics and proof obligations for source/MIR/target tr
 2. State model is used by evaluator and theorem statements consistently.
 
 ### M-04-2: Translation relation library
-- Status: NOT DONE
+- Status: DONE - 6647c8f
+- Evidence tests: `scripts/roadmap/check_proof_obligations.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Proof/TranslationRelation.lean`; `src/LeanCairo/Compiler/IR/Lowering.lean`
 - Required work:
 1. Implement source->MIR and MIR->target relation definitions.
 2. Reuse relations in lowering correctness theorems.
@@ -43,7 +49,9 @@ Establish compositional semantics and proof obligations for source/MIR/target tr
 2. No duplicated ad-hoc relation definitions in proof modules.
 
 ### M-04-3: Proof CI gating
-- Status: NOT DONE
+- Status: DONE - 6647c8f
+- Evidence tests: `scripts/roadmap/check_proof_obligations.sh`; `scripts/test/proof_obligations_negative.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`; `src/LeanCairo/Compiler/Proof/CSELetNormSound.lean`
 - Required work:
 1. Add CI script verifying proof stubs/theorems for new passes and families.
 2. Fail CI on missing obligations.
@@ -56,4 +64,3 @@ Establish compositional semantics and proof obligations for source/MIR/target tr
 1. Semantic model is unified across runtime and proofs.
 2. Pass and lowering correctness obligations are enforced by CI.
 3. Proof coverage grows with feature coverage and is auditable.
-
