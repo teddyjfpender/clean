@@ -46,10 +46,12 @@ partial def validateExpr (varEnv : TypeEnv) (storageEnv : TypeEnv) : Expr ty -> 
         validateExpr varEnv storageEnv elseBranch
   | .letE name boundTy bound body =>
       let idErrors :=
-        if isValidIdentifier name then
-          []
-        else
+        if !isValidIdentifier name then
           [.invalidIdentifier "let binding" name]
+        else if isReservedInternalIdentifier name then
+          [.reservedIdentifier "let binding" name]
+        else
+          []
       let bindingErrors := validateExpr varEnv storageEnv bound
       let duplicateErrors :=
         if hasBinding varEnv name then

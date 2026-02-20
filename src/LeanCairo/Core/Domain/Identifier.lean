@@ -13,6 +13,18 @@ def isValidIdentifier (value : String) : Bool :=
   | [] => false
   | head :: tail => isIdentStart head && tail.all isIdentContinue
 
+def internalReservedPrefix : String :=
+  "__leancairo_internal_"
+
+private def hasPrefix (pref value : List Char) : Bool :=
+  match pref, value with
+  | [], _ => true
+  | _, [] => false
+  | pHead :: pTail, vHead :: vTail => pHead = vHead && hasPrefix pTail vTail
+
+def isReservedInternalIdentifier (value : String) : Bool :=
+  hasPrefix internalReservedPrefix.toList value.toList
+
 def isValidModuleName (value : String) : Bool :=
   let parts := value.splitOn "."
   !parts.isEmpty && parts.all (fun part => part != "" && isValidIdentifier part)

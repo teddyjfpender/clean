@@ -6,13 +6,13 @@ open LeanCairo.Compiler.IR
 open LeanCairo.Core.Domain
 
 def cseTempU128 : String :=
-  "__leancairo_cse_u128"
+  "__leancairo_internal_cse_u128"
 
 def cseTempU256 : String :=
-  "__leancairo_cse_u256"
+  "__leancairo_internal_cse_u256"
 
 def cseTempEq : String :=
-  "__leancairo_cse_eq"
+  "__leancairo_internal_cse_eq"
 
 def cseAddU128 (lhs rhs : IRExpr .u128) : IRExpr .u128 :=
   if lhs = rhs then

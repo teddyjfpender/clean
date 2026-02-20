@@ -20,6 +20,16 @@ Current proof scope:
 - Contract-level optimizer soundness is proved over function outcomes (return value + post-storage context) in `src/LeanCairo/Compiler/Proof/IRSpecSound.lean`.
 - Generation now runs through an IR-native emission lane (`ContractSpec -> IRContractSpec -> IR optimize -> Cairo emit`).
 
+## Pipeline Overview
+
+1. Author a contract as typed Lean data (`ContractSpec` / `Expr`).
+2. Validate names/types/bindings and mutability/storage constraints.
+3. Lower to typed IR (`IRContractSpec`).
+4. Run verified optimizer passes (`algebraic-fold |> cse-let-normalization`).
+5. Emit Cairo from IR.
+6. Compile with Scarb to Sierra (and optional CASM).
+7. Gate performance/non-regression on produced artifacts.
+
 ## What You Can Do Now
 
 1. Define contract behavior in Lean as `ContractSpec` data, including storage fields.
@@ -56,15 +66,14 @@ Current proof scope:
   - stronger cost model tied to Sierra/Cairo execution metrics,
   - benchmark suites representing realistic workloads.
 
-## Quick start
+## Quick Start Guides
 
-Run the fully wired example pipeline:
+Prerequisites:
 
-```bash
-./scripts/workflow/generate-example.sh
-```
+- Lean/Lake installed (typically via `elan`)
+- Scarb installed
 
-Or run the steps manually:
+Guide 1: Generate + build the canonical contract:
 
 ```bash
 export PATH="$HOME/.elan/bin:$PATH"
@@ -73,15 +82,33 @@ cd generated_contract
 scarb build
 ```
 
-Notes:
-
-- Workflow scripts in `scripts/workflow` and `scripts/test` now prepend `~/.elan/bin` automatically.
-- Manual `lake` invocations still require `lake` on `PATH` (or use `~/.elan/bin/lake`).
-
-Expected outputs after build:
+Expected outputs:
 
 - `target/dev/<target>_<contract>.contract_class.json`
 - `target/dev/<target>.starknet_artifacts.json`
+
+Guide 2: Run the full quality gate (lint + build + snapshot + e2e + optimizer gates):
+
+```bash
+./scripts/workflow/run-mvp-checks.sh
+```
+
+Guide 3: Run only optimizer non-regression gate:
+
+```bash
+./scripts/bench/check_optimizer_non_regression.sh
+```
+
+Guide 4: Run the CSE-focused benchmark gate:
+
+```bash
+./scripts/bench/check_optimizer_non_regression.sh MyLeanContractCSEBench CSEBenchContract
+```
+
+Notes:
+
+- Workflow scripts in `scripts/workflow` and `scripts/test` prepend `~/.elan/bin` automatically.
+- Manual `lake` invocations still require `lake` on `PATH` (or use `~/.elan/bin/lake`).
 
 ## CLI
 
@@ -153,6 +180,7 @@ Example module in this repo: `src/MyLeanContract.lean`.
 
 - Mutability supports both `view` and `externalMutable`.
 - Storage writes are declared explicitly per function (`FuncSpec.writes`).
+- User identifiers using reserved internal prefix `__leancairo_internal_` are rejected by validation.
 - Optimizer is enabled by default (`--optimize true`) and can be disabled for baseline benchmarking.
 - `--inlining-strategy` controls low-level Cairo compiler inlining (`default`, `avoid`, or numeric bound).
 - Felt arithmetic is limited to pass-through/equality semantics in this MVP.

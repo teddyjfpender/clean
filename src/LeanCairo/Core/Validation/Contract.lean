@@ -10,10 +10,12 @@ open LeanCairo.Core.Domain
 open LeanCairo.Core.Spec
 
 private def validateContractName (contractName : String) : List ValidationError :=
-  if isValidIdentifier contractName then
-    []
-  else
+  if !isValidIdentifier contractName then
     [.invalidIdentifier "contract name" contractName]
+  else if isReservedInternalIdentifier contractName then
+    [.reservedIdentifier "contract name" contractName]
+  else
+    []
 
 private def validateFunctionList (spec : ContractSpec) : List ValidationError :=
   if spec.functions.isEmpty then
@@ -28,10 +30,12 @@ private def validateStorageFieldNames (fields : List StorageField) : List Valida
   let invalidNameErrors :=
     fields.foldl
       (fun errors field =>
-        if isValidIdentifier field.name then
-          errors
+        if !isValidIdentifier field.name then
+          errors ++ [.invalidIdentifier "storage field" field.name]
+        else if isReservedInternalIdentifier field.name then
+          errors ++ [.reservedIdentifier "storage field" field.name]
         else
-          errors ++ [.invalidIdentifier "storage field" field.name])
+          errors)
       []
   let duplicateErrors :=
     (duplicateNames <| fields.map (fun field => field.name)).map ValidationError.duplicateStorageFieldName

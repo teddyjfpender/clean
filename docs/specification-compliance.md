@@ -36,6 +36,7 @@
 - Extension note: stateful mutation is now supported via `externalMutable` + explicit storage writes in `FuncSpec.writes`.
 - Mutable execution law: write RHS and return expressions are evaluated once in pre-state, then writes are committed.
 - Duplicate writes to the same storage field in a function are rejected by validator.
+- Internal compiler namespace safety: user identifiers with reserved prefix `__leancairo_internal_` are rejected.
 - No unsupported constructs (loops/recursion/etc.): AST surface in `Expr` excludes them by construction.
 - `spec.md` non-goal "direct Sierra emission" still holds for MVP path; current low-level tuning is done via Scarb/Cairo compiler configuration and artifact analysis.
 - Explicitly out-of-scope today: arbitrary post-compilation mutation of emitted Sierra/CASM with formal semantics-preservation guarantees.

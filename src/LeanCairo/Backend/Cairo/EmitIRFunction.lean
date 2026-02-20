@@ -24,10 +24,10 @@ private def renderTempBinding (name : String) (ty : Ty) (valueExpr : String) : S
   "let " ++ name ++ ": " ++ Ty.toCairo ty ++ " = " ++ valueExpr ++ ";"
 
 private def writeValueTempName (index : Nat) : String :=
-  s!"__leancairo_write_{index}"
+  s!"__leancairo_internal_write_{index}"
 
 private def returnValueTempName : String :=
-  "__leancairo_return_value"
+  "__leancairo_internal_return_value"
 
 private def enumerateWrites (writes : List IRStorageWrite) : List (Nat × IRStorageWrite) :=
   (List.range writes.length).zip writes

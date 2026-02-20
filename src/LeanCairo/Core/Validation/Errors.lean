@@ -1,4 +1,5 @@
 import LeanCairo.Core.Domain.Ty
+import LeanCairo.Core.Domain.Identifier
 
 namespace LeanCairo.Core.Validation
 
@@ -6,6 +7,7 @@ open LeanCairo.Core.Domain
 
 inductive ValidationError where
   | invalidIdentifier (scope : String) (name : String)
+  | reservedIdentifier (scope : String) (name : String)
   | duplicateFunctionName (name : String)
   | duplicateArgumentName (functionName : String) (argumentName : String)
   | duplicateStorageFieldName (fieldName : String)
@@ -24,6 +26,8 @@ namespace ValidationError
 def render : ValidationError -> String
   | .invalidIdentifier scope name =>
       s!"invalid identifier '{name}' in {scope}; only [A-Za-z_][A-Za-z0-9_]* is allowed"
+  | .reservedIdentifier scope name =>
+      s!"identifier '{name}' in {scope} uses reserved prefix '{LeanCairo.Core.Domain.internalReservedPrefix}'"
   | .duplicateFunctionName name =>
       s!"duplicate function name '{name}'"
   | .duplicateArgumentName fnName argName =>

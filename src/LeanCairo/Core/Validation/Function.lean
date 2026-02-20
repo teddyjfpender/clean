@@ -20,10 +20,12 @@ private def validateArgumentNames (fnName : String) (args : List Param) : List V
   let invalidNameErrors :=
     args.foldl
       (fun errors arg =>
-        if isValidIdentifier arg.name then
-          errors
+        if !isValidIdentifier arg.name then
+          errors ++ [.invalidIdentifier s!"function '{fnName}' argument" arg.name]
+        else if isReservedInternalIdentifier arg.name then
+          errors ++ [.reservedIdentifier s!"function '{fnName}' argument" arg.name]
         else
-          errors ++ [.invalidIdentifier s!"function '{fnName}' argument" arg.name])
+          errors)
       []
   let duplicateErrors :=
     (duplicateNames <| args.map (fun arg => arg.name)).map (fun dup =>
@@ -32,10 +34,12 @@ private def validateArgumentNames (fnName : String) (args : List Param) : List V
 
 private def validateWrite (knownStorage : TypeEnv) (writeSpec : StorageWrite) : List ValidationError :=
   let fieldNameErrors :=
-    if isValidIdentifier writeSpec.field then
-      []
-    else
+    if !isValidIdentifier writeSpec.field then
       [.invalidIdentifier "storage write field name" writeSpec.field]
+    else if isReservedInternalIdentifier writeSpec.field then
+      [.reservedIdentifier "storage write field name" writeSpec.field]
+    else
+      []
   let fieldTypeErrors :=
     match lookupType knownStorage writeSpec.field with
     | none => [.unknownStorageField writeSpec.field]
@@ -49,10 +53,12 @@ private def validateWrite (knownStorage : TypeEnv) (writeSpec : StorageWrite) : 
 def validateFunction (storageFields : List StorageField) (fnSpec : FuncSpec) : List ValidationError :=
   let knownStorage := storageEnv storageFields
   let nameErrors :=
-    if isValidIdentifier fnSpec.name then
-      []
-    else
+    if !isValidIdentifier fnSpec.name then
       [.invalidIdentifier "function name" fnSpec.name]
+    else if isReservedInternalIdentifier fnSpec.name then
+      [.reservedIdentifier "function name" fnSpec.name]
+    else
+      []
   let argErrors := validateArgumentNames fnSpec.name fnSpec.args
   let bodyErrors := validateExpr (argEnv fnSpec.args) knownStorage fnSpec.body
   let writeSpecErrors :=
