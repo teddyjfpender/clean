@@ -65,6 +65,34 @@ partial def emitU128OverflowingWrapping
   setRangeCheckVar mergedRangeCheck
   pure (envAfterRhs, mergedValue)
 
+partial def emitU128MulWrapping
+    (fnName : String)
+    (env : Env)
+    (lhs rhs : IRExpr .u128) : EmitM (Env × Json) := do
+  let (envAfterLhs, lhsVar) <- emitExpr fnName env lhs
+  let (envAfterRhs, rhsVar) <- emitExpr fnName envAfterLhs rhs
+  let rcIn <- requireRangeCheckVar fnName
+  let _ <- registerTypeDecl .rangeCheck
+  let _ <- registerTypeDecl .u128
+  let _ <- registerU128MulGuaranteeTypeDecl
+
+  let mulLibfuncId <- registerLibfuncDecl "u128_guarantee_mul" "u128_guarantee_mul" []
+  let highRaw <- freshVarId fnName "u128_mul_high_raw"
+  let lowRaw <- freshVarId fnName "u128_mul_low_raw"
+  let guaranteeRaw <- freshVarId fnName "u128_mul_guarantee_raw"
+  pushStmt (invocationStmtJson mulLibfuncId [lhsVar, rhsVar] [highRaw, lowRaw, guaranteeRaw])
+
+  -- Wrapping semantics retain only the low limb (`mod 2^128`) and explicitly drop the high limb.
+  emitDrop fnName .u128 highRaw
+  let verifyLibfuncId <-
+    registerLibfuncDecl "u128_mul_guarantee_verify" "u128_mul_guarantee_verify" []
+  let rcOut <- freshVarId fnName "u128_mul_range_check_out"
+  pushStmt (invocationStmtJson verifyLibfuncId [rcIn, guaranteeRaw] [rcOut])
+  setRangeCheckVar rcOut
+
+  let outVar <- emitStoreTemp fnName .u128 lowRaw
+  pure (envAfterRhs, outVar)
+
 partial def emitExpr (fnName : String) (env : Env) : IRExpr ty -> EmitM (Env × Json)
   | .var name =>
       consumeVar fnName env ty name
@@ -91,8 +119,8 @@ partial def emitExpr (fnName : String) (env : Env) : IRExpr ty -> EmitM (Env × 
       emitU128OverflowingWrapping fnName env lhs rhs "u128_overflowing_add" "u128_add"
   | .subU128 lhs rhs =>
       emitU128OverflowingWrapping fnName env lhs rhs "u128_overflowing_sub" "u128_sub"
-  | .mulU128 _ _ =>
-      u128ArithUnsupported fnName "mul"
+  | .mulU128 lhs rhs =>
+      emitU128MulWrapping fnName env lhs rhs
   | .addU256 _ _ =>
       u256ArithUnsupported fnName "add"
   | .subU256 _ _ =>

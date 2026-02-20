@@ -28,6 +28,9 @@ private def refAdd (lhs rhs : Nat) : Nat :=
 private def refSub (lhs rhs : Nat) : Nat :=
   normalizeU128 (lhs + IntegerDomains.pow2 128 - rhs)
 
+private def refMul (lhs rhs : Nat) : Nat :=
+  normalizeU128 (lhs * rhs)
+
 #eval do
   let maxU128 := IntegerDomains.pow2 128 - 1
 
@@ -82,3 +85,30 @@ private def refSub (lhs rhs : Nat) : Nat :=
     let expected := refSub (normalizeU128 lhsRaw) (normalizeU128 rhsRaw)
     assertCondition (observed = expected)
       s!"u128 sub differential mismatch for lhs={lhsRaw}, rhs={rhsRaw}: observed={observed}, expected={expected}")
+
+  let mulCases : List (Nat × Nat) :=
+    [
+      (0, 0),
+      (1, 2),
+      (17, 31),
+      (maxU128, 2),
+      (maxU128, maxU128),
+      (maxU128 + 5, 3)
+    ]
+  mulCases.forM (fun pair => do
+    let (lhsRaw, rhsRaw) := pair
+    let ctx : EvalContext :=
+      {
+        u128Vars := fun name =>
+          if name = "lhs" then lhsRaw
+          else if name = "rhs" then rhsRaw
+          else 0
+      }
+    let expr : LeanCairo.Compiler.IR.IRExpr .u128 :=
+      .mulU128
+        (.var (ty := .u128) "lhs")
+        (.var (ty := .u128) "rhs")
+    let observed <- runExpr ctx expr
+    let expected := refMul (normalizeU128 lhsRaw) (normalizeU128 rhsRaw)
+    assertCondition (observed = expected)
+      s!"u128 mul differential mismatch for lhs={lhsRaw}, rhs={rhsRaw}: observed={observed}, expected={expected}")

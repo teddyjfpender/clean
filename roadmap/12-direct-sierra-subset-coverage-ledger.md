@@ -50,9 +50,10 @@ This file is a strict status ledger for `src/LeanCairo/Backend/Sierra/Emit/Subse
 - Current progress:
 1. Formal start/design note authored: `docs/design/2026-02-20-s2-rangechecked-u128-lowering-plan.md`.
 2. CASM-legal wrapping branch shape landed for direct `u128_overflowing_add/sub` with explicit `RangeCheck` lane threading and branch-join normalization.
-3. Validation/compile gate added: `scripts/test/sierra_u128_range_checked_e2e.sh` (wired into Sierra + MVP workflows).
-4. Overflow-boundary differential gate added for wrapping semantics: `scripts/test/sierra_u128_wrapping_differential.sh`.
-5. Remaining blocker: checked/panic result typing for integer families is still not modeled in Lean IR/backend, and `mulU128` plus non-`u128` families remain fail-fast.
+3. Wrapping `u128 mul` lowering landed via `u128_guarantee_mul` + `u128_mul_guarantee_verify` with explicit high-limb drop and `RangeCheck` threading.
+4. Validation/compile gate added: `scripts/test/sierra_u128_range_checked_e2e.sh` (wired into Sierra + MVP workflows).
+5. Overflow-boundary differential gate added for wrapping semantics: `scripts/test/sierra_u128_wrapping_differential.sh`.
+6. Remaining blocker: checked/panic result typing for integer families is still not modeled in Lean IR/backend, and non-`u128` families remain fail-fast.
 
 ### S3 Multi-limb integers and struct semantics
 - Status: NOT DONE

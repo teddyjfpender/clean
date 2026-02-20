@@ -25,7 +25,7 @@ with open(path, "r", encoding="utf-8") as f:
 
 for fn in program["funcs"]:
     name = fn["id"]["debug_name"]
-    if name in {"addU128Wrapping", "subU128Wrapping"}:
+    if name in {"addU128Wrapping", "subU128Wrapping", "mulU128Wrapping"}:
         params = fn["signature"]["param_types"]
         rets = fn["signature"]["ret_types"]
         if len(params) != 3 or params[0]["debug_name"] != "RangeCheck":

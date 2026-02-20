@@ -8,8 +8,8 @@ open LeanCairo.Core.Domain
 open LeanCairo.Core.Spec
 open LeanCairo.Core.Syntax
 
-private def unsupportedBody : Expr .u128 :=
-  Expr.mulU128
+private def unsupportedBody : Expr .bool :=
+  Expr.ltU128
     (Expr.var (ty := .u128) "lhs")
     (Expr.var (ty := .u128) "rhs")
 
@@ -20,9 +20,9 @@ def contract : ContractSpec :=
     functions :=
       [
         {
-          name := "unsupportedU128Mul"
+          name := "unsupportedU128Lt"
           args := [{ name := "lhs", ty := .u128 }, { name := "rhs", ty := .u128 }]
-          ret := .u128
+          ret := .bool
           body := unsupportedBody
         }
       ]

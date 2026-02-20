@@ -18,7 +18,7 @@ This is a design/start note, not a completion claim.
 1. `IRExpr` nodes:
   - `.addU128`
   - `.subU128`
-  - `.mulU128` (must remain fail-fast in this step)
+  - `.mulU128` (wrapping path)
 2. Existing direct Sierra emitter state and linear environment.
 3. Pinned Sierra surface at commit:
   - `e56055c87a9db4e3dbb91c82ccb2ea751a8dc617`
@@ -62,15 +62,20 @@ S2 cannot be completed by adding only libfunc calls; it requires one of:
 
 ## Status Update (Implemented Slice)
 
-The second path above was implemented for wrapping `add/sub`:
+The second path above was implemented for wrapping `add/sub/mul`:
 
 1. `u128_overflowing_*` branches now normalize through:
   - `branch_align`,
   - `store_temp<RangeCheck>` / `store_temp<u128>` on both branches to shared output ids,
   - `jump` to a single join/return point.
-2. Direct emitter function signatures with `u128 add/sub` now include explicit `RangeCheck` in/out lanes.
+2. Direct emitter function signatures with `u128 add/sub/mul` now include explicit `RangeCheck` in/out lanes.
 3. Gate script added and wired:
   - `scripts/test/sierra_u128_range_checked_e2e.sh`
+4. Wrapping `mul` lowering now uses pinned Sierra semantics:
+  - `u128_guarantee_mul` to obtain `(high, low, guarantee)`,
+  - explicit `drop<u128>` on `high`,
+  - `u128_mul_guarantee_verify` to consume guarantee and thread `RangeCheck`,
+  - returned value is `low` (`mod 2^128` wrapping result).
 
 This satisfies a first CASM-legal wrapping lane, but does not close S2.
 
@@ -79,7 +84,7 @@ This satisfies a first CASM-legal wrapping lane, but does not close S2.
 1. Extend IR semantics to distinguish checked vs wrapping integer operations.
 2. Implement checked/panic-aware integer result typing and lowering shape (pinned-signature-compatible).
 3. Add differential tests over overflow boundaries for checked behavior.
-4. Extend from `u128 add/sub` to `mul` and then to additional integer families.
+4. Extend from `u128` wrapping operations to additional integer families.
 
 ## Gate Criteria For The Next S2 Code Slice
 

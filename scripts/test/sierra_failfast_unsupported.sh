@@ -30,7 +30,7 @@ check_fail() {
 
 check_fail \
   MyLeanSierraSubsetUnsupportedU128Arith \
-  "unsupported u128 arithmetic (mul)" \
+  "ltU128 lowering is not yet implemented" \
   "u128_arith"
 
 check_fail \

@@ -67,9 +67,9 @@ Steps:
 3. implement u256/u512 helpers and multi-limb semantics
 
 Current progress snapshot:
-1. Direct emitter now supports `u128 add/sub` wrapping lowering with explicit `RangeCheck` signature threading and CASM-legal branch/join shaping.
+1. Direct emitter now supports `u128 add/sub/mul` wrapping lowering with explicit `RangeCheck` signature threading and CASM-legal lowering shapes.
 2. Dedicated gate added: `scripts/test/sierra_u128_range_checked_e2e.sh`.
-3. Remaining scope: checked/panic-aware integer result typing, `mulU128`, and non-`u128` integer families.
+3. Remaining scope: checked/panic-aware integer result typing and non-`u128` integer families.
 
 Proof obligations:
 1. resource-threading preservation

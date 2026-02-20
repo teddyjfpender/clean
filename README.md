@@ -88,8 +88,8 @@ sequenceDiagram
 
 - No events, no syscalls, no cross-contract calls.
 - Expression language is intentionally small and pure (no loops, no recursion, no dynamic memory structures).
-- Direct Sierra subset arithmetic currently supports `felt252` (`add/sub/mul`) plus `u128` (`add/sub` wrapping) with explicit `RangeCheck` signature threading.
-- `u128 mul` and `u256` arithmetic remain explicit fail-fast.
+- Direct Sierra subset arithmetic currently supports `felt252` (`add/sub/mul`) plus `u128` (`add/sub/mul` wrapping) with explicit `RangeCheck` signature threading.
+- `u256` arithmetic and non-modeled `u128` comparisons remain explicit fail-fast.
 - Optimization currently includes algebraic simplification plus a non-trivial CSE + let-normalization pass over typed IR.
 
 ## Mutable Execution Law
@@ -232,10 +232,10 @@ Example module in this repo: [`src/MyLeanContract.lean`](src/MyLeanContract.lean
 - [`scripts/test/abi_surface.sh`](scripts/test/abi_surface.sh) validates ABI against expected signatures.
 - [`scripts/test/sierra_surface_codegen.sh`](scripts/test/sierra_surface_codegen.sh) verifies generated pinned Sierra surface bindings are deterministic.
 - [`scripts/test/sierra_codegen_snapshot.sh`](scripts/test/sierra_codegen_snapshot.sh) checks deterministic direct Lean -> Sierra JSON output.
-- [`scripts/test/sierra_failfast_unsupported.sh`](scripts/test/sierra_failfast_unsupported.sh) enforces fail-fast behavior for unsupported direct Sierra families (`u128 mul`, `u256` signatures/arithmetic).
+- [`scripts/test/sierra_failfast_unsupported.sh`](scripts/test/sierra_failfast_unsupported.sh) enforces fail-fast behavior for unsupported direct Sierra forms (`u128` comparisons, `u256` signatures/arithmetic).
 - [`scripts/test/sierra_e2e.sh`](scripts/test/sierra_e2e.sh) runs direct Sierra validation (`ProgramRegistry`) and Sierra -> CASM compilation with pinned upstream crates.
-- [`scripts/test/sierra_u128_range_checked_e2e.sh`](scripts/test/sierra_u128_range_checked_e2e.sh) verifies explicit `RangeCheck` in/out threading for direct `u128 add/sub` lowering and CASM compilation.
-- [`scripts/test/sierra_u128_wrapping_differential.sh`](scripts/test/sierra_u128_wrapping_differential.sh) checks deterministic overflow-boundary differential behavior for `u128 add/sub` wrapping semantics.
+- [`scripts/test/sierra_u128_range_checked_e2e.sh`](scripts/test/sierra_u128_range_checked_e2e.sh) verifies explicit `RangeCheck` in/out threading for direct `u128 add/sub/mul` lowering and CASM compilation.
+- [`scripts/test/sierra_u128_wrapping_differential.sh`](scripts/test/sierra_u128_wrapping_differential.sh) checks deterministic overflow-boundary differential behavior for `u128 add/sub/mul` wrapping semantics.
 - [`scripts/bench/check_optimizer_non_regression.sh`](scripts/bench/check_optimizer_non_regression.sh) compares optimized vs baseline CASM/Sierra score.
 - [`scripts/bench/generate_fixedpoint_bench.sh`](scripts/bench/generate_fixedpoint_bench.sh) regenerates [`packages/fixedpoint_bench/src/lib.cairo`](packages/fixedpoint_bench/src/lib.cairo) from Lean IR outputs (`--optimize false` and `--optimize true`).
 - [`scripts/bench/compare_fixedpoint_steps.sh`](scripts/bench/compare_fixedpoint_steps.sh) enforces hand-vs-optimized equivalence and reports Cairo step deltas for fixed-point + Fibonacci examples.
@@ -267,7 +267,7 @@ Example module in this repo: [`src/MyLeanContract.lean`](src/MyLeanContract.lean
 - [`src/LeanCairo/CLI`](src/LeanCairo/CLI): argument parser + module invocation flow
 - [`src/Examples/Hello.lean`](src/Examples/Hello.lean), [`src/MyLeanContract.lean`](src/MyLeanContract.lean): canonical Lean -> Cairo example contracts
 - [`src/Examples/SierraSubset.lean`](src/Examples/SierraSubset.lean), [`src/MyLeanSierraSubset.lean`](src/MyLeanSierraSubset.lean): direct Lean -> Sierra subset success fixture (`var`/`letE`, `felt252` arithmetic, `u128` literal)
-- [`src/Examples/SierraU128RangeChecked.lean`](src/Examples/SierraU128RangeChecked.lean), [`src/MyLeanSierraU128RangeChecked.lean`](src/MyLeanSierraU128RangeChecked.lean): direct Lean -> Sierra fixture for `u128 add/sub` wrapping with explicit `RangeCheck` lane
+- [`src/Examples/SierraU128RangeChecked.lean`](src/Examples/SierraU128RangeChecked.lean), [`src/MyLeanSierraU128RangeChecked.lean`](src/MyLeanSierraU128RangeChecked.lean): direct Lean -> Sierra fixture for `u128 add/sub/mul` wrapping with explicit `RangeCheck` lane
 - [`src/Examples/SierraSubsetUnsupportedU128Arith.lean`](src/Examples/SierraSubsetUnsupportedU128Arith.lean), [`src/Examples/SierraSubsetUnsupportedU256Sig.lean`](src/Examples/SierraSubsetUnsupportedU256Sig.lean): direct Sierra fail-fast fixtures for unsupported families
 - [`tests/golden`](tests/golden), [`tests/fixtures`](tests/fixtures): snapshot and ABI fixtures
 - [`docs/design`](docs/design): design note and invariants
@@ -283,10 +283,10 @@ Example module in this repo: [`src/MyLeanContract.lean`](src/MyLeanContract.lean
 - User identifiers using reserved internal prefix `__leancairo_internal_` are rejected by validation.
 - Optimizer is enabled by default (`--optimize true`) and can be disabled for baseline benchmarking.
 - `--inlining-strategy` controls low-level Cairo compiler inlining (`default`, `avoid`, or numeric bound).
-- Direct Sierra subset currently supports `var`/`letE`, `felt252` arithmetic, literals, top-level `eq` bool returns, and `u128 add/sub` via explicit `RangeCheck` threading; `u128 mul` and `u256` arithmetic are still fail-fast.
+- Direct Sierra subset currently supports `var`/`letE`, `felt252` arithmetic, literals, top-level `eq` bool returns, and `u128 add/sub/mul` via explicit `RangeCheck` threading; `u256` arithmetic is still fail-fast.
 - Artifact location uses `*.starknet_artifacts.json` instead of hardcoded filenames.
 - There is no exact Sierra/CASM -> Cairo decompiler in this repository; `scarb expand` is used for human-reviewable expanded Cairo.
 - A validated artifact-pass lane now exists ([`scripts/bench/optimize_artifacts.py`](scripts/bench/optimize_artifacts.py)), currently with conservative pass `strip_sierra_debug_info`.
 - Artifact passes are guarded by semantic signatures over critical Sierra/CASM fields before acceptance.
 - Pinned Sierra surface bindings are generated by [`scripts/sierra/generate_surface_bindings.py`](scripts/sierra/generate_surface_bindings.py), not handwritten.
-- Current direct Lean -> Sierra backend is intentionally constrained (view/no-storage, `felt252/u128/bool` user-signature subset, explicit `RangeCheck` lane for `u128 add/sub`) and fails fast outside that subset.
+- Current direct Lean -> Sierra backend is intentionally constrained (view/no-storage, `felt252/u128/bool` user-signature subset, explicit `RangeCheck` lane for `u128 add/sub/mul`) and fails fast outside that subset.

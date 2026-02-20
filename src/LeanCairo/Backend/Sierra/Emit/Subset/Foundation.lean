@@ -26,8 +26,7 @@ Sierra subset backend invariants (phase-2 direct Lean -> Sierra lane):
 Unsupported nodes fail fast with explicit errors.
 
 Important semantic guardrails:
-- u128 mul and u256 arithmetic are still rejected in this lane until explicit semantics are
-  modeled end-to-end.
+- u256 arithmetic is still rejected in this lane until explicit semantics are modeled end-to-end.
 - no implicit coercions are inserted.
 -/
 
@@ -322,6 +321,27 @@ def registerTypeDecl (ty : Ty) : EmitM Json := do
   modify (fun st => { st with typeDecls := insertDeclIfMissing st.typeDecls debugName tyDecl })
   pure tyId
 
+def registerOpaqueNoArgTypeDecl (debugName genericId : String) : EmitM Json := do
+  let _ <- liftExcept (ensureKnownGenericTypeId genericId)
+  let tyId := idJson debugName
+  let decl :=
+    Json.mkObj
+      [
+        ("id", tyId),
+        ( "long_id",
+          Json.mkObj
+            [
+              ("generic_id", Json.str genericId),
+              ("generic_args", Json.arr #[])
+            ] ),
+        ("declared_type_info", Json.null)
+      ]
+  modify (fun st => { st with typeDecls := insertDeclIfMissing st.typeDecls debugName decl })
+  pure tyId
+
+def registerU128MulGuaranteeTypeDecl : EmitM Json :=
+  registerOpaqueNoArgTypeDecl "U128MulGuarantee" "U128MulGuarantee"
+
 def registerLibfuncDecl (debugName : String) (genericId : String) (genericArgs : List Json) : EmitM Json := do
   let _ <- liftExcept (ensureKnownGenericLibfuncId genericId)
   let libfuncId := idJson debugName
@@ -520,7 +540,7 @@ partial def consumeVar
 
 def u128ArithUnsupported (fnName : String) (opName : String) : EmitM α :=
   throw
-    s!"unsupported u128 arithmetic ({opName}) in function '{fnName}': direct Sierra backend currently implements only add/sub wrapping paths with explicit RangeCheck threading"
+    s!"unsupported u128 arithmetic ({opName}) in function '{fnName}': direct Sierra backend currently implements only add/sub/mul wrapping paths with explicit RangeCheck threading"
 
 partial def exprUsesU128Arith : IRExpr ty -> Bool
   | .var _ => false

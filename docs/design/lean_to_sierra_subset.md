@@ -31,6 +31,7 @@ The backend currently accepts only this subset:
 - `IRExpr.mulFelt252`
 - `IRExpr.addU128` (wrapping, explicit range-check lane)
 - `IRExpr.subU128` (wrapping, explicit range-check lane)
+- `IRExpr.mulU128` (wrapping, explicit range-check lane)
 6. Supported top-level bool return lowering:
 - `IRExpr.eq` over `felt252`
 - `IRExpr.eq` over `u128`
@@ -49,7 +50,7 @@ The backend returns explicit errors for:
 3. Unsupported signature/resource types outside this lane (for example `u256`, aggregates, collections, explicit resource channels).
 4. Unsupported expression forms (storage reads, comparisons, `ite`, etc.).
 5. Unsupported arithmetic families where semantics are not fully modeled yet:
-- `u128` multiplication (`mulU128`) and non-modeled checked/panic paths.
+- non-modeled checked/panic integer paths.
 - `u256` arithmetic (`addU256`, `subU256`, `mulU256`) due pending struct-level lowering model.
 6. Unbound variables or internal linearity-state inconsistencies.
 

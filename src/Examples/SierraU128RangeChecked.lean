@@ -18,6 +18,11 @@ private def subBody : Expr .u128 :=
     (Expr.var (ty := .u128) "lhs")
     (Expr.var (ty := .u128) "rhs")
 
+private def mulBody : Expr .u128 :=
+  Expr.mulU128
+    (Expr.var (ty := .u128) "lhs")
+    (Expr.var (ty := .u128) "rhs")
+
 def contract : ContractSpec :=
   {
     contractName := "SierraU128RangeCheckedContract"
@@ -35,6 +40,12 @@ def contract : ContractSpec :=
           args := [{ name := "lhs", ty := .u128 }, { name := "rhs", ty := .u128 }]
           ret := .u128
           body := subBody
+        },
+        {
+          name := "mulU128Wrapping"
+          args := [{ name := "lhs", ty := .u128 }, { name := "rhs", ty := .u128 }]
+          ret := .u128
+          body := mulBody
         }
       ]
   }
