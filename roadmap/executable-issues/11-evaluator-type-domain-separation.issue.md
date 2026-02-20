@@ -56,7 +56,9 @@ Deliver a type-faithful, fail-fast evaluator semantics layer that is suitable fo
 3. `scripts/test/proof_obligations_negative.sh`
 
 ### E3 Width/sign semantics closure for integer and qm31 families
-- Status: NOT DONE
+- Status: DONE - fbb51b0
+- Evidence tests: `scripts/test/eval_integer_width_semantics.sh`; `scripts/test/eval_qm31_semantics.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`
 - Required work:
 1. Define width/sign semantics modules for signed and unsigned integer families.
 2. Define `qm31` domain semantics with explicit arithmetic policy.
@@ -65,9 +67,6 @@ Deliver a type-faithful, fail-fast evaluator semantics layer that is suitable fo
 1. `scripts/test/eval_integer_width_semantics.sh`
 2. `scripts/test/eval_qm31_semantics.sh`
 3. `scripts/workflow/run-sierra-checks.sh`
-- Evidence proofs:
-1. `src/LeanCairo/Compiler/Semantics/Eval.lean`
-2. `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`
 
 ### E4 Resource/failure integration over typed domains
 - Status: NOT DONE
