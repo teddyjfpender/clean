@@ -20,31 +20,87 @@ namespace EvalContext
 
 def readVar (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
   match ty with
-  | .felt252 => ctx.feltVars name
-  | .u128 => ctx.u128Vars name
+  | .felt252 | .i8 | .i16 | .i32 | .i64 | .i128 => ctx.feltVars name
+  | .u128 | .u8 | .u16 | .u32 | .u64 | .qm31 => ctx.u128Vars name
   | .u256 => ctx.u256Vars name
   | .bool => ctx.boolVars name
+  | .tuple _ => ()
+  | .structTy _ => ()
+  | .enumTy _ => ()
+  | .array _ => ()
+  | .span _ => ()
+  | .nullable _ => ()
+  | .boxed _ => ()
+  | .dict _ _ => ()
+  | .nonZero _ => ()
+  | .rangeCheck => ()
+  | .gasBuiltin => ()
+  | .segmentArena => ()
+  | .panicSignal => ()
 
 def readStorage (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
   match ty with
-  | .felt252 => ctx.feltStorage name
-  | .u128 => ctx.u128Storage name
+  | .felt252 | .i8 | .i16 | .i32 | .i64 | .i128 => ctx.feltStorage name
+  | .u128 | .u8 | .u16 | .u32 | .u64 | .qm31 => ctx.u128Storage name
   | .u256 => ctx.u256Storage name
   | .bool => ctx.boolStorage name
+  | .tuple _ => ()
+  | .structTy _ => ()
+  | .enumTy _ => ()
+  | .array _ => ()
+  | .span _ => ()
+  | .nullable _ => ()
+  | .boxed _ => ()
+  | .dict _ _ => ()
+  | .nonZero _ => ()
+  | .rangeCheck => ()
+  | .gasBuiltin => ()
+  | .segmentArena => ()
+  | .panicSignal => ()
 
 def bindVar (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) : EvalContext :=
   match ty with
-  | .felt252 => { ctx with feltVars := fun n => if n = name then value else ctx.feltVars n }
-  | .u128 => { ctx with u128Vars := fun n => if n = name then value else ctx.u128Vars n }
+  | .felt252 | .i8 | .i16 | .i32 | .i64 | .i128 =>
+      { ctx with feltVars := fun n => if n = name then value else ctx.feltVars n }
+  | .u128 | .u8 | .u16 | .u32 | .u64 | .qm31 =>
+      { ctx with u128Vars := fun n => if n = name then value else ctx.u128Vars n }
   | .u256 => { ctx with u256Vars := fun n => if n = name then value else ctx.u256Vars n }
   | .bool => { ctx with boolVars := fun n => if n = name then value else ctx.boolVars n }
+  | .tuple _ => ctx
+  | .structTy _ => ctx
+  | .enumTy _ => ctx
+  | .array _ => ctx
+  | .span _ => ctx
+  | .nullable _ => ctx
+  | .boxed _ => ctx
+  | .dict _ _ => ctx
+  | .nonZero _ => ctx
+  | .rangeCheck => ctx
+  | .gasBuiltin => ctx
+  | .segmentArena => ctx
+  | .panicSignal => ctx
 
 def bindStorage (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) : EvalContext :=
   match ty with
-  | .felt252 => { ctx with feltStorage := fun n => if n = name then value else ctx.feltStorage n }
-  | .u128 => { ctx with u128Storage := fun n => if n = name then value else ctx.u128Storage n }
+  | .felt252 | .i8 | .i16 | .i32 | .i64 | .i128 =>
+      { ctx with feltStorage := fun n => if n = name then value else ctx.feltStorage n }
+  | .u128 | .u8 | .u16 | .u32 | .u64 | .qm31 =>
+      { ctx with u128Storage := fun n => if n = name then value else ctx.u128Storage n }
   | .u256 => { ctx with u256Storage := fun n => if n = name then value else ctx.u256Storage n }
   | .bool => { ctx with boolStorage := fun n => if n = name then value else ctx.boolStorage n }
+  | .tuple _ => ctx
+  | .structTy _ => ctx
+  | .enumTy _ => ctx
+  | .array _ => ctx
+  | .span _ => ctx
+  | .nullable _ => ctx
+  | .boxed _ => ctx
+  | .dict _ _ => ctx
+  | .nonZero _ => ctx
+  | .rangeCheck => ctx
+  | .gasBuiltin => ctx
+  | .segmentArena => ctx
+  | .panicSignal => ctx
 
 theorem readVar_bindVar_same (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) :
     readVar (bindVar ctx ty name value) ty name = value := by
@@ -69,11 +125,9 @@ def evalExpr (ctx : EvalContext) : IRExpr ty -> Ty.denote ty
   | .subU256 lhs rhs => evalExpr ctx lhs - evalExpr ctx rhs
   | .mulU256 lhs rhs => evalExpr ctx lhs * evalExpr ctx rhs
   | @IRExpr.eq ty lhs rhs =>
-      match ty with
-      | .felt252 => decide (evalExpr ctx lhs = evalExpr ctx rhs)
-      | .u128 => decide (evalExpr ctx lhs = evalExpr ctx rhs)
-      | .u256 => decide (evalExpr ctx lhs = evalExpr ctx rhs)
-      | .bool => decide (evalExpr ctx lhs = evalExpr ctx rhs)
+      by
+        let _ : DecidableEq (Ty.denote ty) := Ty.denoteDecidableEq ty
+        exact decide (evalExpr ctx lhs = evalExpr ctx rhs)
   | .ltU128 lhs rhs => evalExpr ctx lhs < evalExpr ctx rhs
   | .leU128 lhs rhs => evalExpr ctx lhs <= evalExpr ctx rhs
   | .ltU256 lhs rhs => evalExpr ctx lhs < evalExpr ctx rhs

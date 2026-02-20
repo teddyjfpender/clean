@@ -72,6 +72,8 @@ private def tyGenericTypeId : Ty -> Except EmitError String
       .error "u256 is not yet supported in direct Sierra subset backend (struct-based lowering pending)"
   | .bool =>
       .error "bool is not yet supported in direct Sierra subset backend (enum lowering pending)"
+  | ty =>
+      .error s!"type '{Ty.toCairo ty}' is not yet supported in direct Sierra subset backend"
 
 private def tyDebugName (ty : Ty) : Except EmitError String := do
   let genericId <- tyGenericTypeId ty
@@ -442,10 +444,8 @@ private def ensureFunctionTySupported (fnName : String) (whereLabel : String) (t
   match ty with
   | .felt252 => pure ()
   | .u128 => pure ()
-  | .u256 =>
-      .error s!"unsupported {whereLabel} type 'u256' in function '{fnName}'"
-  | .bool =>
-      .error s!"unsupported {whereLabel} type 'bool' in function '{fnName}'"
+  | _ =>
+      .error s!"unsupported {whereLabel} type '{Ty.toCairo ty}' in function '{fnName}'"
 
 private def ensureViewNoWrites (fnSpec : IRFuncSpec) : Except EmitError Unit :=
   if fnSpec.mutability != .view then

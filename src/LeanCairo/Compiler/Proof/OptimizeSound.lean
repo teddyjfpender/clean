@@ -135,8 +135,8 @@ theorem optimizeExprSound (ctx : EvalContext) (expr : IRExpr ty) :
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldSubU256 ctx (optimizeExpr lhs) (optimizeExpr rhs)
   | mulU256 lhs rhs ihLhs ihRhs =>
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldMulU256 ctx (optimizeExpr lhs) (optimizeExpr rhs)
-  | @eq eqTy lhs rhs ihLhs ihRhs =>
-      cases eqTy <;> simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | @eq _ lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
   | ltU128 lhs rhs ihLhs ihRhs =>
       simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
   | leU128 lhs rhs ihLhs ihRhs =>

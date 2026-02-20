@@ -19,6 +19,7 @@ export PATH="$HOME/.elan/bin:$PATH"
   cd "$ROOT_DIR"
   lake build
 )
+"$ROOT_DIR/scripts/test/type_universe_regression.sh"
 "$ROOT_DIR/scripts/test/codegen_snapshot.sh"
 "$ROOT_DIR/scripts/test/e2e.sh"
 "$ROOT_DIR/scripts/test/sierra_surface_codegen.sh"

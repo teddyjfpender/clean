@@ -183,35 +183,12 @@ theorem cseLetNormExprSound (ctx : EvalContext) (expr : IRExpr ty) :
         _ = evalExpr ctx (.mulU256 lhs rhs) := by
               simp [evalExpr, ihLhs ctx, ihRhs ctx]
   | @eq eqTy lhs rhs ihLhs ihRhs =>
-      cases eqTy with
-      | felt252 =>
-          calc
-            evalExpr ctx (cseLetNormExpr (.eq lhs rhs)) =
-                evalExpr ctx (.eq (cseLetNormExpr lhs) (cseLetNormExpr rhs)) := by
-                  simpa [cseLetNormExpr] using evalCseEq (ty := .felt252) ctx (cseLetNormExpr lhs) (cseLetNormExpr rhs)
-            _ = evalExpr ctx (.eq lhs rhs) := by
-                  simp [evalExpr, ihLhs ctx, ihRhs ctx]
-      | u128 =>
-          calc
-            evalExpr ctx (cseLetNormExpr (.eq lhs rhs)) =
-                evalExpr ctx (.eq (cseLetNormExpr lhs) (cseLetNormExpr rhs)) := by
-                  simpa [cseLetNormExpr] using evalCseEq (ty := .u128) ctx (cseLetNormExpr lhs) (cseLetNormExpr rhs)
-            _ = evalExpr ctx (.eq lhs rhs) := by
-                  simp [evalExpr, ihLhs ctx, ihRhs ctx]
-      | u256 =>
-          calc
-            evalExpr ctx (cseLetNormExpr (.eq lhs rhs)) =
-                evalExpr ctx (.eq (cseLetNormExpr lhs) (cseLetNormExpr rhs)) := by
-                  simpa [cseLetNormExpr] using evalCseEq (ty := .u256) ctx (cseLetNormExpr lhs) (cseLetNormExpr rhs)
-            _ = evalExpr ctx (.eq lhs rhs) := by
-                  simp [evalExpr, ihLhs ctx, ihRhs ctx]
-      | bool =>
-          calc
-            evalExpr ctx (cseLetNormExpr (.eq lhs rhs)) =
-                evalExpr ctx (.eq (cseLetNormExpr lhs) (cseLetNormExpr rhs)) := by
-                  simpa [cseLetNormExpr] using evalCseEq (ty := .bool) ctx (cseLetNormExpr lhs) (cseLetNormExpr rhs)
-            _ = evalExpr ctx (.eq lhs rhs) := by
-                  simp [evalExpr, ihLhs ctx, ihRhs ctx]
+      calc
+        evalExpr ctx (cseLetNormExpr (.eq lhs rhs)) =
+            evalExpr ctx (.eq (cseLetNormExpr lhs) (cseLetNormExpr rhs)) := by
+              simpa [cseLetNormExpr] using evalCseEq (ty := eqTy) ctx (cseLetNormExpr lhs) (cseLetNormExpr rhs)
+        _ = evalExpr ctx (.eq lhs rhs) := by
+              simp [evalExpr, ihLhs ctx, ihRhs ctx]
   | ltU128 lhs rhs ihLhs ihRhs =>
       simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
   | leU128 lhs rhs ihLhs ihRhs =>
