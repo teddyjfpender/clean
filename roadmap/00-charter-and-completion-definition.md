@@ -6,9 +6,20 @@ Deliver complete function-level support for pinned Cairo surfaces with primary L
 
 ## Inputs
 
-1. Canonical project constraints in `spec.md` and `spec2.md`.
+1. Baseline scope in `spec.md` (historical MVP specification).
+2. Active architecture direction in `spec2.md` (Lean -> Sierra primary, Lean -> Cairo secondary).
+3. Executable plan and status tracker in `roadmap/executable-issues/INDEX.md`.
 2. Pinned upstream Cairo sources at commit `e56055c87a9db4e3dbb91c82ccb2ea751a8dc617`.
 3. Existing Lean typed DSL and optimizer infrastructure.
+
+## Document Authority
+
+When documents differ, use this precedence:
+
+1. `roadmap/executable-issues/INDEX.md` and corresponding `*.issue.md` files (active execution contract)
+2. `roadmap/*.md` (program-level roadmap and milestones)
+3. `spec2.md` (architecture direction note)
+4. `spec.md` (historical baseline context)
 
 ## Outputs
 
@@ -79,4 +90,3 @@ The secondary track is complete only when all conditions hold:
 - fail-fast behavior
 - error message contract
 - tracking issue and milestone assignment
-
