@@ -41,6 +41,8 @@ export PATH="$HOME/.elan/bin:$PATH"
 "$ROOT_DIR/scripts/test/sierra_hash_policy.sh"
 "$ROOT_DIR/scripts/roadmap/check_failfast_policy_lock.sh"
 "$ROOT_DIR/scripts/test/sierra_e2e.sh"
+"$ROOT_DIR/scripts/test/sierra_scalar_e2e.sh"
+"$ROOT_DIR/scripts/test/sierra_differential.sh"
 "$ROOT_DIR/scripts/bench/check_optimizer_non_regression.sh"
 "$ROOT_DIR/scripts/bench/check_optimizer_non_regression.sh" MyLeanContractCSEBench CSEBenchContract
 "$ROOT_DIR/scripts/bench/check_artifact_passes.sh"

@@ -14,11 +14,12 @@ open LeanCairo.Core.Spec
 Sierra subset backend invariants (phase-2 direct Lean -> Sierra lane):
 - storage must be empty,
 - functions must be view-only and write-free,
-- supported function signature types: felt252, u128,
+- supported function signature types: felt252, u128, bool,
 - supported expressions:
   - vars / letE,
-  - literals: felt252, u128,
-  - felt252 arithmetic: add/sub/mul.
+  - literals: felt252, u128, bool,
+  - felt252 arithmetic: add/sub/mul,
+  - top-level equality returns for felt252/u128.
 
 Unsupported nodes fail fast with explicit errors.
 
@@ -49,6 +50,26 @@ private def idJson (debugName : String) : Json :=
       ("debug_name", Json.str debugName)
     ]
 
+private def u32Modulus : Nat := 2 ^ 32
+
+private def userTypeIdWords (debugName : String) : Array Nat :=
+  (List.range 8).map (fun idx => (fnv1a64 s!"{debugName}#{idx}").toNat % u32Modulus) |>.toArray
+
+private def userTypeArgJson (debugName : String) : Json :=
+  Json.mkObj
+    [
+      ( "UserType",
+        Json.mkObj
+          [
+            ("id", Json.arr (userTypeIdWords debugName |>.map (fun word => Json.num (JsonNumber.fromNat word)))),
+            ("debug_name", Json.str debugName)
+          ] )
+    ]
+
+private def unitTypeDebugName : String := "Unit"
+private def boolTypeDebugName : String := "core::bool"
+private def tupleUserTypeDebugName : String := "Tuple"
+
 private def ensureKnownGenericTypeId (genericId : String) : Except EmitError Unit :=
   if genericTypeIds.contains genericId then
     .ok ()
@@ -71,36 +92,110 @@ private def tyGenericTypeId : Ty -> Except EmitError String
   | .u256 =>
       .error "u256 is not yet supported in direct Sierra subset backend (struct-based lowering pending)"
   | .bool =>
-      .error "bool is not yet supported in direct Sierra subset backend (enum lowering pending)"
+      do
+        ensureKnownGenericTypeId "Enum"
+        pure "Enum"
+  | .nonZero _ => do
+      ensureKnownGenericTypeId "NonZero"
+      pure "NonZero"
   | ty =>
       .error s!"type '{Ty.toCairo ty}' is not yet supported in direct Sierra subset backend"
 
 private def tyDebugName (ty : Ty) : Except EmitError String := do
-  let genericId <- tyGenericTypeId ty
-  pure genericId
+  match ty with
+  | .bool => pure boolTypeDebugName
+  | .nonZero innerTag => pure s!"NonZero<{innerTag}>"
+  | _ =>
+      let genericId <- tyGenericTypeId ty
+      pure genericId
 
 private def typeIdJson (ty : Ty) : Except EmitError Json := do
   let debugName <- tyDebugName ty
   pure (idJson debugName)
 
-private def typeDeclJson (ty : Ty) : Except EmitError Json := do
-  let genericId <- tyGenericTypeId ty
-  let tyId <- typeIdJson ty
+private def typeArgJson (tyId : Json) : Json :=
+  Json.mkObj [("Type", tyId)]
+
+private def innerTyOfNonZeroTag (innerTag : String) : Except EmitError Ty :=
+  match innerTag with
+  | "felt252" => .ok .felt252
+  | "u128" => .ok .u128
+  | "u256" => .ok .u256
+  | "bool" => .ok .bool
+  | _ => .error s!"unsupported NonZero inner tag '{innerTag}' in direct Sierra subset backend"
+
+private def unitTypeDeclJson : Except EmitError Json := do
+  ensureKnownGenericTypeId "Struct"
   pure <|
     Json.mkObj
       [
-        ("id", tyId),
+        ("id", idJson unitTypeDebugName),
         ( "long_id",
           Json.mkObj
             [
-              ("generic_id", Json.str genericId),
-              ("generic_args", Json.arr #[])
+              ("generic_id", Json.str "Struct"),
+              ("generic_args", Json.arr #[userTypeArgJson tupleUserTypeDebugName])
             ] ),
         ("declared_type_info", Json.null)
       ]
 
-private def typeArgJson (tyId : Json) : Json :=
-  Json.mkObj [("Type", tyId)]
+private def boolTypeDeclJson : Except EmitError Json := do
+  ensureKnownGenericTypeId "Enum"
+  pure <|
+    Json.mkObj
+      [
+        ("id", idJson boolTypeDebugName),
+        ( "long_id",
+          Json.mkObj
+            [
+              ("generic_id", Json.str "Enum"),
+              ( "generic_args",
+                Json.arr
+                  #[
+                    userTypeArgJson boolTypeDebugName,
+                    typeArgJson (idJson unitTypeDebugName),
+                    typeArgJson (idJson unitTypeDebugName)
+                  ] )
+            ] ),
+        ("declared_type_info", Json.null)
+      ]
+
+private def typeDeclJson (ty : Ty) : Except EmitError Json := do
+  match ty with
+  | .bool =>
+      boolTypeDeclJson
+  | .nonZero innerTag => do
+      ensureKnownGenericTypeId "NonZero"
+      let innerTy <- innerTyOfNonZeroTag innerTag
+      let innerTyId <- typeIdJson innerTy
+      let tyId <- typeIdJson (.nonZero innerTag)
+      pure <|
+        Json.mkObj
+          [
+            ("id", tyId),
+            ( "long_id",
+              Json.mkObj
+                [
+                  ("generic_id", Json.str "NonZero"),
+                  ("generic_args", Json.arr #[typeArgJson innerTyId])
+                ] ),
+            ("declared_type_info", Json.null)
+          ]
+  | _ => do
+      let genericId <- tyGenericTypeId ty
+      let tyId <- typeIdJson ty
+      pure <|
+        Json.mkObj
+          [
+            ("id", tyId),
+            ( "long_id",
+              Json.mkObj
+                [
+                  ("generic_id", Json.str genericId),
+                  ("generic_args", Json.arr #[])
+                ] ),
+            ("declared_type_info", Json.null)
+          ]
 
 partial def natToLeBytes (n : Nat) : List Nat :=
   if n = 0 then
@@ -123,7 +218,19 @@ private def bigIntJson (value : Int) : Json :=
 private def valueArgJson (value : Int) : Json :=
   Json.mkObj [("Value", bigIntJson value)]
 
-private def invocationStmtJson (libfuncId : Json) (args : List Json) (results : List Json) : Json :=
+private def fallthroughTargetJson : Json :=
+  Json.str "Fallthrough"
+
+private def statementTargetJson (statementIdx : Nat) : Json :=
+  Json.mkObj [("Statement", Json.num (JsonNumber.fromNat statementIdx))]
+
+private def branchJson (target : Json) (results : List Json) : Json :=
+  Json.mkObj [("target", target), ("results", Json.arr results.toArray)]
+
+private def invocationStmtBranchesJson
+    (libfuncId : Json)
+    (args : List Json)
+    (branches : List (Json × List Json)) : Json :=
   Json.mkObj
     [
       ( "Invocation",
@@ -131,17 +238,12 @@ private def invocationStmtJson (libfuncId : Json) (args : List Json) (results : 
           [
             ("libfunc_id", libfuncId),
             ("args", Json.arr args.toArray),
-            ( "branches",
-              Json.arr
-                #[
-                  Json.mkObj
-                    [
-                      ("target", Json.str "Fallthrough"),
-                      ("results", Json.arr results.toArray)
-                    ]
-                ] )
+            ("branches", Json.arr (branches.map (fun entry => branchJson entry.fst entry.snd)).toArray)
           ] )
     ]
+
+private def invocationStmtJson (libfuncId : Json) (args : List Json) (results : List Json) : Json :=
+  invocationStmtBranchesJson libfuncId args [(fallthroughTargetJson, results)]
 
 private def returnStmtJson (results : List Json) : Json :=
   Json.mkObj [("Return", Json.arr results.toArray)]
@@ -182,6 +284,17 @@ private def freshVarId (fnName : String) (purpose : String) : EmitM Json := do
   pure (idJson s!"{fnName}::tmp::{purpose}::{idx}")
 
 private def registerTypeDecl (ty : Ty) : EmitM Json := do
+  match ty with
+  | .bool =>
+      let unitDecl <- liftExcept unitTypeDeclJson
+      modify (fun st => { st with typeDecls := insertDeclIfMissing st.typeDecls unitTypeDebugName unitDecl })
+  | .nonZero innerTag =>
+      let innerTy <- liftExcept (innerTyOfNonZeroTag innerTag)
+      let innerTyDecl <- liftExcept (typeDeclJson innerTy)
+      let innerDebugName <- liftExcept (tyDebugName innerTy)
+      modify (fun st => { st with typeDecls := insertDeclIfMissing st.typeDecls innerDebugName innerTyDecl })
+  | _ =>
+      pure ()
   let tyDecl <- liftExcept (typeDeclJson ty)
   let tyId <- liftExcept (typeIdJson ty)
   let debugName <- liftExcept (tyDebugName ty)
@@ -232,6 +345,42 @@ private def emitDrop (fnName : String) (ty : Ty) (valueVar : Json) : EmitM Unit 
   let _ <- freshVarId fnName "drop"
   pushStmt (invocationStmtJson libfuncId [valueVar] [])
 
+private def nextStatementIdx : EmitM Nat := do
+  pure (←get).statementsRev.length
+
+private def emitBranchAlign : EmitM Unit := do
+  let branchAlignLibfuncId <- registerLibfuncDecl "branch_align" "branch_align" []
+  pushStmt (invocationStmtJson branchAlignLibfuncId [] [])
+
+private def emitJump (targetIdx : Nat) : EmitM Unit := do
+  let jumpLibfuncId <- registerLibfuncDecl "jump" "jump" []
+  pushStmt (invocationStmtBranchesJson jumpLibfuncId [] [(statementTargetJson targetIdx, [])])
+
+private def boolVariantDebugName (value : Bool) : String :=
+  if value then
+    s!"enum_init<{boolTypeDebugName}, 1>"
+  else
+    s!"enum_init<{boolTypeDebugName}, 0>"
+
+private def emitBoolConst (fnName : String) (value : Bool) : EmitM Json := do
+  let boolTyId <- registerTypeDecl .bool
+  let unitTyId := idJson unitTypeDebugName
+  let structConstructDebugName := s!"struct_construct<{unitTypeDebugName}>"
+  let structConstructLibfuncId <-
+    registerLibfuncDecl structConstructDebugName "struct_construct" [typeArgJson unitTyId]
+  let unitValueVar <- freshVarId fnName "bool_unit"
+  pushStmt (invocationStmtJson structConstructLibfuncId [] [unitValueVar])
+
+  let variantIdx : Int := if value then 1 else 0
+  let enumInitLibfuncId <-
+    registerLibfuncDecl
+      (boolVariantDebugName value)
+      "enum_init"
+      [typeArgJson boolTyId, valueArgJson variantIdx]
+  let rawBoolVar <- freshVarId fnName "bool_const_raw"
+  pushStmt (invocationStmtJson enumInitLibfuncId [unitValueVar] [rawBoolVar])
+  emitStoreTemp fnName .bool rawBoolVar
+
 private def feltConstDebugName (value : Int) : String :=
   if value < 0 then
     s!"felt252_const_neg_{value.natAbs}"
@@ -263,6 +412,19 @@ private structure LinearVar where
   deriving Inhabited
 
 private abbrev Env := List (String × LinearVar)
+
+private partial def pendingDropCount (env : Env) : Except EmitError Nat := do
+  match env with
+  | [] => pure 0
+  | (_, entry) :: rest =>
+      if entry.remaining != 0 then
+        .error "internal error: non-zero remaining uses encountered while computing branch shape"
+      else
+        let restCount <- pendingDropCount rest
+        if entry.current?.isSome then
+          pure (restCount + 1)
+        else
+          pure restCount
 
 private partial def countVarUses (target : String) : IRExpr ty -> Nat
   | .var name => if name = target then 1 else 0
@@ -367,8 +529,9 @@ partial def emitExpr (fnName : String) (env : Env) : IRExpr ty -> EmitM (Env × 
       pure (env, outVar)
   | .litU256 _ =>
       unsupportedExpr fnName "u256 literals are not yet supported"
-  | .litBool _ =>
-      unsupportedExpr fnName "bool literals are not yet supported"
+  | .litBool value => do
+      let outVar <- emitBoolConst fnName value
+      pure (env, outVar)
   | .litFelt252 value => do
       let outVar <- emitFeltConst fnName value
       pure (env, outVar)
@@ -391,7 +554,7 @@ partial def emitExpr (fnName : String) (env : Env) : IRExpr ty -> EmitM (Env × 
   | .mulU256 _ _ =>
       u256ArithUnsupported fnName "mul"
   | .eq _ _ =>
-      unsupportedExpr fnName "equality lowering is not yet implemented"
+      unsupportedExpr fnName "equality lowering is currently supported only for top-level return expressions"
   | .ltU128 _ _ =>
       unsupportedExpr fnName "ltU128 lowering is not yet implemented"
   | .leU128 _ _ =>
@@ -440,10 +603,80 @@ private partial def dropRemainingEnv (fnName : String) (env : Env) : EmitM Unit 
         | none =>
             dropRemainingEnv fnName rest
 
+private def emitBoolReturnBranch
+    (fnName : String)
+    (env : Env)
+    (value : Bool)
+    (extraDrops : List (Ty × Json) := []) : EmitM Unit := do
+  emitBranchAlign
+  for dropSpec in extraDrops do
+    emitDrop fnName dropSpec.fst dropSpec.snd
+  dropRemainingEnv fnName env
+  let boolVar <- emitBoolConst fnName value
+  pushStmt (returnStmtJson [boolVar])
+
+private def emitTailEqReturnBool
+    (baseStatementIdx : Nat)
+    (fnName : String)
+    (env : Env)
+    (lhs rhs : IRExpr eqTy) : EmitM Unit := do
+  match eqTy with
+  | .felt252 => do
+      let (envAfterLhs, lhsVar) <- emitExpr fnName env lhs
+      let (envAfterRhs, rhsVar) <- emitExpr fnName envAfterLhs rhs
+      let _ <- registerTypeDecl .felt252
+      let subLibfuncId <- registerLibfuncDecl "felt252_sub" "felt252_sub" []
+      let diffRawVar <- freshVarId fnName "eq_felt_diff_raw"
+      pushStmt (invocationStmtJson subLibfuncId [lhsVar, rhsVar] [diffRawVar])
+      let diffVar <- emitStoreTemp fnName .felt252 diffRawVar
+
+      let currentIdx <- nextStatementIdx
+      let dropCount <- liftExcept (pendingDropCount envAfterRhs)
+      let trueBranchLen := dropCount + 5
+      let falseBranchTarget := baseStatementIdx + currentIdx + 1 + trueBranchLen
+
+      let isZeroLibfuncId <- registerLibfuncDecl "felt252_is_zero" "felt252_is_zero" []
+      let nonZeroDiffVar <- freshVarId fnName "eq_felt_non_zero"
+      pushStmt <|
+        invocationStmtBranchesJson
+          isZeroLibfuncId
+          [diffVar]
+          [
+            (fallthroughTargetJson, []),
+            (statementTargetJson falseBranchTarget, [nonZeroDiffVar])
+          ]
+
+      emitBoolReturnBranch fnName envAfterRhs true
+      emitBoolReturnBranch fnName envAfterRhs false [(.nonZero "felt252", nonZeroDiffVar)]
+  | .u128 => do
+      let (envAfterLhs, lhsVar) <- emitExpr fnName env lhs
+      let (envAfterRhs, rhsVar) <- emitExpr fnName envAfterLhs rhs
+      let _ <- registerTypeDecl .u128
+      let currentIdx <- nextStatementIdx
+      let dropCount <- liftExcept (pendingDropCount envAfterRhs)
+      let falseBranchLen := dropCount + 5
+      let trueBranchTarget := baseStatementIdx + currentIdx + 1 + falseBranchLen
+
+      let u128EqLibfuncId <- registerLibfuncDecl "u128_eq" "u128_eq" []
+      pushStmt <|
+        invocationStmtBranchesJson
+          u128EqLibfuncId
+          [lhsVar, rhsVar]
+          [
+            (fallthroughTargetJson, []),
+            (statementTargetJson trueBranchTarget, [])
+          ]
+
+      emitBoolReturnBranch fnName envAfterRhs false
+      emitBoolReturnBranch fnName envAfterRhs true
+  | _ =>
+      unsupportedExpr fnName s!"equality lowering for type '{Ty.toCairo eqTy}' is not yet implemented"
+
 private def ensureFunctionTySupported (fnName : String) (whereLabel : String) (ty : Ty) : Except EmitError Unit := do
   match ty with
   | .felt252 => pure ()
   | .u128 => pure ()
+  | .bool => pure ()
   | _ =>
       .error s!"unsupported {whereLabel} type '{Ty.toCairo ty}' in function '{fnName}'"
 
@@ -482,10 +715,22 @@ private def emitFunction (entryPoint : Nat) (fnSpec : IRFuncSpec) : Except EmitE
     for arg in fnSpec.args do
       let _ <- registerTypeDecl arg.ty
     let _ <- registerTypeDecl fnSpec.ret
-    let (envAfterBody, bodyValueVar) <- emitExpr fnSpec.name initialEnv fnSpec.body
-    dropRemainingEnv fnSpec.name envAfterBody
-    let retTemp <- emitStoreTemp fnSpec.name fnSpec.ret bodyValueVar
-    pushStmt (returnStmtJson [retTemp])
+    if hRet : fnSpec.ret = .bool then
+      let bodyBool : IRExpr .bool := by
+        simpa [hRet] using fnSpec.body
+      match bodyBool with
+      | .eq lhs rhs =>
+          emitTailEqReturnBool entryPoint fnSpec.name initialEnv lhs rhs
+      | _ =>
+          let (envAfterBody, bodyValueVar) <- emitExpr fnSpec.name initialEnv fnSpec.body
+          dropRemainingEnv fnSpec.name envAfterBody
+          let retTemp <- emitStoreTemp fnSpec.name fnSpec.ret bodyValueVar
+          pushStmt (returnStmtJson [retTemp])
+    else
+      let (envAfterBody, bodyValueVar) <- emitExpr fnSpec.name initialEnv fnSpec.body
+      dropRemainingEnv fnSpec.name envAfterBody
+      let retTemp <- emitStoreTemp fnSpec.name fnSpec.ret bodyValueVar
+      pushStmt (returnStmtJson [retTemp])
 
   match emitAction.run {} with
   | .error err => .error err

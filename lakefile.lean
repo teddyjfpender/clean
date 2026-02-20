@@ -20,6 +20,8 @@ lean_lib MyLeanSierraSubsetUnsupportedU128Arith where
 
 lean_lib MyLeanSierraSubsetUnsupportedU256Sig where
 
+lean_lib MyLeanSierraScalar where
+
 @[default_target]
 lean_exe «leancairo-gen» where
   root := `LeanCairo.CLI.Main
