@@ -41,7 +41,9 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 2. `python3 scripts/roadmap/generate_inventory_docs.py && git diff --exit-code roadmap/inventory`
 
 ### A1 Scalar arithmetic core
-- Status: NOT DONE
+- Status: DONE - 8e775a3
+- Evidence tests: `scripts/test/sierra_scalar_e2e.sh`; `scripts/test/sierra_differential.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `src/LeanCairo/Backend/Sierra/Emit/SubsetProgram.lean`; `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`
 - Acceptance tests:
 1. Scalar corpus generates valid Sierra (`ProgramRegistry` pass).
 2. Scalar corpus compiles to CASM without failures.
