@@ -43,7 +43,9 @@ Deliver a type-faithful, fail-fast evaluator semantics layer that is suitable fo
 3. `scripts/test/semantic_state_regression.sh`
 
 ### E2 Fail-fast unsupported-domain evaluator interfaces
-- Status: NOT DONE
+- Status: DONE - 272ee40
+- Evidence tests: `scripts/test/eval_unsupported_domain_failfast.sh`; `scripts/roadmap/check_failfast_policy_lock.sh`; `scripts/test/proof_obligations_negative.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/Semantics/ContractEval.lean`
 - Required work:
 1. Add strict fail-fast evaluator API returning `Except String` for unsupported domains.
 2. Emit stable error contracts that include type/family context.
@@ -52,9 +54,6 @@ Deliver a type-faithful, fail-fast evaluator semantics layer that is suitable fo
 1. `scripts/test/eval_unsupported_domain_failfast.sh`
 2. `scripts/roadmap/check_failfast_policy_lock.sh`
 3. `scripts/test/proof_obligations_negative.sh`
-- Evidence proofs:
-1. `src/LeanCairo/Compiler/Semantics/Eval.lean`
-2. `src/LeanCairo/Compiler/Semantics/ContractEval.lean`
 
 ### E3 Width/sign semantics closure for integer and qm31 families
 - Status: NOT DONE
