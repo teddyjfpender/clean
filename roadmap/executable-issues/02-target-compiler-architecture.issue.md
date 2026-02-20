@@ -41,7 +41,7 @@ without reintroducing IR -> DSL -> IR loops.
 2. Introducing forbidden import edge fails checker.
 
 ### M-02-2: Primary path purity
-- Status: NOT DONE
+- Status: DONE - cfcce6d
 - Required work:
 1. Ensure primary path never depends on Cairo textual emission.
 2. Add regression test to prevent accidental coupling.
