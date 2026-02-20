@@ -561,4 +561,36 @@ theorem evalExprState_failure_channel
   unfold evalExprState
   simp [h]
 
+theorem evalExprStateStrict_success_transition
+    (state : SemanticState)
+    (expr : IRExpr ty)
+    (value : Ty.denote ty)
+    (hFail : state.failure = none)
+    (hEval : evalExprStrict state.context expr = .ok value) :
+    evalExprStateStrict state expr =
+      .ok
+        ( value,
+          { state with resources := ResourceCarriers.merge state.resources (resourceCost expr) } ) := by
+  unfold evalExprStateStrict
+  simp [hFail, hEval]
+  rfl
+
+theorem evalExprStateStrict_failure_channel
+    (state : SemanticState)
+    (expr : IRExpr ty)
+    (err : String)
+    (h : state.failure = some err) :
+    evalExprStateStrict state expr = .error err := by
+  unfold evalExprStateStrict
+  simp [h]
+
+theorem evalEffectExprStateStrict_seeded_resources
+    (state : SemanticState)
+    (effectExpr : EffectExpr ty) :
+    evalEffectExprStateStrict state effectExpr =
+      evalExprStateStrict
+        { state with resources := ResourceCarriers.merge state.resources effectExpr.resources }
+        effectExpr.expr := by
+  rfl
+
 end LeanCairo.Compiler.Semantics
