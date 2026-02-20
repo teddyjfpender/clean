@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/inventory/corelib-src-inventory.md`](../../inventory/corelib-src-inventory.md)
 - Issue class: Corelib inventory integrity
 - Priority: P1
-- Overall status: NOT DONE
+- Overall status: DONE - 7a6a63c
+- Completion evidence tests: `scripts/roadmap/check_inventory_freshness.sh`; `scripts/roadmap/check_corelib_parity_freshness.sh`; `scripts/roadmap/check_pin_consistency.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Completion evidence proofs: `roadmap/inventory/corelib-src-inventory.md`; `roadmap/inventory/corelib-parity-report.json`; `roadmap/inventory/corelib-parity-report.md`; `scripts/roadmap/render_corelib_parity_report.py`
 
 ## Objective
 
@@ -23,13 +25,13 @@ Use pinned `corelib/src` inventory as a measurable parity target for secondary L
 ## Milestones
 
 ### I-CORE-1 Inventory exactness
-- Status: NOT DONE
+- Status: DONE - 7a6a63c
 - Acceptance tests:
 1. Regenerated list matches committed list exactly.
 2. Upstream pin mismatch triggers deterministic diff.
 
 ### I-CORE-2 Parity classification
-- Status: NOT DONE
+- Status: DONE - 7a6a63c
 - Acceptance tests:
 1. Every corelib file has a status: `supported`, `partial`, or `excluded`.
 2. Report generation is deterministic and CI-gated.
@@ -38,4 +40,3 @@ Use pinned `corelib/src` inventory as a measurable parity target for secondary L
 
 1. Corelib inventory is stable and exact.
 2. Parity report is complete and reproducible.
-
