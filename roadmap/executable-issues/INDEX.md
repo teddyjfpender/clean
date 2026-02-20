@@ -27,4 +27,4 @@ Status legend:
 - `roadmap/inventory/README.md` -> `roadmap/executable-issues/inventory/README.issue.md` (`DONE - f1f87d6`)
 - `roadmap/inventory/corelib-src-inventory.md` -> `roadmap/executable-issues/inventory/corelib-src-inventory.issue.md` (`NOT DONE`)
 - `roadmap/inventory/sierra-extensions-inventory.md` -> `roadmap/executable-issues/inventory/sierra-extensions-inventory.issue.md` (`NOT DONE`)
-- `roadmap/inventory/compiler-crates-inventory.md` -> `roadmap/executable-issues/inventory/compiler-crates-inventory.issue.md` (`NOT DONE`)
+- `roadmap/inventory/compiler-crates-inventory.md` -> `roadmap/executable-issues/inventory/compiler-crates-inventory.issue.md` (`DONE - d3d1d18`)

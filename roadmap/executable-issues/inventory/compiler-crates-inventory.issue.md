@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/inventory/compiler-crates-inventory.md`](../../inventory/compiler-crates-inventory.md)
 - Issue class: Upstream crate dependency map
 - Priority: P1
-- Overall status: NOT DONE
+- Overall status: DONE - d3d1d18
+- Completion evidence tests: `scripts/roadmap/check_crate_dependency_matrix_freshness.sh`; `scripts/roadmap/check_pin_consistency.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Completion evidence proofs: `roadmap/inventory/compiler-crates-inventory.md`; `roadmap/inventory/compiler-crates-dependency-matrix.md`; `scripts/roadmap/render_crate_dependency_matrix.py`; `tools/sierra_toolchain/Cargo.toml`
 
 ## Objective
 
@@ -27,13 +29,13 @@ Track and constrain which upstream Cairo compiler crates are depended on for sem
 ## Milestones
 
 ### I-CRATES-1 Dependency matrix
-- Status: NOT DONE
+- Status: DONE - d3d1d18
 - Acceptance tests:
 1. Matrix is generated and includes all focused crates.
 2. Matrix differentiates required vs optional references.
 
 ### I-CRATES-2 Pin and drift checks
-- Status: NOT DONE
+- Status: DONE - d3d1d18
 - Acceptance tests:
 1. Crate version drift in tooling dependencies is detected.
 2. Pin mismatch blocks release-candidate checks.
@@ -42,4 +44,3 @@ Track and constrain which upstream Cairo compiler crates are depended on for sem
 
 1. Focus crate usage is explicit and reviewed.
 2. Dependency drift is controlled by executable checks.
-
