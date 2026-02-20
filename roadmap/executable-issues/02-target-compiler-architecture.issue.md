@@ -32,7 +32,7 @@ without reintroducing IR -> DSL -> IR loops.
 ## Milestones
 
 ### M-02-1: Module boundary policy
-- Status: NOT DONE
+- Status: DONE - b37260d
 - Required work:
 1. Define allowed import DAG by layer.
 2. Add automated boundary checker.
@@ -63,4 +63,3 @@ without reintroducing IR -> DSL -> IR loops.
 1. Architecture boundaries are machine-enforced.
 2. Primary pipeline is isolated from secondary backend.
 3. Determinism guarantees are tested and stable.
-
