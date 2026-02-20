@@ -26,7 +26,9 @@ Deliver verified and benchmarked optimization from MIR through Sierra/CASM-relev
 ## Milestones
 
 ### O1 MIR optimization expansion
-- Status: NOT DONE
+- Status: DONE - c8594bb
+- Evidence tests: `scripts/test/optimizer_pass_regression.sh`; `scripts/test/canonicalization_regression.sh`; `scripts/roadmap/check_proof_obligations.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Optimize/Pipeline.lean`; `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`; `src/LeanCairo/Compiler/Proof/CSELetNormSound.lean`
 - Acceptance tests:
 1. New pass unit tests and property tests pass.
 2. Soundness theorems compile for enabled passes.
@@ -60,4 +62,3 @@ Deliver verified and benchmarked optimization from MIR through Sierra/CASM-relev
 1. Optimization claims are evidence-backed.
 2. Regression gating is comprehensive for core families.
 3. Proof and benchmark reports are linked for every major pass change.
-

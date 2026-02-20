@@ -3,9 +3,7 @@
 - Source roadmap file: [`roadmap/08-quality-gates-bench-and-release.md`](../08-quality-gates-bench-and-release.md)
 - Issue class: Quality and release enforcement
 - Priority: P0
-- Overall status: DONE - 1607761
-- Completion evidence tests: `scripts/roadmap/list_quality_gates.sh --validate-workflows`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`; `scripts/workflow/run-release-candidate-checks.sh`; `scripts/roadmap/check_release_reports_freshness.sh`
-- Completion evidence proofs: `scripts/roadmap/list_quality_gates.sh`; `scripts/workflow/run-release-candidate-checks.sh`; `scripts/roadmap/generate_release_reports.py`; `roadmap/reports/release-compatibility-report.md`; `roadmap/reports/release-proof-report.md`; `roadmap/reports/release-benchmark-report.md`
+- Overall status: NOT DONE
 
 ## Objective
 

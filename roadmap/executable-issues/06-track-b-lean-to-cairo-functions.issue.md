@@ -27,13 +27,17 @@ Deliver deterministic function-level Lean -> Cairo emission from shared MIR with
 ## Milestones
 
 ### B0 Structured Cairo AST emitter foundation
-- Status: NOT DONE
+- Status: DONE - c8594bb
+- Evidence tests: `scripts/test/cairo_ast_idempotence.sh`; `scripts/test/deterministic_codegen.sh`
+- Evidence proofs: `src/LeanCairo/Backend/Cairo/Ast.lean`; `src/LeanCairo/Backend/Cairo/EmitIRFunction.lean`
 - Acceptance tests:
 1. Snapshot-stable output across repeated runs.
 2. AST-to-source pretty-printer idempotence tests pass.
 
 ### B1 Scalar/integer parity
-- Status: NOT DONE
+- Status: DONE - c8594bb
+- Evidence tests: `scripts/test/backend_parity.sh`; `scripts/test/sierra_differential.sh`; `scripts/test/sierra_u128_wrapping_differential.sh`
+- Evidence proofs: `scripts/utils/check_backend_parity.py`; `src/LeanCairo/Backend/Cairo/Naming.lean`
 - Acceptance tests:
 1. Scalar/integer differential tests vs Sierra path pass.
 2. Overflow and checked-op semantics match expected outputs.
@@ -73,4 +77,3 @@ Deliver deterministic function-level Lean -> Cairo emission from shared MIR with
 1. B0-B5 all `DONE - <commit>`.
 2. Backend parity suite is stable and CI-gated.
 3. Cairo backend remains secondary and does not alter primary compilation path.
-

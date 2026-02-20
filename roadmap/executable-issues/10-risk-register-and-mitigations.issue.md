@@ -3,9 +3,7 @@
 - Source roadmap file: [`roadmap/10-risk-register-and-mitigations.md`](../10-risk-register-and-mitigations.md)
 - Issue class: Risk control and escalation
 - Priority: P0
-- Overall status: DONE - 1607761
-- Completion evidence tests: `scripts/roadmap/check_risk_controls.sh --validate-mapping`; `scripts/test/release_risk_gate_negative.sh`; `scripts/workflow/run-release-candidate-checks.sh`
-- Completion evidence proofs: `roadmap/10-risk-register-and-mitigations.md`; `roadmap/risk-controls.json`; `scripts/roadmap/check_risk_controls.py`; `scripts/roadmap/check_risk_controls.sh`
+- Overall status: NOT DONE
 
 ## Objective
 
