@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Lean toolchain (elan + lake)
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake --version
+          lean --version
+
+      - name: Install Scarb
+        run: |
+          curl -fsSL https://docs.swmansion.com/scarb/install.sh | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          scarb --version
+
+      - name: Run MVP quality checks
+        run: ./scripts/workflow/run-mvp-checks.sh

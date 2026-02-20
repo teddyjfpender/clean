@@ -1,0 +1,41 @@
+{
+  "contract_name": "HelloContract",
+  "functions": [
+    {
+      "name": "add_u128",
+      "state_mutability": "view",
+      "inputs": [
+        { "name": "lhs", "type": "u128" },
+        { "name": "rhs", "type": "u128" }
+      ],
+      "outputs": [{ "type": "u128" }]
+    },
+    {
+      "name": "add_u256",
+      "state_mutability": "view",
+      "inputs": [
+        { "name": "lhs", "type": "u256" },
+        { "name": "rhs", "type": "u256" }
+      ],
+      "outputs": [{ "type": "u256" }]
+    },
+    {
+      "name": "eq_felt252",
+      "state_mutability": "view",
+      "inputs": [
+        { "name": "lhs", "type": "felt252" },
+        { "name": "rhs", "type": "felt252" }
+      ],
+      "outputs": [{ "type": "bool" }]
+    },
+    {
+      "name": "max_u128",
+      "state_mutability": "view",
+      "inputs": [
+        { "name": "lhs", "type": "u128" },
+        { "name": "rhs", "type": "u128" }
+      ],
+      "outputs": [{ "type": "u128" }]
+    }
+  ]
+}

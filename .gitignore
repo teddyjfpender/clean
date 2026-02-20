@@ -1,0 +1,11 @@
+.artifacts/
+generated_contract/
+.lake/
+.lean/
+build/
+**/target/
+__pycache__/
+*.pyc
+*.olean
+*.ilean
+*.trace
