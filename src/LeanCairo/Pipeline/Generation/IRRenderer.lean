@@ -1,8 +1,8 @@
-import LeanCairo.Backend.Cairo.EmitContract
+import LeanCairo.Backend.Cairo.EmitIRContract
 import LeanCairo.Backend.Cairo.Naming
 import LeanCairo.Backend.Scarb.ArtifactHelper
 import LeanCairo.Backend.Scarb.Manifest
-import LeanCairo.Core.Spec.ContractSpec
+import LeanCairo.Compiler.IR.Spec
 import LeanCairo.Pipeline.Generation.BuildPlan
 import LeanCairo.Pipeline.Generation.InliningStrategy
 
@@ -10,12 +10,12 @@ namespace LeanCairo.Pipeline.Generation
 
 open LeanCairo.Backend.Cairo
 open LeanCairo.Backend.Scarb
-open LeanCairo.Core.Spec
+open LeanCairo.Compiler.IR
 
 private def boolString (value : Bool) : String :=
   if value then "true" else "false"
 
-private def renderReadme (spec : ContractSpec) (emitCasm : Bool) : String :=
+private def renderReadme (spec : IRContractSpec) (emitCasm : Bool) : String :=
   let packageName := toScarbPackageName spec.contractName
   String.intercalate "\n"
     [
@@ -39,10 +39,10 @@ private def renderReadme (spec : ContractSpec) (emitCasm : Bool) : String :=
       ""
     ]
 
-def renderProject (spec : ContractSpec) (emitCasm : Bool) (inliningStrategy : InliningStrategy) : GeneratedProject :=
+def renderProjectFromIR (spec : IRContractSpec) (emitCasm : Bool) (inliningStrategy : InliningStrategy) : GeneratedProject :=
   {
-    scarbToml := renderScarbManifest spec emitCasm inliningStrategy
-    cairoLib := renderContract spec ++ "\n"
+    scarbToml := renderScarbManifestForPackageName (toScarbPackageName spec.contractName) emitCasm inliningStrategy
+    cairoLib := renderIRContract spec ++ "\n"
     readme := renderReadme spec emitCasm
     artifactHelperScript := artifactLocatorScript
   }

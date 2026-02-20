@@ -31,6 +31,8 @@ Generated Cairo includes:
 - Storage writes target declared fields and use matching types.
 - Only `externalMutable` functions may contain writes.
 - Existing deterministic ordering properties remain unchanged.
+- Write RHS and return expressions are evaluated once in pre-state; storage commits happen afterward.
+- Duplicate writes to the same storage field in one function are invalid.
 
 ## 4. Failure modes
 

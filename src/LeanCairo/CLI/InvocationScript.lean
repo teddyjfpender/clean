@@ -19,19 +19,24 @@ private def escapeLeanStringLiteral (value : String) : String :=
 private def boolLiteral (value : Bool) : String :=
   if value then "true" else "false"
 
+private def inliningStrategyLiteral (value : LeanCairo.Pipeline.Generation.InliningStrategy) : String :=
+  LeanCairo.Pipeline.Generation.InliningStrategy.toLeanExpr value
+
 private def toTempSafeName (value : String) : String :=
   String.ofList <| value.toList.map (fun c => if c.isAlphanum then c else '_')
 
 private def renderInvocationScript (options : CliOptions) : String :=
   let escapedOutDir := escapeLeanStringLiteral options.outDir
   let emitLiteral := boolLiteral options.emitCasm
+  let optimizeLiteral := boolLiteral options.optimize
+  let inliningLiteral := inliningStrategyLiteral options.inliningStrategy
   String.intercalate "\n"
     [
       "import LeanCairo.Pipeline.Generation.EntryPoint",
       s!"import {options.moduleName}",
       "",
       "#eval",
-      s!"  LeanCairo.Pipeline.Generation.generateProjectChecked {options.moduleName}.contract \"{escapedOutDir}\" {emitLiteral}",
+      s!"  LeanCairo.Pipeline.Generation.generateProjectCheckedWithTuning {options.moduleName}.contract \"{escapedOutDir}\" {emitLiteral} {optimizeLiteral} {inliningLiteral}",
       ""
     ]
 

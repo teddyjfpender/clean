@@ -4,6 +4,22 @@ Lean 4 EDSL -> Cairo Starknet contract generator (MVP), aligned to `spec.md`.
 
 Status: Lean -> Cairo -> Scarb is wired and passing end-to-end in this repository.
 
+## What This Is (and Is Not)
+
+- This is a constrained Lean DSL -> Cairo compiler pipeline (not just a shell wrapper around templates).
+- It compiles typed `ContractSpec`/`Expr` data from Lean into deterministic Cairo contract source and Scarb artifacts.
+- It is **not** a compiler from arbitrary Lean programs to Cairo.
+- It is **not yet** a full end-to-end formally verified semantics-preserving Lean->Cairo compiler.
+
+Current proof scope:
+
+- Typed IR optimizer soundness is proved in Lean (`src/LeanCairo/Compiler/Proof/OptimizeSound.lean`).
+- CSE + let-normalization soundness is proved in Lean (`src/LeanCairo/Compiler/Proof/CSELetNormSound.lean`).
+- A typed verified pass interface with compositional soundness obligations is implemented in `src/LeanCairo/Compiler/Optimize/Pass.lean`.
+- Proof is over the IR evaluator semantics (`src/LeanCairo/Compiler/Semantics/Eval.lean`), not full Cairo VM semantics yet.
+- Contract-level optimizer soundness is proved over function outcomes (return value + post-storage context) in `src/LeanCairo/Compiler/Proof/IRSpecSound.lean`.
+- Generation now runs through an IR-native emission lane (`ContractSpec -> IRContractSpec -> IR optimize -> Cairo emit`).
+
 ## What You Can Do Now
 
 1. Define contract behavior in Lean as `ContractSpec` data, including storage fields.
@@ -14,12 +30,31 @@ Status: Lean -> Cairo -> Scarb is wired and passing end-to-end in this repositor
 6. Run a full quality gate (`./scripts/workflow/run-mvp-checks.sh`) covering lint + snapshot + build + ABI checks.
 7. Generate both `view` and `external` entrypoints from Lean mutability settings.
 8. Generate storage reads/writes for mutable functions.
+9. Run an optimizer non-regression benchmark gate (optimized score must be <= baseline score).
 
 ## Current MVP Limits
 
 - No events, no syscalls, no cross-contract calls.
 - Expression language is intentionally small and pure (no loops, no recursion, no dynamic memory structures).
 - Felt arithmetic is restricted to pass-through/equality semantics in this MVP.
+- Optimization currently includes algebraic simplification plus a non-trivial CSE + let-normalization pass over typed IR.
+
+## Mutable Execution Law
+
+- For mutable functions, write-value expressions and return expression are evaluated once in pre-state, then writes are committed.
+- Generated Cairo now stages these values in temporaries before `self.<field>.write(...)` statements to avoid accidental re-evaluation after mutation.
+- Duplicate writes to the same storage field within one function are rejected by validation.
+
+## Efficiency Expectations
+
+- Current state: this does **not** yet reliably beat careful hand-written Cairo.
+- Current guarantee: optimization is benchmark-gated for non-regression using CASM+Sierra artifact metrics (`scripts/bench/check_optimizer_non_regression.sh`).
+- A dedicated CSE benchmark contract gate is run in the workflow (`MyLeanContractCSEBench` -> `CSEBenchContract`).
+- Additional tuning path: compiler inlining strategy sweep (`scripts/bench/tune_inlining_strategy.sh`) over real artifacts.
+- To consistently outperform manual Cairo, next work is required:
+  - richer typed IR passes (CSE, let normalization, storage-access optimization, specialization/inlining),
+  - stronger cost model tied to Sierra/Cairo execution metrics,
+  - benchmark suites representing realistic workloads.
 
 ## Quick start
 
@@ -32,10 +67,16 @@ Run the fully wired example pipeline:
 Or run the steps manually:
 
 ```bash
+export PATH="$HOME/.elan/bin:$PATH"
 lake exe leancairo-gen --module MyLeanContract --out ./generated_contract --emit-casm false
 cd generated_contract
 scarb build
 ```
+
+Notes:
+
+- Workflow scripts in `scripts/workflow` and `scripts/test` now prepend `~/.elan/bin` automatically.
+- Manual `lake` invocations still require `lake` on `PATH` (or use `~/.elan/bin/lake`).
 
 Expected outputs after build:
 
@@ -48,7 +89,9 @@ Expected outputs after build:
 lake exe leancairo-gen \
   --module <LeanModule> \
   --out <OutputDirectory> \
-  [--emit-casm true|false]
+  [--emit-casm true|false] \
+  [--optimize true|false] \
+  [--inlining-strategy default|avoid|<n>]
 ```
 
 `<LeanModule>` must define:
@@ -77,6 +120,11 @@ Example module in this repo: `src/MyLeanContract.lean`.
 - `scripts/test/codegen_snapshot.sh` checks deterministic Cairo output.
 - `scripts/test/e2e.sh` runs Lean generation + `scarb build` + ABI checks.
 - `scripts/test/abi_surface.sh` validates ABI against expected signatures.
+- `scripts/bench/check_optimizer_non_regression.sh` compares optimized vs baseline CASM/Sierra score.
+- `scripts/workflow/run-mvp-checks.sh` runs optimizer non-regression on both baseline example and CSE-focused benchmark contract.
+- `scripts/bench/check_artifact_passes.sh` validates post-build artifact passes preserve semantic signatures.
+- `scripts/bench/tune_inlining_strategy.sh` sweeps compiler inlining strategies and reports the best score.
+- `scripts/bench/generate_review_bundle.sh` emits review artifacts (`expanded.cairo` + metrics JSON).
 
 ## Linting
 
@@ -93,6 +141,9 @@ Example module in this repo: `src/MyLeanContract.lean`.
 - `src/LeanCairo/Backend/Cairo/...`: Cairo rendering backend
 - `src/LeanCairo/Backend/Scarb/...`: manifest and helper script rendering
 - `src/LeanCairo/Pipeline/Generation/...`: render plan and write boundary
+- `src/LeanCairo/Compiler/IR/Spec.lean`, `src/LeanCairo/Pipeline/Generation/IRRenderer.lean`: IR-native contract rendering lane
+- `src/LeanCairo/Compiler/Optimize/Pass.lean`, `src/LeanCairo/Compiler/Optimize/Pipeline.lean`: typed pass interface + composed optimizer pipeline
+- `src/LeanCairo/Compiler/Semantics/ContractEval.lean`, `src/LeanCairo/Compiler/Proof/IRSpecSound.lean`: contract-level execution law + optimizer soundness
 - `src/LeanCairo/CLI/...`: argument parser + module invocation flow
 - `src/Examples/Hello.lean`, `src/MyLeanContract.lean`: example contracts
 - `tests/golden/...`, `tests/fixtures/...`: snapshot and ABI fixtures
@@ -102,5 +153,10 @@ Example module in this repo: `src/MyLeanContract.lean`.
 
 - Mutability supports both `view` and `externalMutable`.
 - Storage writes are declared explicitly per function (`FuncSpec.writes`).
+- Optimizer is enabled by default (`--optimize true`) and can be disabled for baseline benchmarking.
+- `--inlining-strategy` controls low-level Cairo compiler inlining (`default`, `avoid`, or numeric bound).
 - Felt arithmetic is limited to pass-through/equality semantics in this MVP.
 - Artifact location uses `*.starknet_artifacts.json` instead of hardcoded filenames.
+- There is no exact Sierra/CASM -> Cairo decompiler in this repository; `scarb expand` is used for human-reviewable expanded Cairo.
+- A validated artifact-pass lane now exists (`scripts/bench/optimize_artifacts.py`), currently with conservative pass `strip_sierra_debug_info`.
+- Artifact passes are guarded by semantic signatures over critical Sierra/CASM fields before acceptance.

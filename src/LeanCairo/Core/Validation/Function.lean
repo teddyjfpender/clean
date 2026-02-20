@@ -60,6 +60,9 @@ def validateFunction (storageFields : List StorageField) (fnSpec : FuncSpec) : L
       (fun errors writeSpec =>
         errors ++ validateWrite knownStorage writeSpec ++ validateExpr (argEnv fnSpec.args) knownStorage writeSpec.value)
       []
+  let duplicateWriteFieldErrors :=
+    (duplicateNames <| fnSpec.writes.map (fun writeSpec => writeSpec.field)).map (fun dup =>
+      ValidationError.duplicateStorageWriteField fnSpec.name dup)
   let writeMutabilityErrors :=
     match fnSpec.mutability with
     | .view =>
@@ -69,6 +72,6 @@ def validateFunction (storageFields : List StorageField) (fnSpec : FuncSpec) : L
           [.writesNotAllowedInViewFunction fnSpec.name]
     | .externalMutable =>
         []
-  nameErrors ++ argErrors ++ bodyErrors ++ writeSpecErrors ++ writeMutabilityErrors
+  nameErrors ++ argErrors ++ bodyErrors ++ writeSpecErrors ++ duplicateWriteFieldErrors ++ writeMutabilityErrors
 
 end LeanCairo.Core.Validation

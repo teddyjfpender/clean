@@ -21,5 +21,11 @@ def toAbiCanonical : Ty -> String
   | .u256 => "core::integer::u256"
   | .bool => "core::bool"
 
+abbrev denote : Ty -> Type
+  | .felt252 => Int
+  | .u128 => Nat
+  | .u256 => Nat
+  | .bool => Bool
+
 end Ty
 end LeanCairo.Core.Domain

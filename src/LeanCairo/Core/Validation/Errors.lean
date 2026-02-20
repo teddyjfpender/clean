@@ -14,6 +14,7 @@ inductive ValidationError where
   | variableTypeMismatch (name : String) (expected : Ty) (actual : Ty)
   | unknownStorageField (fieldName : String)
   | storageFieldTypeMismatch (fieldName : String) (expected : Ty) (actual : Ty)
+  | duplicateStorageWriteField (functionName : String) (fieldName : String)
   | writesNotAllowedInViewFunction (functionName : String)
   | emptyFunctionList (contractName : String)
   deriving Repr, DecidableEq
@@ -39,6 +40,8 @@ def render : ValidationError -> String
       s!"unknown storage field '{fieldName}'"
   | .storageFieldTypeMismatch fieldName expected actual =>
       s!"storage field '{fieldName}' used with type '{Ty.toCairo expected}' but declaration has type '{Ty.toCairo actual}'"
+  | .duplicateStorageWriteField fnName fieldName =>
+      s!"function '{fnName}' declares multiple writes to storage field '{fieldName}'"
   | .writesNotAllowedInViewFunction fnName =>
       s!"function '{fnName}' is view but declares storage writes"
   | .emptyFunctionList contractName =>

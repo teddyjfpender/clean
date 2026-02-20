@@ -47,8 +47,10 @@ mod HelloContract {
         }
 
         fn increment_counter(ref self: ContractState, amount: u128) -> u128 {
-            self.counter.write((self.counter.read() + amount));
-            (self.counter.read() + amount)
+            let __leancairo_write_0: u128 = (self.counter.read() + amount);
+            let __leancairo_return_value: u128 = (self.counter.read() + amount);
+            self.counter.write(__leancairo_write_0);
+            __leancairo_return_value
         }
     }
 }
