@@ -28,7 +28,9 @@ Implement a strict, deterministic RED->GREEN->REFACTOR loop pipeline with machin
 ## Milestone status ledger
 
 ### RGL-1 Deliverable catalog schema + deterministic generation
-- Status: NOT DONE
+- Status: DONE - 1bc5c30
+- Evidence tests: `scripts/roadmap/check_rgr_deliverables.sh`; `scripts/roadmap/validate_rgr_deliverables.py --catalog roadmap/reports/rgr-deliverables.json`; `scripts/test/rgr_deliverables_negative.sh`
+- Evidence proofs: `config/rgr-deliverable-spec.json`; `scripts/roadmap/generate_rgr_deliverables.py`; `scripts/roadmap/validate_rgr_deliverables.py`; `roadmap/reports/rgr-deliverables.json`; `roadmap/reports/rgr-deliverables.md`
 - Acceptance tests:
 1. Deliverable generation is deterministic.
 2. Missing required sources fail checks.
