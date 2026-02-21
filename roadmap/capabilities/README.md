@@ -32,4 +32,9 @@ python3 scripts/roadmap/validate_mir_family_contract.py \
   --ir-expr src/LeanCairo/Compiler/IR/Expr.lean \
   --eval src/LeanCairo/Compiler/Semantics/Eval.lean \
   --optimize src/LeanCairo/Compiler/Optimize/Expr.lean
+python3 scripts/roadmap/generate_lowering_scaffolds.py \
+  --registry roadmap/capabilities/registry.json \
+  --out-sierra src/LeanCairo/Backend/Sierra/Generated/LoweringScaffold.lean \
+  --out-cairo src/LeanCairo/Backend/Cairo/Generated/LoweringScaffold.lean
+scripts/roadmap/check_lowering_scaffold_sync.sh
 ```
