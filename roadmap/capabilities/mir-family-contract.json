@@ -1,0 +1,179 @@
+{
+  "fail_fast_contracts": [
+    {
+      "evidence_file": "tests/lean/eval_unsupported_domain_failfast.lean",
+      "expected_substring": "strict evaluator should fail-fast with stable variable-read error for unsupported tuple domain",
+      "id": "eval.unsupported_runtime_domain",
+      "test_script": "scripts/test/eval_unsupported_domain_failfast.sh"
+    },
+    {
+      "evidence_file": "scripts/test/sierra_failfast_unsupported.sh",
+      "expected_substring": "ltU128 lowering is not yet implemented",
+      "id": "sierra.unsupported_lt_u128",
+      "test_script": "scripts/test/sierra_failfast_unsupported.sh"
+    },
+    {
+      "evidence_file": "scripts/test/sierra_failfast_unsupported.sh",
+      "expected_substring": "unsupported parameter type 'u256'",
+      "id": "sierra.unsupported_u256_signature",
+      "test_script": "scripts/test/sierra_failfast_unsupported.sh"
+    }
+  ],
+  "nodes": [
+    {
+      "constructor": "addFelt252",
+      "effect_invariant": "pure",
+      "family_group": "scalar",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are felt252."
+    },
+    {
+      "constructor": "addU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u128."
+    },
+    {
+      "constructor": "addU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u256."
+    },
+    {
+      "constructor": "eq",
+      "effect_invariant": "pure",
+      "family_group": "control",
+      "support_state": "implemented",
+      "type_invariant": "Both operands share type parameter ty and result is bool."
+    },
+    {
+      "constructor": "ite",
+      "effect_invariant": "pure",
+      "family_group": "control",
+      "support_state": "implemented",
+      "type_invariant": "Condition is bool and both branches share result type."
+    },
+    {
+      "constructor": "leU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands are u128 and result is bool."
+    },
+    {
+      "constructor": "leU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands are u256 and result is bool."
+    },
+    {
+      "constructor": "letE",
+      "effect_invariant": "pure",
+      "family_group": "control",
+      "support_state": "implemented",
+      "type_invariant": "Bound expression type is boundTy and body defines result type."
+    },
+    {
+      "constructor": "litBool",
+      "effect_invariant": "pure",
+      "family_group": "scalar",
+      "support_state": "implemented",
+      "type_invariant": "Result type is bool."
+    },
+    {
+      "constructor": "litFelt252",
+      "effect_invariant": "pure",
+      "family_group": "scalar",
+      "support_state": "implemented",
+      "type_invariant": "Result type is felt252."
+    },
+    {
+      "constructor": "litU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Result type is u128."
+    },
+    {
+      "constructor": "litU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Result type is u256."
+    },
+    {
+      "constructor": "ltU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands are u128 and result is bool."
+    },
+    {
+      "constructor": "ltU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands are u256 and result is bool."
+    },
+    {
+      "constructor": "mulFelt252",
+      "effect_invariant": "pure",
+      "family_group": "scalar",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are felt252."
+    },
+    {
+      "constructor": "mulU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u128."
+    },
+    {
+      "constructor": "mulU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u256."
+    },
+    {
+      "constructor": "storageRead",
+      "effect_invariant": "resource-threaded",
+      "family_group": "storage",
+      "support_state": "implemented",
+      "type_invariant": "Result type is the requested storage-typed IR parameter."
+    },
+    {
+      "constructor": "subFelt252",
+      "effect_invariant": "pure",
+      "family_group": "scalar",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are felt252."
+    },
+    {
+      "constructor": "subU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u128."
+    },
+    {
+      "constructor": "subU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u256."
+    },
+    {
+      "constructor": "var",
+      "effect_invariant": "pure",
+      "family_group": "binding",
+      "support_state": "implemented",
+      "type_invariant": "Result type is the requested variable-typed IR parameter."
+    }
+  ],
+  "version": 1
+}
