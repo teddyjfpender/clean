@@ -299,6 +299,92 @@ def bindStorageStrict (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.
   else
     .error (unsupportedDomainMessage "storage bind" ty name)
 
+def castUnsupportedMessage (srcTy dstTy : Ty) : String :=
+  s!"unsupported evaluator cast from '{Ty.toCairo srcTy}' to '{Ty.toCairo dstTy}'"
+
+def castDomainViolationMessage (srcTy dstTy : Ty) (detail : String) : String :=
+  s!"invalid cast from '{Ty.toCairo srcTy}' to '{Ty.toCairo dstTy}': {detail}"
+
+def isCastLegal (srcTy dstTy : Ty) : Bool :=
+  supportsRuntimeBinding srcTy && supportsRuntimeBinding dstTy
+
+def runtimeValueToInt (srcTy : Ty) (value : Ty.denote srcTy) : Except String Int :=
+  match srcTy with
+  | .felt252 => .ok value
+  | .i8 => .ok value
+  | .i16 => .ok value
+  | .i32 => .ok value
+  | .i64 => .ok value
+  | .i128 => .ok value
+  | .u128 => .ok (Int.ofNat value)
+  | .u8 => .ok (Int.ofNat value)
+  | .u16 => .ok (Int.ofNat value)
+  | .u32 => .ok (Int.ofNat value)
+  | .u64 => .ok (Int.ofNat value)
+  | .u256 => .ok (Int.ofNat value)
+  | .qm31 => .ok (Int.ofNat value)
+  | .bool => .ok (if value then 1 else 0)
+  | _ => .error (castUnsupportedMessage srcTy srcTy)
+
+def requireNonNegativeNat (srcTy dstTy : Ty) (raw : Int) : Except String Nat :=
+  if raw < 0 then
+    .error (castDomainViolationMessage srcTy dstTy s!"negative source value '{raw}'")
+  else
+    .ok raw.toNat
+
+def castIntToRuntime (srcTy dstTy : Ty) (raw : Int) : Except String (Ty.denote dstTy) :=
+  match dstTy with
+  | .felt252 => .ok raw
+  | .i8 => .ok (IntegerDomains.normalizeSigned 8 raw)
+  | .i16 => .ok (IntegerDomains.normalizeSigned 16 raw)
+  | .i32 => .ok (IntegerDomains.normalizeSigned 32 raw)
+  | .i64 => .ok (IntegerDomains.normalizeSigned 64 raw)
+  | .i128 => .ok (IntegerDomains.normalizeSigned 128 raw)
+  | .u8 => do
+      let natValue <- requireNonNegativeNat srcTy dstTy raw
+      pure (IntegerDomains.normalizeUnsigned 8 natValue)
+  | .u16 => do
+      let natValue <- requireNonNegativeNat srcTy dstTy raw
+      pure (IntegerDomains.normalizeUnsigned 16 natValue)
+  | .u32 => do
+      let natValue <- requireNonNegativeNat srcTy dstTy raw
+      pure (IntegerDomains.normalizeUnsigned 32 natValue)
+  | .u64 => do
+      let natValue <- requireNonNegativeNat srcTy dstTy raw
+      pure (IntegerDomains.normalizeUnsigned 64 natValue)
+  | .u128 => do
+      let natValue <- requireNonNegativeNat srcTy dstTy raw
+      pure (IntegerDomains.normalizeUnsigned 128 natValue)
+  | .u256 => do
+      let natValue <- requireNonNegativeNat srcTy dstTy raw
+      pure (IntegerDomains.normalizeUnsigned 256 natValue)
+  | .qm31 =>
+      let modulus : Int := Int.ofNat IntegerDomains.qm31Modulus
+      let residue := Int.emod raw modulus
+      .ok residue.toNat
+  | .bool =>
+      if raw = 0 then
+        .ok false
+      else if raw = 1 then
+        .ok true
+      else
+        .error (castDomainViolationMessage srcTy dstTy s!"expected canonical boolean value 0 or 1, got '{raw}'")
+  | _ => .error (castUnsupportedMessage srcTy dstTy)
+
+def castStrict (srcTy dstTy : Ty) (value : Ty.denote srcTy) : Except String (Ty.denote dstTy) := do
+  if isCastLegal srcTy dstTy then
+    let raw <- runtimeValueToInt srcTy value
+    castIntToRuntime srcTy dstTy raw
+  else
+    .error (castUnsupportedMessage srcTy dstTy)
+
+theorem castStrict_illegal_failfast
+    (srcTy dstTy : Ty)
+    (value : Ty.denote srcTy)
+    (hIllegal : isCastLegal srcTy dstTy = false) :
+    castStrict srcTy dstTy value = .error (castUnsupportedMessage srcTy dstTy) := by
+  simp [castStrict, hIllegal]
+
 theorem readVar_bindVar_same (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty) :
     readVar (bindVar ctx ty name value) ty name = value := by
   cases ty <;> simp [readVar, bindVar]
