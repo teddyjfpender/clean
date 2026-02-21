@@ -57,7 +57,9 @@ Automate proof obligation tracking and quality gate synthesis so subset growth r
 3. Promotion attempts with unresolved mandatory debt fail CI.
 
 ### LPA-4 Release evidence pack hard gate
-- Status: NOT DONE
+- Status: DONE - 1024e24
+- Evidence tests: `scripts/roadmap/check_release_go_no_go.sh`; `scripts/roadmap/check_release_reports_freshness.sh`; `scripts/test/release_go_no_go_negative.sh`; `scripts/roadmap/check_issue_evidence.sh`
+- Evidence proofs: `scripts/roadmap/generate_release_reports.py`; `roadmap/reports/release-go-no-go-thresholds.json`; `roadmap/reports/release-go-no-go-report.md`; `roadmap/reports/release-go-no-go-report.json`; `scripts/roadmap/check_release_go_no_go.sh`; `scripts/roadmap/check_release_reports_freshness.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
 - Acceptance tests:
 1. Release reports include capability closure, proof closure, and benchmark closure sections.
 2. Missing evidence links for done milestones fail release check.
