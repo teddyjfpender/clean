@@ -1,0 +1,242 @@
+{
+  "data_sources": {
+    "capability_registry": "roadmap/capabilities/registry.json",
+    "corelib_parity_trend": "roadmap/inventory/corelib-parity-trend.json",
+    "optimization_closure": "roadmap/reports/optimization-closure-report.json",
+    "release_go_no_go": "roadmap/reports/release-go-no-go-report.json",
+    "sierra_matrix": "roadmap/inventory/sierra-coverage-matrix.json",
+    "track_a_issue": "roadmap/executable-issues/05-track-a-lean-to-sierra-functions.issue.md",
+    "track_b_issue": "roadmap/executable-issues/20-track-b-cairo-parity-and-reviewability-plan.issue.md"
+  },
+  "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617",
+  "rows": [
+    {
+      "blocking_gates": [
+        "scripts/roadmap/check_issue_statuses.sh",
+        "scripts/roadmap/check_issue_dependencies.sh",
+        "scripts/roadmap/check_milestone_dependencies.py"
+      ],
+      "diagnostics": [
+        "25-full-function-compiler-completion-matrix.issue.md"
+      ],
+      "dimension_id": "program_p0_issue_closure",
+      "evidence_refs": [
+        "scripts/roadmap/check_issue_statuses.sh",
+        "scripts/roadmap/check_issue_dependencies.sh"
+      ],
+      "required_artifacts": [
+        "roadmap/executable-issues"
+      ],
+      "required_metrics": [
+        "pending_p0_issues=1"
+      ],
+      "status": "not_ready",
+      "target_scope": "program"
+    },
+    {
+      "blocking_gates": [
+        "scripts/roadmap/check_release_reports_freshness.sh",
+        "scripts/roadmap/check_release_go_no_go.sh"
+      ],
+      "diagnostics": [],
+      "dimension_id": "program_release_evidence_closure",
+      "evidence_refs": [
+        "scripts/roadmap/check_release_reports_freshness.sh",
+        "roadmap/reports/release-go-no-go-report.json"
+      ],
+      "required_artifacts": [
+        "roadmap/reports/release-compatibility-report.md",
+        "roadmap/reports/release-proof-report.md",
+        "roadmap/reports/release-benchmark-report.md",
+        "roadmap/reports/release-capability-closure-report.md",
+        "roadmap/reports/release-go-no-go-report.json",
+        "roadmap/reports/release-go-no-go-report.md"
+      ],
+      "required_metrics": [
+        "missing_required_reports=0"
+      ],
+      "status": "ready",
+      "target_scope": "program"
+    },
+    {
+      "blocking_gates": [
+        "scripts/bench/check_optimizer_non_regression.sh",
+        "scripts/bench/check_optimizer_family_thresholds.sh"
+      ],
+      "diagnostics": [],
+      "dimension_id": "track_a_benchmark_closure",
+      "evidence_refs": [
+        "roadmap/reports/release-go-no-go-report.json",
+        "roadmap/reports/release-benchmark-report.md"
+      ],
+      "required_artifacts": [
+        "generated/examples/benchmark-summary.json",
+        "roadmap/reports/release-benchmark-report.md"
+      ],
+      "required_metrics": [
+        "benchmark_pass=True",
+        "case_count=5",
+        "hotspot_sierra_improvement_pct=0.0"
+      ],
+      "status": "ready",
+      "target_scope": "lean->sierra->casm"
+    },
+    {
+      "blocking_gates": [
+        "scripts/roadmap/check_sierra_primary_closure.sh",
+        "scripts/roadmap/check_sierra_coverage_report_freshness.sh"
+      ],
+      "diagnostics": [],
+      "dimension_id": "track_a_family_closure",
+      "evidence_refs": [
+        "scripts/roadmap/check_sierra_primary_closure.sh",
+        "roadmap/inventory/sierra-coverage-matrix.json"
+      ],
+      "required_artifacts": [
+        "roadmap/inventory/sierra-coverage-matrix.json",
+        "roadmap/inventory/sierra-family-coverage-report.json"
+      ],
+      "required_metrics": [
+        "non_starknet_non_closed_modules=0"
+      ],
+      "status": "ready",
+      "target_scope": "lean->sierra->casm"
+    },
+    {
+      "blocking_gates": [
+        "scripts/roadmap/check_optimization_closure_report.sh",
+        "scripts/roadmap/check_release_go_no_go.sh"
+      ],
+      "diagnostics": [],
+      "dimension_id": "track_a_optimization_closure",
+      "evidence_refs": [
+        "roadmap/reports/optimization-closure-report.json",
+        "scripts/roadmap/check_optimization_closure_report.sh"
+      ],
+      "required_artifacts": [
+        "roadmap/reports/optimization-closure-report.json",
+        "roadmap/reports/optimization-closure-report.md"
+      ],
+      "required_metrics": [
+        "optimization_result=PASS",
+        "optimization_done_count=4",
+        "optimization_target_count=4"
+      ],
+      "status": "ready",
+      "target_scope": "lean->sierra->casm"
+    },
+    {
+      "blocking_gates": [
+        "scripts/roadmap/check_proof_obligations.sh",
+        "scripts/roadmap/check_release_go_no_go.sh"
+      ],
+      "diagnostics": [],
+      "dimension_id": "track_a_proof_closure",
+      "evidence_refs": [
+        "roadmap/reports/release-go-no-go-report.json",
+        "scripts/roadmap/check_release_go_no_go.sh"
+      ],
+      "required_artifacts": [
+        "roadmap/reports/release-proof-report.md",
+        "roadmap/reports/release-go-no-go-report.json"
+      ],
+      "required_metrics": [
+        "proof_pass=True",
+        "missing_required_theorems=0",
+        "placeholder_count=0"
+      ],
+      "status": "ready",
+      "target_scope": "lean->sierra->casm"
+    },
+    {
+      "blocking_gates": [
+        "scripts/roadmap/check_capability_registry.sh",
+        "scripts/roadmap/check_capability_obligations.sh"
+      ],
+      "diagnostics": [],
+      "dimension_id": "track_b_divergence_contract_closure",
+      "evidence_refs": [
+        "roadmap/capabilities/registry.json",
+        "scripts/roadmap/check_capability_registry.sh"
+      ],
+      "required_artifacts": [
+        "roadmap/capabilities/registry.json",
+        "roadmap/inventory/capability-coverage-report.json"
+      ],
+      "required_metrics": [
+        "missing_divergence_contracts=0"
+      ],
+      "status": "ready",
+      "target_scope": "lean->cairo"
+    },
+    {
+      "blocking_gates": [
+        "scripts/roadmap/check_corelib_parity_freshness.sh",
+        "scripts/roadmap/check_corelib_parity_trend.sh"
+      ],
+      "diagnostics": [],
+      "dimension_id": "track_b_parity_closure",
+      "evidence_refs": [
+        "roadmap/inventory/corelib-parity-trend.json",
+        "scripts/roadmap/check_corelib_parity_trend.sh"
+      ],
+      "required_artifacts": [
+        "roadmap/inventory/corelib-parity-report.json",
+        "roadmap/inventory/corelib-parity-trend.json"
+      ],
+      "required_metrics": [
+        "parity_result=PASS",
+        "supported=1",
+        "bounded=9"
+      ],
+      "status": "ready",
+      "target_scope": "lean->cairo"
+    },
+    {
+      "blocking_gates": [
+        "scripts/test/sierra_primary_without_cairo.sh",
+        "scripts/test/sierra_primary_cairo_coupling_guard.sh"
+      ],
+      "diagnostics": [],
+      "dimension_id": "track_b_purity_closure",
+      "evidence_refs": [
+        "roadmap/executable-issues/20-track-b-cairo-parity-and-reviewability-plan.issue.md",
+        "scripts/test/sierra_primary_without_cairo.sh"
+      ],
+      "required_artifacts": [
+        "scripts/test/sierra_primary_without_cairo.sh",
+        "scripts/test/sierra_primary_cairo_coupling_guard.sh"
+      ],
+      "required_metrics": [
+        "CPL-1=DONE - 0052b25"
+      ],
+      "status": "ready",
+      "target_scope": "lean->cairo"
+    },
+    {
+      "blocking_gates": [
+        "scripts/test/sierra_review_lift.sh",
+        "scripts/test/sierra_review_lift_complex.sh"
+      ],
+      "diagnostics": [],
+      "dimension_id": "track_b_reviewability_closure",
+      "evidence_refs": [
+        "roadmap/executable-issues/20-track-b-cairo-parity-and-reviewability-plan.issue.md",
+        "scripts/test/sierra_review_lift_complex.sh"
+      ],
+      "required_artifacts": [
+        "scripts/sierra/render_review_lift.py",
+        "scripts/test/sierra_review_lift_complex.sh"
+      ],
+      "required_metrics": [
+        "CPL-3=DONE - 23a5513",
+        "CPL-4=DONE - a70c31f"
+      ],
+      "status": "ready",
+      "target_scope": "lean->cairo"
+    }
+  ],
+  "schema": "config/completion-matrix-schema.json",
+  "schema_version": 1,
+  "version": 1
+}

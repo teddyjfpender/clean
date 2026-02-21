@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "required_top_level": [
+    "version",
+    "schema_version",
+    "pinned_commit",
+    "data_sources",
+    "rows"
+  ],
+  "required_row_fields": [
+    "dimension_id",
+    "target_scope",
+    "required_metrics",
+    "required_artifacts",
+    "blocking_gates",
+    "status",
+    "diagnostics",
+    "evidence_refs"
+  ],
+  "status_values": [
+    "not_ready",
+    "conditionally_ready",
+    "ready"
+  ]
+}
