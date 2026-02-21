@@ -1,0 +1,9 @@
+{
+  "minimums": {
+    "bounded_count": 3,
+    "bounded_ratio": 0.01875,
+    "supported_count": 1
+  },
+  "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617",
+  "version": 1
+}

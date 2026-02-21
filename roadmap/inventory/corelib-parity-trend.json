@@ -1,0 +1,37 @@
+{
+  "checks": [
+    {
+      "current": 1,
+      "metric": "supported_count",
+      "minimum": 1,
+      "pass": true
+    },
+    {
+      "current": 3,
+      "metric": "bounded_count",
+      "minimum": 3,
+      "pass": true
+    },
+    {
+      "current": 0.01875,
+      "metric": "bounded_ratio",
+      "minimum": 0.01875,
+      "pass": true
+    }
+  ],
+  "counts": {
+    "bounded": 3,
+    "bounded_ratio": 0.01875,
+    "excluded": 157,
+    "partial": 2,
+    "supported": 1,
+    "total": 160
+  },
+  "inputs": {
+    "baseline": "/Users/theodorepender/Coding/clean/roadmap/capabilities/corelib-parity-trend-baseline.json",
+    "parity_report": "/Users/theodorepender/Coding/clean/roadmap/inventory/corelib-parity-report.json"
+  },
+  "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617",
+  "result": "PASS",
+  "version": 1
+}
