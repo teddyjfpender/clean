@@ -26,7 +26,9 @@ Deliver machine-verifiable completion audits and certification for function-doma
 ## Milestone status ledger
 
 ### AUD-1 Completion matrix schema and data sources
-- Status: NOT DONE
+- Status: DONE - b167c8b
+- Evidence tests: `scripts/roadmap/check_completion_matrix.sh`; `scripts/roadmap/validate_completion_matrix.py --schema config/completion-matrix-schema.json --matrix roadmap/reports/completion-matrix.json`; `scripts/roadmap/check_gate_manifest_sync.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `config/completion-matrix-schema.json`; `scripts/roadmap/generate_completion_matrix.py`; `scripts/roadmap/validate_completion_matrix.py`; `roadmap/reports/completion-matrix.json`; `roadmap/reports/completion-matrix.md`; `config/gate-manifest.json`
 - Acceptance tests:
 1. Completion matrix schema validates required fields.
 2. Missing required data sources fail checks.
