@@ -37,6 +37,7 @@ export PATH="$HOME/.elan/bin:$PATH"
 "$ROOT_DIR/scripts/roadmap/check_risk_controls.sh" --validate-mapping
 "$ROOT_DIR/scripts/roadmap/check_effect_isolation.sh"
 "$ROOT_DIR/scripts/roadmap/check_proof_obligations.sh"
+"$ROOT_DIR/scripts/roadmap/check_proof_debt_policy.sh"
 (
   cd "$ROOT_DIR"
   lake build
@@ -52,6 +53,7 @@ export PATH="$HOME/.elan/bin:$PATH"
 "$ROOT_DIR/scripts/test/canonicalization_regression.sh"
 "$ROOT_DIR/scripts/test/optimizer_pass_regression.sh"
 "$ROOT_DIR/scripts/test/proof_obligations_negative.sh"
+"$ROOT_DIR/scripts/test/proof_debt_policy_negative.sh"
 "$ROOT_DIR/scripts/test/gate_manifest_reproducibility.sh"
 "$ROOT_DIR/scripts/test/gate_manifest_negative.sh"
 "$ROOT_DIR/scripts/test/capability_registry_negative.sh"
