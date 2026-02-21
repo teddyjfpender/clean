@@ -65,7 +65,9 @@ Escalate to a verified optimizing compiler pipeline for the constrained Lean sub
 3. Performance regressions are blocked by gates.
 
 ### OPTX-5 Verified optimization closure report
-- Status: NOT DONE
+- Status: DONE - 441b5d0
+- Evidence tests: `scripts/roadmap/check_optimization_closure_report.sh`; `scripts/roadmap/check_release_go_no_go.sh`; `scripts/roadmap/check_release_reports_freshness.sh`; `scripts/roadmap/check_issue_evidence.sh`
+- Evidence proofs: `scripts/roadmap/generate_optimization_closure_report.py`; `roadmap/reports/optimization-closure-report.json`; `roadmap/reports/optimization-closure-report.md`; `scripts/roadmap/generate_release_reports.py`; `roadmap/reports/release-go-no-go-report.json`
 - Acceptance tests:
 1. Proof and benchmark closure report is generated.
 2. Missing evidence for optimization claims fails checks.
