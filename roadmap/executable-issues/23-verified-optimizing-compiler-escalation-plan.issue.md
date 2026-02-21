@@ -47,7 +47,9 @@ Escalate to a verified optimizing compiler pipeline for the constrained Lean sub
 3. Proof debt entries are linked and bounded where theorem gaps remain.
 
 ### OPTX-3 Sierra structural optimization layer
-- Status: NOT DONE
+- Status: DONE - e1842a0
+- Evidence tests: `scripts/test/sierra_structural_optimization_e2e.sh`; `scripts/test/sierra_structural_optimization_reproducibility.sh`; `scripts/test/sierra_differential.sh`; `scripts/roadmap/check_effect_metadata.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `scripts/sierra/optimize_structural.py`; `src/LeanCairo/Compiler/Optimize/Pass.lean`; `config/effect-metadata.json`; `roadmap/reports/cost-model-calibration-thresholds.json`
 - Acceptance tests:
 1. Sierra transforms preserve validation and CASM compile success.
 2. Differential semantic checks pass.
