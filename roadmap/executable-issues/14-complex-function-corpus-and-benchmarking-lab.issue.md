@@ -48,7 +48,9 @@ Deliver a manifest-driven complex function corpus with deterministic differentia
 3. Differential mismatch output is replayable and deterministic.
 
 ### CFB-3 Benchmark harness autogeneration
-- Status: NOT DONE
+- Status: DONE - 6111d81
+- Evidence tests: `scripts/roadmap/check_benchmark_harness_sync.sh`; `scripts/test/benchmark_harness_reproducibility.sh`; `scripts/test/benchmark_family_thresholds_negative.sh`; `scripts/bench/generated/run_manifest_benchmarks.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `config/examples-manifest.json`; `scripts/examples/validate_examples_manifest.py`; `scripts/examples/generate_benchmark_harness.py`; `generated/examples/benchmark-harness.json`; `scripts/bench/generated/run_manifest_benchmarks.sh`; `scripts/bench/run_manifest_benchmark_suite.py`; `scripts/bench/check_manifest_benchmark_thresholds.py`; `generated/examples/benchmark-summary.json`; `generated/examples/benchmark-summary.md`
 - Acceptance tests:
 1. Benchmark harnesses generate from manifest kernels with stable naming.
 2. Gas and steps comparisons are parsed into deterministic artifacts.
