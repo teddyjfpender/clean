@@ -100,7 +100,10 @@ private theorem evalFoldIte (ctx : EvalContext) (cond : IRExpr .bool) (thenBranc
   | litBool value =>
       cases value <;> simp [foldIte, evalExpr]
   | _ =>
-      simp [foldIte, evalExpr]
+      by_cases hEq : thenBranch = elseBranch
+      · subst hEq
+        simp [foldIte, evalExpr]
+      · simp [foldIte, hEq, evalExpr]
 
 theorem optimizeExprSound (ctx : EvalContext) (expr : IRExpr ty) :
     evalExpr ctx (optimizeExpr expr) = evalExpr ctx expr := by

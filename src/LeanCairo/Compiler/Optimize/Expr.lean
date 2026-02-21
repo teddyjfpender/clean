@@ -56,7 +56,11 @@ def foldIte (cond : IRExpr .bool) (thenBranch elseBranch : IRExpr ty) : IRExpr t
   match cond with
   | .litBool true => thenBranch
   | .litBool false => elseBranch
-  | other => .ite other thenBranch elseBranch
+  | other =>
+      if thenBranch = elseBranch then
+        thenBranch
+      else
+        .ite other thenBranch elseBranch
 
 def optimizeExpr : IRExpr ty -> IRExpr ty
   | .var name => .var name
