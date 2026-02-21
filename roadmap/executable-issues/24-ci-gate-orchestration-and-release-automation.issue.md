@@ -36,7 +36,9 @@ Automate and harden CI gate orchestration and release-governance workflows as ca
 3. Manifest validation checks pass.
 
 ### CIX-2 Workflow synchronization and drift detection
-- Status: NOT DONE
+- Status: DONE - 6ca24b1
+- Evidence tests: `scripts/roadmap/list_quality_gates.sh --validate-workflows`; `scripts/test/gate_manifest_negative.sh`; `scripts/roadmap/check_gate_manifest_sync.sh`; `scripts/test/gate_manifest_reproducibility.sh`
+- Evidence proofs: `scripts/roadmap/validate_gate_manifest_workflows.py`; `scripts/roadmap/list_quality_gates.sh`; `config/gate-manifest.json`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`; `scripts/workflow/run-release-candidate-checks.sh`
 - Acceptance tests:
 1. Workflow scripts validate against generated gate manifests.
 2. Manual drift is detected and fails checks.
