@@ -1,0 +1,155 @@
+{"version": 1,
+ "type_declarations":
+ [{"long_id": {"generic_id": "felt252", "generic_args": []},
+   "id": {"id": 18197987107266074389, "debug_name": "felt252"},
+   "declared_type_info": null},
+  {"long_id":
+   {"generic_id": "Array",
+    "generic_args":
+    [{"Type": {"id": 18197987107266074389, "debug_name": "felt252"}}]},
+   "id": {"id": 7859605461770069350, "debug_name": "Array<felt252>"},
+   "declared_type_info": null},
+  {"long_id":
+   {"generic_id": "Span",
+    "generic_args":
+    [{"Type": {"id": 18197987107266074389, "debug_name": "felt252"}}]},
+   "id": {"id": 4641710165377337107, "debug_name": "Span<felt252>"},
+   "declared_type_info": null},
+  {"long_id":
+   {"generic_id": "Nullable",
+    "generic_args":
+    [{"Type": {"id": 18197987107266074389, "debug_name": "felt252"}}]},
+   "id": {"id": 589139507627356256, "debug_name": "Nullable<felt252>"},
+   "declared_type_info": null},
+  {"long_id":
+   {"generic_id": "Box",
+    "generic_args":
+    [{"Type": {"id": 18197987107266074389, "debug_name": "felt252"}}]},
+   "id": {"id": 7169452086969238706, "debug_name": "Box<felt252>"},
+   "declared_type_info": null}],
+ "statements":
+ [{"Invocation":
+   {"libfunc_id":
+    {"id": 4434642676631099885, "debug_name": "store_temp_Array<felt252>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15670685823980202699,
+        "debug_name": "arrayPassthrough::tmp::store_temp::0"}]}],
+    "args":
+    [{"id": 14152039582755301190,
+      "debug_name": "arrayPassthrough::param::value"}]}},
+  {"Return":
+   [{"id": 15670685823980202699,
+     "debug_name": "arrayPassthrough::tmp::store_temp::0"}]},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 3100263409554005222, "debug_name": "store_temp_Span<felt252>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2011266753892872274,
+        "debug_name": "spanPassthrough::tmp::store_temp::0"}]}],
+    "args":
+    [{"id": 12260018432382952071,
+      "debug_name": "spanPassthrough::param::value"}]}},
+  {"Return":
+   [{"id": 2011266753892872274,
+     "debug_name": "spanPassthrough::tmp::store_temp::0"}]},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 7488908160840521153, "debug_name": "store_temp_Nullable<felt252>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10176382093013712001,
+        "debug_name": "nullablePassthrough::tmp::store_temp::0"}]}],
+    "args":
+    [{"id": 4131708804862060340,
+      "debug_name": "nullablePassthrough::param::value"}]}},
+  {"Return":
+   [{"id": 10176382093013712001,
+     "debug_name": "nullablePassthrough::tmp::store_temp::0"}]},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13465879042287059281, "debug_name": "store_temp_Box<felt252>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11545418307169930884,
+        "debug_name": "boxedPassthrough::tmp::store_temp::0"}]}],
+    "args":
+    [{"id": 3472473504071308977,
+      "debug_name": "boxedPassthrough::param::value"}]}},
+  {"Return":
+   [{"id": 11545418307169930884,
+     "debug_name": "boxedPassthrough::tmp::store_temp::0"}]}],
+ "libfunc_declarations":
+ [{"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 7859605461770069350, "debug_name": "Array<felt252>"}}]},
+   "id":
+   {"id": 4434642676631099885, "debug_name": "store_temp_Array<felt252>"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 4641710165377337107, "debug_name": "Span<felt252>"}}]},
+   "id": {"id": 3100263409554005222, "debug_name": "store_temp_Span<felt252>"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 589139507627356256, "debug_name": "Nullable<felt252>"}}]},
+   "id":
+   {"id": 7488908160840521153, "debug_name": "store_temp_Nullable<felt252>"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 7169452086969238706, "debug_name": "Box<felt252>"}}]},
+   "id":
+   {"id": 13465879042287059281, "debug_name": "store_temp_Box<felt252>"}}],
+ "funcs":
+ [{"signature":
+   {"ret_types": [{"id": 7859605461770069350, "debug_name": "Array<felt252>"}],
+    "param_types":
+    [{"id": 7859605461770069350, "debug_name": "Array<felt252>"}]},
+   "params":
+   [{"ty": {"id": 7859605461770069350, "debug_name": "Array<felt252>"},
+     "id":
+     {"id": 14152039582755301190,
+      "debug_name": "arrayPassthrough::param::value"}}],
+   "id": {"id": 2269734972628928428, "debug_name": "arrayPassthrough"},
+   "entry_point": 0},
+  {"signature":
+   {"ret_types": [{"id": 4641710165377337107, "debug_name": "Span<felt252>"}],
+    "param_types":
+    [{"id": 4641710165377337107, "debug_name": "Span<felt252>"}]},
+   "params":
+   [{"ty": {"id": 4641710165377337107, "debug_name": "Span<felt252>"},
+     "id":
+     {"id": 12260018432382952071,
+      "debug_name": "spanPassthrough::param::value"}}],
+   "id": {"id": 14139952502915064725, "debug_name": "spanPassthrough"},
+   "entry_point": 2},
+  {"signature":
+   {"ret_types":
+    [{"id": 589139507627356256, "debug_name": "Nullable<felt252>"}],
+    "param_types":
+    [{"id": 589139507627356256, "debug_name": "Nullable<felt252>"}]},
+   "params":
+   [{"ty": {"id": 589139507627356256, "debug_name": "Nullable<felt252>"},
+     "id":
+     {"id": 4131708804862060340,
+      "debug_name": "nullablePassthrough::param::value"}}],
+   "id": {"id": 12582752216828957962, "debug_name": "nullablePassthrough"},
+   "entry_point": 4},
+  {"signature":
+   {"ret_types": [{"id": 7169452086969238706, "debug_name": "Box<felt252>"}],
+    "param_types": [{"id": 7169452086969238706, "debug_name": "Box<felt252>"}]},
+   "params":
+   [{"ty": {"id": 7169452086969238706, "debug_name": "Box<felt252>"},
+     "id":
+     {"id": 3472473504071308977,
+      "debug_name": "boxedPassthrough::param::value"}}],
+   "id": {"id": 2362543285605487895, "debug_name": "boxedPassthrough"},
+   "entry_point": 6}]}

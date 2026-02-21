@@ -2,7 +2,7 @@
   "baseline_source": "/Users/theodorepender/Coding/clean/roadmap/capabilities/corpus-coverage-trend-baseline.json",
   "checks": [
     {
-      "current": 10,
+      "current": 11,
       "metric": "kernel_count",
       "minimum": 10,
       "pass": true

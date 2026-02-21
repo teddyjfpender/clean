@@ -54,6 +54,9 @@ lean_lib sq128x128_u128 where
 lean_lib aggregate_payload_mix where
   srcDir := "../examples/Lean"
 
+lean_lib collection_passthrough where
+  srcDir := "../examples/Lean"
+
 lean_lib circuit_gate_felt where
   srcDir := "../examples/Lean"
 

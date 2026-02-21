@@ -37,7 +37,9 @@ Close Track-B function parity and reviewability guarantees while preserving Trac
 3. Capability guard checks pass.
 
 ### CPL-2 Corelib parity mapping and divergence policy
-- Status: NOT DONE
+- Status: DONE - 167bfae
+- Evidence tests: `scripts/roadmap/check_corelib_parity_freshness.sh`; `scripts/roadmap/check_capability_registry.sh`; `scripts/test/capability_registry_negative.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `scripts/roadmap/render_corelib_parity_report.py`; `roadmap/inventory/corelib-parity-report.json`; `roadmap/inventory/corelib-parity-report.md`; `scripts/roadmap/validate_capability_registry.py`; `roadmap/capabilities/registry.json`
 - Acceptance tests:
 1. Corelib parity mapping report is generated.
 2. Undocumented divergence is rejected.

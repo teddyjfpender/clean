@@ -79,6 +79,44 @@
       }
     },
     {
+      "id": "collection_passthrough",
+      "module": "collection_passthrough.Example",
+      "lean_sources": [
+        "examples/Lean/collection_passthrough/Example.lean"
+      ],
+      "mirrors": {
+        "lean_dir": "examples/Lean/collection_passthrough",
+        "sierra_dir": "examples/Sierra/collection_passthrough",
+        "cairo_dir": "examples/Cairo/collection_passthrough",
+        "baseline_dir": null,
+        "benchmark_dir": null
+      },
+      "differential": {
+        "kind": "none",
+        "vector_profiles": [],
+        "replay_command": null,
+        "lean_test_file": null,
+        "backend_module": null,
+        "backend_contract": null
+      },
+      "benchmark": {
+        "kind": "none",
+        "family": null,
+        "runner_script": null,
+        "min_sierra_improvement_pct": null,
+        "min_l2_improvement_pct": null
+      },
+      "coverage": {
+        "complexity_tier": "medium",
+        "family_tags": [
+          "aggregate"
+        ],
+        "capability_ids": [
+          "cap.collection.array_span_dict"
+        ]
+      }
+    },
+    {
       "id": "crypto_round_felt",
       "module": "crypto_round_felt.Example",
       "lean_sources": [

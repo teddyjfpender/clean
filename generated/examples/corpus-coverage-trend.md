@@ -6,6 +6,6 @@
 
 | Metric | Current | Minimum | Pass |
 | --- | ---: | ---: | --- |
-| `kernel_count` | `10` | `10` | `true` |
+| `kernel_count` | `11` | `10` | `true` |
 | `family_count` | `7` | `6` | `true` |
 | `implemented_capability_coverage_ratio` | `1.0` | `1.0` | `true` |

@@ -78,7 +78,9 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 3. Dictionary operation differential tests pass.
 
 ### A5 Control-flow and calls
-- Status: NOT DONE
+- Status: DONE - c22a9ea
+- Evidence tests: `scripts/test/call_panic_semantics_regression.sh`; `scripts/test/control_flow_normalization_regression.sh`; `scripts/test/sierra_differential.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/Optimize/Expr.lean`; `tests/lean/call_panic_semantics_regression.lean`; `tests/lean/control_flow_normalization_regression.lean`
 - Acceptance tests:
 1. Function-call and recursion fixtures pass validation/compilation.
 2. Panic propagation behavior matches reference semantics.

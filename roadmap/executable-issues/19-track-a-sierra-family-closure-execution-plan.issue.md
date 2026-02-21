@@ -65,7 +65,9 @@ Execute full function-domain Sierra family closure for Track A with explicit low
 3. Advanced family benchmarks are non-regressive.
 
 ### SCL-5 Non-Starknet closure certification
-- Status: NOT DONE
+- Status: DONE - 167bfae
+- Evidence tests: `scripts/roadmap/check_capability_closure_slo.sh`; `scripts/roadmap/check_sierra_coverage_report_freshness.sh`; `scripts/roadmap/check_capability_registry.sh`; `scripts/roadmap/check_capability_obligations.sh`
+- Evidence proofs: `roadmap/inventory/capability-coverage-report.json`; `roadmap/inventory/capability-coverage-report.md`; `roadmap/inventory/capability-obligation-report.json`; `roadmap/inventory/capability-obligation-report.md`; `roadmap/reports/release-capability-closure-report.md`
 - Acceptance tests:
 1. Coverage report shows closure ratio target met for non-Starknet families.
 2. No unresolved implemented-family gaps remain.

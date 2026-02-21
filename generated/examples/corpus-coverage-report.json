@@ -3,8 +3,8 @@
     {
       "family": "aggregate",
       "high_count": 0,
-      "medium_count": 1,
-      "total_count": 1
+      "medium_count": 2,
+      "total_count": 2
     },
     {
       "family": "circuit",
@@ -44,10 +44,10 @@
     }
   ],
   "implemented_capability_coverage_ratio": 1.0,
-  "implemented_capability_covered": 7,
+  "implemented_capability_covered": 9,
   "implemented_capability_missing": [],
-  "implemented_capability_total": 7,
-  "kernel_count": 10,
+  "implemented_capability_total": 9,
+  "kernel_count": 11,
   "kernels": [
     {
       "capability_ids": [
@@ -68,6 +68,16 @@
         "circuit"
       ],
       "id": "circuit_gate_felt"
+    },
+    {
+      "capability_ids": [
+        "cap.collection.array_span_dict"
+      ],
+      "complexity_tier": "medium",
+      "family_tags": [
+        "aggregate"
+      ],
+      "id": "collection_passthrough"
     },
     {
       "capability_ids": [
@@ -193,10 +203,10 @@
     {
       "family": "aggregate",
       "high_count": 0,
-      "medium_count": 1,
+      "medium_count": 2,
       "required": true,
       "satisfied": true,
-      "total_count": 1
+      "total_count": 2
     },
     {
       "family": "crypto",

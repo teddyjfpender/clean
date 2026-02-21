@@ -59,7 +59,9 @@ Deliver deterministic function-level Lean -> Cairo emission from shared MIR with
 2. Branch-heavy corpus parity passes.
 
 ### B4 Advanced math/crypto/circuit parity
-- Status: NOT DONE
+- Status: DONE - 9e60ab1
+- Evidence tests: `scripts/test/backend_parity_advanced_family.sh`; `scripts/bench/check_optimizer_non_regression.sh`; `scripts/bench/check_optimizer_family_thresholds.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `scripts/test/backend_parity_advanced_family.sh`; `scripts/test/run_backend_parity_case.sh`; `examples/Lean/circuit_gate_felt/Example.lean`; `examples/Lean/crypto_round_felt/Example.lean`; `config/effect-metadata.json`
 - Acceptance tests:
 1. Advanced function corpus parity passes.
 2. Resource-sensitive emit rules are enforced.

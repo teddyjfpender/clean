@@ -2,7 +2,7 @@
 
 - Manifest: `config/examples-manifest.json`
 - Capability registry: `roadmap/capabilities/registry.json`
-- Kernels: `10`
+- Kernels: `11`
 
 ## Kernel Mapping
 
@@ -10,6 +10,7 @@
 | --- | --- | --- | --- |
 | `aggregate_payload_mix` | `medium` | `aggregate` | `cap.aggregate.tuple_struct_enum` |
 | `circuit_gate_felt` | `medium` | `circuit` | `cap.circuit.constraint_gate` |
+| `collection_passthrough` | `medium` | `aggregate` | `cap.collection.array_span_dict` |
 | `crypto_round_felt` | `high` | `crypto` | `cap.crypto.round_mix, cap.scalar.felt252.sub` |
 | `fast_power_u128` | `high` | `integer` | `cap.integer.u128.add.wrapping, cap.integer.u128.mul.wrapping` |
 | `fast_power_u128_p63` | `high` | `integer` | `cap.integer.u128.add.wrapping, cap.integer.u128.mul.wrapping` |
@@ -21,8 +22,8 @@
 
 ## Implemented Capability Coverage
 
-- Implemented capabilities in registry: `7`
-- Implemented capabilities covered by corpus: `7`
+- Implemented capabilities in registry: `9`
+- Implemented capabilities covered by corpus: `9`
 - Coverage ratio: `1.0`
 - Missing: `none`
 
@@ -33,6 +34,6 @@
 | `integer` | `true` | `1` | `3` | `4` |
 | `fixed_point` | `true` | `0` | `2` | `2` |
 | `control_flow` | `true` | `0` | `1` | `1` |
-| `aggregate` | `true` | `1` | `0` | `1` |
+| `aggregate` | `true` | `2` | `0` | `2` |
 | `crypto` | `true` | `0` | `1` | `1` |
 | `circuit` | `true` | `1` | `0` | `1` |
