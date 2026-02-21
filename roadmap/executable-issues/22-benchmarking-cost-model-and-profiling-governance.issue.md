@@ -36,7 +36,9 @@ Deliver deterministic benchmarking/profiling governance and cost-model calibrati
 3. Parse/report scripts reject malformed logs.
 
 ### BEN-2 Profiling pipeline closure
-- Status: NOT DONE
+- Status: DONE - 194e432
+- Evidence tests: `scripts/roadmap/check_profile_artifacts_freshness.sh`; `scripts/test/profile_artifacts_reproducibility.sh`; `scripts/test/profile_artifacts_negative.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `scripts/bench/generate_profile_artifacts.py`; `generated/examples/profile-artifacts.json`; `generated/examples/profile-artifacts.md`; `generated/examples/benchmark-summary.json`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
 - Acceptance tests:
 1. Baseline/generated profile artifacts are produced for configured items.
 2. Hotspot summaries are generated reproducibly.
