@@ -7,14 +7,14 @@
     },
     "extension_modules_total": 62,
     "generic_libfunc_ids_by_status": {
-      "fail_fast": 271,
-      "implemented": 8,
+      "fail_fast": 261,
+      "implemented": 18,
       "unresolved": 0
     },
     "generic_libfunc_ids_total": 279,
     "generic_type_ids_by_status": {
-      "fail_fast": 56,
-      "implemented": 12,
+      "fail_fast": 47,
+      "implemented": 21,
       "unresolved": 0
     },
     "generic_type_ids_total": 68
@@ -450,7 +450,7 @@
     },
     {
       "id": "branch_align",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "bytes31_const",
@@ -614,7 +614,7 @@
     },
     {
       "id": "enum_init",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "enum_match",
@@ -666,7 +666,7 @@
     },
     {
       "id": "felt252_is_zero",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "felt252_mul",
@@ -922,7 +922,7 @@
     },
     {
       "id": "jump",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "keccak_syscall",
@@ -1142,7 +1142,7 @@
     },
     {
       "id": "struct_construct",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "struct_deconstruct",
@@ -1174,11 +1174,11 @@
     },
     {
       "id": "u128_eq",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "u128_guarantee_mul",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "u128_is_zero",
@@ -1186,15 +1186,15 @@
     },
     {
       "id": "u128_mul_guarantee_verify",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "u128_overflowing_add",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "u128_overflowing_sub",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "u128_safe_divmod",
@@ -1460,7 +1460,7 @@
     },
     {
       "id": "Array",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "Bitwise",
@@ -1476,7 +1476,7 @@
     },
     {
       "id": "Box",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "BuiltinCosts",
@@ -1548,7 +1548,7 @@
     },
     {
       "id": "Enum",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "Felt252Dict",
@@ -1584,11 +1584,11 @@
     },
     {
       "id": "NonZero",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "Nullable",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "Pedersen",
@@ -1600,7 +1600,7 @@
     },
     {
       "id": "RangeCheck",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "RangeCheck96",
@@ -1628,7 +1628,7 @@
     },
     {
       "id": "Span",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "SquashedFelt252Dict",
@@ -1644,7 +1644,7 @@
     },
     {
       "id": "Struct",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "SubModGate",
@@ -1656,7 +1656,7 @@
     },
     {
       "id": "U128MulGuarantee",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "U96Guarantee",

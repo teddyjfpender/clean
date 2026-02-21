@@ -15,6 +15,15 @@ DEFAULT_OUT_MD = ROOT / "roadmap" / "inventory" / "sierra-coverage-summary.md"
 MODULE_PREFIX = "crates/cairo-lang-sierra/src/extensions/modules/"
 
 IMPLEMENTED_GENERIC_TYPE_IDS = {
+    "Array",
+    "Box",
+    "Enum",
+    "NonZero",
+    "Nullable",
+    "RangeCheck",
+    "Span",
+    "Struct",
+    "U128MulGuarantee",
     "felt252",
     "i8",
     "i16",
@@ -31,18 +40,26 @@ IMPLEMENTED_GENERIC_TYPE_IDS = {
 FAIL_FAST_GENERIC_TYPE_IDS = {"bool", "u256"}
 
 IMPLEMENTED_GENERIC_LIBFUNC_IDS = {
+    "branch_align",
     "drop",
     "dup",
+    "enum_init",
     "felt252_add",
     "felt252_const",
+    "felt252_is_zero",
     "felt252_mul",
     "felt252_sub",
+    "jump",
     "store_temp",
     "u128_const",
-}
-FAIL_FAST_GENERIC_LIBFUNC_IDS = {
+    "u128_eq",
+    "u128_guarantee_mul",
+    "u128_mul_guarantee_verify",
     "u128_overflowing_add",
     "u128_overflowing_sub",
+    "struct_construct",
+}
+FAIL_FAST_GENERIC_LIBFUNC_IDS = {
     "u256_is_zero",
     "u256_safe_divmod",
     "u256_sqrt",
