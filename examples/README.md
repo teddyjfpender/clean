@@ -82,6 +82,13 @@ python3 scripts/examples/validate_baselines_manifest.py \
 ./scripts/roadmap/check_baseline_provenance.sh
 ```
 
+## Corpus Coverage Trend
+
+```bash
+./scripts/roadmap/check_corpus_coverage_report_sync.sh
+./scripts/roadmap/check_corpus_coverage_trend_sync.sh
+```
+
 ## Add A New Example
 
 1. Add Lean source under `examples/Lean/<new-id>/`.

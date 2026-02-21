@@ -10,7 +10,7 @@
 | --- | --- | --- | --- |
 | `aggregate_payload_mix` | `medium` | `aggregate` | `cap.aggregate.tuple_struct_enum` |
 | `circuit_gate_felt` | `medium` | `circuit` | `cap.circuit.constraint_gate` |
-| `crypto_round_felt` | `high` | `crypto` | `cap.crypto.round_mix` |
+| `crypto_round_felt` | `high` | `crypto` | `cap.crypto.round_mix, cap.scalar.felt252.sub` |
 | `fast_power_u128` | `high` | `integer` | `cap.integer.u128.add.wrapping, cap.integer.u128.mul.wrapping` |
 | `fast_power_u128_p63` | `high` | `integer` | `cap.integer.u128.add.wrapping, cap.integer.u128.mul.wrapping` |
 | `karatsuba_u128` | `high` | `integer` | `cap.integer.u128.add.wrapping, cap.integer.u128.mul.wrapping, cap.integer.u128.sub.wrapping` |
@@ -18,6 +18,13 @@
 | `scalar_core` | `medium` | `scalar` | `cap.scalar.bool.literal, cap.scalar.felt252.add, cap.scalar.felt252.mul` |
 | `sq128x128_u128` | `high` | `fixed_point` | `cap.integer.u128.add.wrapping, cap.integer.u128.mul.wrapping` |
 | `u128_range_checked` | `medium` | `integer` | `cap.integer.u128.add.wrapping, cap.integer.u128.mul.wrapping, cap.integer.u128.sub.wrapping` |
+
+## Implemented Capability Coverage
+
+- Implemented capabilities in registry: `7`
+- Implemented capabilities covered by corpus: `7`
+- Coverage ratio: `1.0`
+- Missing: `none`
 
 ## Required Family Coverage
 

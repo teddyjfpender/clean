@@ -53,12 +53,16 @@ def main() -> int:
 
     capabilities = registry_payload.get("capabilities", [])
     capability_ids = set()
+    implemented_capability_ids = set()
     if isinstance(capabilities, list):
         for cap in capabilities:
             if isinstance(cap, dict):
                 cap_id = cap.get("capability_id")
                 if isinstance(cap_id, str) and cap_id:
                     capability_ids.add(cap_id)
+                    support = cap.get("support_state", {})
+                    if isinstance(support, dict) and support.get("overall") == "implemented":
+                        implemented_capability_ids.add(cap_id)
 
     examples = manifest_payload.get("examples", [])
     if not isinstance(examples, list) or not examples:
@@ -66,6 +70,7 @@ def main() -> int:
 
     kernel_rows: List[Dict[str, object]] = []
     family_counts: Dict[str, Dict[str, int]] = {}
+    covered_capability_ids = set()
 
     for entry in examples:
         if not isinstance(entry, dict):
@@ -97,6 +102,9 @@ def main() -> int:
                 stats["medium"] += 1
             elif tier == "high":
                 stats["high"] += 1
+
+        for cap_id in normalized_caps:
+            covered_capability_ids.add(cap_id)
 
         kernel_rows.append(
             {
@@ -133,6 +141,19 @@ def main() -> int:
             + ", ".join(sorted(missing_required))
         )
 
+    missing_implemented_capabilities = sorted(
+        cap for cap in implemented_capability_ids if cap not in covered_capability_ids
+    )
+    if missing_implemented_capabilities:
+        raise SystemExit(
+            "missing implemented capability coverage in corpus manifest: "
+            + ", ".join(missing_implemented_capabilities)
+        )
+
+    implemented_total = len(implemented_capability_ids)
+    implemented_covered = len(implemented_capability_ids.intersection(covered_capability_ids))
+    implemented_coverage_ratio = 0.0 if implemented_total == 0 else round(implemented_covered / implemented_total, 6)
+
     payload = {
         "version": 1,
         "manifest": str(manifest.relative_to(root)),
@@ -152,6 +173,10 @@ def main() -> int:
             key=lambda row: str(row["family"]),
         ),
         "required_family_status": required_status,
+        "implemented_capability_total": implemented_total,
+        "implemented_capability_covered": implemented_covered,
+        "implemented_capability_coverage_ratio": implemented_coverage_ratio,
+        "implemented_capability_missing": missing_implemented_capabilities,
     }
 
     out_json.parent.mkdir(parents=True, exist_ok=True)
@@ -172,6 +197,17 @@ def main() -> int:
         lines.append(
             f"| `{row['id']}` | `{row['complexity_tier']}` | `{', '.join(row['family_tags'])}` | `{', '.join(row['capability_ids'])}` |"
         )
+    lines.append("")
+    lines.append("## Implemented Capability Coverage")
+    lines.append("")
+    lines.append(f"- Implemented capabilities in registry: `{implemented_total}`")
+    lines.append(f"- Implemented capabilities covered by corpus: `{implemented_covered}`")
+    lines.append(f"- Coverage ratio: `{implemented_coverage_ratio}`")
+    missing = payload["implemented_capability_missing"]
+    if missing:
+        lines.append(f"- Missing: `{', '.join(missing)}`")
+    else:
+        lines.append("- Missing: `none`")
     lines.append("")
     lines.append("## Required Family Coverage")
     lines.append("")

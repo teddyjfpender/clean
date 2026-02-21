@@ -43,6 +43,10 @@
       "total_count": 1
     }
   ],
+  "implemented_capability_coverage_ratio": 1.0,
+  "implemented_capability_covered": 7,
+  "implemented_capability_missing": [],
+  "implemented_capability_total": 7,
   "kernel_count": 10,
   "kernels": [
     {
@@ -67,7 +71,8 @@
     },
     {
       "capability_ids": [
-        "cap.crypto.round_mix"
+        "cap.crypto.round_mix",
+        "cap.scalar.felt252.sub"
       ],
       "complexity_tier": "high",
       "family_tags": [

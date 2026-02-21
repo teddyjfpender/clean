@@ -1,0 +1,26 @@
+{
+  "baseline_source": "/Users/theodorepender/Coding/clean/roadmap/capabilities/corpus-coverage-trend-baseline.json",
+  "checks": [
+    {
+      "current": 10,
+      "metric": "kernel_count",
+      "minimum": 10,
+      "pass": true
+    },
+    {
+      "current": 7,
+      "metric": "family_count",
+      "minimum": 6,
+      "pass": true
+    },
+    {
+      "current": 1.0,
+      "metric": "implemented_capability_coverage_ratio",
+      "minimum": 1.0,
+      "pass": true
+    }
+  ],
+  "coverage_source": "/Users/theodorepender/Coding/clean/generated/examples/corpus-coverage-report.json",
+  "result": "PASS",
+  "version": 1
+}

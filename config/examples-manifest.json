@@ -112,7 +112,8 @@
           "crypto"
         ],
         "capability_ids": [
-          "cap.crypto.round_mix"
+          "cap.crypto.round_mix",
+          "cap.scalar.felt252.sub"
         ]
       }
     },

@@ -1,0 +1,8 @@
+{
+  "minimums": {
+    "family_count": 6,
+    "implemented_capability_coverage_ratio": 1.0,
+    "kernel_count": 10
+  },
+  "version": 1
+}
