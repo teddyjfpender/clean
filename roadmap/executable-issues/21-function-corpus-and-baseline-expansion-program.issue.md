@@ -55,7 +55,9 @@ Build a manifest-driven complex function corpus program with baseline ingestion,
 3. Replay tooling reproduces mismatches.
 
 ### COR-4 Complex kernel pack expansion
-- Status: NOT DONE
+- Status: DONE - 9ffe25e
+- Evidence tests: `scripts/roadmap/check_corpus_coverage_report_sync.sh`; `scripts/test/corpus_coverage_reproducibility.sh`; `scripts/test/examples_structure.sh`; `scripts/test/backend_parity.sh`
+- Evidence proofs: `config/examples-manifest.json`; `generated/examples/corpus-coverage-report.json`; `generated/examples/corpus-coverage-report.md`; `scripts/examples/generate_corpus_coverage_report.py`; `examples/Lean/aggregate_payload_mix/Example.lean`; `examples/Lean/circuit_gate_felt/Example.lean`; `examples/Lean/crypto_round_felt/Example.lean`
 - Acceptance tests:
 1. Medium/high complexity kernels exist across all planned family domains.
 2. Generated and baseline paths remain signature-aligned.
