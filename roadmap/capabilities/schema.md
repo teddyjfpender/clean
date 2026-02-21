@@ -35,6 +35,8 @@ Capability object required keys:
 10. `proof_status`: one of `planned`, `partial`, `complete`
 11. `test_class`: non-empty string
 12. `benchmark_class`: non-empty string
+13. `divergence_constraints`: optional array of non-empty strings
+   Required (non-empty) when `support_state.sierra != support_state.cairo`.
 
 Transition legality (old -> new):
 
@@ -49,3 +51,4 @@ Additional invariants:
 - if one backend state is `planned`, `overall` cannot be `implemented`.
 2. `mir_nodes` entries are unique per capability.
 3. capability IDs are globally unique in registry.
+4. Backend divergence (`sierra != cairo`) must include explicit `divergence_constraints`.

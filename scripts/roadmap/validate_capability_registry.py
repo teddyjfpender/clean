@@ -183,6 +183,30 @@ def validate_registry(payload: object, path: Path) -> Tuple[List[str], Dict[str,
 
         sierra_state, cairo_state, overall_state = validate_support_state(cap.get("support_state"), f"{ctx}.support_state", errors)
 
+        divergence_constraints = cap.get("divergence_constraints", [])
+        if sierra_state != cairo_state:
+            constraints = as_list_of_strings(
+                divergence_constraints,
+                f"{ctx}.divergence_constraints",
+                errors,
+                allow_empty=False,
+            )
+            if not constraints:
+                errors.append(
+                    f"{ctx}: divergent backend states require non-empty divergence_constraints"
+                )
+        else:
+            if divergence_constraints not in ([], None):
+                if not isinstance(divergence_constraints, list):
+                    errors.append(f"{ctx}.divergence_constraints: expected list when present")
+                else:
+                    _ = as_list_of_strings(
+                        divergence_constraints,
+                        f"{ctx}.divergence_constraints",
+                        errors,
+                        allow_empty=True,
+                    )
+
         proof_class = cap.get("proof_class")
         if not isinstance(proof_class, str) or not proof_class.strip():
             errors.append(f"{ctx}.proof_class: expected non-empty string")

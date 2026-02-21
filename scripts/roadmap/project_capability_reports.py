@@ -46,6 +46,8 @@ def summarize(capabilities: List[Dict[str, object]]) -> Dict[str, object]:
     implemented_ids: List[str] = []
     fail_fast_ids: List[str] = []
     planned_ids: List[str] = []
+    capability_rows: List[Dict[str, object]] = []
+    divergence_ids: List[str] = []
 
     for cap in capabilities:
         cap_id = str(cap["capability_id"])
@@ -55,6 +57,12 @@ def summarize(capabilities: List[Dict[str, object]]) -> Dict[str, object]:
         sierra = str(support["sierra"])
         cairo = str(support["cairo"])
         proof_status = str(cap["proof_status"])
+        divergence_constraints_raw = cap.get("divergence_constraints", [])
+        divergence_constraints = (
+            [str(item) for item in divergence_constraints_raw if isinstance(item, str)]
+            if isinstance(divergence_constraints_raw, list)
+            else []
+        )
 
         overall_counter[overall] += 1
         sierra_counter[sierra] += 1
@@ -73,6 +81,23 @@ def summarize(capabilities: List[Dict[str, object]]) -> Dict[str, object]:
             fail_fast_ids.append(cap_id)
         else:
             planned_ids.append(cap_id)
+
+        diverges = sierra != cairo
+        if diverges:
+            divergence_ids.append(cap_id)
+        capability_rows.append(
+            {
+                "capability_id": cap_id,
+                "family_group": family,
+                "support_state": {
+                    "overall": overall,
+                    "sierra": sierra,
+                    "cairo": cairo,
+                },
+                "diverges": diverges,
+                "divergence_constraints": sorted(set(divergence_constraints)),
+            }
+        )
 
     families = {}
     for family in sorted(family_buckets.keys()):
@@ -117,6 +142,9 @@ def summarize(capabilities: List[Dict[str, object]]) -> Dict[str, object]:
         "implemented_capability_ids": sorted(implemented_ids),
         "fail_fast_capability_ids": sorted(fail_fast_ids),
         "planned_capability_ids": sorted(planned_ids),
+        "backend_divergence_count": len(set(divergence_ids)),
+        "backend_divergence_capability_ids": sorted(set(divergence_ids)),
+        "capability_status_rows": capability_rows,
     }
 
 
@@ -164,6 +192,20 @@ def render_markdown(summary: Dict[str, object], registry_rel: str) -> str:
         closure = bucket["closure_ratios"]
         lines.append(
             f"| `{family}` | {closure['overall_implemented_ratio']} | {closure['sierra_implemented_ratio']} | {closure['cairo_implemented_ratio']} |"
+        )
+    lines.append("")
+
+    lines.append("## Capability State Matrix")
+    lines.append("")
+    lines.append("| Capability ID | Family | Overall | Sierra | Cairo | Diverges | Divergence constraints |")
+    lines.append("| --- | --- | --- | --- | --- | --- | --- |")
+    for row in summary["capability_status_rows"]:
+        support = row["support_state"]
+        constraints = row["divergence_constraints"]
+        constraint_text = "; ".join(constraints) if constraints else "none"
+        diverges_text = "true" if row["diverges"] else "false"
+        lines.append(
+            f"| `{row['capability_id']}` | `{row['family_group']}` | `{support['overall']}` | `{support['sierra']}` | `{support['cairo']}` | `{diverges_text}` | {constraint_text} |"
         )
     lines.append("")
 

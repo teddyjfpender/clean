@@ -154,6 +154,9 @@
       "resource_requirements": [
         "range_check"
       ],
+      "divergence_constraints": [
+        "Sierra lane requires explicit fail-fast until range-checked non-u128 arithmetic lowering is implemented; Cairo backend remains planned until parity closure."
+      ],
       "semantic_class": "partial",
       "sierra_targets": {
         "generic_libfunc_ids": [

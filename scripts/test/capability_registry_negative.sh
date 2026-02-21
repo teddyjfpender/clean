@@ -57,4 +57,32 @@ if python3 "$VALIDATOR" --registry "$NEW" --previous "$PREV" >/dev/null 2>&1; th
   exit 1
 fi
 
+NO_DIVERGENCE_CONSTRAINTS="$TMP_DIR/no_divergence_constraints.json"
+python3 - "$REGISTRY" "$NO_DIVERGENCE_CONSTRAINTS" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+src = Path(sys.argv[1])
+out = Path(sys.argv[2])
+p = json.loads(src.read_text(encoding="utf-8"))
+target = None
+for cap in p["capabilities"]:
+    state = cap.get("support_state", {})
+    if not isinstance(state, dict):
+        continue
+    if state.get("sierra") != state.get("cairo"):
+        target = cap
+        break
+if target is None:
+    raise SystemExit("expected at least one divergent backend state capability")
+target.pop("divergence_constraints", None)
+out.write_text(json.dumps(p, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+PY
+
+if python3 "$VALIDATOR" --registry "$NO_DIVERGENCE_CONSTRAINTS" >/dev/null 2>&1; then
+  echo "expected divergence-constraint validation failure"
+  exit 1
+fi
+
 echo "capability registry negative tests passed"

@@ -1,9 +1,160 @@
 {
+  "backend_divergence_capability_ids": [
+    "cap.integer.family.non_u128"
+  ],
+  "backend_divergence_count": 1,
   "cairo_status_counts": {
     "fail_fast": 0,
     "implemented": 7,
     "planned": 6
   },
+  "capability_status_rows": [
+    {
+      "capability_id": "cap.aggregate.tuple_struct_enum",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "aggregate",
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      }
+    },
+    {
+      "capability_id": "cap.collection.array_span_dict",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "collection",
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      }
+    },
+    {
+      "capability_id": "cap.control.calls_loops_panic",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "control",
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      }
+    },
+    {
+      "capability_id": "cap.field.qm31",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "field",
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      }
+    },
+    {
+      "capability_id": "cap.integer.family.non_u128",
+      "divergence_constraints": [
+        "Sierra lane requires explicit fail-fast until range-checked non-u128 arithmetic lowering is implemented; Cairo backend remains planned until parity closure."
+      ],
+      "diverges": true,
+      "family_group": "integer",
+      "support_state": {
+        "cairo": "planned",
+        "overall": "fail_fast",
+        "sierra": "fail_fast"
+      }
+    },
+    {
+      "capability_id": "cap.integer.u128.add.wrapping",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "integer",
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      }
+    },
+    {
+      "capability_id": "cap.integer.u128.mul.wrapping",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "integer",
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      }
+    },
+    {
+      "capability_id": "cap.integer.u128.sub.wrapping",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "integer",
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      }
+    },
+    {
+      "capability_id": "cap.resource.gas_ap_segment",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "resource",
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      }
+    },
+    {
+      "capability_id": "cap.scalar.bool.literal",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "scalar",
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      }
+    },
+    {
+      "capability_id": "cap.scalar.felt252.add",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "scalar",
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      }
+    },
+    {
+      "capability_id": "cap.scalar.felt252.mul",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "scalar",
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      }
+    },
+    {
+      "capability_id": "cap.scalar.felt252.sub",
+      "divergence_constraints": [],
+      "diverges": false,
+      "family_group": "scalar",
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      }
+    }
+  ],
   "closure_ratios": {
     "cairo_implemented_ratio": 0.538462,
     "overall_implemented_ratio": 0.538462,

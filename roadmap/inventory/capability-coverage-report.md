@@ -35,6 +35,24 @@ Source registry: `roadmap/capabilities/registry.json`
 | `resource` | 0.0 | 0.0 | 0.0 |
 | `scalar` | 1.0 | 1.0 | 1.0 |
 
+## Capability State Matrix
+
+| Capability ID | Family | Overall | Sierra | Cairo | Diverges | Divergence constraints |
+| --- | --- | --- | --- | --- | --- | --- |
+| `cap.aggregate.tuple_struct_enum` | `aggregate` | `planned` | `planned` | `planned` | `false` | none |
+| `cap.collection.array_span_dict` | `collection` | `planned` | `planned` | `planned` | `false` | none |
+| `cap.control.calls_loops_panic` | `control` | `planned` | `planned` | `planned` | `false` | none |
+| `cap.field.qm31` | `field` | `planned` | `planned` | `planned` | `false` | none |
+| `cap.integer.family.non_u128` | `integer` | `fail_fast` | `fail_fast` | `planned` | `true` | Sierra lane requires explicit fail-fast until range-checked non-u128 arithmetic lowering is implemented; Cairo backend remains planned until parity closure. |
+| `cap.integer.u128.add.wrapping` | `integer` | `implemented` | `implemented` | `implemented` | `false` | none |
+| `cap.integer.u128.mul.wrapping` | `integer` | `implemented` | `implemented` | `implemented` | `false` | none |
+| `cap.integer.u128.sub.wrapping` | `integer` | `implemented` | `implemented` | `implemented` | `false` | none |
+| `cap.resource.gas_ap_segment` | `resource` | `planned` | `planned` | `planned` | `false` | none |
+| `cap.scalar.bool.literal` | `scalar` | `implemented` | `implemented` | `implemented` | `false` | none |
+| `cap.scalar.felt252.add` | `scalar` | `implemented` | `implemented` | `implemented` | `false` | none |
+| `cap.scalar.felt252.mul` | `scalar` | `implemented` | `implemented` | `implemented` | `false` | none |
+| `cap.scalar.felt252.sub` | `scalar` | `implemented` | `implemented` | `implemented` | `false` | none |
+
 ## Capability IDs
 
 ### implemented_capability_ids

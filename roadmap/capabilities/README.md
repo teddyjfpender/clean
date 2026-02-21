@@ -9,6 +9,8 @@ Authoritative files:
 3. `capability-closure-slo-baseline.json`: monotonic implemented-capability SLO minimums.
 4. `mir-family-contract.json`: MIR node coverage and fail-fast contract references.
 
+When Sierra/Cairo backend states diverge for a capability, registry entries must include explicit `divergence_constraints`.
+
 Derived artifacts (generated):
 
 1. `roadmap/inventory/capability-coverage-report.json`
