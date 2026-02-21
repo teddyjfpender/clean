@@ -46,7 +46,9 @@ Build a manifest-driven complex function corpus program with baseline ingestion,
 3. Provenance metadata checks pass.
 
 ### COR-3 Differential vector generation and replay tooling
-- Status: NOT DONE
+- Status: DONE - 4ca44aa
+- Evidence tests: `scripts/roadmap/check_differential_harness_sync.sh`; `scripts/test/differential_harness_reproducibility.sh`; `scripts/test/examples_differential_vectors_negative.sh`; `scripts/test/backend_parity.sh`
+- Evidence proofs: `scripts/examples/generate_differential_harness.py`; `generated/examples/differential-harness.json`; `scripts/test/generated/run_manifest_differential.sh`; `scripts/test/run_backend_parity_case.sh`; `config/examples-manifest.json`
 - Acceptance tests:
 1. Equivalence vectors generate deterministically.
 2. Boundary/failure vectors are generated per capability class.
