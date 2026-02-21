@@ -39,7 +39,9 @@ Automate proof obligation tracking and quality gate synthesis so subset growth r
 3. Obligation projections are deterministic.
 
 ### LPA-2 Gate manifest generation and workflow sync
-- Status: NOT DONE
+- Status: DONE - 6ca24b1
+- Evidence tests: `scripts/roadmap/check_gate_manifest_sync.sh`; `scripts/test/gate_manifest_reproducibility.sh`; `scripts/test/gate_manifest_negative.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `config/gate-manifest.json`; `scripts/roadmap/generate_gate_manifest.py`; `scripts/roadmap/validate_gate_manifest_workflows.py`; `scripts/roadmap/list_quality_gates.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
 - Acceptance tests:
 1. Gate manifest generation reproduces workflow gate sets deterministically.
 2. Manual workflow drift from generated manifests is detected.
