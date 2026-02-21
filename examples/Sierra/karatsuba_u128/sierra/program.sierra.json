@@ -1,0 +1,964 @@
+{"version": 1,
+ "type_declarations":
+ [{"long_id": {"generic_id": "RangeCheck", "generic_args": []},
+   "id": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+   "declared_type_info": null},
+  {"long_id": {"generic_id": "u128", "generic_args": []},
+   "id": {"id": 10698497612269247729, "debug_name": "u128"},
+   "declared_type_info": null},
+  {"long_id": {"generic_id": "U128MulGuarantee", "generic_args": []},
+   "id": {"id": 11371311946252800753, "debug_name": "U128MulGuarantee"},
+   "declared_type_info": null}],
+ "statements":
+ [{"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4922878777123963564,
+        "debug_name": "karatsubaCombine::tmp::dup_keep::0"},
+       {"id": 14703964664276156739,
+        "debug_name": "karatsubaCombine::tmp::dup_use::1"}]}],
+    "args":
+    [{"id": 9219395405865906783,
+      "debug_name": "karatsubaCombine::param::x0"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4922880976147219986,
+        "debug_name": "karatsubaCombine::tmp::dup_keep::2"},
+       {"id": 14703966863299413161,
+        "debug_name": "karatsubaCombine::tmp::dup_use::3"}]}],
+    "args":
+    [{"id": 9218403646377449686,
+      "debug_name": "karatsubaCombine::param::y0"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 976981054863155494,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_high_raw::4"},
+       {"id": 16642487079455541781,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_low_raw::5"},
+       {"id": 1861873488978273552,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_guarantee_raw::6"}]}],
+    "args":
+    [{"id": 14703964664276156739,
+      "debug_name": "karatsubaCombine::tmp::dup_use::1"},
+     {"id": 14703966863299413161,
+      "debug_name": "karatsubaCombine::tmp::dup_use::3"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 976981054863155494,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_high_raw::4"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8918589868066951676,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_range_check_out::8"}]}],
+    "args":
+    [{"id": 11080160039106603297,
+      "debug_name": "karatsubaCombine::param::__range_check"},
+     {"id": 1861873488978273552,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_guarantee_raw::6"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15088053697767434470,
+        "debug_name": "karatsubaCombine::tmp::store_temp::9"}]}],
+    "args":
+    [{"id": 16642487079455541781,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_low_raw::5"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 16079229336476518557,
+        "debug_name": "karatsubaCombine::tmp::dup_keep::10"},
+       {"id": 15056709359665214646,
+        "debug_name": "karatsubaCombine::tmp::dup_use::11"}]}],
+    "args":
+    [{"id": 9219394306354278572,
+      "debug_name": "karatsubaCombine::param::x1"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 16079227137453262135,
+        "debug_name": "karatsubaCombine::tmp::dup_keep::12"},
+       {"id": 15056707160641958224,
+        "debug_name": "karatsubaCombine::tmp::dup_use::13"}]}],
+    "args":
+    [{"id": 9218404745889077897,
+      "debug_name": "karatsubaCombine::param::y1"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8183697494101008739,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_high_raw::14"},
+       {"id": 7906910320418302900,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_low_raw::15"},
+       {"id": 3193232471974714201,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_guarantee_raw::16"}]}],
+    "args":
+    [{"id": 15056709359665214646,
+      "debug_name": "karatsubaCombine::tmp::dup_use::11"},
+     {"id": 15056707160641958224,
+      "debug_name": "karatsubaCombine::tmp::dup_use::13"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8183697494101008739,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_high_raw::14"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15529859623980542669,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_range_check_out::18"}]}],
+    "args":
+    [{"id": 8918589868066951676,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_range_check_out::8"},
+     {"id": 3193232471974714201,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_guarantee_raw::16"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4514152421600983717,
+        "debug_name": "karatsubaCombine::tmp::store_temp::19"}]}],
+    "args":
+    [{"id": 7906910320418302900,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_low_raw::15"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 3443828138563054068, "debug_name": "u128_overflowing_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8092605549655809943,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_non_overflow::20"},
+       {"id": 11085223098314691717,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_result_non_overflow::21"}]},
+     {"target": {"Statement": 17},
+      "results":
+      [{"id": 16622948143333862993,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_overflow::22"},
+       {"id": 15934527827796361619,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_overflow::23"}]}],
+    "args":
+    [{"id": 15529859623980542669,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_range_check_out::18"},
+     {"id": 4922878777123963564,
+      "debug_name": "karatsubaCombine::tmp::dup_keep::0"},
+     {"id": 16079229336476518557,
+      "debug_name": "karatsubaCombine::tmp::dup_keep::10"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17262727293492929881,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_merged::24"}]}],
+    "args":
+    [{"id": 8092605549655809943,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_range_check_non_overflow::20"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11110641936828708291,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::25"}]}],
+    "args":
+    [{"id": 11085223098314691717,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_result_non_overflow::21"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 20}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17262727293492929881,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_merged::24"}]}],
+    "args":
+    [{"id": 16622948143333862993,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_range_check_overflow::22"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11110641936828708291,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::25"}]}],
+    "args":
+    [{"id": 15934527827796361619,
+      "debug_name": "karatsubaCombine::tmp::u128_add_result_overflow::23"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 3443828138563054068, "debug_name": "u128_overflowing_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8092603350632553521,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_non_overflow::26"},
+       {"id": 11085216501244922451,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_result_non_overflow::27"}]},
+     {"target": {"Statement": 25},
+      "results":
+      [{"id": 16622937148217580883,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_overflow::28"},
+       {"id": 15934538822912643729,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_overflow::29"}]}],
+    "args":
+    [{"id": 17262727293492929881,
+      "debug_name": "karatsubaCombine::tmp::u128_add_range_check_merged::24"},
+     {"id": 4922880976147219986,
+      "debug_name": "karatsubaCombine::tmp::dup_keep::2"},
+     {"id": 16079227137453262135,
+      "debug_name": "karatsubaCombine::tmp::dup_keep::12"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17261880669539396636,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_merged::30"}]}],
+    "args":
+    [{"id": 8092603350632553521,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_range_check_non_overflow::26"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11111495157852010802,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::31"}]}],
+    "args":
+    [{"id": 11085216501244922451,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_result_non_overflow::27"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 28}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17261880669539396636,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_merged::30"}]}],
+    "args":
+    [{"id": 16622937148217580883,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_range_check_overflow::28"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11111495157852010802,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::31"}]}],
+    "args":
+    [{"id": 15934538822912643729,
+      "debug_name": "karatsubaCombine::tmp::u128_add_result_overflow::29"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8181751358519453719,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_high_raw::32"},
+       {"id": 7904920204371619440,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_low_raw::33"},
+       {"id": 3191422675835057345,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_guarantee_raw::34"}]}],
+    "args":
+    [{"id": 11110641936828708291,
+      "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::25"},
+     {"id": 11111495157852010802,
+      "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::31"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8181751358519453719,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_high_raw::32"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15531691410352763745,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_range_check_out::36"}]}],
+    "args":
+    [{"id": 17261880669539396636,
+      "debug_name": "karatsubaCombine::tmp::u128_add_range_check_merged::30"},
+     {"id": 3191422675835057345,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_guarantee_raw::34"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4512325033275275485,
+        "debug_name": "karatsubaCombine::tmp::store_temp::37"}]}],
+    "args":
+    [{"id": 7904920204371619440,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_low_raw::33"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 16081186467174355687,
+        "debug_name": "karatsubaCombine::tmp::dup_keep::38"},
+       {"id": 15058543345060692144,
+        "debug_name": "karatsubaCombine::tmp::dup_use::39"}]}],
+    "args":
+    [{"id": 15088053697767434470,
+      "debug_name": "karatsubaCombine::tmp::store_temp::9"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14641423882098738837, "debug_name": "u128_overflowing_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 5532584944988080530,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_sub_range_check_non_overflow::40"},
+       {"id": 16113774143376212706,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_sub_result_non_overflow::41"}]},
+     {"target": {"Statement": 38},
+      "results":
+      [{"id": 3048966009891905528,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_sub_range_check_overflow::42"},
+       {"id": 17844701498690973064,
+        "debug_name": "karatsubaCombine::tmp::u128_sub_result_overflow::43"}]}],
+    "args":
+    [{"id": 15531691410352763745,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_range_check_out::36"},
+     {"id": 4512325033275275485,
+      "debug_name": "karatsubaCombine::tmp::store_temp::37"},
+     {"id": 15058543345060692144,
+      "debug_name": "karatsubaCombine::tmp::dup_use::39"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8355330624319637228,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_sub_range_check_merged::44"}]}],
+    "args":
+    [{"id": 5532584944988080530,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_sub_range_check_non_overflow::40"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 9191458226684324072,
+        "debug_name": "karatsubaCombine::tmp::u128_sub_result_merged::45"}]}],
+    "args":
+    [{"id": 16113774143376212706,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_sub_result_non_overflow::41"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 41}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8355330624319637228,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_sub_range_check_merged::44"}]}],
+    "args":
+    [{"id": 3048966009891905528,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_sub_range_check_overflow::42"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 9191458226684324072,
+        "debug_name": "karatsubaCombine::tmp::u128_sub_result_merged::45"}]}],
+    "args":
+    [{"id": 17844701498690973064,
+      "debug_name": "karatsubaCombine::tmp::u128_sub_result_overflow::43"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 16074417873592413346,
+        "debug_name": "karatsubaCombine::tmp::dup_keep::46"},
+       {"id": 15059543900642174929,
+        "debug_name": "karatsubaCombine::tmp::dup_use::47"}]}],
+    "args":
+    [{"id": 4514152421600983717,
+      "debug_name": "karatsubaCombine::tmp::store_temp::19"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14641423882098738837, "debug_name": "u128_overflowing_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 5532593741081106218,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_sub_range_check_non_overflow::48"},
+       {"id": 16113782939469238394,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_sub_result_non_overflow::49"}]},
+     {"target": {"Statement": 47},
+      "results":
+      [{"id": 3049959968403619047,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_sub_range_check_overflow::50"},
+       {"id": 17843714137249028811,
+        "debug_name": "karatsubaCombine::tmp::u128_sub_result_overflow::51"}]}],
+    "args":
+    [{"id": 8355330624319637228,
+      "debug_name": "karatsubaCombine::tmp::u128_sub_range_check_merged::44"},
+     {"id": 9191458226684324072,
+      "debug_name": "karatsubaCombine::tmp::u128_sub_result_merged::45"},
+     {"id": 15059543900642174929,
+      "debug_name": "karatsubaCombine::tmp::dup_use::47"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8356315786738325059,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_sub_range_check_merged::52"}]}],
+    "args":
+    [{"id": 5532593741081106218,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_sub_range_check_non_overflow::48"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 9190470865242379819,
+        "debug_name": "karatsubaCombine::tmp::u128_sub_result_merged::53"}]}],
+    "args":
+    [{"id": 16113782939469238394,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_sub_result_non_overflow::49"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 50}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8356315786738325059,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_sub_range_check_merged::52"}]}],
+    "args":
+    [{"id": 3049959968403619047,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_sub_range_check_overflow::50"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 9190470865242379819,
+        "debug_name": "karatsubaCombine::tmp::u128_sub_result_merged::53"}]}],
+    "args":
+    [{"id": 17843714137249028811,
+      "debug_name": "karatsubaCombine::tmp::u128_sub_result_overflow::51"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16882084271909616627, "debug_name": "u128_const_1000000000"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3118440364073185779,
+        "debug_name": "karatsubaCombine::tmp::u128_const_raw::54"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4518097469322247885,
+        "debug_name": "karatsubaCombine::tmp::store_temp::55"}]}],
+    "args":
+    [{"id": 3118440364073185779,
+      "debug_name": "karatsubaCombine::tmp::u128_const_raw::54"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8179917373123976221,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_high_raw::56"},
+       {"id": 7910694839441848262,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_low_raw::57"},
+       {"id": 3189434758811630307,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_guarantee_raw::58"}]}],
+    "args":
+    [{"id": 9190470865242379819,
+      "debug_name": "karatsubaCombine::tmp::u128_sub_result_merged::53"},
+     {"id": 4518097469322247885,
+      "debug_name": "karatsubaCombine::tmp::store_temp::55"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8179917373123976221,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_high_raw::56"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15526910733794248442,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_range_check_out::60"}]}],
+    "args":
+    [{"id": 8356315786738325059,
+      "debug_name": "karatsubaCombine::tmp::u128_sub_range_check_merged::52"},
+     {"id": 3189434758811630307,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_guarantee_raw::58"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4517099112764021522,
+        "debug_name": "karatsubaCombine::tmp::store_temp::61"}]}],
+    "args":
+    [{"id": 7910694839441848262,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_low_raw::57"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 3443828138563054068, "debug_name": "u128_overflowing_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8088781448213648985,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_non_overflow::62"},
+       {"id": 11089012015384749923,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_result_non_overflow::63"}]},
+     {"target": {"Statement": 61},
+      "results":
+      [{"id": 16626732662357408355,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_overflow::64"},
+       {"id": 15930734512679790569,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_overflow::65"}]}],
+    "args":
+    [{"id": 15526910733794248442,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_range_check_out::60"},
+     {"id": 16081186467174355687,
+      "debug_name": "karatsubaCombine::tmp::dup_keep::38"},
+     {"id": 4517099112764021522,
+      "debug_name": "karatsubaCombine::tmp::store_temp::61"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17258942774469384519,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_merged::66"}]}],
+    "args":
+    [{"id": 8088781448213648985,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_range_check_non_overflow::62"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11106721078363264765,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::67"}]}],
+    "args":
+    [{"id": 11089012015384749923,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_result_non_overflow::63"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 64}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17258942774469384519,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_merged::66"}]}],
+    "args":
+    [{"id": 16626732662357408355,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_range_check_overflow::64"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11106721078363264765,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::67"}]}],
+    "args":
+    [{"id": 15930734512679790569,
+      "debug_name": "karatsubaCombine::tmp::u128_add_result_overflow::65"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13443946967287877561,
+     "debug_name": "u128_const_1000000000000000000"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3115636609421815404,
+        "debug_name": "karatsubaCombine::tmp::u128_const_raw::68"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4517107908857047210,
+        "debug_name": "karatsubaCombine::tmp::store_temp::69"}]}],
+    "args":
+    [{"id": 3115636609421815404,
+      "debug_name": "karatsubaCombine::tmp::u128_const_raw::68"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8177927257077292761,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_high_raw::70"},
+       {"id": 7908748703860293242,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_low_raw::71"},
+       {"id": 3187598574392896387,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_guarantee_raw::72"}]}],
+    "args":
+    [{"id": 16074417873592413346,
+      "debug_name": "karatsubaCombine::tmp::dup_keep::46"},
+     {"id": 4517107908857047210,
+      "debug_name": "karatsubaCombine::tmp::store_temp::69"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8177927257077292761,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_high_raw::70"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15527871706957115631,
+        "debug_name": "karatsubaCombine::tmp::u128_mul_range_check_out::74"}]}],
+    "args":
+    [{"id": 17258942774469384519,
+      "debug_name": "karatsubaCombine::tmp::u128_add_range_check_merged::66"},
+     {"id": 3187598574392896387,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_guarantee_raw::72"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4516105154252308003,
+        "debug_name": "karatsubaCombine::tmp::store_temp::75"}]}],
+    "args":
+    [{"id": 7908748703860293242,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_low_raw::71"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 3443828138563054068, "debug_name": "u128_overflowing_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8087816077004268952,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_non_overflow::76"},
+       {"id": 11090001575849950598,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_result_non_overflow::77"}]},
+     {"target": {"Statement": 75},
+      "results":
+      [{"id": 16625754097008489790,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_overflow::78"},
+       {"id": 15931578937610067392,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_overflow::79"}]}],
+    "args":
+    [{"id": 15527871706957115631,
+      "debug_name": "karatsubaCombine::tmp::u128_mul_range_check_out::74"},
+     {"id": 11106721078363264765,
+      "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::67"},
+     {"id": 4516105154252308003,
+      "debug_name": "karatsubaCombine::tmp::store_temp::75"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17257097793957624911,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_merged::80"}]}],
+    "args":
+    [{"id": 8087816077004268952,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_range_check_non_overflow::76"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11104871699804992313,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::81"}]}],
+    "args":
+    [{"id": 11090001575849950598,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_result_non_overflow::77"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 78}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17257097793957624911,
+        "debug_name":
+        "karatsubaCombine::tmp::u128_add_range_check_merged::80"}]}],
+    "args":
+    [{"id": 16625754097008489790,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_range_check_overflow::78"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11104871699804992313,
+        "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::81"}]}],
+    "args":
+    [{"id": 15931578937610067392,
+      "debug_name": "karatsubaCombine::tmp::u128_add_result_overflow::79"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4507536660135362705,
+        "debug_name": "karatsubaCombine::tmp::store_temp::82"}]}],
+    "args":
+    [{"id": 17257097793957624911,
+      "debug_name":
+      "karatsubaCombine::tmp::u128_add_range_check_merged::80"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4507535560623734494,
+        "debug_name": "karatsubaCombine::tmp::store_temp::83"}]}],
+    "args":
+    [{"id": 11104871699804992313,
+      "debug_name": "karatsubaCombine::tmp::u128_add_result_merged::81"}]}},
+  {"Return":
+   [{"id": 4507536660135362705,
+     "debug_name": "karatsubaCombine::tmp::store_temp::82"},
+    {"id": 4507535560623734494,
+     "debug_name": "karatsubaCombine::tmp::store_temp::83"}]}],
+ "libfunc_declarations":
+ [{"long_id":
+   {"generic_id": "dup",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}}]},
+   "id": {"id": 5357369253888360067, "debug_name": "dup_u128"}},
+  {"long_id": {"generic_id": "u128_guarantee_mul", "generic_args": []},
+   "id": {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"}},
+  {"long_id":
+   {"generic_id": "drop",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}}]},
+   "id": {"id": 8180805564406204157, "debug_name": "drop_u128"}},
+  {"long_id": {"generic_id": "u128_mul_guarantee_verify", "generic_args": []},
+   "id":
+   {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}}]},
+   "id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"}},
+  {"long_id": {"generic_id": "u128_overflowing_add", "generic_args": []},
+   "id": {"id": 3443828138563054068, "debug_name": "u128_overflowing_add"}},
+  {"long_id": {"generic_id": "branch_align", "generic_args": []},
+   "id": {"id": 3328301606880823183, "debug_name": "branch_align"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 5158587525321846130, "debug_name": "RangeCheck"}}]},
+   "id": {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"}},
+  {"long_id": {"generic_id": "jump", "generic_args": []},
+   "id": {"id": 16940139219101328589, "debug_name": "jump"}},
+  {"long_id": {"generic_id": "u128_overflowing_sub", "generic_args": []},
+   "id": {"id": 14641423882098738837, "debug_name": "u128_overflowing_sub"}},
+  {"long_id":
+   {"generic_id": "u128_const",
+    "generic_args": [{"Value": [1, [0, 202, 154, 59]]}]},
+   "id": {"id": 16882084271909616627, "debug_name": "u128_const_1000000000"}},
+  {"long_id":
+   {"generic_id": "u128_const",
+    "generic_args": [{"Value": [1, [0, 0, 100, 167, 179, 182, 224, 13]]}]},
+   "id":
+   {"id": 13443946967287877561,
+    "debug_name": "u128_const_1000000000000000000"}}],
+ "funcs":
+ [{"signature":
+   {"ret_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 10698497612269247729, "debug_name": "u128"}],
+    "param_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 10698497612269247729, "debug_name": "u128"},
+     {"id": 10698497612269247729, "debug_name": "u128"},
+     {"id": 10698497612269247729, "debug_name": "u128"},
+     {"id": 10698497612269247729, "debug_name": "u128"}]},
+   "params":
+   [{"ty": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     "id":
+     {"id": 11080160039106603297,
+      "debug_name": "karatsubaCombine::param::__range_check"}},
+    {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
+     "id":
+     {"id": 9219395405865906783, "debug_name": "karatsubaCombine::param::x0"}},
+    {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
+     "id":
+     {"id": 9219394306354278572, "debug_name": "karatsubaCombine::param::x1"}},
+    {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
+     "id":
+     {"id": 9218403646377449686, "debug_name": "karatsubaCombine::param::y0"}},
+    {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
+     "id":
+     {"id": 9218404745889077897, "debug_name": "karatsubaCombine::param::y1"}}],
+   "id": {"id": 9195298789581765210, "debug_name": "karatsubaCombine"},
+   "entry_point": 0}]}

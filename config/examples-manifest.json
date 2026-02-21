@@ -36,6 +36,13 @@
       "lean_sources": [
         "examples/Lean/fast_power_u128_p63/Example.lean"
       ]
+    },
+    {
+      "id": "karatsuba_u128",
+      "module": "karatsuba_u128.Example",
+      "lean_sources": [
+        "examples/Lean/karatsuba_u128/Example.lean"
+      ]
     }
   ]
 }
