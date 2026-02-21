@@ -49,6 +49,11 @@ IMPLEMENTED_GENERIC_LIBFUNC_IDS = {
     "felt252_is_zero",
     "felt252_mul",
     "felt252_sub",
+    "i128_eq",
+    "i16_eq",
+    "i32_eq",
+    "i64_eq",
+    "i8_eq",
     "jump",
     "store_temp",
     "u128_const",
@@ -57,6 +62,10 @@ IMPLEMENTED_GENERIC_LIBFUNC_IDS = {
     "u128_mul_guarantee_verify",
     "u128_overflowing_add",
     "u128_overflowing_sub",
+    "u16_eq",
+    "u32_eq",
+    "u64_eq",
+    "u8_eq",
     "struct_construct",
 }
 FAIL_FAST_GENERIC_LIBFUNC_IDS = {

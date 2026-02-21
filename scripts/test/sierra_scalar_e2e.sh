@@ -38,6 +38,7 @@ import sys
 
 path = sys.argv[1]
 required = {"i8", "i16", "i32", "i64", "i128", "u8", "u16", "u32", "u64"}
+required_libfuncs = {"i8_eq", "u64_eq"}
 
 with open(path, "r", encoding="utf-8") as f:
     program = json.load(f)
@@ -55,6 +56,21 @@ for entry in decls:
 missing = sorted(required - present)
 if missing:
     raise SystemExit(f"missing integer type declarations: {missing}")
+
+libfuncs = set()
+for decl in program.get("libfunc_declarations", []):
+    if not isinstance(decl, dict):
+        continue
+    long_id = decl.get("long_id")
+    if not isinstance(long_id, dict):
+        continue
+    generic = long_id.get("generic_id")
+    if isinstance(generic, str):
+        libfuncs.add(generic)
+
+missing_libfuncs = sorted(required_libfuncs - libfuncs)
+if missing_libfuncs:
+    raise SystemExit(f"missing integer equality libfunc declarations: {missing_libfuncs}")
 PY
 
 echo "sierra scalar e2e (validate + compile) passed"

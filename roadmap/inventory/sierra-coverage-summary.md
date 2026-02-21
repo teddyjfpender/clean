@@ -10,7 +10,7 @@
 | Surface | Implemented | Fail-fast | Unresolved |
 | --- | ---: | ---: | ---: |
 | Generic type IDs | 21 | 47 | 0 |
-| Generic libfunc IDs | 18 | 261 | 0 |
+| Generic libfunc IDs | 27 | 252 | 0 |
 | Extension module files | 4 | 58 | 0 |
 
 ## Unresolved Snapshot

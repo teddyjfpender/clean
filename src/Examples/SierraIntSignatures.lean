@@ -67,6 +67,22 @@ def contract : ContractSpec :=
           args := [{ name := "x", ty := .u64 }]
           ret := .u64
           body := Expr.var (ty := .u64) "x"
+        },
+        {
+          name := "eqI8"
+          args := [{ name := "lhs", ty := .i8 }, { name := "rhs", ty := .i8 }]
+          ret := .bool
+          body := Expr.eq
+            (Expr.var (ty := .i8) "lhs")
+            (Expr.var (ty := .i8) "rhs")
+        },
+        {
+          name := "eqU64"
+          args := [{ name := "lhs", ty := .u64 }, { name := "rhs", ty := .u64 }]
+          ret := .bool
+          body := Expr.eq
+            (Expr.var (ty := .u64) "lhs")
+            (Expr.var (ty := .u64) "rhs")
         }
       ]
   }

@@ -189,6 +189,34 @@ def emitBoolReturnBranch
   let boolVar <- emitBoolConst fnName value
   pushStmt (returnStmtJson [boolVar])
 
+def emitTailTypedEqReturnBool
+    (baseStatementIdx : Nat)
+    (fnName : String)
+    (env : Env)
+    (eqTy : Ty)
+    (eqLibfuncGenericId : String)
+    (lhs rhs : IRExpr eqTy) : EmitM Unit := do
+  let (envAfterLhs, lhsVar) <- emitExpr fnName env lhs
+  let (envAfterRhs, rhsVar) <- emitExpr fnName envAfterLhs rhs
+  let _ <- registerTypeDecl eqTy
+  let currentIdx <- nextStatementIdx
+  let dropCount <- liftExcept (pendingDropCount envAfterRhs)
+  let falseBranchLen := dropCount + 5
+  let trueBranchTarget := baseStatementIdx + currentIdx + 1 + falseBranchLen
+
+  let eqLibfuncId <- registerLibfuncDecl eqLibfuncGenericId eqLibfuncGenericId []
+  pushStmt <|
+    invocationStmtBranchesJson
+      eqLibfuncId
+      [lhsVar, rhsVar]
+      [
+        (fallthroughTargetJson, []),
+        (statementTargetJson trueBranchTarget, [])
+      ]
+
+  emitBoolReturnBranch fnName envAfterRhs false
+  emitBoolReturnBranch fnName envAfterRhs true
+
 def emitTailEqReturnBool
     (baseStatementIdx : Nat)
     (fnName : String)
@@ -222,27 +250,26 @@ def emitTailEqReturnBool
 
       emitBoolReturnBranch fnName envAfterRhs true
       emitBoolReturnBranch fnName envAfterRhs false [(.nonZero "felt252", nonZeroDiffVar)]
-  | .u128 => do
-      let (envAfterLhs, lhsVar) <- emitExpr fnName env lhs
-      let (envAfterRhs, rhsVar) <- emitExpr fnName envAfterLhs rhs
-      let _ <- registerTypeDecl .u128
-      let currentIdx <- nextStatementIdx
-      let dropCount <- liftExcept (pendingDropCount envAfterRhs)
-      let falseBranchLen := dropCount + 5
-      let trueBranchTarget := baseStatementIdx + currentIdx + 1 + falseBranchLen
-
-      let u128EqLibfuncId <- registerLibfuncDecl "u128_eq" "u128_eq" []
-      pushStmt <|
-        invocationStmtBranchesJson
-          u128EqLibfuncId
-          [lhsVar, rhsVar]
-          [
-            (fallthroughTargetJson, []),
-            (statementTargetJson trueBranchTarget, [])
-          ]
-
-      emitBoolReturnBranch fnName envAfterRhs false
-      emitBoolReturnBranch fnName envAfterRhs true
+  | .u8 =>
+      emitTailTypedEqReturnBool baseStatementIdx fnName env .u8 "u8_eq" lhs rhs
+  | .u16 =>
+      emitTailTypedEqReturnBool baseStatementIdx fnName env .u16 "u16_eq" lhs rhs
+  | .u32 =>
+      emitTailTypedEqReturnBool baseStatementIdx fnName env .u32 "u32_eq" lhs rhs
+  | .u64 =>
+      emitTailTypedEqReturnBool baseStatementIdx fnName env .u64 "u64_eq" lhs rhs
+  | .u128 =>
+      emitTailTypedEqReturnBool baseStatementIdx fnName env .u128 "u128_eq" lhs rhs
+  | .i8 =>
+      emitTailTypedEqReturnBool baseStatementIdx fnName env .i8 "i8_eq" lhs rhs
+  | .i16 =>
+      emitTailTypedEqReturnBool baseStatementIdx fnName env .i16 "i16_eq" lhs rhs
+  | .i32 =>
+      emitTailTypedEqReturnBool baseStatementIdx fnName env .i32 "i32_eq" lhs rhs
+  | .i64 =>
+      emitTailTypedEqReturnBool baseStatementIdx fnName env .i64 "i64_eq" lhs rhs
+  | .i128 =>
+      emitTailTypedEqReturnBool baseStatementIdx fnName env .i128 "i128_eq" lhs rhs
   | _ =>
       unsupportedExpr fnName s!"equality lowering for type '{Ty.toCairo eqTy}' is not yet implemented"
 

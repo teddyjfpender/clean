@@ -7,8 +7,8 @@
     },
     "extension_modules_total": 62,
     "generic_libfunc_ids_by_status": {
-      "fail_fast": 261,
-      "implemented": 18,
+      "fail_fast": 252,
+      "implemented": 27,
       "unresolved": 0
     },
     "generic_libfunc_ids_total": 279,
@@ -754,7 +754,7 @@
     },
     {
       "id": "i128_eq",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "i128_overflowing_add_impl",
@@ -782,7 +782,7 @@
     },
     {
       "id": "i16_eq",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "i16_overflowing_add_impl",
@@ -814,7 +814,7 @@
     },
     {
       "id": "i32_eq",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "i32_overflowing_add_impl",
@@ -846,7 +846,7 @@
     },
     {
       "id": "i64_eq",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "i64_overflowing_add_impl",
@@ -878,7 +878,7 @@
     },
     {
       "id": "i8_eq",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "i8_overflowing_add_impl",
@@ -1226,7 +1226,7 @@
     },
     {
       "id": "u16_eq",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "u16_is_zero",
@@ -1286,7 +1286,7 @@
     },
     {
       "id": "u32_eq",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "u32_is_zero",
@@ -1334,7 +1334,7 @@
     },
     {
       "id": "u64_eq",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "u64_is_zero",
@@ -1378,7 +1378,7 @@
     },
     {
       "id": "u8_eq",
-      "status": "fail_fast"
+      "status": "implemented"
     },
     {
       "id": "u8_is_zero",
