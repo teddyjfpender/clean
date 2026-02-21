@@ -38,7 +38,9 @@ Execute full function-domain Sierra family closure for Track A with explicit low
 3. Unsupported family paths fail fast consistently.
 
 ### SCL-2 Scalar/integer/field family closure
-- Status: NOT DONE
+- Status: DONE - 6833a1a
+- Evidence tests: `scripts/test/sierra_scalar_e2e.sh`; `scripts/test/sierra_u128_range_checked_e2e.sh`; `scripts/test/sierra_u128_wrapping_differential.sh`; `scripts/test/eval_qm31_semantics.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `src/LeanCairo/Backend/Sierra/Emit/Subset/Expr.lean`; `src/LeanCairo/Backend/Sierra/Emit/Subset/Function.lean`; `src/LeanCairo/Compiler/Semantics/Eval.lean`; `roadmap/capabilities/registry.json`
 - Acceptance tests:
 1. Scalar/integer/field corpora pass validation and CASM compilation.
 2. Overflow/boundary differential tests pass.
