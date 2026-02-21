@@ -29,6 +29,15 @@ REQUIRED_DIFFERENTIAL_KEYS = (
 ALLOWED_DIFFERENTIAL_KINDS = {"none", "composite"}
 ALLOWED_VECTOR_PROFILES = {"normal", "boundary", "failure"}
 
+REQUIRED_BENCHMARK_KEYS = (
+    "kind",
+    "family",
+    "runner_script",
+    "min_sierra_improvement_pct",
+    "min_l2_improvement_pct",
+)
+ALLOWED_BENCHMARK_KINDS = {"none", "gas_script"}
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Validate examples manifest")
@@ -72,6 +81,14 @@ def normalize_optional_string(value: object, ctx: str) -> str:
     return stripped
 
 
+def normalize_optional_float(value: object, ctx: str) -> float | None:
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    raise ValueError(f"{ctx}: expected number or null")
+
+
 def validate_manifest(manifest_path: Path) -> List[Tuple[str, str, str, str, str, str, str, List[str]]]:
     payload = json.loads(manifest_path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
@@ -94,7 +111,7 @@ def validate_manifest(manifest_path: Path) -> List[Tuple[str, str, str, str, str
         if not isinstance(entry, dict):
             raise ValueError(f"{ctx}: expected object")
 
-        for key in ("id", "module", "lean_sources", "mirrors", "differential"):
+        for key in ("id", "module", "lean_sources", "mirrors", "differential", "benchmark"):
             if key not in entry:
                 raise ValueError(f"{ctx}: missing key '{key}'")
 
@@ -225,6 +242,51 @@ def validate_manifest(manifest_path: Path) -> List[Tuple[str, str, str, str, str
             if not backend_contract:
                 raise ValueError(
                     f"{ctx}.differential: kind 'composite' requires backend_contract"
+                )
+
+        benchmark = entry["benchmark"]
+        if not isinstance(benchmark, dict):
+            raise ValueError(f"{ctx}.benchmark: expected object")
+        for key in REQUIRED_BENCHMARK_KEYS:
+            if key not in benchmark:
+                raise ValueError(f"{ctx}.benchmark: missing key '{key}'")
+
+        benchmark_kind = str(benchmark["kind"]).strip()
+        if benchmark_kind not in ALLOWED_BENCHMARK_KINDS:
+            raise ValueError(
+                f"{ctx}.benchmark.kind: invalid value '{benchmark_kind}', expected one of {sorted(ALLOWED_BENCHMARK_KINDS)}"
+            )
+
+        benchmark_family = normalize_optional_string(benchmark["family"], f"{ctx}.benchmark.family")
+        benchmark_runner = normalize_optional_rel_path(
+            benchmark["runner_script"], f"{ctx}.benchmark.runner_script"
+        )
+        min_sierra_improvement = normalize_optional_float(
+            benchmark["min_sierra_improvement_pct"],
+            f"{ctx}.benchmark.min_sierra_improvement_pct",
+        )
+        min_l2_improvement = normalize_optional_float(
+            benchmark["min_l2_improvement_pct"],
+            f"{ctx}.benchmark.min_l2_improvement_pct",
+        )
+
+        if benchmark_kind == "none":
+            if benchmark_family or benchmark_runner or min_sierra_improvement is not None or min_l2_improvement is not None:
+                raise ValueError(
+                    f"{ctx}.benchmark: kind 'none' requires family/runner/threshold fields to be null"
+                )
+        elif benchmark_kind == "gas_script":
+            if not benchmark_family:
+                raise ValueError(f"{ctx}.benchmark: kind 'gas_script' requires family")
+            if not benchmark_runner:
+                raise ValueError(f"{ctx}.benchmark: kind 'gas_script' requires runner_script")
+            if not benchmark_runner.startswith("examples/Benchmark/"):
+                raise ValueError(
+                    f"{ctx}.benchmark.runner_script must be under examples/Benchmark/: {benchmark_runner}"
+                )
+            if min_sierra_improvement is None or min_l2_improvement is None:
+                raise ValueError(
+                    f"{ctx}.benchmark: kind 'gas_script' requires min_sierra_improvement_pct and min_l2_improvement_pct"
                 )
 
         for source in lean_sources:

@@ -1,0 +1,53 @@
+{
+  "cases": [
+    {
+      "family": "integer",
+      "id": "fast_power_u128",
+      "min_l2_improvement_pct": 0.0,
+      "min_sierra_improvement_pct": 0.0,
+      "runner_script": "examples/Benchmark/fast_power_u128/scripts/run_gas_comparison.sh"
+    },
+    {
+      "family": "integer",
+      "id": "fast_power_u128_p63",
+      "min_l2_improvement_pct": 0.0,
+      "min_sierra_improvement_pct": 0.0,
+      "runner_script": "examples/Benchmark/fast_power_u128_p63/scripts/run_gas_comparison.sh"
+    },
+    {
+      "family": "integer",
+      "id": "karatsuba_u128",
+      "min_l2_improvement_pct": 0.0,
+      "min_sierra_improvement_pct": 0.0,
+      "runner_script": "examples/Benchmark/karatsuba_u128/scripts/run_gas_comparison.sh"
+    },
+    {
+      "family": "fixed_point",
+      "id": "newton_u128",
+      "min_l2_improvement_pct": 0.0,
+      "min_sierra_improvement_pct": 0.0,
+      "runner_script": "examples/Benchmark/newton_u128/scripts/run_gas_comparison.sh"
+    },
+    {
+      "family": "fixed_point",
+      "id": "sq128x128_u128",
+      "min_l2_improvement_pct": 0.0,
+      "min_sierra_improvement_pct": 0.0,
+      "runner_script": "examples/Benchmark/sq128x128_u128/scripts/run_gas_comparison.sh"
+    }
+  ],
+  "family_thresholds": [
+    {
+      "family": "fixed_point",
+      "min_l2_improvement_pct": 0.0,
+      "min_sierra_improvement_pct": 0.0
+    },
+    {
+      "family": "integer",
+      "min_l2_improvement_pct": 0.0,
+      "min_sierra_improvement_pct": 0.0
+    }
+  ],
+  "manifest": "config/examples-manifest.json",
+  "version": 1
+}

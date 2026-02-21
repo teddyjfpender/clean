@@ -50,6 +50,17 @@ python3 scripts/examples/generate_differential_harness.py \
 ./scripts/roadmap/check_differential_harness_sync.sh
 ```
 
+## Benchmark Harness
+
+```bash
+python3 scripts/examples/generate_benchmark_harness.py \
+  --manifest config/examples-manifest.json \
+  --out-config generated/examples/benchmark-harness.json \
+  --out-script scripts/bench/generated/run_manifest_benchmarks.sh
+./scripts/roadmap/check_benchmark_harness_sync.sh
+scripts/bench/generated/run_manifest_benchmarks.sh
+```
+
 ## Validate Structure
 
 ```bash

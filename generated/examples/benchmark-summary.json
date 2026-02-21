@@ -1,0 +1,106 @@
+{
+  "case_count": 5,
+  "cases": [
+    {
+      "family": "integer",
+      "id": "fast_power_u128",
+      "log_file": ".artifacts/manifest_benchmark/fast_power_u128.log",
+      "metrics": {
+        "baseline_fn_avg_gas": 0.0,
+        "baseline_l2_gas": 108703670.0,
+        "baseline_sierra_gas": 108703670.0,
+        "fn_improvement_pct": 0.0,
+        "generated_fn_avg_gas": 0.0,
+        "generated_l2_gas": 19974070.0,
+        "generated_sierra_gas": 19974070.0,
+        "l2_improvement_pct": 81.63,
+        "sierra_improvement_pct": 81.63
+      },
+      "runner_script": "examples/Benchmark/fast_power_u128/scripts/run_gas_comparison.sh"
+    },
+    {
+      "family": "integer",
+      "id": "fast_power_u128_p63",
+      "log_file": ".artifacts/manifest_benchmark/fast_power_u128_p63.log",
+      "metrics": {
+        "baseline_fn_avg_gas": 0.0,
+        "baseline_l2_gas": 191565750.0,
+        "baseline_sierra_gas": 191565750.0,
+        "fn_improvement_pct": 0.0,
+        "generated_fn_avg_gas": 0.0,
+        "generated_l2_gas": 37392310.0,
+        "generated_sierra_gas": 37392310.0,
+        "l2_improvement_pct": 80.48,
+        "sierra_improvement_pct": 80.48
+      },
+      "runner_script": "examples/Benchmark/fast_power_u128_p63/scripts/run_gas_comparison.sh"
+    },
+    {
+      "family": "integer",
+      "id": "karatsuba_u128",
+      "log_file": ".artifacts/manifest_benchmark/karatsuba_u128.log",
+      "metrics": {
+        "baseline_fn_avg_gas": 0.0,
+        "baseline_l2_gas": 147523830.0,
+        "baseline_sierra_gas": 147523830.0,
+        "fn_improvement_pct": 0.0,
+        "generated_fn_avg_gas": 0.0,
+        "generated_l2_gas": 786550.0,
+        "generated_sierra_gas": 786550.0,
+        "l2_improvement_pct": 99.47,
+        "sierra_improvement_pct": 99.47
+      },
+      "runner_script": "examples/Benchmark/karatsuba_u128/scripts/run_gas_comparison.sh"
+    },
+    {
+      "family": "fixed_point",
+      "id": "newton_u128",
+      "log_file": ".artifacts/manifest_benchmark/newton_u128.log",
+      "metrics": {
+        "baseline_fn_avg_gas": 22250.0,
+        "baseline_l2_gas": 121444330.0,
+        "baseline_sierra_gas": 121444330.0,
+        "fn_improvement_pct": 13.08,
+        "generated_fn_avg_gas": 19340.0,
+        "generated_l2_gas": 118464490.0,
+        "generated_sierra_gas": 118464490.0,
+        "l2_improvement_pct": 2.45,
+        "sierra_improvement_pct": 2.45
+      },
+      "runner_script": "examples/Benchmark/newton_u128/scripts/run_gas_comparison.sh"
+    },
+    {
+      "family": "fixed_point",
+      "id": "sq128x128_u128",
+      "log_file": ".artifacts/manifest_benchmark/sq128x128_u128.log",
+      "metrics": {
+        "baseline_fn_avg_gas": 0.0,
+        "baseline_l2_gas": 32128950.0,
+        "baseline_sierra_gas": 32128950.0,
+        "fn_improvement_pct": 0.0,
+        "generated_fn_avg_gas": 0.0,
+        "generated_l2_gas": 32128950.0,
+        "generated_sierra_gas": 32128950.0,
+        "l2_improvement_pct": 0.0,
+        "sierra_improvement_pct": 0.0
+      },
+      "runner_script": "examples/Benchmark/sq128x128_u128/scripts/run_gas_comparison.sh"
+    }
+  ],
+  "config": "generated/examples/benchmark-harness.json",
+  "families": [
+    {
+      "avg_l2_improvement_pct": 1.225,
+      "avg_sierra_improvement_pct": 1.225,
+      "case_count": 2,
+      "family": "fixed_point"
+    },
+    {
+      "avg_l2_improvement_pct": 87.193333,
+      "avg_sierra_improvement_pct": 87.193333,
+      "case_count": 3,
+      "family": "integer"
+    }
+  ],
+  "version": 1
+}
