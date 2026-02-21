@@ -1,0 +1,72 @@
+{
+  "baselines": [
+    {
+      "baseline_dir": "examples/Cairo-Baseline/fast_power_u128",
+      "id": "fast_power_u128",
+      "patch_justification": "Upstream generic fast-power implementation is wrapped to expose stable benchmark entrypoint `pow13_baseline`.",
+      "patch_script": "scripts/examples/apply_baseline_patches.sh",
+      "provenance_doc": "examples/Cairo-Baseline/fast_power_u128/README.md",
+      "source_commit": "d64124b96f4e12840d64f80f2526841413b72096",
+      "source_paths": [
+        "packages/math/src/fast_power.cairo"
+      ],
+      "source_repo": "keep-starknet-strange/alexandria",
+      "sync_script": "scripts/examples/sync_baseline_from_github.sh"
+    },
+    {
+      "baseline_dir": "examples/Cairo-Baseline/fast_power_u128_p63",
+      "id": "fast_power_u128_p63",
+      "patch_justification": "Same pinned upstream fast-power source, with local exponent specialization for parity benchmarking.",
+      "patch_script": "scripts/examples/apply_baseline_patches.sh",
+      "provenance_doc": "examples/Cairo-Baseline/fast_power_u128_p63/README.md",
+      "source_commit": "d64124b96f4e12840d64f80f2526841413b72096",
+      "source_paths": [
+        "packages/math/src/fast_power.cairo"
+      ],
+      "source_repo": "keep-starknet-strange/alexandria",
+      "sync_script": "scripts/examples/sync_baseline_from_github.sh"
+    },
+    {
+      "baseline_dir": "examples/Cairo-Baseline/karatsuba_u128",
+      "id": "karatsuba_u128",
+      "patch_justification": "Upstream recursion helper is patched in benchmark sync for deterministic termination and local module shape.",
+      "patch_script": "scripts/examples/apply_baseline_patches.sh",
+      "provenance_doc": "examples/Cairo-Baseline/karatsuba_u128/README.md",
+      "source_commit": "d64124b96f4e12840d64f80f2526841413b72096",
+      "source_paths": [
+        "packages/math/src/const_pow.cairo",
+        "packages/math/src/karatsuba.cairo"
+      ],
+      "source_repo": "keep-starknet-strange/alexandria",
+      "sync_script": "scripts/examples/sync_baseline_from_github.sh"
+    },
+    {
+      "baseline_dir": "examples/Cairo-Baseline/newton_u128",
+      "id": "newton_u128",
+      "patch_justification": "Pinned Newton baseline is wrapped into local package entrypoint for function-only benchmark parity.",
+      "patch_script": "scripts/examples/apply_baseline_patches.sh",
+      "provenance_doc": "examples/Cairo-Baseline/newton_u128/README.md",
+      "source_commit": "d64124b96f4e12840d64f80f2526841413b72096",
+      "source_paths": [
+        "packages/math/src/fast_root.cairo"
+      ],
+      "source_repo": "keep-starknet-strange/alexandria",
+      "sync_script": "scripts/examples/sync_baseline_from_github.sh"
+    },
+    {
+      "baseline_dir": "examples/Cairo-Baseline/sq128x128_u128",
+      "id": "sq128x128_u128",
+      "patch_justification": "Pinned SQ128 source family is reduced to the repo's raw-u128 benchmark lane and wrapped for deterministic parity checks.",
+      "patch_script": "scripts/examples/apply_baseline_patches.sh",
+      "provenance_doc": "examples/Cairo-Baseline/sq128x128_u128/README.md",
+      "source_commit": "9dc92b9e3d654c2f46c4588e42a4aab4e44f6bee",
+      "source_paths": [
+        "contracts/src/types/sq128/arithmetic.cairo",
+        "contracts/src/types/sq128/types.cairo"
+      ],
+      "source_repo": "teddyjfpender/the-situation",
+      "sync_script": "scripts/examples/sync_baseline_from_github.sh"
+    }
+  ],
+  "version": 1
+}

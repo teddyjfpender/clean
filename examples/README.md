@@ -67,6 +67,16 @@ scripts/bench/generated/run_manifest_benchmarks.sh
 ./scripts/test/examples_structure.sh
 ```
 
+## Baseline Provenance
+
+```bash
+python3 scripts/examples/validate_baselines_manifest.py \
+  --manifest config/baselines-manifest.json \
+  --examples-manifest config/examples-manifest.json
+./scripts/examples/sync_baselines.sh --manifest config/baselines-manifest.json
+./scripts/roadmap/check_baseline_provenance.sh
+```
+
 ## Add A New Example
 
 1. Add Lean source under `examples/Lean/<new-id>/`.
