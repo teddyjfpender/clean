@@ -33,6 +33,9 @@ lean_lib scalar_core where
 lean_lib u128_range_checked where
   srcDir := "../examples/Lean"
 
+lean_lib fast_power_u128 where
+  srcDir := "../examples/Lean"
+
 @[default_target]
 lean_exe «leancairo-gen» where
   root := `LeanCairo.CLI.Main

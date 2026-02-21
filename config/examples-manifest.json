@@ -22,6 +22,13 @@
       "lean_sources": [
         "examples/Lean/u128_range_checked/Example.lean"
       ]
+    },
+    {
+      "id": "fast_power_u128",
+      "module": "fast_power_u128.Example",
+      "lean_sources": [
+        "examples/Lean/fast_power_u128/Example.lean"
+      ]
     }
   ]
 }

@@ -4,3 +4,4 @@ Benchmark packages that compare baseline vs optimized implementations for exampl
 
 Current benchmark set:
 - `newton_u128`
+- `fast_power_u128`
