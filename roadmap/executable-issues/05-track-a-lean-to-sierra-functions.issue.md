@@ -113,13 +113,17 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 2. No unresolved TODO in enabled families without fail-fast guard.
 
 ### A9 Starknet interop (optional, isolated)
-- Status: NOT DONE
+- Status: DONE - a70c31f
+- Evidence tests: `scripts/test/e2e.sh`; `scripts/test/sierra_primary_without_cairo.sh`; `scripts/test/sierra_primary_cairo_coupling_guard.sh`; `scripts/test/architecture_boundaries.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `src/LeanCairo/Pipeline/Sierra/Main.lean`; `src/LeanCairo/Backend/Cairo/EmitIRContract.lean`; `scripts/roadmap/check_architecture_boundaries.sh`; `scripts/test/sierra_primary_without_cairo.sh`
 - Acceptance tests:
 1. Contract adapter tests pass without regressing function-only lane.
 2. Function-core CI lane remains independent and green.
 
 ### A10 Sierra -> Cairo review lift
-- Status: NOT DONE
+- Status: DONE - a70c31f
+- Evidence tests: `scripts/test/sierra_review_lift.sh`; `scripts/test/sierra_review_lift_complex.sh`; `scripts/roadmap/check_review_lift_isolation.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `scripts/sierra/render_review_lift.py`; `scripts/test/sierra_review_lift.sh`; `scripts/test/sierra_review_lift_complex.sh`; `scripts/roadmap/check_review_lift_isolation.sh`
 - Acceptance tests:
 1. Review output is generated with Sierra statement anchors.
 2. No compilation path depends on review lift output.
