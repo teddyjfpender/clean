@@ -56,7 +56,9 @@ Close effect/resource-aware control-flow semantics in MIR and lowering pipelines
 3. Unsupported call modes fail fast.
 
 ### EFF-4 Resource legality and optimization-side-condition gates
-- Status: NOT DONE
+- Status: DONE - c22a9ea
+- Evidence tests: `scripts/roadmap/check_effect_metadata.sh`; `scripts/bench/check_optimizer_family_thresholds.sh`; `scripts/bench/check_optimizer_non_regression.sh`; `scripts/test/benchmark_family_thresholds_negative.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `config/effect-metadata.json`; `scripts/roadmap/validate_effect_metadata.py`; `scripts/bench/check_optimizer_family_thresholds.sh`; `scripts/bench/check_optimizer_non_regression.sh`; `roadmap/reports/cost-model-calibration-thresholds.json`
 - Acceptance tests:
 1. Gas/AP/resource legality checks block unsafe transforms.
 2. Negative legality tests pass.
