@@ -69,7 +69,9 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 3. Constructor/destructor roundtrip laws are proved for enabled forms.
 
 ### A4 Arrays/spans/nullable/box/dict
-- Status: NOT DONE
+- Status: DONE - 573579c
+- Evidence tests: `scripts/test/sierra_aggregate_collection_e2e.sh`; `scripts/test/eval_aggregate_wrapper_semantics.sh`; `scripts/test/sierra_failfast_unsupported.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `src/LeanCairo/Backend/Sierra/Emit/Subset/Foundation.lean`; `src/LeanCairo/Compiler/Semantics/Aggregates.lean`; `src/Examples/SierraSubsetUnsupportedDictSig.lean`; `roadmap/capabilities/registry.json`
 - Acceptance tests:
 1. Collection corpus compiles to Sierra and CASM.
 2. Alias/ownership invariants are tested.

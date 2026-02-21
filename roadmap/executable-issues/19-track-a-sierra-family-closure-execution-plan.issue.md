@@ -56,7 +56,9 @@ Execute full function-domain Sierra family closure for Track A with explicit low
 3. Differential suites pass.
 
 ### SCL-4 Control/runtime/advanced family closure
-- Status: NOT DONE
+- Status: DONE - c22a9ea
+- Evidence tests: `scripts/test/control_flow_normalization_regression.sh`; `scripts/test/call_panic_semantics_regression.sh`; `scripts/bench/check_optimizer_non_regression.sh`; `scripts/bench/check_optimizer_family_thresholds.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/Optimize/Expr.lean`; `config/effect-metadata.json`; `roadmap/capabilities/registry.json`
 - Acceptance tests:
 1. Call/control/panic/runtime fixtures validate and compile.
 2. Gas/AP/segment-arena legality checks pass.

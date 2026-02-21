@@ -28,7 +28,9 @@ Close Track-B function parity and reviewability guarantees while preserving Trac
 ## Milestone status ledger
 
 ### CPL-1 Cairo AST and emitter family closure
-- Status: NOT DONE
+- Status: DONE - 0052b25
+- Evidence tests: `scripts/test/cairo_ast_idempotence.sh`; `scripts/test/deterministic_codegen.sh`; `scripts/test/backend_parity_aggregate_collection.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Backend/Cairo/EmitIRContract.lean`; `src/LeanCairo/Backend/Cairo/EmitIRFunction.lean`; `roadmap/capabilities/registry.json`; `src/Examples.lean`
 - Acceptance tests:
 1. AST/emitter supports all Track-A implemented capabilities or explicit fail-fast states.
 2. Deterministic rendering and idempotence tests pass.

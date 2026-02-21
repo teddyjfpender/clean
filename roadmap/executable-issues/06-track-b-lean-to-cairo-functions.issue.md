@@ -51,7 +51,9 @@ Deliver deterministic function-level Lean -> Cairo emission from shared MIR with
 2. Behavior matches primary backend on shared vectors.
 
 ### B3 Error/panic/control-flow parity
-- Status: NOT DONE
+- Status: DONE - c22a9ea
+- Evidence tests: `scripts/test/call_panic_semantics_regression.sh`; `scripts/test/control_flow_normalization_regression.sh`; `scripts/test/backend_parity.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/Optimize/Expr.lean`; `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`
 - Acceptance tests:
 1. Panic and early-return differentials pass.
 2. Branch-heavy corpus parity passes.
