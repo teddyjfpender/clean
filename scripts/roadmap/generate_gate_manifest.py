@@ -39,6 +39,7 @@ CORE_GATES: List[str] = [
     "scripts/roadmap/check_completion_matrix.sh",
     "scripts/roadmap/check_track_a_completion_audit.sh",
     "scripts/roadmap/check_track_b_completion_audit.sh",
+    "scripts/roadmap/check_completion_certificate.sh",
     "scripts/roadmap/check_crate_dependency_matrix_freshness.sh",
     "scripts/roadmap/check_coverage_matrix_freshness.sh",
     "scripts/roadmap/check_sierra_coverage_report_freshness.sh",

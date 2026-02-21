@@ -1,0 +1,69 @@
+{
+  "blocking_reasons": [
+    "mandatory dimension not ready: program_p0_issue_closure=not_ready"
+  ],
+  "closure_summary": {
+    "program": {
+      "ready": 1,
+      "target": 2
+    },
+    "track_a": {
+      "ready": 4,
+      "target": 4
+    },
+    "track_b": {
+      "ready": 4,
+      "target": 4
+    }
+  },
+  "dimension_statuses": {
+    "program_p0_issue_closure": "not_ready",
+    "program_release_evidence_closure": "ready",
+    "track_a_benchmark_closure": "ready",
+    "track_a_family_closure": "ready",
+    "track_a_optimization_closure": "ready",
+    "track_a_proof_closure": "ready",
+    "track_b_divergence_contract_closure": "ready",
+    "track_b_parity_closure": "ready",
+    "track_b_purity_closure": "ready",
+    "track_b_reviewability_closure": "ready"
+  },
+  "evidence_links": [
+    "roadmap/reports/completion-matrix.json",
+    "roadmap/reports/release-benchmark-report.md",
+    "roadmap/reports/release-capability-closure-report.md",
+    "roadmap/reports/release-compatibility-report.md",
+    "roadmap/reports/release-go-no-go-report.json",
+    "roadmap/reports/release-proof-report.md",
+    "roadmap/reports/track-a-completion-audit.json",
+    "roadmap/reports/track-b-completion-audit.json",
+    "scripts/roadmap/check_completion_matrix.sh",
+    "scripts/roadmap/check_release_reports_freshness.sh",
+    "scripts/roadmap/check_track_a_completion_audit.sh",
+    "scripts/roadmap/check_track_b_completion_audit.sh"
+  ],
+  "mandatory_dimensions": [
+    "track_a_benchmark_closure",
+    "track_a_family_closure",
+    "track_a_optimization_closure",
+    "track_a_proof_closure",
+    "track_b_divergence_contract_closure",
+    "track_b_parity_closure",
+    "track_b_purity_closure",
+    "track_b_reviewability_closure",
+    "program_p0_issue_closure",
+    "program_release_evidence_closure"
+  ],
+  "matrix": "roadmap/reports/completion-matrix.json",
+  "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617",
+  "ready_dimensions": 9,
+  "release_go_no_go": "roadmap/reports/release-go-no-go-report.json",
+  "release_result": "PASS",
+  "result": "BLOCKED",
+  "target_dimensions": 10,
+  "track_a_audit": "roadmap/reports/track-a-completion-audit.json",
+  "track_a_result": "PASS",
+  "track_b_audit": "roadmap/reports/track-b-completion-audit.json",
+  "track_b_result": "PASS",
+  "version": 1
+}
