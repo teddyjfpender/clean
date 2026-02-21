@@ -45,7 +45,9 @@ Deliver deterministic benchmarking/profiling governance and cost-model calibrati
 3. Profile artifact freshness checks pass.
 
 ### BEN-3 Cost-model calibration bootstrap
-- Status: NOT DONE
+- Status: DONE - 017c025
+- Evidence tests: `scripts/roadmap/check_cost_model_calibration_freshness.sh`; `scripts/test/cost_model_calibration_reproducibility.sh`; `scripts/test/cost_model_calibration_negative.sh`; `scripts/bench/check_cost_model_calibration_thresholds.py --calibration generated/examples/cost-model-calibration.json --thresholds roadmap/reports/cost-model-calibration-thresholds.json`
+- Evidence proofs: `scripts/bench/generate_cost_model_calibration.py`; `scripts/bench/check_cost_model_calibration_thresholds.py`; `generated/examples/cost-model-calibration.json`; `generated/examples/cost-model-calibration.md`; `roadmap/reports/cost-model-calibration-thresholds.json`; `generated/examples/benchmark-summary.json`
 - Acceptance tests:
 1. Calibration datasets and outputs are reproducible.
 2. Versioned calibration artifacts are generated.
