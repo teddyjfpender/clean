@@ -17,7 +17,7 @@
 
 | Dimension | Scope | Status | Blocking gates |
 | --- | --- | --- | --- |
-| `program_p0_issue_closure` | `program` | `not_ready` | `scripts/roadmap/check_issue_statuses.sh`, `scripts/roadmap/check_issue_dependencies.sh`, `scripts/roadmap/check_milestone_dependencies.py` |
+| `program_p0_issue_closure` | `program` | `ready` | `scripts/roadmap/check_issue_statuses.sh`, `scripts/roadmap/check_issue_dependencies.sh`, `scripts/roadmap/check_milestone_dependencies.py` |
 | `program_release_evidence_closure` | `program` | `ready` | `scripts/roadmap/check_release_reports_freshness.sh`, `scripts/roadmap/check_release_go_no_go.sh` |
 | `track_a_benchmark_closure` | `lean->sierra->casm` | `ready` | `scripts/bench/check_optimizer_non_regression.sh`, `scripts/bench/check_optimizer_family_thresholds.sh` |
 | `track_a_family_closure` | `lean->sierra->casm` | `ready` | `scripts/roadmap/check_sierra_primary_closure.sh`, `scripts/roadmap/check_sierra_coverage_report_freshness.sh` |
@@ -29,6 +29,3 @@
 | `track_b_reviewability_closure` | `lean->cairo` | `ready` | `scripts/test/sierra_review_lift.sh`, `scripts/test/sierra_review_lift_complex.sh` |
 
 ## Diagnostics
-
-### `program_p0_issue_closure`
-- 25-full-function-compiler-completion-matrix.issue.md

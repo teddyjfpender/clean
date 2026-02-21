@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/14-complex-function-corpus-and-benchmarking-lab.md`](../14-complex-function-corpus-and-benchmarking-lab.md)
 - Issue class: Complex corpus and benchmark scaling
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - 9ffe25e
+- Completion evidence tests: `scripts/roadmap/check_issue_statuses.sh`; `scripts/roadmap/check_issue_dependencies.sh`; `scripts/roadmap/check_milestone_dependencies.py`; `scripts/roadmap/check_issue_evidence.sh`; `./scripts/workflow/run-sierra-checks.sh`; `./scripts/workflow/run-mvp-checks.sh`
+- Completion evidence proofs: `roadmap/reports/completion-matrix.json`; `roadmap/reports/track-a-completion-audit.json`; `roadmap/reports/track-b-completion-audit.json`; `roadmap/reports/program-completion-certificate.json`; `roadmap/reports/release-go-no-go-report.json`; `roadmap/reports/release-go-no-go-report.md`
 
 ## Objective
 

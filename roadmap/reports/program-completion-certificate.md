@@ -1,6 +1,6 @@
 # Program Completion Certificate
 
-- Result: `BLOCKED`
+- Result: `PASS`
 - Pinned commit: `e56055c87a9db4e3dbb91c82ccb2ea751a8dc617`
 - Matrix: `roadmap/reports/completion-matrix.json`
 - Track-A audit: `roadmap/reports/track-a-completion-audit.json`
@@ -9,7 +9,7 @@
 
 ## Closure Summary
 
-- Mandatory dimensions ready: `9` / `10`
+- Mandatory dimensions ready: `10` / `10`
 - Track-A audit result: `PASS`
 - Track-B audit result: `PASS`
 - Release go/no-go result: `PASS`
@@ -26,12 +26,12 @@
 | `track_b_parity_closure` | `ready` |
 | `track_b_purity_closure` | `ready` |
 | `track_b_reviewability_closure` | `ready` |
-| `program_p0_issue_closure` | `not_ready` |
+| `program_p0_issue_closure` | `ready` |
 | `program_release_evidence_closure` | `ready` |
 
 ## Blocking Reasons
 
-- mandatory dimension not ready: program_p0_issue_closure=not_ready
+- none
 
 ## Evidence Links
 

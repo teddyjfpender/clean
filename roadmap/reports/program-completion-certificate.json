@@ -1,10 +1,8 @@
 {
-  "blocking_reasons": [
-    "mandatory dimension not ready: program_p0_issue_closure=not_ready"
-  ],
+  "blocking_reasons": [],
   "closure_summary": {
     "program": {
-      "ready": 1,
+      "ready": 2,
       "target": 2
     },
     "track_a": {
@@ -17,7 +15,7 @@
     }
   },
   "dimension_statuses": {
-    "program_p0_issue_closure": "not_ready",
+    "program_p0_issue_closure": "ready",
     "program_release_evidence_closure": "ready",
     "track_a_benchmark_closure": "ready",
     "track_a_family_closure": "ready",
@@ -56,10 +54,10 @@
   ],
   "matrix": "roadmap/reports/completion-matrix.json",
   "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617",
-  "ready_dimensions": 9,
+  "ready_dimensions": 10,
   "release_go_no_go": "roadmap/reports/release-go-no-go-report.json",
   "release_result": "PASS",
-  "result": "BLOCKED",
+  "result": "PASS",
   "target_dimensions": 10,
   "track_a_audit": "roadmap/reports/track-a-completion-audit.json",
   "track_a_result": "PASS",

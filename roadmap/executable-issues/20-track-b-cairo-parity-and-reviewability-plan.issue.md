@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/20-track-b-cairo-parity-and-reviewability-plan.md`](../20-track-b-cairo-parity-and-reviewability-plan.md)
 - Issue class: Track-B parity and reviewability closure
 - Priority: P1
-- Overall status: NOT DONE
+- Overall status: DONE - a70c31f
+- Completion evidence tests: `scripts/roadmap/check_issue_statuses.sh`; `scripts/roadmap/check_issue_dependencies.sh`; `scripts/roadmap/check_milestone_dependencies.py`; `scripts/roadmap/check_issue_evidence.sh`; `./scripts/workflow/run-sierra-checks.sh`; `./scripts/workflow/run-mvp-checks.sh`
+- Completion evidence proofs: `roadmap/reports/completion-matrix.json`; `roadmap/reports/track-a-completion-audit.json`; `roadmap/reports/track-b-completion-audit.json`; `roadmap/reports/program-completion-certificate.json`; `roadmap/reports/release-go-no-go-report.json`; `roadmap/reports/release-go-no-go-report.md`
 
 ## Objective
 

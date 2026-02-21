@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/07-low-level-optimization-sierra-casm.md`](../07-low-level-optimization-sierra-casm.md)
 - Issue class: Optimization program
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - bdd376b
+- Completion evidence tests: `scripts/roadmap/check_issue_statuses.sh`; `scripts/roadmap/check_issue_dependencies.sh`; `scripts/roadmap/check_milestone_dependencies.py`; `scripts/roadmap/check_issue_evidence.sh`; `./scripts/workflow/run-sierra-checks.sh`; `./scripts/workflow/run-mvp-checks.sh`
+- Completion evidence proofs: `roadmap/reports/completion-matrix.json`; `roadmap/reports/track-a-completion-audit.json`; `roadmap/reports/track-b-completion-audit.json`; `roadmap/reports/program-completion-certificate.json`; `roadmap/reports/release-go-no-go-report.json`; `roadmap/reports/release-go-no-go-report.md`
 
 ## Objective
 

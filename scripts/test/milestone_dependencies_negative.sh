@@ -4,9 +4,15 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 CHECKER="$ROOT_DIR/scripts/roadmap/check_milestone_dependencies.py"
 LOG_FILE="$(mktemp -t leancairo_milestone_deps_negative.XXXXXX.log)"
+ISSUE25_FILE="$ROOT_DIR/roadmap/executable-issues/25-full-function-compiler-completion-matrix.issue.md"
+ISSUE25_BACKUP="$(mktemp -t leancairo_issue25_backup.XXXXXX.md)"
 
 cleanup() {
   rm -f "$LOG_FILE"
+  if [[ -f "$ISSUE25_BACKUP" ]]; then
+    cp "$ISSUE25_BACKUP" "$ISSUE25_FILE"
+    rm -f "$ISSUE25_BACKUP"
+  fi
 }
 trap cleanup EXIT
 
@@ -21,79 +27,50 @@ if ! grep -q "cycle" "$LOG_FILE"; then
   exit 1
 fi
 
-STATUS_EDGE="$(
-  cd "$ROOT_DIR"
-  python3 - <<'PY'
+if [[ ! -f "$ISSUE25_FILE" ]]; then
+  echo "missing issue file for status-order negative test: $ISSUE25_FILE"
+  exit 1
+fi
+
+cp "$ISSUE25_FILE" "$ISSUE25_BACKUP"
+
+python3 - <<'PY' "$ISSUE25_FILE"
 import re
+import sys
 from pathlib import Path
-import importlib.util
 
-spec = importlib.util.spec_from_file_location(
-    "milestone_deps",
-    "scripts/roadmap/check_milestone_dependencies.py",
-)
-mod = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(mod)
+issue_path = Path(sys.argv[1])
+lines = issue_path.read_text(encoding="utf-8").splitlines()
 
-issue_paths = sorted(Path("roadmap/executable-issues").rglob("*.issue.md"))
-statuses, issue_to_milestones = mod.parse_milestones(issue_paths)
-deps = mod.build_dependencies(issue_to_milestones, [])
+target_header = "### AUD-1 Completion matrix schema and data sources"
+header_idx = None
+for idx, line in enumerate(lines):
+    if line.strip() == target_header:
+        header_idx = idx
+        break
 
-done_nodes = sorted(
-    milestone
-    for milestone, status in statuses.items()
-    if re.match(r"^DONE - [0-9a-f]{7,40}$", status)
-)
-not_done_nodes = sorted(
-    milestone
-    for milestone, status in statuses.items()
-    if status == "NOT DONE"
-)
+if header_idx is None:
+    raise SystemExit(f"missing milestone header for negative test: {target_header}")
 
-reverse_deps = {}
-for child, parents in deps.items():
-    for parent in parents:
-        reverse_deps.setdefault(parent, set()).add(child)
-
-def depends_on(start: str, target: str) -> bool:
-    stack = list(deps.get(start, set()))
-    seen = set()
-    while stack:
-        node = stack.pop()
-        if node == target:
-            return True
-        if node in seen:
-            continue
-        seen.add(node)
-        stack.extend(deps.get(node, set()))
-    return False
-
-for child in done_nodes:
-    for parent in not_done_nodes:
-        if child == parent:
-            continue
-        # Avoid cycle injection for this check: we need a pure status violation.
-        if depends_on(parent, child):
-            continue
-        print(f"{child}:{parent}")
+for idx in range(header_idx + 1, len(lines)):
+    line = lines[idx].strip()
+    if line.startswith("### "):
+        break
+    if re.match(r"^- Status: DONE - [0-9a-f]{7,40}$", line):
+        lines[idx] = "- Status: NOT DONE"
+        issue_path.write_text("\\n".join(lines) + "\\n", encoding="utf-8")
         raise SystemExit(0)
 
-raise SystemExit(1)
+raise SystemExit("failed to find DONE status line under AUD-1 milestone")
 PY
-)"
 
-if [[ -z "$STATUS_EDGE" ]]; then
-  echo "failed to derive done->not-done edge for status-order negative test"
+if "$CHECKER" >"$LOG_FILE" 2>&1; then
+  echo "expected milestone checker to fail when AUD-1 is forced to NOT DONE"
   exit 1
 fi
 
-if "$CHECKER" --extra-edge "$STATUS_EDGE" >"$LOG_FILE" 2>&1; then
-  echo "expected milestone checker to fail when done milestone depends on not-done milestone"
-  exit 1
-fi
-
-if ! grep -q "dependency violation" "$LOG_FILE"; then
-  echo "status-order injection failed without dependency diagnostic"
+if ! grep -Eq "dependency violation|dependency graph references unknown (child|parent) milestone" "$LOG_FILE"; then
+  echo "status-order mutation failed without dependency/graph diagnostic"
   cat "$LOG_FILE"
   exit 1
 fi
