@@ -29,7 +29,9 @@ Close effect/resource-aware control-flow semantics in MIR and lowering pipelines
 ## Milestone status ledger
 
 ### EFF-1 Effect algebra and metadata schema
-- Status: NOT DONE
+- Status: DONE - 8264cad
+- Evidence tests: `scripts/roadmap/check_effect_metadata.sh`; `scripts/test/effect_metadata_negative.sh`; `scripts/roadmap/check_effect_isolation.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `config/effect-metadata.json`; `scripts/roadmap/validate_effect_metadata.py`; `src/LeanCairo/Compiler/IR/Expr.lean`; `src/LeanCairo/Compiler/Semantics/Eval.lean`
 - Acceptance tests:
 1. Missing effect metadata fails validation.
 2. Illegal effect class combinations are rejected.
