@@ -55,7 +55,9 @@ Close full function-domain type semantics for MIR/evaluator/backends with explic
 3. Differential conversion behavior matches semantic oracle.
 
 ### TYC-4 Aggregate and wrapper semantics closure
-- Status: NOT DONE
+- Status: DONE - 541ef63
+- Evidence tests: `scripts/test/eval_aggregate_wrapper_semantics.sh`; `scripts/test/eval_conversion_legality.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Aggregates.lean`; `tests/lean/eval_aggregate_wrapper_semantics.lean`; `config/gate-manifest.json`; `scripts/roadmap/generate_gate_manifest.py`
 - Acceptance tests:
 1. Tuple/struct/enum semantic law tests pass.
 2. Wrapper semantics (nullable/box/nonzero) tests pass.
