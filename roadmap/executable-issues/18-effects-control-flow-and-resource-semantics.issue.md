@@ -38,7 +38,9 @@ Close effect/resource-aware control-flow semantics in MIR and lowering pipelines
 3. Effect-isolation checks pass.
 
 ### EFF-2 Control-flow MIR normalization closure
-- Status: NOT DONE
+- Status: DONE - dbdb08e
+- Evidence tests: `scripts/test/control_flow_normalization_regression.sh`; `scripts/test/canonicalization_regression.sh`; `scripts/test/optimizer_pass_regression.sh`; `scripts/test/sierra_failfast_unsupported.sh`; `scripts/test/sierra_differential.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Optimize/Expr.lean`; `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`; `tests/lean/control_flow_normalization_regression.lean`; `config/gate-manifest.json`
 - Acceptance tests:
 1. Structured branch/join normalization tests pass.
 2. Loop/call control tests pass with deterministic outputs.
