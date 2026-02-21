@@ -47,7 +47,9 @@ Close effect/resource-aware control-flow semantics in MIR and lowering pipelines
 3. Differential control-flow suites pass.
 
 ### EFF-3 Call, recursion, and panic channel semantics
-- Status: NOT DONE
+- Status: DONE - dbdb08e
+- Evidence tests: `scripts/test/call_panic_semantics_regression.sh`; `scripts/test/semantic_state_regression.sh`; `scripts/test/sierra_failfast_unsupported.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Backend/Sierra/Generated/LoweringScaffold.lean`; `src/LeanCairo/Backend/Cairo/Generated/LoweringScaffold.lean`; `tests/lean/call_panic_semantics_regression.lean`
 - Acceptance tests:
 1. Call/recursion fixtures pass semantics and lowering checks.
 2. Panic/failure propagation tests pass.
