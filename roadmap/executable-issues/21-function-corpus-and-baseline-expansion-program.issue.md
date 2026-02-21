@@ -37,7 +37,9 @@ Build a manifest-driven complex function corpus program with baseline ingestion,
 3. Regeneration is deterministic.
 
 ### COR-2 Baseline ingestion and patch governance
-- Status: NOT DONE
+- Status: DONE - d272d36
+- Evidence tests: `scripts/roadmap/check_baseline_provenance.sh`; `scripts/test/baseline_sync_reproducibility.sh`; `scripts/test/baseline_provenance_negative.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `config/baselines-manifest.json`; `scripts/examples/validate_baselines_manifest.py`; `scripts/examples/sync_baselines.sh`; `scripts/examples/sync_baseline_from_github.sh`; `scripts/examples/apply_baseline_patches.sh`; `examples/Cairo-Baseline/README.md`; `examples/README.md`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
 - Acceptance tests:
 1. Baseline pull/sync scripts are reproducible and pinned.
 2. Baseline patches are scripted and justified.
