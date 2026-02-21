@@ -29,7 +29,9 @@ Escalate to a verified optimizing compiler pipeline for the constrained Lean sub
 ## Milestone status ledger
 
 ### OPTX-1 Typed pass contract and legality framework
-- Status: NOT DONE
+- Status: DONE - 5754656
+- Evidence tests: `scripts/test/optimizer_contracts_regression.sh`; `scripts/test/optimizer_pass_regression.sh`; `scripts/roadmap/check_gate_manifest_sync.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Optimize/Pass.lean`; `src/LeanCairo/Compiler/Optimize/Pipeline.lean`; `tests/lean/optimizer_contracts_regression.lean`; `config/gate-manifest.json`
 - Acceptance tests:
 1. Pass contract interfaces enforce declared pre/post conditions.
 2. Missing legality metadata fails pass integration checks.
