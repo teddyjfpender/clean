@@ -39,6 +39,23 @@ theorem normalizeExprDeterministic (expr : IRExpr ty) :
 
 def canonicalizePass : VerifiedExprPass where
   name := "canonicalize"
+  legality :=
+    {
+      preconditions :=
+        [
+          "input expression is well-typed",
+          "let-binding scopes are explicit in MIR"
+        ]
+      postconditions :=
+        [
+          "output expression preserves evaluation semantics",
+          "let-normalization and local CSE are deterministic"
+        ]
+      resourceSideConditions :=
+        [
+          "no control/resource reordering across effect boundaries"
+        ]
+    }
   run := normalizeStep
   sound := by
     intro ctx ty expr

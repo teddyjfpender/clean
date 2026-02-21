@@ -61,6 +61,7 @@ CORE_GATES: List[str] = [
     "scripts/test/control_flow_normalization_regression.sh",
     "scripts/test/call_panic_semantics_regression.sh",
     "scripts/test/optimizer_pass_regression.sh",
+    "scripts/test/optimizer_contracts_regression.sh",
     "scripts/test/capability_registry_negative.sh",
     "scripts/test/effect_metadata_negative.sh",
     "scripts/test/proof_debt_policy_negative.sh",

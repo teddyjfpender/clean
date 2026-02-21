@@ -7,8 +7,29 @@ open LeanCairo.Compiler.IR
 open LeanCairo.Compiler.Semantics
 open LeanCairo.Core.Domain
 
+structure PassLegality where
+  preconditions : List String
+  postconditions : List String
+  resourceSideConditions : List String := []
+  deriving Repr, DecidableEq
+
+namespace PassLegality
+
+private def allEntriesNonEmpty (entries : List String) : Bool :=
+  entries.all (fun entry => !entry.isEmpty)
+
+def isWellFormed (legality : PassLegality) : Bool :=
+  !legality.preconditions.isEmpty &&
+    !legality.postconditions.isEmpty &&
+    allEntriesNonEmpty legality.preconditions &&
+    allEntriesNonEmpty legality.postconditions &&
+    allEntriesNonEmpty legality.resourceSideConditions
+
+end PassLegality
+
 structure VerifiedExprPass where
   name : String
+  legality : PassLegality
   run : {ty : Ty} -> IRExpr ty -> IRExpr ty
   sound : ∀ (ctx : EvalContext) {ty : Ty} (expr : IRExpr ty), evalExpr ctx (run expr) = evalExpr ctx expr
 
@@ -16,10 +37,19 @@ namespace VerifiedExprPass
 
 def id : VerifiedExprPass where
   name := "id"
+  legality :=
+    {
+      preconditions := ["input IR expression is well-typed"]
+      postconditions := ["output expression is definitionally equal to input"]
+      resourceSideConditions := ["no resource-sensitive reordering"]
+    }
   run := fun expr => expr
   sound := by
     intro ctx ty expr
     rfl
+
+def hasLegalityMetadata (pass : VerifiedExprPass) : Bool :=
+  pass.legality.isWellFormed
 
 def applyStorageWrite (pass : VerifiedExprPass) (writeSpec : IRStorageWrite) : IRStorageWrite :=
   { writeSpec with value := pass.run writeSpec.value }
@@ -116,6 +146,13 @@ theorem applyContractSound
 
 def compose (next prev : VerifiedExprPass) : VerifiedExprPass where
   name := prev.name ++ " |> " ++ next.name
+  legality :=
+    {
+      preconditions := prev.legality.preconditions ++ next.legality.preconditions
+      postconditions := prev.legality.postconditions ++ next.legality.postconditions
+      resourceSideConditions :=
+        prev.legality.resourceSideConditions ++ next.legality.resourceSideConditions
+    }
   run := fun expr => next.run (prev.run expr)
   sound := by
     intro ctx ty expr
@@ -127,6 +164,13 @@ def compose (next prev : VerifiedExprPass) : VerifiedExprPass where
 
 def composeMany (passes : List VerifiedExprPass) : VerifiedExprPass :=
   passes.foldl (fun acc pass => compose pass acc) id
+
+def validatePipelineContracts (passes : List VerifiedExprPass) : Except String Unit := do
+  for pass in passes do
+    if !pass.hasLegalityMetadata then
+      .error s!"optimizer pass '{pass.name}' is missing required legality metadata"
+    else
+      pure ()
 
 end VerifiedExprPass
 end LeanCairo.Compiler.Optimize

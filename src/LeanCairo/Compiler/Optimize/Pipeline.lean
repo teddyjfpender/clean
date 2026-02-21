@@ -9,6 +9,23 @@ open LeanCairo.Compiler.IR
 
 def algebraicFoldPass : VerifiedExprPass where
   name := "algebraic-fold"
+  legality :=
+    {
+      preconditions :=
+        [
+          "input expression is well-typed",
+          "algebraic identities apply only to matching typed operators"
+        ]
+      postconditions :=
+        [
+          "output expression preserves evaluator semantics",
+          "constant/control simplifications are deterministic"
+        ]
+      resourceSideConditions :=
+        [
+          "resource-sensitive operators keep original ordering semantics"
+        ]
+    }
   run := fun expr => optimizeExpr expr
   sound := by
     intro ctx ty expr
@@ -16,6 +33,14 @@ def algebraicFoldPass : VerifiedExprPass where
 
 def optimizerPasses : List VerifiedExprPass :=
   [algebraicFoldPass, canonicalizePass]
+
+def optimizerPipelineContractCheck : Except String Unit :=
+  VerifiedExprPass.validatePipelineContracts optimizerPasses
+
+def optimizerPipelineContractsOk : Bool :=
+  match optimizerPipelineContractCheck with
+  | .ok _ => true
+  | .error _ => false
 
 def optimizerPass : VerifiedExprPass :=
   VerifiedExprPass.composeMany optimizerPasses
