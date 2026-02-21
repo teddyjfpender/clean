@@ -54,7 +54,9 @@ Deliver deterministic benchmarking/profiling governance and cost-model calibrati
 3. Prediction-vs-measurement checks pass policy thresholds.
 
 ### BEN-4 Family threshold gate hardening
-- Status: NOT DONE
+- Status: DONE - c8594bb
+- Evidence tests: `scripts/bench/check_optimizer_family_thresholds.sh`; `scripts/test/benchmark_family_thresholds_negative.sh`; `scripts/bench/check_optimizer_non_regression.sh`
+- Evidence proofs: `scripts/bench/check_optimizer_family_thresholds.sh`; `scripts/bench/check_optimizer_non_regression.sh`; `scripts/test/benchmark_family_thresholds_negative.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
 - Acceptance tests:
 1. Per-family non-regression thresholds are enforced.
 2. Threshold regressions fail CI deterministically.
