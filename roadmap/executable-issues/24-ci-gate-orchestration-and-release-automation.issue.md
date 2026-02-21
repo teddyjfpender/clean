@@ -54,7 +54,9 @@ Automate and harden CI gate orchestration and release-governance workflows as ca
 3. Timeout/retry policies preserve deterministic outcomes.
 
 ### CIX-4 Release go/no-go gate automation
-- Status: NOT DONE
+- Status: DONE - 1024e24
+- Evidence tests: `scripts/roadmap/check_release_go_no_go.sh`; `scripts/test/release_go_no_go_negative.sh`; `scripts/roadmap/check_release_reports_freshness.sh`; `scripts/roadmap/check_issue_evidence.sh`
+- Evidence proofs: `scripts/roadmap/check_release_go_no_go.sh`; `scripts/roadmap/generate_release_reports.py`; `roadmap/reports/release-go-no-go-thresholds.json`; `roadmap/reports/release-go-no-go-report.md`; `roadmap/reports/release-go-no-go-report.json`; `scripts/workflow/run-release-candidate-checks.sh`
 - Acceptance tests:
 1. Release gate checker aggregates closure evidence correctly.
 2. Missing mandatory evidence blocks release.
