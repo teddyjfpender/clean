@@ -1,0 +1,171 @@
+{
+  "nodes": [
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "addFelt252",
+      "resource_writes": [
+        "gas"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "addU128",
+      "resource_writes": [
+        "gas"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "addU256",
+      "resource_writes": [
+        "gas"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "eq",
+      "resource_writes": [
+        "gas"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "ite",
+      "resource_writes": [
+        "gas"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "leU128",
+      "resource_writes": [
+        "gas",
+        "range_check"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "leU256",
+      "resource_writes": [
+        "gas",
+        "range_check"
+      ]
+    },
+    {
+      "effect_class": "pure",
+      "failure_channel": "none",
+      "node": "letE",
+      "resource_writes": []
+    },
+    {
+      "effect_class": "pure",
+      "failure_channel": "none",
+      "node": "litBool",
+      "resource_writes": []
+    },
+    {
+      "effect_class": "pure",
+      "failure_channel": "none",
+      "node": "litFelt252",
+      "resource_writes": []
+    },
+    {
+      "effect_class": "pure",
+      "failure_channel": "none",
+      "node": "litU128",
+      "resource_writes": []
+    },
+    {
+      "effect_class": "pure",
+      "failure_channel": "none",
+      "node": "litU256",
+      "resource_writes": []
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "ltU128",
+      "resource_writes": [
+        "gas",
+        "range_check"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "ltU256",
+      "resource_writes": [
+        "gas",
+        "range_check"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "mulFelt252",
+      "resource_writes": [
+        "gas"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "mulU128",
+      "resource_writes": [
+        "gas"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "mulU256",
+      "resource_writes": [
+        "gas"
+      ]
+    },
+    {
+      "effect_class": "pure",
+      "failure_channel": "none",
+      "node": "storageRead",
+      "resource_writes": []
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "subFelt252",
+      "resource_writes": [
+        "gas"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "subU128",
+      "resource_writes": [
+        "gas"
+      ]
+    },
+    {
+      "effect_class": "effectful",
+      "failure_channel": "none",
+      "node": "subU256",
+      "resource_writes": [
+        "gas"
+      ]
+    },
+    {
+      "effect_class": "pure",
+      "failure_channel": "none",
+      "node": "var",
+      "resource_writes": []
+    }
+  ],
+  "version": 1
+}
