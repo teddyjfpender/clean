@@ -46,14 +46,18 @@ Implement a canonical capability registry and projection pipeline as the single 
 3. Projection outputs are sorted and diff-stable.
 
 ### CREG-3 Backend scaffold/projection integration
-- Status: NOT DONE
+- Status: DONE - a88cc78
+- Evidence tests: `scripts/roadmap/check_capability_projection_usage.sh`; `scripts/test/sierra_failfast_unsupported.sh`; `scripts/roadmap/check_capability_registry.sh`
+- Evidence proofs: `scripts/roadmap/generate_capability_projection_lean.py`; `src/LeanCairo/Backend/Sierra/Generated/CapabilityProjection.lean`; `src/LeanCairo/Backend/Sierra/Emit/Subset/Function.lean`; `scripts/roadmap/check_capability_projection_usage.sh`; `scripts/roadmap/check_capability_registry.sh`
 - Acceptance tests:
 1. Backend support lookups consume generated projections.
 2. Unregistered capabilities fail fast.
 3. Handwritten duplicated support maps are detected by checks.
 
 ### CREG-4 Closure ratio and SLO gates
-- Status: NOT DONE
+- Status: DONE - a88cc78
+- Evidence tests: `scripts/roadmap/check_capability_closure_slo.sh`; `scripts/test/capability_closure_slo_negative.sh`; `scripts/roadmap/check_release_reports_freshness.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `roadmap/capabilities/capability-closure-slo-baseline.json`; `roadmap/inventory/capability-coverage-report.json`; `roadmap/inventory/capability-coverage-report.md`; `scripts/roadmap/project_capability_reports.py`; `scripts/roadmap/check_capability_closure_slo.sh`; `scripts/roadmap/generate_release_reports.py`; `roadmap/reports/release-capability-closure-report.md`
 - Acceptance tests:
 1. Capability closure metrics generate from registry data.
 2. Monotonicity checks fail on regression in implemented capability counts.
