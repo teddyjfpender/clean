@@ -20,6 +20,8 @@ lean_lib MyLeanSierraSubsetUnsupportedU128Arith where
 
 lean_lib MyLeanSierraSubsetUnsupportedU256Sig where
 
+lean_lib MyLeanSierraSubsetUnsupportedDictSig where
+
 lean_lib MyLeanSierraScalar where
 
 lean_lib MyLeanSierraU128RangeChecked where

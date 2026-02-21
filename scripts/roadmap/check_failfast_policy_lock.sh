@@ -7,6 +7,7 @@ FAILFAST_GATE="$ROOT_DIR/scripts/test/sierra_failfast_unsupported.sh"
 REQUIRED_FIXTURES=(
   "$ROOT_DIR/src/MyLeanSierraSubsetUnsupportedU128Arith.lean"
   "$ROOT_DIR/src/MyLeanSierraSubsetUnsupportedU256Sig.lean"
+  "$ROOT_DIR/src/MyLeanSierraSubsetUnsupportedDictSig.lean"
 )
 
 REQUIRED_WORKFLOWS=(

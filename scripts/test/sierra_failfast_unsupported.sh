@@ -38,4 +38,9 @@ check_fail \
   "unsupported parameter type 'u256'" \
   "u256_signature"
 
+check_fail \
+  MyLeanSierraSubsetUnsupportedDictSig \
+  "unsupported parameter type 'Felt252Dict<felt252, u128>'" \
+  "dict_signature"
+
 echo "sierra fail-fast unsupported checks passed"
