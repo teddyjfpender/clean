@@ -46,7 +46,9 @@ Close Track-B function parity and reviewability guarantees while preserving Trac
 3. Divergence entries include capability IDs and rationale.
 
 ### CPL-3 Differential equivalence suite closure
-- Status: NOT DONE
+- Status: DONE - 23a5513
+- Evidence tests: `scripts/test/sierra_differential.sh`; `scripts/test/sierra_u128_wrapping_differential.sh`; `scripts/test/backend_parity.sh`; `scripts/test/differential_harness_reproducibility.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `scripts/test/generated/run_manifest_differential.sh`; `generated/examples/differential-harness.json`; `scripts/test/run_backend_parity_case.sh`; `scripts/utils/check_backend_parity.py`; `config/examples-manifest.json`
 - Acceptance tests:
 1. Evaluator/Sierra/Cairo differential suites pass for closed capabilities.
 2. Failure/boundary parity vectors pass.

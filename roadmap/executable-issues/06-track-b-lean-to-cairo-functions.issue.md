@@ -67,7 +67,9 @@ Deliver deterministic function-level Lean -> Cairo emission from shared MIR with
 2. Resource-sensitive emit rules are enforced.
 
 ### B5 Corelib closure reporting
-- Status: NOT DONE
+- Status: DONE - 23a5513
+- Evidence tests: `scripts/roadmap/check_corelib_parity_freshness.sh`; `scripts/roadmap/check_corelib_parity_trend.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `scripts/roadmap/render_corelib_parity_report.py`; `scripts/roadmap/generate_corelib_parity_trend.py`; `roadmap/inventory/corelib-parity-report.json`; `roadmap/inventory/corelib-parity-report.md`; `roadmap/inventory/corelib-parity-trend.json`; `roadmap/inventory/corelib-parity-trend.md`; `roadmap/capabilities/corelib-parity-trend-baseline.json`
 - Acceptance tests:
 1. Corelib parity report is generated from inventory.
 2. Coverage trends are monotonic non-decreasing.

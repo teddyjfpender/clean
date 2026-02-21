@@ -87,7 +87,9 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 3. Control-flow normalization tests are deterministic.
 
 ### A6 Crypto/math/circuit/ec families
-- Status: NOT DONE
+- Status: DONE - 23a5513
+- Evidence tests: `scripts/test/sierra_advanced_family_e2e.sh`; `scripts/test/backend_parity_advanced_family.sh`; `scripts/roadmap/check_effect_metadata.sh`; `scripts/bench/check_optimizer_non_regression.sh`; `scripts/bench/check_optimizer_family_thresholds.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `examples/Lean/circuit_gate_felt/Example.lean`; `examples/Lean/crypto_round_felt/Example.lean`; `scripts/test/sierra_advanced_family_e2e.sh`; `config/effect-metadata.json`; `roadmap/capabilities/registry.json`
 - Acceptance tests:
 1. Crypto/circuit fixtures compile and validate.
 2. Builtin/resource constraints are explicitly verified.

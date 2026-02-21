@@ -8,7 +8,6 @@ trap 'rm -rf "$TMP_DIR"' EXIT
 PARITY_REL="roadmap/inventory/corelib-parity-report.json"
 BASELINE_REL="roadmap/capabilities/corelib-parity-trend-baseline.json"
 OUT_JSON_REL="roadmap/inventory/corelib-parity-trend.json"
-OUT_MD_REL="roadmap/inventory/corelib-parity-trend.md"
 
 python3 "$ROOT_DIR/scripts/roadmap/generate_corelib_parity_trend.py" \
   --parity "$ROOT_DIR/$PARITY_REL" \
