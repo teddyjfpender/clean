@@ -1,9 +1,9 @@
 {
   "counts": {
     "extension_modules_by_status": {
-      "fail_fast": 13,
+      "fail_fast": 48,
       "implemented": 4,
-      "unresolved": 45
+      "unresolved": 10
     },
     "extension_modules_total": 62,
     "generic_libfunc_ids_by_status": {
@@ -23,22 +23,22 @@
     {
       "module_id": "ap_tracking",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/ap_tracking.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "array",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/array.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "bitwise",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/bitwise.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "blake",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/blake.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "boolean",
@@ -48,22 +48,22 @@
     {
       "module_id": "bounded_int",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/bounded_int.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "boxing",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/boxing.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "branch_align",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/branch_align.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "bytes31",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/bytes31.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "casts",
@@ -73,27 +73,27 @@
     {
       "module_id": "circuit",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/circuit.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "const_type",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/const_type.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "consts",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/consts.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "coupon",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/coupon.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "debug",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/debug.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "drop",
@@ -108,7 +108,7 @@
     {
       "module_id": "ec",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/ec.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "enm",
@@ -123,22 +123,22 @@
     {
       "module_id": "felt252_dict",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/felt252_dict.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "function_call",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/function_call.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "gas",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/gas.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "gas_reserve",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/gas_reserve.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "int/mod",
@@ -188,37 +188,37 @@
     {
       "module_id": "mod",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/mod.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "non_zero",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/non_zero.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "nullable",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/nullable.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "pedersen",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/pedersen.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "poseidon",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/poseidon.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "qm31",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/qm31.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "range",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/range.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "range_check",
@@ -228,22 +228,22 @@
     {
       "module_id": "segment_arena",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/segment_arena.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "snapshot",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/snapshot.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "span",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/span.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "squashed_felt252_dict",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/squashed_felt252_dict.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "starknet/emit_event",
@@ -303,32 +303,32 @@
     {
       "module_id": "trace",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/trace.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "try_from_felt252",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/try_from_felt252.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "unconditional_jump",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/unconditional_jump.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "uninitialized",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/uninitialized.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "unsafe_panic",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/unsafe_panic.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "utils",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/utils.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     }
   ],
   "generic_libfunc_ids": [

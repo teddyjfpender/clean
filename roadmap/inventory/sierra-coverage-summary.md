@@ -11,13 +11,13 @@
 | --- | ---: | ---: | ---: |
 | Generic type IDs | 2 | 0 | 66 |
 | Generic libfunc IDs | 8 | 5 | 266 |
-| Extension module files | 4 | 13 | 45 |
+| Extension module files | 4 | 48 | 10 |
 
 ## Unresolved Snapshot
 
 - Unresolved generic type IDs: `66`
 - Unresolved generic libfunc IDs: `266`
-- Unresolved extension modules: `45`
+- Unresolved extension modules: `10`
 
 ### First 25 unresolved generic type IDs
 
@@ -102,35 +102,6 @@
 
 ### Unresolved extension modules
 
-- `ap_tracking`
-- `array`
-- `bitwise`
-- `blake`
-- `bounded_int`
-- `boxing`
-- `branch_align`
-- `bytes31`
-- `circuit`
-- `const_type`
-- `consts`
-- `coupon`
-- `debug`
-- `ec`
-- `felt252_dict`
-- `function_call`
-- `gas`
-- `gas_reserve`
-- `mod`
-- `non_zero`
-- `nullable`
-- `pedersen`
-- `poseidon`
-- `qm31`
-- `range`
-- `segment_arena`
-- `snapshot`
-- `span`
-- `squashed_felt252_dict`
 - `starknet/emit_event`
 - `starknet/getter`
 - `starknet/interoperability`
@@ -141,9 +112,3 @@
 - `starknet/storage`
 - `starknet/syscalls`
 - `starknet/testing`
-- `trace`
-- `try_from_felt252`
-- `unconditional_jump`
-- `uninitialized`
-- `unsafe_panic`
-- `utils`

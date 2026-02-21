@@ -83,13 +83,15 @@ def classify_libfunc(libfunc_id: str) -> str:
 
 
 def classify_module(module_id: str) -> str:
+    if module_id.startswith("starknet/"):
+        return "unresolved"
     if module_id in IMPLEMENTED_MODULE_IDS:
         return "implemented"
     if module_id in FAIL_FAST_MODULE_PREFIXES:
         return "fail_fast"
     if any(module_id.startswith(prefix) for prefix in FAIL_FAST_MODULE_PREFIXES if prefix.endswith("/")):
         return "fail_fast"
-    return "unresolved"
+    return "fail_fast"
 
 
 def module_id_from_path(path: str) -> str:

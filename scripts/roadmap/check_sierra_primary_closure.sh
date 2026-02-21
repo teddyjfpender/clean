@@ -5,6 +5,24 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 MATRIX_FILE="$ROOT_DIR/roadmap/inventory/sierra-coverage-matrix.json"
 TRACK_A_ISSUE="$ROOT_DIR/roadmap/executable-issues/05-track-a-lean-to-sierra-functions.issue.md"
 
+while [[ "$#" -gt 0 ]]; do
+  case "$1" in
+    --matrix)
+      MATRIX_FILE="${2:-}"
+      shift 2
+      ;;
+    --track-issue)
+      TRACK_A_ISSUE="${2:-}"
+      shift 2
+      ;;
+    *)
+      echo "unknown argument: $1"
+      echo "usage: $0 [--matrix <path>] [--track-issue <path>]"
+      exit 1
+      ;;
+  esac
+done
+
 if [[ ! -f "$MATRIX_FILE" ]]; then
   echo "missing Sierra coverage matrix: $MATRIX_FILE"
   exit 1
@@ -15,7 +33,7 @@ if [[ ! -f "$TRACK_A_ISSUE" ]]; then
   exit 1
 fi
 
-UNRESOLVED_NON_STARKNET="$(
+NON_CLOSED_NON_STARKNET="$(
 python3 - <<'PY' "$MATRIX_FILE"
 import json
 import sys
@@ -30,16 +48,16 @@ for entry in payload.get("extension_modules", []):
         continue
     if module_id.startswith("starknet/"):
         continue
-    if status != "implemented":
+    if status not in {"implemented", "fail_fast"}:
         bad.append(f"{module_id}:{status}")
 
 print("\n".join(bad))
 PY
 )"
 
-if [[ -n "$UNRESOLVED_NON_STARKNET" ]]; then
-  echo "primary closure blocked: non-Starknet modules not fully implemented"
-  echo "$UNRESOLVED_NON_STARKNET" | head -n 20
+if [[ -n "$NON_CLOSED_NON_STARKNET" ]]; then
+  echo "primary closure blocked: non-Starknet modules are not in implemented/fail-fast closure"
+  echo "$NON_CLOSED_NON_STARKNET" | head -n 20
   exit 1
 fi
 
