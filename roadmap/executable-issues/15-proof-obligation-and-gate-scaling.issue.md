@@ -30,7 +30,9 @@ Automate proof obligation tracking and quality gate synthesis so subset growth r
 ## Milestone status ledger
 
 ### LPA-1 Capability-to-obligation schema and validator
-- Status: NOT DONE
+- Status: DONE - db61737
+- Evidence tests: `scripts/roadmap/check_capability_obligations.sh`; `scripts/test/capability_obligations_reproducibility.sh`; `scripts/test/capability_obligations_negative.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `roadmap/capabilities/obligations.json`; `scripts/roadmap/validate_capability_obligations.py`; `scripts/roadmap/project_capability_obligations.py`; `roadmap/inventory/capability-obligation-report.json`; `roadmap/inventory/capability-obligation-report.md`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
 - Acceptance tests:
 1. Missing obligation entries for implemented capabilities fail validation.
 2. Invalid proof/test/benchmark references fail validation.
