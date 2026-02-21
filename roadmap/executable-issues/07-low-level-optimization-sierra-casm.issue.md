@@ -34,7 +34,9 @@ Deliver verified and benchmarked optimization from MIR through Sierra/CASM-relev
 2. Soundness theorems compile for enabled passes.
 
 ### O2 Sierra-level optimization layer
-- Status: NOT DONE
+- Status: DONE - e1842a0
+- Evidence tests: `scripts/test/sierra_structural_optimization_e2e.sh`; `scripts/test/sierra_structural_optimization_reproducibility.sh`; `scripts/test/sierra_differential.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `scripts/sierra/optimize_structural.py`; `scripts/roadmap/generate_gate_manifest.py`; `config/gate-manifest.json`; `scripts/test/sierra_structural_optimization_e2e.sh`
 - Acceptance tests:
 1. Sierra structural transforms preserve validation and compilation success.
 2. Differential semantic tests remain green.
