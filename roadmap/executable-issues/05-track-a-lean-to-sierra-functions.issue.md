@@ -51,7 +51,7 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 3. Differential scalar tests pass against reference runner.
 
 ### A2 Range-checked integer families
-- Status: DONE - b652c0a
+- Status: DONE - 6833a1a
 - Evidence tests: `scripts/test/sierra_u128_range_checked_e2e.sh`; `scripts/test/sierra_u128_wrapping_differential.sh`; `scripts/test/sierra_failfast_unsupported.sh`; `scripts/workflow/run-sierra-checks.sh`
 - Evidence proofs: `src/LeanCairo/Backend/Sierra/Emit/Subset/Function.lean`; `src/LeanCairo/Backend/Sierra/Generated/CapabilityProjection.lean`; `examples/Lean/u128_range_checked/Example.lean`; `tests/lean/sierra_u128_wrapping_differential.lean`; `roadmap/capabilities/registry.json`
 - Acceptance tests:
