@@ -35,6 +35,35 @@
       "test_class": "aggregate-differential"
     },
     {
+      "benchmark_class": "circuit-core",
+      "cairo_targets": {
+        "forms": [
+          "circuit_constraint_gate_placeholder"
+        ]
+      },
+      "capability_id": "cap.circuit.constraint_gate",
+      "family_group": "circuit",
+      "mir_nodes": [
+        "circuit_constraint_gate_placeholder"
+      ],
+      "proof_class": "circuit-gate-laws",
+      "proof_status": "planned",
+      "resource_requirements": [],
+      "semantic_class": "partial",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "circuit_gate_placeholder"
+        ],
+        "generic_type_ids": []
+      },
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      },
+      "test_class": "circuit-differential"
+    },
+    {
       "benchmark_class": "collection-core",
       "cairo_targets": {
         "forms": [
@@ -105,6 +134,35 @@
         "sierra": "planned"
       },
       "test_class": "control-differential"
+    },
+    {
+      "benchmark_class": "crypto-core",
+      "cairo_targets": {
+        "forms": [
+          "crypto_round_mix_placeholder"
+        ]
+      },
+      "capability_id": "cap.crypto.round_mix",
+      "family_group": "crypto",
+      "mir_nodes": [
+        "crypto_round_mix_placeholder"
+      ],
+      "proof_class": "crypto-round-laws",
+      "proof_status": "planned",
+      "resource_requirements": [],
+      "semantic_class": "partial",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "crypto_round_placeholder"
+        ],
+        "generic_type_ids": []
+      },
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      },
+      "test_class": "crypto-differential"
     },
     {
       "benchmark_class": "field-core",

@@ -20,8 +20,10 @@ def sierraLoweringImplementedCapabilityIds : List String :=
 def sierraLoweringFailFastStubs : List (String × String) :=
 [
   ("cap.aggregate.tuple_struct_enum", "capability 'cap.aggregate.tuple_struct_enum' is not implemented for Sierra lowering (state: planned)"),
+  ("cap.circuit.constraint_gate", "capability 'cap.circuit.constraint_gate' is not implemented for Sierra lowering (state: planned)"),
   ("cap.collection.array_span_dict", "capability 'cap.collection.array_span_dict' is not implemented for Sierra lowering (state: planned)"),
   ("cap.control.calls_loops_panic", "capability 'cap.control.calls_loops_panic' is not implemented for Sierra lowering (state: planned)"),
+  ("cap.crypto.round_mix", "capability 'cap.crypto.round_mix' is not implemented for Sierra lowering (state: planned)"),
   ("cap.field.qm31", "capability 'cap.field.qm31' is not implemented for Sierra lowering (state: planned)"),
   ("cap.integer.family.non_u128", "capability 'cap.integer.family.non_u128' is not implemented for Sierra lowering (state: fail_fast)"),
   ("cap.resource.gas_ap_segment", "capability 'cap.resource.gas_ap_segment' is not implemented for Sierra lowering (state: planned)"),

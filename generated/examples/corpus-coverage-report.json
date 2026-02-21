@@ -1,0 +1,214 @@
+{
+  "family_coverage": [
+    {
+      "family": "aggregate",
+      "high_count": 0,
+      "medium_count": 1,
+      "total_count": 1
+    },
+    {
+      "family": "circuit",
+      "high_count": 0,
+      "medium_count": 1,
+      "total_count": 1
+    },
+    {
+      "family": "control_flow",
+      "high_count": 1,
+      "medium_count": 0,
+      "total_count": 1
+    },
+    {
+      "family": "crypto",
+      "high_count": 1,
+      "medium_count": 0,
+      "total_count": 1
+    },
+    {
+      "family": "fixed_point",
+      "high_count": 2,
+      "medium_count": 0,
+      "total_count": 2
+    },
+    {
+      "family": "integer",
+      "high_count": 3,
+      "medium_count": 1,
+      "total_count": 4
+    },
+    {
+      "family": "scalar",
+      "high_count": 0,
+      "medium_count": 1,
+      "total_count": 1
+    }
+  ],
+  "kernel_count": 10,
+  "kernels": [
+    {
+      "capability_ids": [
+        "cap.aggregate.tuple_struct_enum"
+      ],
+      "complexity_tier": "medium",
+      "family_tags": [
+        "aggregate"
+      ],
+      "id": "aggregate_payload_mix"
+    },
+    {
+      "capability_ids": [
+        "cap.circuit.constraint_gate"
+      ],
+      "complexity_tier": "medium",
+      "family_tags": [
+        "circuit"
+      ],
+      "id": "circuit_gate_felt"
+    },
+    {
+      "capability_ids": [
+        "cap.crypto.round_mix"
+      ],
+      "complexity_tier": "high",
+      "family_tags": [
+        "crypto"
+      ],
+      "id": "crypto_round_felt"
+    },
+    {
+      "capability_ids": [
+        "cap.integer.u128.add.wrapping",
+        "cap.integer.u128.mul.wrapping"
+      ],
+      "complexity_tier": "high",
+      "family_tags": [
+        "integer"
+      ],
+      "id": "fast_power_u128"
+    },
+    {
+      "capability_ids": [
+        "cap.integer.u128.add.wrapping",
+        "cap.integer.u128.mul.wrapping"
+      ],
+      "complexity_tier": "high",
+      "family_tags": [
+        "integer"
+      ],
+      "id": "fast_power_u128_p63"
+    },
+    {
+      "capability_ids": [
+        "cap.integer.u128.add.wrapping",
+        "cap.integer.u128.mul.wrapping",
+        "cap.integer.u128.sub.wrapping"
+      ],
+      "complexity_tier": "high",
+      "family_tags": [
+        "integer"
+      ],
+      "id": "karatsuba_u128"
+    },
+    {
+      "capability_ids": [
+        "cap.control.calls_loops_panic",
+        "cap.integer.u128.mul.wrapping",
+        "cap.integer.u128.sub.wrapping"
+      ],
+      "complexity_tier": "high",
+      "family_tags": [
+        "control_flow",
+        "fixed_point"
+      ],
+      "id": "newton_u128"
+    },
+    {
+      "capability_ids": [
+        "cap.scalar.bool.literal",
+        "cap.scalar.felt252.add",
+        "cap.scalar.felt252.mul"
+      ],
+      "complexity_tier": "medium",
+      "family_tags": [
+        "scalar"
+      ],
+      "id": "scalar_core"
+    },
+    {
+      "capability_ids": [
+        "cap.integer.u128.add.wrapping",
+        "cap.integer.u128.mul.wrapping"
+      ],
+      "complexity_tier": "high",
+      "family_tags": [
+        "fixed_point"
+      ],
+      "id": "sq128x128_u128"
+    },
+    {
+      "capability_ids": [
+        "cap.integer.u128.add.wrapping",
+        "cap.integer.u128.mul.wrapping",
+        "cap.integer.u128.sub.wrapping"
+      ],
+      "complexity_tier": "medium",
+      "family_tags": [
+        "integer"
+      ],
+      "id": "u128_range_checked"
+    }
+  ],
+  "manifest": "config/examples-manifest.json",
+  "registry": "roadmap/capabilities/registry.json",
+  "required_family_status": [
+    {
+      "family": "integer",
+      "high_count": 3,
+      "medium_count": 1,
+      "required": true,
+      "satisfied": true,
+      "total_count": 4
+    },
+    {
+      "family": "fixed_point",
+      "high_count": 2,
+      "medium_count": 0,
+      "required": true,
+      "satisfied": true,
+      "total_count": 2
+    },
+    {
+      "family": "control_flow",
+      "high_count": 1,
+      "medium_count": 0,
+      "required": true,
+      "satisfied": true,
+      "total_count": 1
+    },
+    {
+      "family": "aggregate",
+      "high_count": 0,
+      "medium_count": 1,
+      "required": true,
+      "satisfied": true,
+      "total_count": 1
+    },
+    {
+      "family": "crypto",
+      "high_count": 1,
+      "medium_count": 0,
+      "required": true,
+      "satisfied": true,
+      "total_count": 1
+    },
+    {
+      "family": "circuit",
+      "high_count": 0,
+      "medium_count": 1,
+      "required": true,
+      "satisfied": true,
+      "total_count": 1
+    }
+  ],
+  "version": 1
+}

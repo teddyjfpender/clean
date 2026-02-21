@@ -16,6 +16,7 @@ CORELIB_REPORT = ROOT / "roadmap" / "inventory" / "corelib-parity-report.json"
 CAPABILITY_REPORT = ROOT / "roadmap" / "inventory" / "capability-coverage-report.json"
 CAPABILITY_SLO_BASELINE = ROOT / "roadmap" / "capabilities" / "capability-closure-slo-baseline.json"
 BENCHMARK_DOC = ROOT / "docs" / "fixed-point" / "benchmark-results.md"
+MANIFEST_BENCHMARK_SUMMARY = ROOT / "generated" / "examples" / "benchmark-summary.json"
 PROOF_CHECK_SCRIPT = ROOT / "scripts" / "roadmap" / "check_proof_obligations.sh"
 PROOF_DIR = ROOT / "src" / "LeanCairo" / "Compiler" / "Proof"
 SEM_DIR = ROOT / "src" / "LeanCairo" / "Compiler" / "Semantics"
@@ -175,34 +176,99 @@ def render_proof_report(out_dir: Path, pinned_commit: str) -> None:
 
 
 def render_benchmark_report(out_dir: Path, pinned_commit: str) -> None:
-    rows = parse_benchmark_rows()
-    improvements = []
-    for row in rows:
-        raw = row["improvement"].rstrip("%")
-        try:
-            improvements.append((float(raw), row["kernel"]))
-        except ValueError:
-            continue
-    best = max(improvements, default=(0.0, "n/a"))
-
     lines = [
         "# Release Benchmark Report",
         "",
         f"- Commit: `{pinned_commit}`",
-        f"- Benchmark source: `{BENCHMARK_DOC.relative_to(ROOT)}`",
-        f"- Kernel rows parsed: `{len(rows)}`",
-        f"- Best measured improvement: `{best[0]:.2f}%` (`{best[1]}`)",
-        "",
-        "## Kernel Summary",
-        "",
-        "| Kernel | Hand Steps | Optimized Steps | Delta | Improvement | Speedup |",
-        "| --- | ---: | ---: | ---: | ---: | ---: |",
     ]
-    for row in rows:
-        lines.append(
-            f"| `{row['kernel']}` | `{row['hand_steps']}` | `{row['optimized_steps']}` | `{row['delta']}` | `{row['improvement']}` | `{row['speedup']}` |"
+
+    if MANIFEST_BENCHMARK_SUMMARY.exists():
+        payload = json.loads(MANIFEST_BENCHMARK_SUMMARY.read_text(encoding="utf-8"))
+        cases = payload.get("cases", [])
+        families = payload.get("families", [])
+        if not isinstance(cases, list):
+            cases = []
+        if not isinstance(families, list):
+            families = []
+
+        best_case = ("n/a", 0.0)
+        worst_case = ("n/a", 0.0)
+        if cases:
+            ordered = sorted(
+                [
+                    (
+                        str(case.get("id", "")),
+                        float(case.get("metrics", {}).get("sierra_improvement_pct", 0.0)),
+                        float(case.get("metrics", {}).get("l2_improvement_pct", 0.0)),
+                    )
+                    for case in cases
+                    if isinstance(case, dict)
+                ],
+                key=lambda item: item[1],
+            )
+            if ordered:
+                worst_case = (ordered[0][0], ordered[0][1])
+                best_case = (ordered[-1][0], ordered[-1][1])
+
+        lines.extend(
+            [
+                f"- Benchmark source: `{MANIFEST_BENCHMARK_SUMMARY.relative_to(ROOT)}`",
+                f"- Cases parsed: `{len(cases)}`",
+                f"- Best Sierra improvement: `{best_case[1]:.2f}%` (`{best_case[0]}`)",
+                f"- Hotspot (lowest Sierra improvement): `{worst_case[1]:.2f}%` (`{worst_case[0]}`)",
+                "",
+                "## Family Summary",
+                "",
+                "| Family | Cases | Avg Sierra improvement % | Avg L2 improvement % |",
+                "| --- | ---: | ---: | ---: |",
+            ]
         )
-    lines.append("")
+        for family in families:
+            if not isinstance(family, dict):
+                continue
+            lines.append(
+                f"| `{family.get('family', '')}` | `{family.get('case_count', 0)}` | `{float(family.get('avg_sierra_improvement_pct', 0.0))}` | `{float(family.get('avg_l2_improvement_pct', 0.0))}` |"
+            )
+
+        lines.extend(["", "## Case Summary", "", "| Case | Sierra improvement % | L2 improvement % |", "| --- | ---: | ---: |"])
+        for case in sorted(
+            [c for c in cases if isinstance(c, dict)],
+            key=lambda item: str(item.get("id", "")),
+        ):
+            metrics = case.get("metrics", {})
+            lines.append(
+                f"| `{case.get('id', '')}` | `{float(metrics.get('sierra_improvement_pct', 0.0))}` | `{float(metrics.get('l2_improvement_pct', 0.0))}` |"
+            )
+        lines.append("")
+    else:
+        rows = parse_benchmark_rows()
+        improvements = []
+        for row in rows:
+            raw = row["improvement"].rstrip("%")
+            try:
+                improvements.append((float(raw), row["kernel"]))
+            except ValueError:
+                continue
+        best = max(improvements, default=(0.0, "n/a"))
+
+        lines.extend(
+            [
+                f"- Benchmark source: `{BENCHMARK_DOC.relative_to(ROOT)}`",
+                f"- Kernel rows parsed: `{len(rows)}`",
+                f"- Best measured improvement: `{best[0]:.2f}%` (`{best[1]}`)",
+                "",
+                "## Kernel Summary",
+                "",
+                "| Kernel | Hand Steps | Optimized Steps | Delta | Improvement | Speedup |",
+                "| --- | ---: | ---: | ---: | ---: | ---: |",
+            ]
+        )
+        for row in rows:
+            lines.append(
+                f"| `{row['kernel']}` | `{row['hand_steps']}` | `{row['optimized_steps']}` | `{row['delta']}` | `{row['improvement']}` | `{row['speedup']}` |"
+            )
+        lines.append("")
+
     (out_dir / "release-benchmark-report.md").write_text("\n".join(lines), encoding="utf-8")
 
 

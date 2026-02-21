@@ -3,6 +3,120 @@
   "description": "Manifest for mirrored Lean/Sierra/Cairo/Baseline/Benchmark example generation.",
   "examples": [
     {
+      "id": "aggregate_payload_mix",
+      "module": "aggregate_payload_mix.Example",
+      "lean_sources": [
+        "examples/Lean/aggregate_payload_mix/Example.lean"
+      ],
+      "mirrors": {
+        "lean_dir": "examples/Lean/aggregate_payload_mix",
+        "sierra_dir": "examples/Sierra/aggregate_payload_mix",
+        "cairo_dir": "examples/Cairo/aggregate_payload_mix",
+        "baseline_dir": null,
+        "benchmark_dir": null
+      },
+      "differential": {
+        "kind": "none",
+        "vector_profiles": [],
+        "replay_command": null,
+        "lean_test_file": null,
+        "backend_module": null,
+        "backend_contract": null
+      },
+      "benchmark": {
+        "kind": "none",
+        "family": null,
+        "runner_script": null,
+        "min_sierra_improvement_pct": null,
+        "min_l2_improvement_pct": null
+      },
+      "coverage": {
+        "complexity_tier": "medium",
+        "family_tags": [
+          "aggregate"
+        ],
+        "capability_ids": [
+          "cap.aggregate.tuple_struct_enum"
+        ]
+      }
+    },
+    {
+      "id": "circuit_gate_felt",
+      "module": "circuit_gate_felt.Example",
+      "lean_sources": [
+        "examples/Lean/circuit_gate_felt/Example.lean"
+      ],
+      "mirrors": {
+        "lean_dir": "examples/Lean/circuit_gate_felt",
+        "sierra_dir": "examples/Sierra/circuit_gate_felt",
+        "cairo_dir": "examples/Cairo/circuit_gate_felt",
+        "baseline_dir": null,
+        "benchmark_dir": null
+      },
+      "differential": {
+        "kind": "none",
+        "vector_profiles": [],
+        "replay_command": null,
+        "lean_test_file": null,
+        "backend_module": null,
+        "backend_contract": null
+      },
+      "benchmark": {
+        "kind": "none",
+        "family": null,
+        "runner_script": null,
+        "min_sierra_improvement_pct": null,
+        "min_l2_improvement_pct": null
+      },
+      "coverage": {
+        "complexity_tier": "medium",
+        "family_tags": [
+          "circuit"
+        ],
+        "capability_ids": [
+          "cap.circuit.constraint_gate"
+        ]
+      }
+    },
+    {
+      "id": "crypto_round_felt",
+      "module": "crypto_round_felt.Example",
+      "lean_sources": [
+        "examples/Lean/crypto_round_felt/Example.lean"
+      ],
+      "mirrors": {
+        "lean_dir": "examples/Lean/crypto_round_felt",
+        "sierra_dir": "examples/Sierra/crypto_round_felt",
+        "cairo_dir": "examples/Cairo/crypto_round_felt",
+        "baseline_dir": null,
+        "benchmark_dir": null
+      },
+      "differential": {
+        "kind": "none",
+        "vector_profiles": [],
+        "replay_command": null,
+        "lean_test_file": null,
+        "backend_module": null,
+        "backend_contract": null
+      },
+      "benchmark": {
+        "kind": "none",
+        "family": null,
+        "runner_script": null,
+        "min_sierra_improvement_pct": null,
+        "min_l2_improvement_pct": null
+      },
+      "coverage": {
+        "complexity_tier": "high",
+        "family_tags": [
+          "crypto"
+        ],
+        "capability_ids": [
+          "cap.crypto.round_mix"
+        ]
+      }
+    },
+    {
       "id": "fast_power_u128",
       "module": "fast_power_u128.Example",
       "lean_sources": [
@@ -29,6 +143,16 @@
         "runner_script": "examples/Benchmark/fast_power_u128/scripts/run_gas_comparison.sh",
         "min_sierra_improvement_pct": 0.0,
         "min_l2_improvement_pct": 0.0
+      },
+      "coverage": {
+        "complexity_tier": "high",
+        "family_tags": [
+          "integer"
+        ],
+        "capability_ids": [
+          "cap.integer.u128.mul.wrapping",
+          "cap.integer.u128.add.wrapping"
+        ]
       }
     },
     {
@@ -58,6 +182,16 @@
         "runner_script": "examples/Benchmark/fast_power_u128_p63/scripts/run_gas_comparison.sh",
         "min_sierra_improvement_pct": 0.0,
         "min_l2_improvement_pct": 0.0
+      },
+      "coverage": {
+        "complexity_tier": "high",
+        "family_tags": [
+          "integer"
+        ],
+        "capability_ids": [
+          "cap.integer.u128.mul.wrapping",
+          "cap.integer.u128.add.wrapping"
+        ]
       }
     },
     {
@@ -87,6 +221,17 @@
         "runner_script": "examples/Benchmark/karatsuba_u128/scripts/run_gas_comparison.sh",
         "min_sierra_improvement_pct": 0.0,
         "min_l2_improvement_pct": 0.0
+      },
+      "coverage": {
+        "complexity_tier": "high",
+        "family_tags": [
+          "integer"
+        ],
+        "capability_ids": [
+          "cap.integer.u128.mul.wrapping",
+          "cap.integer.u128.add.wrapping",
+          "cap.integer.u128.sub.wrapping"
+        ]
       }
     },
     {
@@ -116,6 +261,18 @@
         "runner_script": "examples/Benchmark/newton_u128/scripts/run_gas_comparison.sh",
         "min_sierra_improvement_pct": 0.0,
         "min_l2_improvement_pct": 0.0
+      },
+      "coverage": {
+        "complexity_tier": "high",
+        "family_tags": [
+          "fixed_point",
+          "control_flow"
+        ],
+        "capability_ids": [
+          "cap.control.calls_loops_panic",
+          "cap.integer.u128.mul.wrapping",
+          "cap.integer.u128.sub.wrapping"
+        ]
       }
     },
     {
@@ -149,6 +306,17 @@
         "runner_script": null,
         "min_sierra_improvement_pct": null,
         "min_l2_improvement_pct": null
+      },
+      "coverage": {
+        "complexity_tier": "medium",
+        "family_tags": [
+          "scalar"
+        ],
+        "capability_ids": [
+          "cap.scalar.felt252.add",
+          "cap.scalar.felt252.mul",
+          "cap.scalar.bool.literal"
+        ]
       }
     },
     {
@@ -178,6 +346,16 @@
         "runner_script": "examples/Benchmark/sq128x128_u128/scripts/run_gas_comparison.sh",
         "min_sierra_improvement_pct": 0.0,
         "min_l2_improvement_pct": 0.0
+      },
+      "coverage": {
+        "complexity_tier": "high",
+        "family_tags": [
+          "fixed_point"
+        ],
+        "capability_ids": [
+          "cap.integer.u128.mul.wrapping",
+          "cap.integer.u128.add.wrapping"
+        ]
       }
     },
     {
@@ -211,6 +389,17 @@
         "runner_script": null,
         "min_sierra_improvement_pct": null,
         "min_l2_improvement_pct": null
+      },
+      "coverage": {
+        "complexity_tier": "medium",
+        "family_tags": [
+          "integer"
+        ],
+        "capability_ids": [
+          "cap.integer.u128.add.wrapping",
+          "cap.integer.u128.sub.wrapping",
+          "cap.integer.u128.mul.wrapping"
+        ]
       }
     }
   ]

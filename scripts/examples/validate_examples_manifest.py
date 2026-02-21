@@ -38,6 +38,22 @@ REQUIRED_BENCHMARK_KEYS = (
 )
 ALLOWED_BENCHMARK_KINDS = {"none", "gas_script"}
 
+REQUIRED_COVERAGE_KEYS = (
+    "complexity_tier",
+    "family_tags",
+    "capability_ids",
+)
+ALLOWED_COMPLEXITY_TIERS = {"medium", "high"}
+ALLOWED_COVERAGE_FAMILIES = {
+    "integer",
+    "fixed_point",
+    "control_flow",
+    "aggregate",
+    "crypto",
+    "circuit",
+    "scalar",
+}
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Validate examples manifest")
@@ -111,7 +127,7 @@ def validate_manifest(manifest_path: Path) -> List[Tuple[str, str, str, str, str
         if not isinstance(entry, dict):
             raise ValueError(f"{ctx}: expected object")
 
-        for key in ("id", "module", "lean_sources", "mirrors", "differential", "benchmark"):
+        for key in ("id", "module", "lean_sources", "mirrors", "differential", "benchmark", "coverage"):
             if key not in entry:
                 raise ValueError(f"{ctx}: missing key '{key}'")
 
@@ -288,6 +304,51 @@ def validate_manifest(manifest_path: Path) -> List[Tuple[str, str, str, str, str
                 raise ValueError(
                     f"{ctx}.benchmark: kind 'gas_script' requires min_sierra_improvement_pct and min_l2_improvement_pct"
                 )
+
+        coverage = entry["coverage"]
+        if not isinstance(coverage, dict):
+            raise ValueError(f"{ctx}.coverage: expected object")
+        for key in REQUIRED_COVERAGE_KEYS:
+            if key not in coverage:
+                raise ValueError(f"{ctx}.coverage: missing key '{key}'")
+
+        complexity_tier = str(coverage["complexity_tier"]).strip()
+        if complexity_tier not in ALLOWED_COMPLEXITY_TIERS:
+            raise ValueError(
+                f"{ctx}.coverage.complexity_tier: invalid value '{complexity_tier}', expected one of {sorted(ALLOWED_COMPLEXITY_TIERS)}"
+            )
+
+        family_tags = coverage["family_tags"]
+        if not isinstance(family_tags, list) or not family_tags:
+            raise ValueError(f"{ctx}.coverage.family_tags: expected non-empty list")
+        normalized_tags = []
+        for family_idx, family in enumerate(family_tags):
+            if not isinstance(family, str) or not family.strip():
+                raise ValueError(f"{ctx}.coverage.family_tags[{family_idx}]: expected non-empty string")
+            normalized = family.strip()
+            if normalized not in ALLOWED_COVERAGE_FAMILIES:
+                raise ValueError(
+                    f"{ctx}.coverage.family_tags[{family_idx}]: invalid family '{normalized}'"
+                )
+            normalized_tags.append(normalized)
+        if len(normalized_tags) != len(set(normalized_tags)):
+            raise ValueError(f"{ctx}.coverage.family_tags: entries must be unique")
+
+        capability_ids = coverage["capability_ids"]
+        if not isinstance(capability_ids, list) or not capability_ids:
+            raise ValueError(f"{ctx}.coverage.capability_ids: expected non-empty list")
+        normalized_cap_ids = []
+        for cap_idx, cap_id in enumerate(capability_ids):
+            if not isinstance(cap_id, str) or not cap_id.strip():
+                raise ValueError(f"{ctx}.coverage.capability_ids[{cap_idx}]: expected non-empty string")
+            normalized_cap = cap_id.strip()
+            if not normalized_cap.startswith("cap."):
+                raise ValueError(
+                    f"{ctx}.coverage.capability_ids[{cap_idx}]: capability id must start with 'cap.' ({normalized_cap})"
+                )
+            normalized_cap_ids.append(normalized_cap)
+        if len(normalized_cap_ids) != len(set(normalized_cap_ids)):
+            raise ValueError(f"{ctx}.coverage.capability_ids: entries must be unique")
 
         for source in lean_sources:
             if not source.startswith(f"{lean_dir}/"):

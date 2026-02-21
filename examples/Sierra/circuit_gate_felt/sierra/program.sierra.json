@@ -1,0 +1,368 @@
+{"version": 1,
+ "type_declarations":
+ [{"long_id": {"generic_id": "felt252", "generic_args": []},
+   "id": {"id": 18197987107266074389, "debug_name": "felt252"},
+   "declared_type_info": null},
+  {"long_id":
+   {"generic_id": "Struct",
+    "generic_args":
+    [{"UserType":
+      {"id":
+       [4047649810,
+        4047650245,
+        4047648940,
+        4047649375,
+        4047648070,
+        4047648505,
+        4047647200,
+        4047647635],
+       "debug_name": "Tuple"}}]},
+   "id": {"id": 10315179320196999047, "debug_name": "Unit"},
+   "declared_type_info": null},
+  {"long_id":
+   {"generic_id": "Enum",
+    "generic_args":
+    [{"UserType":
+      {"id":
+       [779219333,
+        779218898,
+        779218463,
+        779218028,
+        779217593,
+        779217158,
+        779216723,
+        779216288],
+       "debug_name": "core::bool"}},
+     {"Type": {"id": 10315179320196999047, "debug_name": "Unit"}},
+     {"Type": {"id": 10315179320196999047, "debug_name": "Unit"}}]},
+   "id": {"id": 3793205241841896302, "debug_name": "core::bool"},
+   "declared_type_info": null},
+  {"long_id":
+   {"generic_id": "NonZero",
+    "generic_args":
+    [{"Type": {"id": 18197987107266074389, "debug_name": "felt252"}}]},
+   "id": {"id": 16116930213936630814, "debug_name": "NonZero<felt252>"},
+   "declared_type_info": null}],
+ "statements":
+ [{"Invocation":
+   {"libfunc_id": {"id": 16735586749622859144, "debug_name": "felt252_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7094669376297101041,
+        "debug_name": "gateConstraint::tmp::felt_mul_raw::0"}]}],
+    "args":
+    [{"id": 726963840414617273, "debug_name": "gateConstraint::param::a"},
+     {"id": 726960541879732640, "debug_name": "gateConstraint::param::b"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13030732588637243321,
+        "debug_name": "gateConstraint::tmp::store_temp::1"}]}],
+    "args":
+    [{"id": 7094669376297101041,
+      "debug_name": "gateConstraint::tmp::felt_mul_raw::0"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 11881856011480806563, "debug_name": "dup_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 1326047654694556381,
+        "debug_name": "gateConstraint::tmp::dup_keep::2"},
+       {"id": 4009498558307518412,
+        "debug_name": "gateConstraint::tmp::dup_use::3"}]}],
+    "args":
+    [{"id": 726961641391360851, "debug_name": "gateConstraint::param::c"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5573091817713561949, "debug_name": "felt252_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2051512870373564150,
+        "debug_name": "gateConstraint::tmp::felt_add_raw::4"}]}],
+    "args":
+    [{"id": 13030732588637243321,
+      "debug_name": "gateConstraint::tmp::store_temp::1"},
+     {"id": 4009498558307518412,
+      "debug_name": "gateConstraint::tmp::dup_use::3"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13030736986683756165,
+        "debug_name": "gateConstraint::tmp::store_temp::5"}]}],
+    "args":
+    [{"id": 2051512870373564150,
+      "debug_name": "gateConstraint::tmp::felt_add_raw::4"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 11881856011480806563, "debug_name": "dup_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 1326043256648043537,
+        "debug_name": "gateConstraint::tmp::dup_keep::6"},
+       {"id": 4009494160261005568,
+        "debug_name": "gateConstraint::tmp::dup_use::7"}]}],
+    "args":
+    [{"id": 1326047654694556381,
+      "debug_name": "gateConstraint::tmp::dup_keep::2"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16735586749622859144, "debug_name": "felt252_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7094660580204075353,
+        "debug_name": "gateConstraint::tmp::felt_mul_raw::8"}]}],
+    "args":
+    [{"id": 4009494160261005568,
+      "debug_name": "gateConstraint::tmp::dup_use::7"},
+     {"id": 1326043256648043537,
+      "debug_name": "gateConstraint::tmp::dup_keep::6"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13030741384730269009,
+        "debug_name": "gateConstraint::tmp::store_temp::9"}]}],
+    "args":
+    [{"id": 7094660580204075353,
+      "debug_name": "gateConstraint::tmp::felt_mul_raw::8"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 7210604155204467516, "debug_name": "felt252_const_pos_5"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 18326740888677765711,
+        "debug_name": "gateConstraint::tmp::felt_const_raw::10"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2067845547627482136,
+        "debug_name": "gateConstraint::tmp::store_temp::11"}]}],
+    "args":
+    [{"id": 18326740888677765711,
+      "debug_name": "gateConstraint::tmp::felt_const_raw::10"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5573091817713561949, "debug_name": "felt252_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2510259271299022245,
+        "debug_name": "gateConstraint::tmp::felt_add_raw::12"}]}],
+    "args":
+    [{"id": 13030741384730269009,
+      "debug_name": "gateConstraint::tmp::store_temp::9"},
+     {"id": 2067845547627482136,
+      "debug_name": "gateConstraint::tmp::store_temp::11"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2067847746650738558,
+        "debug_name": "gateConstraint::tmp::store_temp::13"}]}],
+    "args":
+    [{"id": 2510259271299022245,
+      "debug_name": "gateConstraint::tmp::felt_add_raw::12"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 12829813583981032364, "debug_name": "felt252_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4458312009699617286,
+        "debug_name": "gateConstraint::tmp::eq_felt_diff_raw::14"}]}],
+    "args":
+    [{"id": 13030736986683756165,
+      "debug_name": "gateConstraint::tmp::store_temp::5"},
+     {"id": 2067847746650738558,
+      "debug_name": "gateConstraint::tmp::store_temp::13"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2067849945673994980,
+        "debug_name": "gateConstraint::tmp::store_temp::15"}]}],
+    "args":
+    [{"id": 4458312009699617286,
+      "debug_name": "gateConstraint::tmp::eq_felt_diff_raw::14"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 4730041110748051225, "debug_name": "felt252_is_zero"},
+    "branches":
+    [{"target": "Fallthrough", "results": []},
+     {"target": {"Statement": 20},
+      "results":
+      [{"id": 2766012618530208544,
+        "debug_name": "gateConstraint::tmp::eq_felt_non_zero::16"}]}],
+    "args":
+    [{"id": 2067849945673994980,
+      "debug_name": "gateConstraint::tmp::store_temp::15"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 18026436562753352590, "debug_name": "struct_construct<Unit>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6044539786223387609,
+        "debug_name": "gateConstraint::tmp::bool_unit::17"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 15910260390440458837, "debug_name": "enum_init<core::bool, 1>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13177244770755225222,
+        "debug_name": "gateConstraint::tmp::bool_const_raw::18"}]}],
+    "args":
+    [{"id": 6044539786223387609,
+      "debug_name": "gateConstraint::tmp::bool_unit::17"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 5129851337247512289, "debug_name": "store_temp_core::bool"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2067836751534456448,
+        "debug_name": "gateConstraint::tmp::store_temp::19"}]}],
+    "args":
+    [{"id": 13177244770755225222,
+      "debug_name": "gateConstraint::tmp::bool_const_raw::18"}]}},
+  {"Return":
+   [{"id": 2067836751534456448,
+     "debug_name": "gateConstraint::tmp::store_temp::19"}]},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16048858239075167666, "debug_name": "drop_NonZero<felt252>"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 2766012618530208544,
+      "debug_name": "gateConstraint::tmp::eq_felt_non_zero::16"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 18026436562753352590, "debug_name": "struct_construct<Unit>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6047515064688758900,
+        "debug_name": "gateConstraint::tmp::bool_unit::21"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 15909273028998514584, "debug_name": "enum_init<core::bool, 0>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13176259608336537391,
+        "debug_name": "gateConstraint::tmp::bool_const_raw::22"}]}],
+    "args":
+    [{"id": 6047515064688758900,
+      "debug_name": "gateConstraint::tmp::bool_unit::21"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 5129851337247512289, "debug_name": "store_temp_core::bool"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2065015404697034697,
+        "debug_name": "gateConstraint::tmp::store_temp::23"}]}],
+    "args":
+    [{"id": 13176259608336537391,
+      "debug_name": "gateConstraint::tmp::bool_const_raw::22"}]}},
+  {"Return":
+   [{"id": 2065015404697034697,
+     "debug_name": "gateConstraint::tmp::store_temp::23"}]}],
+ "libfunc_declarations":
+ [{"long_id": {"generic_id": "felt252_mul", "generic_args": []},
+   "id": {"id": 16735586749622859144, "debug_name": "felt252_mul"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 18197987107266074389, "debug_name": "felt252"}}]},
+   "id": {"id": 14115798396771957644, "debug_name": "store_temp_felt252"}},
+  {"long_id":
+   {"generic_id": "dup",
+    "generic_args":
+    [{"Type": {"id": 18197987107266074389, "debug_name": "felt252"}}]},
+   "id": {"id": 11881856011480806563, "debug_name": "dup_felt252"}},
+  {"long_id": {"generic_id": "felt252_add", "generic_args": []},
+   "id": {"id": 5573091817713561949, "debug_name": "felt252_add"}},
+  {"long_id":
+   {"generic_id": "felt252_const", "generic_args": [{"Value": [1, [5]]}]},
+   "id": {"id": 7210604155204467516, "debug_name": "felt252_const_pos_5"}},
+  {"long_id": {"generic_id": "felt252_sub", "generic_args": []},
+   "id": {"id": 12829813583981032364, "debug_name": "felt252_sub"}},
+  {"long_id": {"generic_id": "felt252_is_zero", "generic_args": []},
+   "id": {"id": 4730041110748051225, "debug_name": "felt252_is_zero"}},
+  {"long_id": {"generic_id": "branch_align", "generic_args": []},
+   "id": {"id": 3328301606880823183, "debug_name": "branch_align"}},
+  {"long_id":
+   {"generic_id": "struct_construct",
+    "generic_args":
+    [{"Type": {"id": 10315179320196999047, "debug_name": "Unit"}}]},
+   "id": {"id": 18026436562753352590, "debug_name": "struct_construct<Unit>"}},
+  {"long_id":
+   {"generic_id": "enum_init",
+    "generic_args":
+    [{"Type": {"id": 3793205241841896302, "debug_name": "core::bool"}},
+     {"Value": [1, [1]]}]},
+   "id":
+   {"id": 15910260390440458837, "debug_name": "enum_init<core::bool, 1>"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 3793205241841896302, "debug_name": "core::bool"}}]},
+   "id": {"id": 5129851337247512289, "debug_name": "store_temp_core::bool"}},
+  {"long_id":
+   {"generic_id": "drop",
+    "generic_args":
+    [{"Type": {"id": 16116930213936630814, "debug_name": "NonZero<felt252>"}}]},
+   "id": {"id": 16048858239075167666, "debug_name": "drop_NonZero<felt252>"}},
+  {"long_id":
+   {"generic_id": "enum_init",
+    "generic_args":
+    [{"Type": {"id": 3793205241841896302, "debug_name": "core::bool"}},
+     {"Value": [0, []]}]},
+   "id":
+   {"id": 15909273028998514584, "debug_name": "enum_init<core::bool, 0>"}}],
+ "funcs":
+ [{"signature":
+   {"ret_types": [{"id": 3793205241841896302, "debug_name": "core::bool"}],
+    "param_types":
+    [{"id": 18197987107266074389, "debug_name": "felt252"},
+     {"id": 18197987107266074389, "debug_name": "felt252"},
+     {"id": 18197987107266074389, "debug_name": "felt252"}]},
+   "params":
+   [{"ty": {"id": 18197987107266074389, "debug_name": "felt252"},
+     "id":
+     {"id": 726963840414617273, "debug_name": "gateConstraint::param::a"}},
+    {"ty": {"id": 18197987107266074389, "debug_name": "felt252"},
+     "id":
+     {"id": 726960541879732640, "debug_name": "gateConstraint::param::b"}},
+    {"ty": {"id": 18197987107266074389, "debug_name": "felt252"},
+     "id":
+     {"id": 726961641391360851, "debug_name": "gateConstraint::param::c"}}],
+   "id": {"id": 13215278083610849601, "debug_name": "gateConstraint"},
+   "entry_point": 0}]}

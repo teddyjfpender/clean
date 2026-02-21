@@ -1,0 +1,324 @@
+{"version": 1,
+ "type_declarations":
+ [{"long_id": {"generic_id": "felt252", "generic_args": []},
+   "id": {"id": 18197987107266074389, "debug_name": "felt252"},
+   "declared_type_info": null}],
+ "statements":
+ [{"Invocation":
+   {"libfunc_id": {"id": 11881856011480806563, "debug_name": "dup_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8294165944488151210,
+        "debug_name": "cryptoRound::tmp::dup_keep::0"},
+       {"id": 10984612193133754669,
+        "debug_name": "cryptoRound::tmp::dup_use::1"}]}],
+    "args":
+    [{"id": 3610923231846463639, "debug_name": "cryptoRound::param::x"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 11881856011480806563, "debug_name": "dup_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8294163745464894788,
+        "debug_name": "cryptoRound::tmp::dup_keep::2"},
+       {"id": 10984609994110498247,
+        "debug_name": "cryptoRound::tmp::dup_use::3"}]}],
+    "args":
+    [{"id": 3610922132334835428, "debug_name": "cryptoRound::param::y"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5573091817713561949, "debug_name": "felt252_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 1075246090149660975,
+        "debug_name": "cryptoRound::tmp::felt_add_raw::4"}]}],
+    "args":
+    [{"id": 10984612193133754669, "debug_name": "cryptoRound::tmp::dup_use::1"},
+     {"id": 10984609994110498247,
+      "debug_name": "cryptoRound::tmp::dup_use::3"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 869342505267517168,
+        "debug_name": "cryptoRound::tmp::store_temp::5"}]}],
+    "args":
+    [{"id": 1075246090149660975,
+      "debug_name": "cryptoRound::tmp::felt_add_raw::4"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 11881856011480806563, "debug_name": "dup_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8294159347418381944,
+        "debug_name": "cryptoRound::tmp::dup_keep::6"},
+       {"id": 10984605596063985403,
+        "debug_name": "cryptoRound::tmp::dup_use::7"}]}],
+    "args":
+    [{"id": 3610925430869720061, "debug_name": "cryptoRound::param::z"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 11881856011480806563, "debug_name": "dup_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8294157148395125522,
+        "debug_name": "cryptoRound::tmp::dup_keep::8"},
+       {"id": 10984603397040728981,
+        "debug_name": "cryptoRound::tmp::dup_use::9"}]}],
+    "args":
+    [{"id": 8294165944488151210,
+      "debug_name": "cryptoRound::tmp::dup_keep::0"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 12829813583981032364, "debug_name": "felt252_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7325793302777583993,
+        "debug_name": "cryptoRound::tmp::felt_sub_raw::10"}]}],
+    "args":
+    [{"id": 10984605596063985403, "debug_name": "cryptoRound::tmp::dup_use::7"},
+     {"id": 10984603397040728981,
+      "debug_name": "cryptoRound::tmp::dup_use::9"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2195709455668672151,
+        "debug_name": "cryptoRound::tmp::store_temp::11"}]}],
+    "args":
+    [{"id": 7325793302777583993,
+      "debug_name": "cryptoRound::tmp::felt_sub_raw::10"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16735586749622859144, "debug_name": "felt252_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 5341050292299118559,
+        "debug_name": "cryptoRound::tmp::felt_mul_raw::12"}]}],
+    "args":
+    [{"id": 869342505267517168,
+      "debug_name": "cryptoRound::tmp::store_temp::5"},
+     {"id": 2195709455668672151,
+      "debug_name": "cryptoRound::tmp::store_temp::11"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2195711654691928573,
+        "debug_name": "cryptoRound::tmp::store_temp::13"}]}],
+    "args":
+    [{"id": 5341050292299118559,
+      "debug_name": "cryptoRound::tmp::felt_mul_raw::12"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 17594636797604598949, "debug_name": "felt252_const_pos_17"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13617121727367725908,
+        "debug_name": "cryptoRound::tmp::felt_const_raw::14"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2195705057622159307,
+        "debug_name": "cryptoRound::tmp::store_temp::15"}]}],
+    "args":
+    [{"id": 13617121727367725908,
+      "debug_name": "cryptoRound::tmp::felt_const_raw::14"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5573091817713561949, "debug_name": "felt252_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15748546508966290354,
+        "debug_name": "cryptoRound::tmp::felt_add_raw::16"}]}],
+    "args":
+    [{"id": 2195711654691928573,
+      "debug_name": "cryptoRound::tmp::store_temp::13"},
+     {"id": 2195705057622159307,
+      "debug_name": "cryptoRound::tmp::store_temp::15"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2195707256645415729,
+        "debug_name": "cryptoRound::tmp::store_temp::17"}]}],
+    "args":
+    [{"id": 15748546508966290354,
+      "debug_name": "cryptoRound::tmp::felt_add_raw::16"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 7210601956181211094, "debug_name": "felt252_const_pos_3"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13617108533228187376,
+        "debug_name": "cryptoRound::tmp::felt_const_raw::18"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2195700659575646463,
+        "debug_name": "cryptoRound::tmp::store_temp::19"}]}],
+    "args":
+    [{"id": 13617108533228187376,
+      "debug_name": "cryptoRound::tmp::felt_const_raw::18"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5573091817713561949, "debug_name": "felt252_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15751515190361892379,
+        "debug_name": "cryptoRound::tmp::felt_add_raw::20"}]}],
+    "args":
+    [{"id": 8294163745464894788, "debug_name": "cryptoRound::tmp::dup_keep::2"},
+     {"id": 2195700659575646463,
+      "debug_name": "cryptoRound::tmp::store_temp::19"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2198647350738684268,
+        "debug_name": "cryptoRound::tmp::store_temp::21"}]}],
+    "args":
+    [{"id": 15751515190361892379,
+      "debug_name": "cryptoRound::tmp::felt_add_raw::20"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16735586749622859144, "debug_name": "felt252_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 5342042051787575656,
+        "debug_name": "cryptoRound::tmp::felt_mul_raw::22"}]}],
+    "args":
+    [{"id": 2195707256645415729,
+      "debug_name": "cryptoRound::tmp::store_temp::17"},
+     {"id": 2198647350738684268,
+      "debug_name": "cryptoRound::tmp::store_temp::21"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2198649549761940690,
+        "debug_name": "cryptoRound::tmp::store_temp::23"}]}],
+    "args":
+    [{"id": 5342042051787575656,
+      "debug_name": "cryptoRound::tmp::felt_mul_raw::22"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16735586749622859144, "debug_name": "felt252_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 5342048648857344922,
+        "debug_name": "cryptoRound::tmp::felt_mul_raw::24"}]}],
+    "args":
+    [{"id": 8294157148395125522, "debug_name": "cryptoRound::tmp::dup_keep::8"},
+     {"id": 8294159347418381944,
+      "debug_name": "cryptoRound::tmp::dup_keep::6"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2198642952692171424,
+        "debug_name": "cryptoRound::tmp::store_temp::25"}]}],
+    "args":
+    [{"id": 5342048648857344922,
+      "debug_name": "cryptoRound::tmp::felt_mul_raw::24"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 12829813583981032364, "debug_name": "felt252_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7326778465196271824,
+        "debug_name": "cryptoRound::tmp::felt_sub_raw::26"}]}],
+    "args":
+    [{"id": 2198649549761940690,
+      "debug_name": "cryptoRound::tmp::store_temp::23"},
+     {"id": 2198642952692171424,
+      "debug_name": "cryptoRound::tmp::store_temp::25"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2198645151715427846,
+        "debug_name": "cryptoRound::tmp::store_temp::27"}]}],
+    "args":
+    [{"id": 7326778465196271824,
+      "debug_name": "cryptoRound::tmp::felt_sub_raw::26"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14115798396771957644, "debug_name": "store_temp_felt252"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 2198657246343338167,
+        "debug_name": "cryptoRound::tmp::store_temp::28"}]}],
+    "args":
+    [{"id": 2198645151715427846,
+      "debug_name": "cryptoRound::tmp::store_temp::27"}]}},
+  {"Return":
+   [{"id": 2198657246343338167,
+     "debug_name": "cryptoRound::tmp::store_temp::28"}]}],
+ "libfunc_declarations":
+ [{"long_id":
+   {"generic_id": "dup",
+    "generic_args":
+    [{"Type": {"id": 18197987107266074389, "debug_name": "felt252"}}]},
+   "id": {"id": 11881856011480806563, "debug_name": "dup_felt252"}},
+  {"long_id": {"generic_id": "felt252_add", "generic_args": []},
+   "id": {"id": 5573091817713561949, "debug_name": "felt252_add"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 18197987107266074389, "debug_name": "felt252"}}]},
+   "id": {"id": 14115798396771957644, "debug_name": "store_temp_felt252"}},
+  {"long_id": {"generic_id": "felt252_sub", "generic_args": []},
+   "id": {"id": 12829813583981032364, "debug_name": "felt252_sub"}},
+  {"long_id": {"generic_id": "felt252_mul", "generic_args": []},
+   "id": {"id": 16735586749622859144, "debug_name": "felt252_mul"}},
+  {"long_id":
+   {"generic_id": "felt252_const", "generic_args": [{"Value": [1, [17]]}]},
+   "id": {"id": 17594636797604598949, "debug_name": "felt252_const_pos_17"}},
+  {"long_id":
+   {"generic_id": "felt252_const", "generic_args": [{"Value": [1, [3]]}]},
+   "id": {"id": 7210601956181211094, "debug_name": "felt252_const_pos_3"}}],
+ "funcs":
+ [{"signature":
+   {"ret_types": [{"id": 18197987107266074389, "debug_name": "felt252"}],
+    "param_types":
+    [{"id": 18197987107266074389, "debug_name": "felt252"},
+     {"id": 18197987107266074389, "debug_name": "felt252"},
+     {"id": 18197987107266074389, "debug_name": "felt252"}]},
+   "params":
+   [{"ty": {"id": 18197987107266074389, "debug_name": "felt252"},
+     "id": {"id": 3610923231846463639, "debug_name": "cryptoRound::param::x"}},
+    {"ty": {"id": 18197987107266074389, "debug_name": "felt252"},
+     "id": {"id": 3610922132334835428, "debug_name": "cryptoRound::param::y"}},
+    {"ty": {"id": 18197987107266074389, "debug_name": "felt252"},
+     "id": {"id": 3610925430869720061, "debug_name": "cryptoRound::param::z"}}],
+   "id": {"id": 5150993899982786920, "debug_name": "cryptoRound"},
+   "entry_point": 0}]}

@@ -45,6 +45,15 @@ lean_lib karatsuba_u128 where
 lean_lib sq128x128_u128 where
   srcDir := "../examples/Lean"
 
+lean_lib aggregate_payload_mix where
+  srcDir := "../examples/Lean"
+
+lean_lib circuit_gate_felt where
+  srcDir := "../examples/Lean"
+
+lean_lib crypto_round_felt where
+  srcDir := "../examples/Lean"
+
 @[default_target]
 lean_exe «leancairo-gen» where
   root := `LeanCairo.CLI.Main

@@ -4,6 +4,7 @@ generated_contract/
 .lean/
 build/
 **/target/
+examples/Benchmark/**/Scarb.lock
 __pycache__/
 *.pyc
 *.olean
