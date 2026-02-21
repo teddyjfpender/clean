@@ -13,6 +13,24 @@ CATALOG_MD="$TMP_DIR/rgr-deliverables.md"
 cp "$SOURCE_CATALOG" "$CATALOG"
 cp "$ROOT_DIR/roadmap/reports/rgr-deliverables.md" "$CATALOG_MD"
 
+# Normalize bootstrap deliverable to NOT DONE in temp catalog so transition tests
+# remain stable after repository progress updates.
+python3 - <<'PY' "$CATALOG"
+import json
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+payload = json.loads(path.read_text(encoding="utf-8"))
+for item in payload.get("deliverables", []):
+    if item.get("id") == "d00-non-starknet-closure-guard":
+        item["status"] = "NOT DONE"
+        item["evidence_tests"] = []
+        item["evidence_proofs"] = []
+        break
+path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+PY
+
 HEAD_COMMIT="$(git -C "$ROOT_DIR" rev-parse --short=12 HEAD)"
 
 # Case 1: non-ready deliverable cannot be marked done.

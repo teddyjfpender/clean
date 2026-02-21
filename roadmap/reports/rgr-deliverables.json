@@ -2,8 +2,18 @@
   "deliverables": [
     {
       "computed_ready": true,
-      "evidence_proofs": [],
-      "evidence_tests": [],
+      "evidence_proofs": [
+        "config/rgr-deliverable-spec.json",
+        "roadmap/inventory/sierra-coverage-matrix.json",
+        "scripts/roadmap/run_rgr_loop.sh",
+        "roadmap/reports/rgr-deliverables.json"
+      ],
+      "evidence_tests": [
+        "scripts/test/sierra_primary_closure_negative.sh",
+        "scripts/roadmap/check_sierra_primary_closure.sh",
+        "scripts/roadmap/check_coverage_matrix_freshness.sh",
+        "scripts/roadmap/check_sierra_coverage_report_freshness.sh"
+      ],
       "id": "d00-non-starknet-closure-guard",
       "module_count": 52,
       "module_scope": [
@@ -79,7 +89,7 @@
       "priority": 0,
       "remaining_count": 0,
       "remaining_module_ids": [],
-      "status": "NOT DONE",
+      "status": "DONE - e36bd15",
       "target_policy": "implemented_or_failfast",
       "title": "Non-Starknet closure guard"
     },
@@ -412,8 +422,8 @@
   "summary": {
     "deliverable_count": 7,
     "status_counts": {
-      "done": 0,
-      "not_done": 7
+      "done": 1,
+      "not_done": 6
     }
   },
   "version": 1

@@ -7,14 +7,14 @@
 ## Summary
 
 - Deliverables: `7`
-- `NOT DONE`: `7`
-- `DONE`: `0`
+- `NOT DONE`: `6`
+- `DONE`: `1`
 
 ## Catalog
 
 | ID | Priority | Policy | Modules | Remaining | Ready | Status |
 | --- | ---: | --- | ---: | ---: | --- | --- |
-| `d00-non-starknet-closure-guard` | `0` | `implemented_or_failfast` | `52` | `0` | `yes` | `NOT DONE` |
+| `d00-non-starknet-closure-guard` | `0` | `implemented_or_failfast` | `52` | `0` | `yes` | `DONE - e36bd15` |
 | `d01-range-and-integer-families` | `1` | `implemented_only` | `14` | `14` | `no` | `NOT DONE` |
 | `d02-aggregate-and-collection-families` | `2` | `implemented_only` | `9` | `9` | `no` | `NOT DONE` |
 | `d03-control-and-call-families` | `3` | `implemented_only` | `6` | `6` | `no` | `NOT DONE` |
@@ -27,7 +27,7 @@
 ### `d00-non-starknet-closure-guard` Non-Starknet closure guard
 - Priority: `0`
 - Policy: `implemented_or_failfast`
-- Status: `NOT DONE`
+- Status: `DONE - e36bd15`
 - Computed ready: `True`
 - Module count: `52`
 - Remaining count: `0`
