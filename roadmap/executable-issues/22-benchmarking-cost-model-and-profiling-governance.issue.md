@@ -27,7 +27,9 @@ Deliver deterministic benchmarking/profiling governance and cost-model calibrati
 ## Milestone status ledger
 
 ### BEN-1 Benchmark schema and runner normalization
-- Status: NOT DONE
+- Status: DONE - 6111d81
+- Evidence tests: `scripts/roadmap/check_benchmark_harness_sync.sh`; `scripts/test/benchmark_harness_reproducibility.sh`; `scripts/test/benchmark_family_thresholds_negative.sh`; `scripts/bench/generated/run_manifest_benchmarks.sh`
+- Evidence proofs: `scripts/examples/generate_benchmark_harness.py`; `generated/examples/benchmark-harness.json`; `scripts/bench/generated/run_manifest_benchmarks.sh`; `scripts/bench/run_manifest_benchmark_suite.py`; `scripts/bench/check_manifest_benchmark_thresholds.py`; `generated/examples/benchmark-summary.json`; `generated/examples/benchmark-summary.md`; `config/examples-manifest.json`
 - Acceptance tests:
 1. Benchmark manifest validation passes for all corpus items.
 2. Runner outputs are deterministic across repeated runs.
