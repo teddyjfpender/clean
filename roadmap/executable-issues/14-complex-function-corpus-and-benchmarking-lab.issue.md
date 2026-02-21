@@ -30,7 +30,9 @@ Deliver a manifest-driven complex function corpus with deterministic differentia
 ## Milestone status ledger
 
 ### CFB-1 Unified corpus manifest schema extension
-- Status: NOT DONE
+- Status: DONE - ce15de6
+- Evidence tests: `scripts/roadmap/check_examples_manifest_schema.sh`; `scripts/test/examples_structure.sh`; `scripts/test/examples_manifest_mirror_negative.sh`; `scripts/test/examples_regeneration_deterministic.sh`; `scripts/examples/generate_examples.sh config/examples-manifest.json`
+- Evidence proofs: `config/examples-manifest.json`; `scripts/examples/validate_examples_manifest.py`; `scripts/examples/generate_examples.sh`; `scripts/test/examples_structure.sh`; `examples/README.md`; `scripts/roadmap/list_quality_gates.sh`
 - Acceptance tests:
 1. Manifest schema validates Lean/Sierra/Cairo/Baseline/Benchmark mappings.
 2. Missing mirror paths fail structure checks.
