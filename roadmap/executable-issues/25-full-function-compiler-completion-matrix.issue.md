@@ -35,7 +35,9 @@ Deliver machine-verifiable completion audits and certification for function-doma
 3. Matrix generation is deterministic.
 
 ### AUD-2 Track-A completion audit automation
-- Status: NOT DONE
+- Status: DONE - ab1a6e6
+- Evidence tests: `scripts/roadmap/check_track_a_completion_audit.sh`; `scripts/roadmap/check_completion_matrix.sh`; `scripts/roadmap/check_gate_manifest_sync.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `scripts/roadmap/generate_track_a_completion_audit.py`; `scripts/roadmap/check_track_a_completion_audit.sh`; `roadmap/reports/track-a-completion-audit.json`; `roadmap/reports/track-a-completion-audit.md`; `roadmap/reports/completion-matrix.json`
 - Acceptance tests:
 1. Track-A closure predicates are validated automatically.
 2. Missing family/proof/benchmark closure fails audit.
