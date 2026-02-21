@@ -64,7 +64,9 @@ Build a manifest-driven complex function corpus program with baseline ingestion,
 3. Complex corpus differential suites pass.
 
 ### COR-5 Corpus-capability coverage reporting
-- Status: NOT DONE
+- Status: DONE - 83bcc1f
+- Evidence tests: `scripts/roadmap/check_corpus_coverage_report_sync.sh`; `scripts/roadmap/check_corpus_coverage_trend_sync.sh`; `scripts/test/corpus_coverage_reproducibility.sh`; `scripts/test/corpus_coverage_trend_reproducibility.sh`; `scripts/test/corpus_coverage_negative.sh`
+- Evidence proofs: `scripts/examples/generate_corpus_coverage_report.py`; `scripts/examples/generate_corpus_coverage_trend.py`; `generated/examples/corpus-coverage-report.json`; `generated/examples/corpus-coverage-report.md`; `generated/examples/corpus-coverage-trend.json`; `generated/examples/corpus-coverage-trend.md`; `roadmap/capabilities/corpus-coverage-trend-baseline.json`; `config/examples-manifest.json`; `roadmap/capabilities/registry.json`
 - Acceptance tests:
 1. Coverage report maps implemented capabilities to corpus items.
 2. Missing coverage for implemented capabilities fails checks.
