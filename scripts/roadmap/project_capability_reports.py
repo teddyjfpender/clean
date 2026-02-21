@@ -24,6 +24,12 @@ def load_registry(path: Path) -> Dict[str, object]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def ratio(numerator: int, denominator: int) -> float:
+    if denominator <= 0:
+        return 0.0
+    return round(numerator / denominator, 6)
+
+
 def summarize(capabilities: List[Dict[str, object]]) -> Dict[str, object]:
     total = len(capabilities)
     overall_counter = Counter()
@@ -71,12 +77,25 @@ def summarize(capabilities: List[Dict[str, object]]) -> Dict[str, object]:
     families = {}
     for family in sorted(family_buckets.keys()):
         bucket = family_buckets[family]
+        family_total = bucket["total"]
+        family_overall_implemented = bucket["overall"]["implemented"]
+        family_sierra_implemented = bucket["sierra"]["implemented"]
+        family_cairo_implemented = bucket["cairo"]["implemented"]
         families[family] = {
-            "total": bucket["total"],
+            "total": family_total,
             "overall": {state: bucket["overall"][state] for state in STATES},
             "sierra": {state: bucket["sierra"][state] for state in STATES},
             "cairo": {state: bucket["cairo"][state] for state in STATES},
+            "closure_ratios": {
+                "overall_implemented_ratio": ratio(family_overall_implemented, family_total),
+                "sierra_implemented_ratio": ratio(family_sierra_implemented, family_total),
+                "cairo_implemented_ratio": ratio(family_cairo_implemented, family_total),
+            },
         }
+
+    overall_implemented = overall_counter["implemented"]
+    sierra_implemented = sierra_counter["implemented"]
+    cairo_implemented = cairo_counter["implemented"]
 
     return {
         "version": 1,
@@ -84,6 +103,11 @@ def summarize(capabilities: List[Dict[str, object]]) -> Dict[str, object]:
         "overall_status_counts": {state: overall_counter[state] for state in STATES},
         "sierra_status_counts": {state: sierra_counter[state] for state in STATES},
         "cairo_status_counts": {state: cairo_counter[state] for state in STATES},
+        "closure_ratios": {
+            "overall_implemented_ratio": ratio(overall_implemented, total),
+            "sierra_implemented_ratio": ratio(sierra_implemented, total),
+            "cairo_implemented_ratio": ratio(cairo_implemented, total),
+        },
         "proof_status_counts": {
             "complete": proof_counter["complete"],
             "partial": proof_counter["partial"],
@@ -115,6 +139,10 @@ def render_markdown(summary: Dict[str, object], registry_rel: str) -> str:
     lines.append(
         f"- proof_status_counts: `complete={proof['complete']}`, `partial={proof['partial']}`, `planned={proof['planned']}`"
     )
+    closure = summary["closure_ratios"]
+    lines.append(
+        f"- closure_ratios: `overall={closure['overall_implemented_ratio']}`, `sierra={closure['sierra_implemented_ratio']}`, `cairo={closure['cairo_implemented_ratio']}`"
+    )
     lines.append("")
 
     lines.append("## Family Matrix")
@@ -125,6 +153,17 @@ def render_markdown(summary: Dict[str, object], registry_rel: str) -> str:
         overall = bucket["overall"]
         lines.append(
             f"| `{family}` | {bucket['total']} | {overall['implemented']} | {overall['fail_fast']} | {overall['planned']} |"
+        )
+    lines.append("")
+
+    lines.append("## Family Closure Ratios")
+    lines.append("")
+    lines.append("| Family | Overall implemented ratio | Sierra implemented ratio | Cairo implemented ratio |")
+    lines.append("| --- | ---: | ---: | ---: |")
+    for family, bucket in summary["families"].items():
+        closure = bucket["closure_ratios"]
+        lines.append(
+            f"| `{family}` | {closure['overall_implemented_ratio']} | {closure['sierra_implemented_ratio']} | {closure['cairo_implemented_ratio']} |"
         )
     lines.append("")
 

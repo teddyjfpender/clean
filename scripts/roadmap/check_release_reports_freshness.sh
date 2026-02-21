@@ -9,7 +9,7 @@ trap 'rm -rf "$TMP_DIR"' EXIT
 python3 "$ROOT_DIR/scripts/roadmap/generate_release_reports.py" --out-dir "$TMP_DIR"
 
 ERRORS=0
-for file_name in release-compatibility-report.md release-proof-report.md release-benchmark-report.md; do
+for file_name in release-compatibility-report.md release-proof-report.md release-benchmark-report.md release-capability-closure-report.md; do
   src_file="$OUT_DIR/$file_name"
   gen_file="$TMP_DIR/$file_name"
   if [[ ! -f "$src_file" ]]; then

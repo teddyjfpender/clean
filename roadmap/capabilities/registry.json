@@ -324,6 +324,38 @@
       "benchmark_class": "scalar-core",
       "cairo_targets": {
         "forms": [
+          "bool_literal_expr"
+        ]
+      },
+      "capability_id": "cap.scalar.bool.literal",
+      "family_group": "scalar",
+      "mir_nodes": [
+        "litBool"
+      ],
+      "proof_class": "bool-literals",
+      "proof_status": "partial",
+      "resource_requirements": [],
+      "semantic_class": "pure",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "bool_true",
+          "bool_false"
+        ],
+        "generic_type_ids": [
+          "bool"
+        ]
+      },
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      },
+      "test_class": "scalar-differential"
+    },
+    {
+      "benchmark_class": "scalar-core",
+      "cairo_targets": {
+        "forms": [
           "felt252_add_expr"
         ]
       },

@@ -1,0 +1,18 @@
+{
+  "minimums": {
+    "cairo_implemented": 7,
+    "family_overall_implemented": {
+      "aggregate": 0,
+      "collection": 0,
+      "control": 0,
+      "field": 0,
+      "integer": 3,
+      "resource": 0,
+      "scalar": 4
+    },
+    "overall_implemented": 7,
+    "sierra_implemented": 7
+  },
+  "source_report": "roadmap/inventory/capability-coverage-report.json",
+  "version": 1
+}

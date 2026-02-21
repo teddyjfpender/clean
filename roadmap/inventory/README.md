@@ -47,3 +47,9 @@ python3 scripts/roadmap/project_capability_reports.py \
   --out-json roadmap/inventory/capability-coverage-report.json \
   --out-md roadmap/inventory/capability-coverage-report.md
 ```
+
+Capability closure SLO gate:
+
+```bash
+scripts/roadmap/check_capability_closure_slo.sh
+```

@@ -13,6 +13,8 @@ OUT_DIR_DEFAULT = ROOT / "roadmap" / "reports"
 PIN_FILE = ROOT / "config" / "cairo_pinned_commit.txt"
 SIERRA_REPORT = ROOT / "roadmap" / "inventory" / "sierra-family-coverage-report.json"
 CORELIB_REPORT = ROOT / "roadmap" / "inventory" / "corelib-parity-report.json"
+CAPABILITY_REPORT = ROOT / "roadmap" / "inventory" / "capability-coverage-report.json"
+CAPABILITY_SLO_BASELINE = ROOT / "roadmap" / "capabilities" / "capability-closure-slo-baseline.json"
 BENCHMARK_DOC = ROOT / "docs" / "fixed-point" / "benchmark-results.md"
 PROOF_CHECK_SCRIPT = ROOT / "scripts" / "roadmap" / "check_proof_obligations.sh"
 PROOF_DIR = ROOT / "src" / "LeanCairo" / "Compiler" / "Proof"
@@ -204,6 +206,67 @@ def render_benchmark_report(out_dir: Path, pinned_commit: str) -> None:
     (out_dir / "release-benchmark-report.md").write_text("\n".join(lines), encoding="utf-8")
 
 
+def render_capability_closure_report(out_dir: Path, pinned_commit: str) -> None:
+    capability = json.loads(CAPABILITY_REPORT.read_text(encoding="utf-8"))
+    baseline = json.loads(CAPABILITY_SLO_BASELINE.read_text(encoding="utf-8"))
+
+    overall = capability.get("overall_status_counts", {})
+    sierra = capability.get("sierra_status_counts", {})
+    cairo = capability.get("cairo_status_counts", {})
+    closure = capability.get("closure_ratios", {})
+    minimums = baseline.get("minimums", {})
+    family_minimums = minimums.get("family_overall_implemented", {})
+
+    violations: list[str] = []
+    checks = [
+        ("overall", int(overall.get("implemented", 0)), int(minimums.get("overall_implemented", 0))),
+        ("sierra", int(sierra.get("implemented", 0)), int(minimums.get("sierra_implemented", 0))),
+        ("cairo", int(cairo.get("implemented", 0)), int(minimums.get("cairo_implemented", 0))),
+    ]
+    for label, current, required in checks:
+        if current < required:
+            violations.append(f"{label}: current={current}, required_min={required}")
+
+    families = capability.get("families", {})
+    if isinstance(family_minimums, dict):
+        for family, required in sorted(family_minimums.items()):
+            entry = families.get(family, {})
+            family_overall = entry.get("overall", {}) if isinstance(entry, dict) else {}
+            current = int(family_overall.get("implemented", 0))
+            if current < int(required):
+                violations.append(
+                    f"family {family}: current={current}, required_min={required}"
+                )
+
+    lines = [
+        "# Release Capability Closure Report",
+        "",
+        f"- Commit: `{pinned_commit}`",
+        f"- Capability source: `{CAPABILITY_REPORT.relative_to(ROOT)}`",
+        f"- SLO baseline: `{CAPABILITY_SLO_BASELINE.relative_to(ROOT)}`",
+        f"- Total capabilities: `{capability.get('total_capabilities', 0)}`",
+        "",
+        "## Closure Ratios",
+        "",
+        f"- `overall_implemented_ratio`: `{closure.get('overall_implemented_ratio', 0.0)}`",
+        f"- `sierra_implemented_ratio`: `{closure.get('sierra_implemented_ratio', 0.0)}`",
+        f"- `cairo_implemented_ratio`: `{closure.get('cairo_implemented_ratio', 0.0)}`",
+        "",
+        "## Monotonicity Against SLO Baseline",
+        "",
+    ]
+
+    if violations:
+        lines.append(f"- Result: `FAIL` (`{len(violations)}` violations)")
+        for violation in violations:
+            lines.append(f"- {violation}")
+    else:
+        lines.append("- Result: `PASS`")
+    lines.append("")
+
+    (out_dir / "release-capability-closure-report.md").write_text("\n".join(lines), encoding="utf-8")
+
+
 def main() -> int:
     args = parse_args()
     out_dir = Path(args.out_dir).resolve()
@@ -213,6 +276,7 @@ def main() -> int:
     render_compatibility_report(out_dir, pinned_commit)
     render_proof_report(out_dir, pinned_commit)
     render_benchmark_report(out_dir, pinned_commit)
+    render_capability_closure_report(out_dir, pinned_commit)
     return 0
 
 

@@ -1,4 +1,5 @@
 import LeanCairo.Backend.Sierra.Emit.Subset.Expr
+import LeanCairo.Backend.Sierra.Generated.CapabilityProjection
 
 namespace LeanCairo.Backend.Sierra.Emit.Subset
 
@@ -8,12 +9,10 @@ open LeanCairo.Core.Domain
 open LeanCairo.Core.Spec
 
 def ensureFunctionTySupported (fnName : String) (whereLabel : String) (ty : Ty) : Except EmitError Unit := do
-  match ty with
-  | .felt252 => pure ()
-  | .u128 => pure ()
-  | .bool => pure ()
-  | _ =>
-      .error s!"unsupported {whereLabel} type '{Ty.toCairo ty}' in function '{fnName}'"
+  if LeanCairo.Backend.Sierra.Generated.isSierraSignatureTySupported ty then
+    pure ()
+  else
+    .error s!"unsupported {whereLabel} type '{Ty.toCairo ty}' in function '{fnName}'"
 
 def ensureViewNoWrites (fnSpec : IRFuncSpec) : Except EmitError Unit :=
   if fnSpec.mutability != .view then

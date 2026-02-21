@@ -1,8 +1,13 @@
 {
   "cairo_status_counts": {
     "fail_fast": 0,
-    "implemented": 6,
+    "implemented": 7,
     "planned": 6
+  },
+  "closure_ratios": {
+    "cairo_implemented_ratio": 0.538462,
+    "overall_implemented_ratio": 0.538462,
+    "sierra_implemented_ratio": 0.538462
   },
   "fail_fast_capability_ids": [
     "cap.integer.family.non_u128"
@@ -13,6 +18,11 @@
         "fail_fast": 0,
         "implemented": 0,
         "planned": 1
+      },
+      "closure_ratios": {
+        "cairo_implemented_ratio": 0.0,
+        "overall_implemented_ratio": 0.0,
+        "sierra_implemented_ratio": 0.0
       },
       "overall": {
         "fail_fast": 0,
@@ -32,6 +42,11 @@
         "implemented": 0,
         "planned": 1
       },
+      "closure_ratios": {
+        "cairo_implemented_ratio": 0.0,
+        "overall_implemented_ratio": 0.0,
+        "sierra_implemented_ratio": 0.0
+      },
       "overall": {
         "fail_fast": 0,
         "implemented": 0,
@@ -49,6 +64,11 @@
         "fail_fast": 0,
         "implemented": 0,
         "planned": 1
+      },
+      "closure_ratios": {
+        "cairo_implemented_ratio": 0.0,
+        "overall_implemented_ratio": 0.0,
+        "sierra_implemented_ratio": 0.0
       },
       "overall": {
         "fail_fast": 0,
@@ -68,6 +88,11 @@
         "implemented": 0,
         "planned": 1
       },
+      "closure_ratios": {
+        "cairo_implemented_ratio": 0.0,
+        "overall_implemented_ratio": 0.0,
+        "sierra_implemented_ratio": 0.0
+      },
       "overall": {
         "fail_fast": 0,
         "implemented": 0,
@@ -85,6 +110,11 @@
         "fail_fast": 0,
         "implemented": 3,
         "planned": 1
+      },
+      "closure_ratios": {
+        "cairo_implemented_ratio": 0.75,
+        "overall_implemented_ratio": 0.75,
+        "sierra_implemented_ratio": 0.75
       },
       "overall": {
         "fail_fast": 1,
@@ -104,6 +134,11 @@
         "implemented": 0,
         "planned": 1
       },
+      "closure_ratios": {
+        "cairo_implemented_ratio": 0.0,
+        "overall_implemented_ratio": 0.0,
+        "sierra_implemented_ratio": 0.0
+      },
       "overall": {
         "fail_fast": 0,
         "implemented": 0,
@@ -119,33 +154,39 @@
     "scalar": {
       "cairo": {
         "fail_fast": 0,
-        "implemented": 3,
+        "implemented": 4,
         "planned": 0
+      },
+      "closure_ratios": {
+        "cairo_implemented_ratio": 1.0,
+        "overall_implemented_ratio": 1.0,
+        "sierra_implemented_ratio": 1.0
       },
       "overall": {
         "fail_fast": 0,
-        "implemented": 3,
+        "implemented": 4,
         "planned": 0
       },
       "sierra": {
         "fail_fast": 0,
-        "implemented": 3,
+        "implemented": 4,
         "planned": 0
       },
-      "total": 3
+      "total": 4
     }
   },
   "implemented_capability_ids": [
     "cap.integer.u128.add.wrapping",
     "cap.integer.u128.mul.wrapping",
     "cap.integer.u128.sub.wrapping",
+    "cap.scalar.bool.literal",
     "cap.scalar.felt252.add",
     "cap.scalar.felt252.mul",
     "cap.scalar.felt252.sub"
   ],
   "overall_status_counts": {
     "fail_fast": 1,
-    "implemented": 6,
+    "implemented": 7,
     "planned": 5
   },
   "planned_capability_ids": [
@@ -157,14 +198,14 @@
   ],
   "proof_status_counts": {
     "complete": 0,
-    "partial": 6,
+    "partial": 7,
     "planned": 6
   },
   "sierra_status_counts": {
     "fail_fast": 1,
-    "implemented": 6,
+    "implemented": 7,
     "planned": 5
   },
-  "total_capabilities": 12,
+  "total_capabilities": 13,
   "version": 1
 }
