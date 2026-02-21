@@ -2,45 +2,35 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-MANIFEST_FILE="$ROOT_DIR/config/examples-manifest.json"
-EXAMPLES_ROOT="$ROOT_DIR/examples"
+MANIFEST_FILE="${1:-$ROOT_DIR/config/examples-manifest.json}"
+MANIFEST_VALIDATOR="$ROOT_DIR/scripts/examples/validate_examples_manifest.py"
 
 if [[ ! -f "$MANIFEST_FILE" ]]; then
   echo "missing examples manifest: $MANIFEST_FILE"
+  exit 1
+fi
+if [[ ! -f "$MANIFEST_VALIDATOR" ]]; then
+  echo "missing examples manifest validator: $MANIFEST_VALIDATOR"
   exit 1
 fi
 
 rows_file="$(mktemp)"
 trap 'rm -f "$rows_file"' EXIT
 
-python3 - "$MANIFEST_FILE" >"$rows_file" <<'PY'
-import json
-import sys
-from pathlib import Path
-
-manifest_path = Path(sys.argv[1])
-payload = json.loads(manifest_path.read_text(encoding="utf-8"))
-examples = payload.get("examples", [])
-if not isinstance(examples, list) or not examples:
-    raise SystemExit(f"invalid examples manifest: {manifest_path}")
-for entry in examples:
-    example_id = str(entry.get("id", "")).strip()
-    lean_sources = entry.get("lean_sources", [])
-    if not isinstance(lean_sources, list) or not lean_sources:
-        raise SystemExit(f"invalid lean_sources for example: {example_id}")
-    print("\t".join([example_id, ",".join(str(p).strip() for p in lean_sources)]))
-PY
+python3 "$MANIFEST_VALIDATOR" --manifest "$MANIFEST_FILE" --emit-tsv >"$rows_file"
 
 if [[ -z "$(sed '/^$/d' "$rows_file")" ]]; then
   echo "examples manifest has no ids: $MANIFEST_FILE"
   exit 1
 fi
 
-while IFS=$'\t' read -r example_id sources_csv; do
+while IFS=$'\t' read -r example_id _module_name lean_dir_rel sierra_dir_rel cairo_dir_rel baseline_dir_rel benchmark_dir_rel sources_csv; do
   [[ -z "$example_id" ]] && continue
-  lean_dir="$EXAMPLES_ROOT/Lean/$example_id"
-  sierra_dir="$EXAMPLES_ROOT/Sierra/$example_id"
-  cairo_dir="$EXAMPLES_ROOT/Cairo/$example_id"
+  [[ "$baseline_dir_rel" == "-" ]] && baseline_dir_rel=""
+  [[ "$benchmark_dir_rel" == "-" ]] && benchmark_dir_rel=""
+  lean_dir="$ROOT_DIR/$lean_dir_rel"
+  sierra_dir="$ROOT_DIR/$sierra_dir_rel"
+  cairo_dir="$ROOT_DIR/$cairo_dir_rel"
 
   if [[ ! -d "$lean_dir" ]]; then
     echo "missing Lean example directory: $lean_dir"
@@ -52,6 +42,14 @@ while IFS=$'\t' read -r example_id sources_csv; do
   fi
   if [[ ! -d "$cairo_dir" ]]; then
     echo "missing Cairo example directory: $cairo_dir"
+    exit 1
+  fi
+  if [[ -n "$baseline_dir_rel" && ! -d "$ROOT_DIR/$baseline_dir_rel" ]]; then
+    echo "missing Cairo baseline example directory: $ROOT_DIR/$baseline_dir_rel"
+    exit 1
+  fi
+  if [[ -n "$benchmark_dir_rel" && ! -d "$ROOT_DIR/$benchmark_dir_rel" ]]; then
+    echo "missing benchmark example directory: $ROOT_DIR/$benchmark_dir_rel"
     exit 1
   fi
 

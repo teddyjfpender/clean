@@ -3,10 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 MANIFEST_FILE="${1:-$ROOT_DIR/config/examples-manifest.json}"
-EXAMPLES_ROOT="$ROOT_DIR/examples"
-LEAN_ROOT="$EXAMPLES_ROOT/Lean"
-SIERRA_ROOT="$EXAMPLES_ROOT/Sierra"
-CAIRO_ROOT="$EXAMPLES_ROOT/Cairo"
+MANIFEST_VALIDATOR="$ROOT_DIR/scripts/examples/validate_examples_manifest.py"
 
 export PATH="$HOME/.elan/bin:$PATH"
 
@@ -20,54 +17,20 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 1
 fi
 
+if [[ ! -f "$MANIFEST_VALIDATOR" ]]; then
+  echo "missing manifest validator: $MANIFEST_VALIDATOR"
+  exit 1
+fi
+
 if ! command -v lake >/dev/null 2>&1; then
   echo "lake is required for Lean/Cairo generation"
   exit 1
 fi
 
-mkdir -p "$LEAN_ROOT" "$SIERRA_ROOT" "$CAIRO_ROOT"
-
 ROWS_FILE="$(mktemp)"
 trap 'rm -f "$ROWS_FILE"' EXIT
 
-python3 - "$MANIFEST_FILE" >"$ROWS_FILE" <<'PY'
-import json
-import sys
-from pathlib import Path
-
-manifest_path = Path(sys.argv[1])
-payload = json.loads(manifest_path.read_text(encoding="utf-8"))
-examples = payload.get("examples")
-
-if not isinstance(examples, list) or not examples:
-    raise SystemExit(f"invalid examples manifest (no examples): {manifest_path}")
-
-required = ("id", "module", "lean_sources")
-seen = set()
-for idx, entry in enumerate(examples):
-    if not isinstance(entry, dict):
-        raise SystemExit(f"invalid examples manifest entry {idx}: expected object")
-    missing = [key for key in required if key not in entry]
-    if missing:
-        raise SystemExit(f"manifest entry {idx} missing keys: {', '.join(missing)}")
-    example_id = str(entry["id"]).strip()
-    module_name = str(entry["module"]).strip()
-    lean_sources = entry["lean_sources"]
-    if not example_id or not module_name:
-        raise SystemExit(f"manifest entry {idx} has empty id/module")
-    if example_id in seen:
-        raise SystemExit(f"duplicate example id in manifest: {example_id}")
-    seen.add(example_id)
-    if not isinstance(lean_sources, list) or not lean_sources:
-        raise SystemExit(f"manifest entry {example_id} has empty lean_sources")
-    normalized_sources = []
-    for source in lean_sources:
-        source_str = str(source).strip()
-        if not source_str:
-            raise SystemExit(f"manifest entry {example_id} has empty source path")
-        normalized_sources.append(source_str)
-    print("\t".join([example_id, module_name, ",".join(normalized_sources)]))
-PY
+python3 "$MANIFEST_VALIDATOR" --manifest "$MANIFEST_FILE" --emit-tsv >"$ROWS_FILE"
 
 if [[ -z "$(sed '/^$/d' "$ROWS_FILE")" ]]; then
   echo "examples manifest produced no generation rows: $MANIFEST_FILE"
@@ -88,12 +51,14 @@ for root_target in $module_roots; do
   )
 done
 
-while IFS=$'\t' read -r example_id module_name sources_csv; do
+while IFS=$'\t' read -r example_id module_name lean_dir_rel sierra_dir_rel cairo_dir_rel baseline_dir_rel benchmark_dir_rel sources_csv; do
   [[ -z "$example_id" ]] && continue
+  [[ "$baseline_dir_rel" == "-" ]] && baseline_dir_rel=""
+  [[ "$benchmark_dir_rel" == "-" ]] && benchmark_dir_rel=""
 
-  lean_dir="$LEAN_ROOT/$example_id"
-  sierra_dir="$SIERRA_ROOT/$example_id"
-  cairo_dir="$CAIRO_ROOT/$example_id"
+  lean_dir="$ROOT_DIR/$lean_dir_rel"
+  sierra_dir="$ROOT_DIR/$sierra_dir_rel"
+  cairo_dir="$ROOT_DIR/$cairo_dir_rel"
 
   echo "generating example '$example_id' from module '$module_name'"
 
@@ -104,6 +69,15 @@ while IFS=$'\t' read -r example_id module_name sources_csv; do
 
   rm -rf "$sierra_dir" "$cairo_dir"
   mkdir -p "$sierra_dir" "$cairo_dir"
+
+  if [[ -n "$baseline_dir_rel" && ! -d "$ROOT_DIR/$baseline_dir_rel" ]]; then
+    echo "missing baseline mirror directory for '$example_id': $baseline_dir_rel"
+    exit 1
+  fi
+  if [[ -n "$benchmark_dir_rel" && ! -d "$ROOT_DIR/$benchmark_dir_rel" ]]; then
+    echo "missing benchmark mirror directory for '$example_id': $benchmark_dir_rel"
+    exit 1
+  fi
 
   IFS=',' read -r -a source_paths <<<"$sources_csv"
   for source_rel in "${source_paths[@]}"; do
@@ -125,9 +99,15 @@ while IFS=$'\t' read -r example_id module_name sources_csv; do
 # Lean Example: $example_id
 
 - Module: \`$module_name\`
+- Mirrors:
+  - Lean: \`$lean_dir_rel\`
+  - Sierra: \`$sierra_dir_rel\`
+  - Cairo: \`$cairo_dir_rel\`
+  - Cairo baseline: \`${baseline_dir_rel:-none}\`
+  - Benchmark: \`${benchmark_dir_rel:-none}\`
 - Generated via:
-  - \`lake exe leancairo-sierra-gen --module $module_name --out examples/Sierra/$example_id --optimize true\`
-  - \`lake exe leancairo-gen --module $module_name --out examples/Cairo/$example_id --emit-casm false --optimize true\`
+  - \`lake exe leancairo-sierra-gen --module $module_name --out $sierra_dir_rel --optimize true\`
+  - \`lake exe leancairo-gen --module $module_name --out $cairo_dir_rel --emit-casm false --optimize true\`
 
 Lean source in this directory is canonical for this example.
 EOF

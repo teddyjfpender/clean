@@ -15,9 +15,10 @@ This directory is the canonical examples workspace for formal end-to-end checks.
 
 Rules:
 1. Example source belongs in `examples/Lean/`, not `src/`.
-2. Every `<example-id>` must exist in all three roots with the same name.
-3. `examples/Sierra/` and `examples/Cairo/` are generated outputs.
-4. `examples/Cairo-Baseline/` and `examples/Benchmark/` are manual reference/measurement packages.
+2. Every `<example-id>` must map to Lean/Sierra/Cairo mirrors via `config/examples-manifest.json`.
+3. Baseline/Benchmark mirrors are explicit in the manifest (`path` or `null`), not implicit.
+4. `examples/Sierra/` and `examples/Cairo/` are generated outputs.
+5. `examples/Cairo-Baseline/` and `examples/Benchmark/` are manual reference/measurement packages.
 
 ## Regenerate
 
@@ -32,6 +33,12 @@ The generator uses formal CLI commands from this repository:
 
 `<module>` values are declared in `config/examples-manifest.json` and map to Lean modules under `examples/Lean/`.
 
+## Validate Manifest Schema
+
+```bash
+./scripts/roadmap/check_examples_manifest_schema.sh
+```
+
 ## Validate Structure
 
 ```bash
@@ -42,9 +49,10 @@ The generator uses formal CLI commands from this repository:
 
 1. Add Lean source under `examples/Lean/<new-id>/`.
 2. Add a module entrypoint file under `examples/Lean/<new-id>.lean`.
-3. Register the example in `config/examples-manifest.json`.
+3. Register the example in `config/examples-manifest.json` with `mirrors` for Lean/Sierra/Cairo/Baseline/Benchmark.
 4. Run:
    ```bash
+   ./scripts/roadmap/check_examples_manifest_schema.sh
    ./scripts/examples/generate_examples.sh
    ./scripts/test/examples_structure.sh
    ```

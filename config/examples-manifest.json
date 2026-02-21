@@ -1,55 +1,104 @@
 {
-  "version": 1,
-  "description": "Manifest for mirrored Lean/Sierra/Cairo example generation.",
+  "version": 2,
+  "description": "Manifest for mirrored Lean/Sierra/Cairo/Baseline/Benchmark example generation.",
   "examples": [
-    {
-      "id": "newton_u128",
-      "module": "newton_u128.Example",
-      "lean_sources": [
-        "examples/Lean/newton_u128/Example.lean"
-      ]
-    },
-    {
-      "id": "scalar_core",
-      "module": "scalar_core.Example",
-      "lean_sources": [
-        "examples/Lean/scalar_core/Example.lean"
-      ]
-    },
-    {
-      "id": "u128_range_checked",
-      "module": "u128_range_checked.Example",
-      "lean_sources": [
-        "examples/Lean/u128_range_checked/Example.lean"
-      ]
-    },
     {
       "id": "fast_power_u128",
       "module": "fast_power_u128.Example",
       "lean_sources": [
         "examples/Lean/fast_power_u128/Example.lean"
-      ]
+      ],
+      "mirrors": {
+        "lean_dir": "examples/Lean/fast_power_u128",
+        "sierra_dir": "examples/Sierra/fast_power_u128",
+        "cairo_dir": "examples/Cairo/fast_power_u128",
+        "baseline_dir": "examples/Cairo-Baseline/fast_power_u128",
+        "benchmark_dir": "examples/Benchmark/fast_power_u128"
+      }
     },
     {
       "id": "fast_power_u128_p63",
       "module": "fast_power_u128_p63.Example",
       "lean_sources": [
         "examples/Lean/fast_power_u128_p63/Example.lean"
-      ]
+      ],
+      "mirrors": {
+        "lean_dir": "examples/Lean/fast_power_u128_p63",
+        "sierra_dir": "examples/Sierra/fast_power_u128_p63",
+        "cairo_dir": "examples/Cairo/fast_power_u128_p63",
+        "baseline_dir": "examples/Cairo-Baseline/fast_power_u128_p63",
+        "benchmark_dir": "examples/Benchmark/fast_power_u128_p63"
+      }
     },
     {
       "id": "karatsuba_u128",
       "module": "karatsuba_u128.Example",
       "lean_sources": [
         "examples/Lean/karatsuba_u128/Example.lean"
-      ]
+      ],
+      "mirrors": {
+        "lean_dir": "examples/Lean/karatsuba_u128",
+        "sierra_dir": "examples/Sierra/karatsuba_u128",
+        "cairo_dir": "examples/Cairo/karatsuba_u128",
+        "baseline_dir": "examples/Cairo-Baseline/karatsuba_u128",
+        "benchmark_dir": "examples/Benchmark/karatsuba_u128"
+      }
+    },
+    {
+      "id": "newton_u128",
+      "module": "newton_u128.Example",
+      "lean_sources": [
+        "examples/Lean/newton_u128/Example.lean"
+      ],
+      "mirrors": {
+        "lean_dir": "examples/Lean/newton_u128",
+        "sierra_dir": "examples/Sierra/newton_u128",
+        "cairo_dir": "examples/Cairo/newton_u128",
+        "baseline_dir": "examples/Cairo-Baseline/newton_u128",
+        "benchmark_dir": "examples/Benchmark/newton_u128"
+      }
+    },
+    {
+      "id": "scalar_core",
+      "module": "scalar_core.Example",
+      "lean_sources": [
+        "examples/Lean/scalar_core/Example.lean"
+      ],
+      "mirrors": {
+        "lean_dir": "examples/Lean/scalar_core",
+        "sierra_dir": "examples/Sierra/scalar_core",
+        "cairo_dir": "examples/Cairo/scalar_core",
+        "baseline_dir": null,
+        "benchmark_dir": null
+      }
     },
     {
       "id": "sq128x128_u128",
       "module": "sq128x128_u128.Example",
       "lean_sources": [
         "examples/Lean/sq128x128_u128/Example.lean"
-      ]
+      ],
+      "mirrors": {
+        "lean_dir": "examples/Lean/sq128x128_u128",
+        "sierra_dir": "examples/Sierra/sq128x128_u128",
+        "cairo_dir": "examples/Cairo/sq128x128_u128",
+        "baseline_dir": "examples/Cairo-Baseline/sq128x128_u128",
+        "benchmark_dir": "examples/Benchmark/sq128x128_u128"
+      }
+    },
+    {
+      "id": "u128_range_checked",
+      "module": "u128_range_checked.Example",
+      "lean_sources": [
+        "examples/Lean/u128_range_checked/Example.lean"
+      ],
+      "mirrors": {
+        "lean_dir": "examples/Lean/u128_range_checked",
+        "sierra_dir": "examples/Sierra/u128_range_checked",
+        "cairo_dir": "examples/Cairo/u128_range_checked",
+        "baseline_dir": null,
+        "benchmark_dir": null
+      }
     }
   ]
 }
