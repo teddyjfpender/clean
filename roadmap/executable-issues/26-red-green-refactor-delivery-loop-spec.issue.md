@@ -37,7 +37,9 @@ Implement a strict, deterministic RED->GREEN->REFACTOR loop pipeline with machin
 3. Schema and status-format validation passes.
 
 ### RGL-2 Loop runner with explicit RED/GREEN/REFACTOR phase gates
-- Status: NOT DONE
+- Status: DONE - 71dc3fe
+- Evidence tests: `scripts/test/rgr_loop_smoke.sh`; `scripts/roadmap/run_rgr_loop.sh --deliverable d00-non-starknet-closure-guard --phase all --dry-run`; `scripts/roadmap/check_rgr_deliverables.sh`
+- Evidence proofs: `scripts/roadmap/run_rgr_loop.sh`; `roadmap/reports/rgr-deliverables.json`; `config/rgr-deliverable-spec.json`; `scripts/test/rgr_loop_smoke.sh`
 - Acceptance tests:
 1. Loop runner executes all phases for a selected deliverable.
 2. Missing gate command references fail fast.
