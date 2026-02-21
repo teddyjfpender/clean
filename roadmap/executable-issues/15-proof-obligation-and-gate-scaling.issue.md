@@ -48,7 +48,9 @@ Automate proof obligation tracking and quality gate synthesis so subset growth r
 3. Negative tests prove missing required gates fail CI.
 
 ### LPA-3 Proof debt policy enforcement
-- Status: NOT DONE
+- Status: DONE - 6d70e98
+- Evidence tests: `scripts/roadmap/check_proof_debt_policy.sh`; `scripts/test/proof_debt_policy_negative.sh`; `scripts/roadmap/check_gate_manifest_sync.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `roadmap/proof-debt.json`; `scripts/roadmap/check_proof_debt_policy.py`; `scripts/roadmap/check_proof_debt_policy.sh`; `config/gate-manifest.json`; `scripts/roadmap/generate_gate_manifest.py`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
 - Acceptance tests:
 1. Proof debt entries require capability linkage and expiry metadata.
 2. Expired exception/debt entries fail CI.
