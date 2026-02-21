@@ -6,7 +6,6 @@ TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 
 OUT_JSON="$ROOT_DIR/roadmap/reports/optimization-closure-report.json"
-OUT_MD="$ROOT_DIR/roadmap/reports/optimization-closure-report.md"
 
 python3 "$ROOT_DIR/scripts/roadmap/generate_optimization_closure_report.py" \
   --issue "$ROOT_DIR/roadmap/executable-issues/23-verified-optimizing-compiler-escalation-plan.issue.md" \

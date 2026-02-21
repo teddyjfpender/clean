@@ -6,7 +6,7 @@
 
 ## Capability Closure
 
-- Overall implemented ratio: `0.466667` (threshold `>= 0.4`)
+- Overall implemented ratio: `0.6` (threshold `>= 0.4`)
 - Capability closure violations: `0` (threshold `= 0`)
 - Section result: `PASS`
 

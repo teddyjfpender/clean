@@ -7,9 +7,9 @@
 
 ## Closure Ratios
 
-- `overall_implemented_ratio`: `0.466667`
-- `sierra_implemented_ratio`: `0.466667`
-- `cairo_implemented_ratio`: `0.466667`
+- `overall_implemented_ratio`: `0.6`
+- `sierra_implemented_ratio`: `0.6`
+- `cairo_implemented_ratio`: `0.6`
 
 ## Monotonicity Against SLO Baseline
 

@@ -8,7 +8,7 @@
   },
   "capability": {
     "min_overall_implemented_ratio": 0.4,
-    "overall_implemented_ratio": 0.466667,
+    "overall_implemented_ratio": 0.6,
     "pass": true,
     "violations": 0
   },

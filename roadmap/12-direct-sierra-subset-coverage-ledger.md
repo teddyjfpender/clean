@@ -42,18 +42,16 @@ This file is a strict status ledger for `src/LeanCairo/Backend/Sierra/Emit/Subse
 ## Pending Subsets
 
 ### S2 Range-checked integer arithmetic families
-- Status: NOT DONE
+- Status: DONE - 6833a1a
 - Target:
 1. `u8`, `u16`, `u32`, `u64`, `u128`, signed integer families with explicit `RangeCheck` threading.
 2. Overflow/checked arithmetic paths with typed panic/result handling where required.
 3. Differential tests for overflow boundary behavior.
-- Current progress:
-1. Formal start/design note authored: `docs/design/2026-02-20-s2-rangechecked-u128-lowering-plan.md`.
-2. CASM-legal wrapping branch shape landed for direct `u128_overflowing_add/sub` with explicit `RangeCheck` lane threading and branch-join normalization.
-3. Wrapping `u128 mul` lowering landed via `u128_guarantee_mul` + `u128_mul_guarantee_verify` with explicit high-limb drop and `RangeCheck` threading.
-4. Validation/compile gate added: `scripts/test/sierra_u128_range_checked_e2e.sh` (wired into Sierra + MVP workflows).
-5. Overflow-boundary differential gate added for wrapping semantics: `scripts/test/sierra_u128_wrapping_differential.sh`.
-6. Remaining blocker: checked/panic result typing for integer families is still not modeled in Lean IR/backend, and non-`u128` families remain fail-fast.
+- Evidence:
+1. `scripts/test/sierra_u128_range_checked_e2e.sh`
+2. `scripts/test/sierra_u128_wrapping_differential.sh`
+3. `scripts/test/sierra_failfast_unsupported.sh`
+4. `scripts/workflow/run-sierra-checks.sh`
 
 ### S3 Multi-limb integers and struct semantics
 - Status: NOT DONE
@@ -101,9 +99,9 @@ Values must be updated in the same commit as coverage/status changes and must sa
 - `unresolved_non_starknet_extension_modules`: `35`
 - `implemented_non_starknet_closure_ratio`: `0.076923`
 - `bounded_non_starknet_closure_ratio`: `0.326923`
-- `done_subset_milestones`: `2`
+- `done_subset_milestones`: `3`
 - `total_subset_milestones`: `8`
-- `subset_milestone_progress_ratio`: `0.250000`
+- `subset_milestone_progress_ratio`: `0.375000`
 
 ## Required Evidence For Status Promotion
 
