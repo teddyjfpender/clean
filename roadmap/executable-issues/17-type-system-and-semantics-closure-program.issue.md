@@ -64,7 +64,9 @@ Close full function-domain type semantics for MIR/evaluator/backends with explic
 3. Collection element typing invariants pass.
 
 ### TYC-5 Proof and differential closure
-- Status: NOT DONE
+- Status: DONE - fd05426
+- Evidence tests: `scripts/roadmap/check_proof_obligations.sh`; `scripts/roadmap/check_proof_debt_policy.sh`; `scripts/test/proof_obligations_negative.sh`; `scripts/test/sierra_differential.sh`; `scripts/test/backend_parity.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`; `src/LeanCairo/Compiler/Proof/CSELetNormSound.lean`; `roadmap/proof-debt.json`; `roadmap/capabilities/obligations.json`; `src/LeanCairo/Compiler/Semantics/Eval.lean`
 - Acceptance tests:
 1. Type-family proof obligations compile.
 2. Evaluator/Sierra/Cairo differential suites pass for closed families.
