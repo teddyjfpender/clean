@@ -27,7 +27,9 @@ Automate and harden CI gate orchestration and release-governance workflows as ca
 ## Milestone status ledger
 
 ### CIX-1 Gate manifest generation from obligations/capabilities
-- Status: NOT DONE
+- Status: DONE - 6ca24b1
+- Evidence tests: `scripts/roadmap/check_gate_manifest_sync.sh`; `scripts/test/gate_manifest_reproducibility.sh`; `scripts/test/gate_manifest_negative.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `scripts/roadmap/generate_gate_manifest.py`; `config/gate-manifest.json`; `scripts/roadmap/validate_gate_manifest_workflows.py`; `roadmap/capabilities/obligations.json`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
 - Acceptance tests:
 1. Gate manifest generation is deterministic.
 2. Missing required gates are detected.
