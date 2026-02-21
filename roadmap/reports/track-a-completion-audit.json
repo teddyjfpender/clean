@@ -1,0 +1,21 @@
+{
+  "diagnostics": [],
+  "matrix": "roadmap/reports/completion-matrix.json",
+  "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617",
+  "ready_dimensions": 4,
+  "required_dimensions": [
+    "track_a_benchmark_closure",
+    "track_a_family_closure",
+    "track_a_optimization_closure",
+    "track_a_proof_closure"
+  ],
+  "result": "PASS",
+  "statuses": {
+    "track_a_benchmark_closure": "ready",
+    "track_a_family_closure": "ready",
+    "track_a_optimization_closure": "ready",
+    "track_a_proof_closure": "ready"
+  },
+  "target_dimensions": 4,
+  "version": 1
+}
