@@ -1,0 +1,15 @@
+{
+  "benchmark": {
+    "min_case_count": 1,
+    "min_hotspot_sierra_improvement_pct": 0.0
+  },
+  "capability": {
+    "min_overall_implemented_ratio": 0.4
+  },
+  "proof": {
+    "max_missing_required_theorems": 0,
+    "max_open_high_severity_debt": 0,
+    "max_placeholder_count": 0
+  },
+  "version": 1
+}

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from pathlib import Path
 
@@ -22,6 +23,7 @@ PROOF_DIR = ROOT / "src" / "LeanCairo" / "Compiler" / "Proof"
 SEM_DIR = ROOT / "src" / "LeanCairo" / "Compiler" / "Semantics"
 OPT_DIR = ROOT / "src" / "LeanCairo" / "Compiler" / "Optimize"
 PROOF_DEBT_FILE = ROOT / "roadmap" / "proof-debt.json"
+GO_NO_GO_THRESHOLDS = ROOT / "roadmap" / "reports" / "release-go-no-go-thresholds.json"
 
 
 def parse_args() -> argparse.Namespace:
@@ -80,6 +82,22 @@ def load_proof_debt() -> dict:
     return {"entries": entries}
 
 
+def load_go_no_go_thresholds() -> dict:
+    source = GO_NO_GO_THRESHOLDS
+    override = os.environ.get("RELEASE_GO_NO_GO_THRESHOLDS", "").strip()
+    if override:
+        source = Path(override).resolve()
+    if not source.exists():
+        raise ValueError(f"missing go/no-go thresholds file: {source}")
+    payload = json.loads(source.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"invalid go/no-go thresholds file: {source}")
+    if payload.get("version") != 1:
+        raise ValueError(f"go/no-go thresholds version must be 1: {source}")
+    payload["__source_path"] = str(source)
+    return payload
+
+
 def parse_benchmark_rows() -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     pattern = re.compile(
@@ -131,7 +149,7 @@ def render_compatibility_report(out_dir: Path, pinned_commit: str) -> None:
     (out_dir / "release-compatibility-report.md").write_text("\n".join(lines), encoding="utf-8")
 
 
-def render_proof_report(out_dir: Path, pinned_commit: str) -> None:
+def render_proof_report(out_dir: Path, pinned_commit: str) -> dict:
     theorem_names = parse_required_theorems()
     theorem_results = [
         (name, count_theorem_occurrences(name)) for name in theorem_names
@@ -173,14 +191,25 @@ def render_proof_report(out_dir: Path, pinned_commit: str) -> None:
     lines.append("")
 
     (out_dir / "release-proof-report.md").write_text("\n".join(lines), encoding="utf-8")
+    return {
+        "required_theorem_count": len(theorem_names),
+        "missing_required_theorems": len(missing),
+        "placeholder_count": placeholder_count,
+        "open_high_severity_debt": len(open_high),
+    }
 
 
-def render_benchmark_report(out_dir: Path, pinned_commit: str) -> None:
+def render_benchmark_report(out_dir: Path, pinned_commit: str) -> dict:
     lines = [
         "# Release Benchmark Report",
         "",
         f"- Commit: `{pinned_commit}`",
     ]
+    metrics = {
+        "case_count": 0,
+        "hotspot_sierra_improvement_pct": 0.0,
+        "best_sierra_improvement_pct": 0.0,
+    }
 
     if MANIFEST_BENCHMARK_SUMMARY.exists():
         payload = json.loads(MANIFEST_BENCHMARK_SUMMARY.read_text(encoding="utf-8"))
@@ -209,6 +238,9 @@ def render_benchmark_report(out_dir: Path, pinned_commit: str) -> None:
             if ordered:
                 worst_case = (ordered[0][0], ordered[0][1])
                 best_case = (ordered[-1][0], ordered[-1][1])
+                metrics["hotspot_sierra_improvement_pct"] = float(worst_case[1])
+                metrics["best_sierra_improvement_pct"] = float(best_case[1])
+        metrics["case_count"] = len(cases)
 
         lines.extend(
             [
@@ -235,9 +267,9 @@ def render_benchmark_report(out_dir: Path, pinned_commit: str) -> None:
             [c for c in cases if isinstance(c, dict)],
             key=lambda item: str(item.get("id", "")),
         ):
-            metrics = case.get("metrics", {})
+            case_metrics = case.get("metrics", {})
             lines.append(
-                f"| `{case.get('id', '')}` | `{float(metrics.get('sierra_improvement_pct', 0.0))}` | `{float(metrics.get('l2_improvement_pct', 0.0))}` |"
+                f"| `{case.get('id', '')}` | `{float(case_metrics.get('sierra_improvement_pct', 0.0))}` | `{float(case_metrics.get('l2_improvement_pct', 0.0))}` |"
             )
         lines.append("")
     else:
@@ -250,6 +282,12 @@ def render_benchmark_report(out_dir: Path, pinned_commit: str) -> None:
             except ValueError:
                 continue
         best = max(improvements, default=(0.0, "n/a"))
+        metrics["case_count"] = len(rows)
+        metrics["hotspot_sierra_improvement_pct"] = min(
+            (item[0] for item in improvements),
+            default=0.0,
+        )
+        metrics["best_sierra_improvement_pct"] = float(best[0])
 
         lines.extend(
             [
@@ -270,9 +308,10 @@ def render_benchmark_report(out_dir: Path, pinned_commit: str) -> None:
         lines.append("")
 
     (out_dir / "release-benchmark-report.md").write_text("\n".join(lines), encoding="utf-8")
+    return metrics
 
 
-def render_capability_closure_report(out_dir: Path, pinned_commit: str) -> None:
+def render_capability_closure_report(out_dir: Path, pinned_commit: str) -> dict:
     capability = json.loads(CAPABILITY_REPORT.read_text(encoding="utf-8"))
     baseline = json.loads(CAPABILITY_SLO_BASELINE.read_text(encoding="utf-8"))
 
@@ -331,6 +370,116 @@ def render_capability_closure_report(out_dir: Path, pinned_commit: str) -> None:
     lines.append("")
 
     (out_dir / "release-capability-closure-report.md").write_text("\n".join(lines), encoding="utf-8")
+    return {
+        "overall_implemented_ratio": float(closure.get("overall_implemented_ratio", 0.0)),
+        "violations": len(violations),
+    }
+
+
+def render_go_no_go_report(
+    out_dir: Path,
+    pinned_commit: str,
+    capability_metrics: dict,
+    proof_metrics: dict,
+    benchmark_metrics: dict,
+) -> None:
+    thresholds = load_go_no_go_thresholds()
+    threshold_source_raw = str(thresholds.get("__source_path", GO_NO_GO_THRESHOLDS))
+    threshold_source = Path(threshold_source_raw)
+    try:
+        threshold_source_label = str(threshold_source.relative_to(ROOT))
+    except ValueError:
+        threshold_source_label = str(threshold_source)
+    capability_thresholds = thresholds.get("capability", {})
+    proof_thresholds = thresholds.get("proof", {})
+    benchmark_thresholds = thresholds.get("benchmark", {})
+
+    cap_ratio = float(capability_metrics.get("overall_implemented_ratio", 0.0))
+    cap_ratio_min = float(capability_thresholds.get("min_overall_implemented_ratio", 0.0))
+    cap_violations = int(capability_metrics.get("violations", 0))
+
+    missing_theorems = int(proof_metrics.get("missing_required_theorems", 0))
+    placeholders = int(proof_metrics.get("placeholder_count", 0))
+    open_high = int(proof_metrics.get("open_high_severity_debt", 0))
+    max_missing_theorems = int(proof_thresholds.get("max_missing_required_theorems", 0))
+    max_placeholders = int(proof_thresholds.get("max_placeholder_count", 0))
+    max_open_high = int(proof_thresholds.get("max_open_high_severity_debt", 0))
+
+    case_count = int(benchmark_metrics.get("case_count", 0))
+    hotspot_improvement = float(benchmark_metrics.get("hotspot_sierra_improvement_pct", 0.0))
+    min_cases = int(benchmark_thresholds.get("min_case_count", 0))
+    min_hotspot = float(benchmark_thresholds.get("min_hotspot_sierra_improvement_pct", 0.0))
+
+    capability_pass = cap_ratio >= cap_ratio_min and cap_violations == 0
+    proof_pass = (
+        missing_theorems <= max_missing_theorems
+        and placeholders <= max_placeholders
+        and open_high <= max_open_high
+    )
+    benchmark_pass = case_count >= min_cases and hotspot_improvement >= min_hotspot
+    overall_pass = capability_pass and proof_pass and benchmark_pass
+
+    lines = [
+        "# Release Go/No-Go Report",
+        "",
+        f"- Commit: `{pinned_commit}`",
+        f"- Threshold source: `{threshold_source_label}`",
+        f"- Result: `{'PASS' if overall_pass else 'FAIL'}`",
+        "",
+        "## Capability Closure",
+        "",
+        f"- Overall implemented ratio: `{cap_ratio}` (threshold `>= {cap_ratio_min}`)",
+        f"- Capability closure violations: `{cap_violations}` (threshold `= 0`)",
+        f"- Section result: `{'PASS' if capability_pass else 'FAIL'}`",
+        "",
+        "## Proof Closure",
+        "",
+        f"- Missing required theorems: `{missing_theorems}` (threshold `<= {max_missing_theorems}`)",
+        f"- Placeholder count (`sorry`/`admit`): `{placeholders}` (threshold `<= {max_placeholders}`)",
+        f"- Open high-severity proof debt: `{open_high}` (threshold `<= {max_open_high}`)",
+        f"- Section result: `{'PASS' if proof_pass else 'FAIL'}`",
+        "",
+        "## Benchmark Closure",
+        "",
+        f"- Benchmark case count: `{case_count}` (threshold `>= {min_cases}`)",
+        f"- Hotspot Sierra improvement: `{hotspot_improvement}` (threshold `>= {min_hotspot}`)",
+        f"- Section result: `{'PASS' if benchmark_pass else 'FAIL'}`",
+        "",
+    ]
+
+    payload = {
+        "version": 1,
+        "commit": pinned_commit,
+        "result": "PASS" if overall_pass else "FAIL",
+        "capability": {
+            "overall_implemented_ratio": cap_ratio,
+            "min_overall_implemented_ratio": cap_ratio_min,
+            "violations": cap_violations,
+            "pass": capability_pass,
+        },
+        "proof": {
+            "missing_required_theorems": missing_theorems,
+            "max_missing_required_theorems": max_missing_theorems,
+            "placeholder_count": placeholders,
+            "max_placeholder_count": max_placeholders,
+            "open_high_severity_debt": open_high,
+            "max_open_high_severity_debt": max_open_high,
+            "pass": proof_pass,
+        },
+        "benchmark": {
+            "case_count": case_count,
+            "min_case_count": min_cases,
+            "hotspot_sierra_improvement_pct": hotspot_improvement,
+            "min_hotspot_sierra_improvement_pct": min_hotspot,
+            "pass": benchmark_pass,
+        },
+    }
+
+    (out_dir / "release-go-no-go-report.md").write_text("\n".join(lines), encoding="utf-8")
+    (out_dir / "release-go-no-go-report.json").write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
 
 def main() -> int:
@@ -340,9 +489,16 @@ def main() -> int:
     pinned_commit = load_commit()
 
     render_compatibility_report(out_dir, pinned_commit)
-    render_proof_report(out_dir, pinned_commit)
-    render_benchmark_report(out_dir, pinned_commit)
-    render_capability_closure_report(out_dir, pinned_commit)
+    proof_metrics = render_proof_report(out_dir, pinned_commit)
+    benchmark_metrics = render_benchmark_report(out_dir, pinned_commit)
+    capability_metrics = render_capability_closure_report(out_dir, pinned_commit)
+    render_go_no_go_report(
+        out_dir,
+        pinned_commit,
+        capability_metrics=capability_metrics,
+        proof_metrics=proof_metrics,
+        benchmark_metrics=benchmark_metrics,
+    )
     return 0
 
 

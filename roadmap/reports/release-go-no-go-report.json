@@ -1,0 +1,27 @@
+{
+  "benchmark": {
+    "case_count": 5,
+    "hotspot_sierra_improvement_pct": 0.0,
+    "min_case_count": 1,
+    "min_hotspot_sierra_improvement_pct": 0.0,
+    "pass": true
+  },
+  "capability": {
+    "min_overall_implemented_ratio": 0.4,
+    "overall_implemented_ratio": 0.466667,
+    "pass": true,
+    "violations": 0
+  },
+  "commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617",
+  "proof": {
+    "max_missing_required_theorems": 0,
+    "max_open_high_severity_debt": 0,
+    "max_placeholder_count": 0,
+    "missing_required_theorems": 0,
+    "open_high_severity_debt": 0,
+    "pass": true,
+    "placeholder_count": 0
+  },
+  "result": "PASS",
+  "version": 1
+}
