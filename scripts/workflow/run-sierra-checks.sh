@@ -100,6 +100,8 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 "$ROOT_DIR/scripts/test/sierra_e2e.sh"
 "$ROOT_DIR/scripts/test/sierra_scalar_e2e.sh"
 "$ROOT_DIR/scripts/test/sierra_u128_range_checked_e2e.sh"
+"$ROOT_DIR/scripts/test/sierra_structural_optimization_e2e.sh"
+"$ROOT_DIR/scripts/test/sierra_structural_optimization_reproducibility.sh"
 "$ROOT_DIR/scripts/test/sierra_differential.sh"
 "$ROOT_DIR/scripts/test/sierra_u128_wrapping_differential.sh"
 

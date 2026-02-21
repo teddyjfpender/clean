@@ -51,6 +51,8 @@ CORE_GATES: List[str] = [
     "scripts/test/sierra_e2e.sh",
     "scripts/test/sierra_scalar_e2e.sh",
     "scripts/test/sierra_u128_range_checked_e2e.sh",
+    "scripts/test/sierra_structural_optimization_e2e.sh",
+    "scripts/test/sierra_structural_optimization_reproducibility.sh",
     "scripts/test/sierra_differential.sh",
     "scripts/test/sierra_u128_wrapping_differential.sh",
     "scripts/test/backend_parity.sh",
