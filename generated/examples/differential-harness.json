@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "backend_contract": "SierraScalarContract",
+      "backend_module": "MyLeanSierraScalar",
+      "id": "scalar_core",
+      "lean_test_file": "tests/lean/sierra_scalar_differential.lean",
+      "replay_command": "lake env lean tests/lean/sierra_scalar_differential.lean && scripts/test/run_backend_parity_case.sh MyLeanSierraScalar SierraScalarContract scalar_core",
+      "vector_profiles": [
+        "normal",
+        "boundary",
+        "failure"
+      ]
+    },
+    {
+      "backend_contract": "SierraU128RangeCheckedContract",
+      "backend_module": "MyLeanSierraU128RangeChecked",
+      "id": "u128_range_checked",
+      "lean_test_file": "tests/lean/sierra_u128_wrapping_differential.lean",
+      "replay_command": "lake env lean tests/lean/sierra_u128_wrapping_differential.lean && scripts/test/run_backend_parity_case.sh MyLeanSierraU128RangeChecked SierraU128RangeCheckedContract u128_range_checked",
+      "vector_profiles": [
+        "normal",
+        "boundary",
+        "failure"
+      ]
+    }
+  ],
+  "manifest": "config/examples-manifest.json",
+  "version": 1
+}

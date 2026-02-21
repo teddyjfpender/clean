@@ -17,8 +17,9 @@ Rules:
 1. Example source belongs in `examples/Lean/`, not `src/`.
 2. Every `<example-id>` must map to Lean/Sierra/Cairo mirrors via `config/examples-manifest.json`.
 3. Baseline/Benchmark mirrors are explicit in the manifest (`path` or `null`), not implicit.
-4. `examples/Sierra/` and `examples/Cairo/` are generated outputs.
-5. `examples/Cairo-Baseline/` and `examples/Benchmark/` are manual reference/measurement packages.
+4. Differential harness metadata is explicit per example via `differential` in the manifest.
+5. `examples/Sierra/` and `examples/Cairo/` are generated outputs.
+6. `examples/Cairo-Baseline/` and `examples/Benchmark/` are manual reference/measurement packages.
 
 ## Regenerate
 
@@ -37,6 +38,16 @@ The generator uses formal CLI commands from this repository:
 
 ```bash
 ./scripts/roadmap/check_examples_manifest_schema.sh
+```
+
+## Differential Harness
+
+```bash
+python3 scripts/examples/generate_differential_harness.py \
+  --manifest config/examples-manifest.json \
+  --out-script scripts/test/generated/run_manifest_differential.sh \
+  --out-json generated/examples/differential-harness.json
+./scripts/roadmap/check_differential_harness_sync.sh
 ```
 
 ## Validate Structure

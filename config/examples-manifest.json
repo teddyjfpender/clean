@@ -14,6 +14,14 @@
         "cairo_dir": "examples/Cairo/fast_power_u128",
         "baseline_dir": "examples/Cairo-Baseline/fast_power_u128",
         "benchmark_dir": "examples/Benchmark/fast_power_u128"
+      },
+      "differential": {
+        "kind": "none",
+        "vector_profiles": [],
+        "replay_command": null,
+        "lean_test_file": null,
+        "backend_module": null,
+        "backend_contract": null
       }
     },
     {
@@ -28,6 +36,14 @@
         "cairo_dir": "examples/Cairo/fast_power_u128_p63",
         "baseline_dir": "examples/Cairo-Baseline/fast_power_u128_p63",
         "benchmark_dir": "examples/Benchmark/fast_power_u128_p63"
+      },
+      "differential": {
+        "kind": "none",
+        "vector_profiles": [],
+        "replay_command": null,
+        "lean_test_file": null,
+        "backend_module": null,
+        "backend_contract": null
       }
     },
     {
@@ -42,6 +58,14 @@
         "cairo_dir": "examples/Cairo/karatsuba_u128",
         "baseline_dir": "examples/Cairo-Baseline/karatsuba_u128",
         "benchmark_dir": "examples/Benchmark/karatsuba_u128"
+      },
+      "differential": {
+        "kind": "none",
+        "vector_profiles": [],
+        "replay_command": null,
+        "lean_test_file": null,
+        "backend_module": null,
+        "backend_contract": null
       }
     },
     {
@@ -56,6 +80,14 @@
         "cairo_dir": "examples/Cairo/newton_u128",
         "baseline_dir": "examples/Cairo-Baseline/newton_u128",
         "benchmark_dir": "examples/Benchmark/newton_u128"
+      },
+      "differential": {
+        "kind": "none",
+        "vector_profiles": [],
+        "replay_command": null,
+        "lean_test_file": null,
+        "backend_module": null,
+        "backend_contract": null
       }
     },
     {
@@ -70,6 +102,18 @@
         "cairo_dir": "examples/Cairo/scalar_core",
         "baseline_dir": null,
         "benchmark_dir": null
+      },
+      "differential": {
+        "kind": "composite",
+        "vector_profiles": [
+          "normal",
+          "boundary",
+          "failure"
+        ],
+        "replay_command": "lake env lean tests/lean/sierra_scalar_differential.lean && scripts/test/run_backend_parity_case.sh MyLeanSierraScalar SierraScalarContract scalar_core",
+        "lean_test_file": "tests/lean/sierra_scalar_differential.lean",
+        "backend_module": "MyLeanSierraScalar",
+        "backend_contract": "SierraScalarContract"
       }
     },
     {
@@ -84,6 +128,14 @@
         "cairo_dir": "examples/Cairo/sq128x128_u128",
         "baseline_dir": "examples/Cairo-Baseline/sq128x128_u128",
         "benchmark_dir": "examples/Benchmark/sq128x128_u128"
+      },
+      "differential": {
+        "kind": "none",
+        "vector_profiles": [],
+        "replay_command": null,
+        "lean_test_file": null,
+        "backend_module": null,
+        "backend_contract": null
       }
     },
     {
@@ -98,6 +150,18 @@
         "cairo_dir": "examples/Cairo/u128_range_checked",
         "baseline_dir": null,
         "benchmark_dir": null
+      },
+      "differential": {
+        "kind": "composite",
+        "vector_profiles": [
+          "normal",
+          "boundary",
+          "failure"
+        ],
+        "replay_command": "lake env lean tests/lean/sierra_u128_wrapping_differential.lean && scripts/test/run_backend_parity_case.sh MyLeanSierraU128RangeChecked SierraU128RangeCheckedContract u128_range_checked",
+        "lean_test_file": "tests/lean/sierra_u128_wrapping_differential.lean",
+        "backend_module": "MyLeanSierraU128RangeChecked",
+        "backend_contract": "SierraU128RangeCheckedContract"
       }
     }
   ]

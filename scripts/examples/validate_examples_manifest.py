@@ -17,6 +17,18 @@ REQUIRED_MIRROR_KEYS = (
     "benchmark_dir",
 )
 
+REQUIRED_DIFFERENTIAL_KEYS = (
+    "kind",
+    "vector_profiles",
+    "replay_command",
+    "lean_test_file",
+    "backend_module",
+    "backend_contract",
+)
+
+ALLOWED_DIFFERENTIAL_KINDS = {"none", "composite"}
+ALLOWED_VECTOR_PROFILES = {"normal", "boundary", "failure"}
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Validate examples manifest")
@@ -49,6 +61,17 @@ def normalize_optional_rel_path(value: object, ctx: str) -> str:
     return normalize_rel_path(stripped, ctx)
 
 
+def normalize_optional_string(value: object, ctx: str) -> str:
+    if value is None:
+        return ""
+    if not isinstance(value, str):
+        raise ValueError(f"{ctx}: expected string or null")
+    stripped = value.strip()
+    if not stripped:
+        raise ValueError(f"{ctx}: empty string is not allowed; use null instead")
+    return stripped
+
+
 def validate_manifest(manifest_path: Path) -> List[Tuple[str, str, str, str, str, str, str, List[str]]]:
     payload = json.loads(manifest_path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
@@ -71,7 +94,7 @@ def validate_manifest(manifest_path: Path) -> List[Tuple[str, str, str, str, str
         if not isinstance(entry, dict):
             raise ValueError(f"{ctx}: expected object")
 
-        for key in ("id", "module", "lean_sources", "mirrors"):
+        for key in ("id", "module", "lean_sources", "mirrors", "differential"):
             if key not in entry:
                 raise ValueError(f"{ctx}: missing key '{key}'")
 
@@ -123,6 +146,86 @@ def validate_manifest(manifest_path: Path) -> List[Tuple[str, str, str, str, str
             raise ValueError(
                 f"{ctx}.mirrors.benchmark_dir must be under examples/Benchmark/: {benchmark_dir}"
             )
+
+        differential = entry["differential"]
+        if not isinstance(differential, dict):
+            raise ValueError(f"{ctx}.differential: expected object")
+        for key in REQUIRED_DIFFERENTIAL_KEYS:
+            if key not in differential:
+                raise ValueError(f"{ctx}.differential: missing key '{key}'")
+
+        differential_kind = str(differential["kind"]).strip()
+        if differential_kind not in ALLOWED_DIFFERENTIAL_KINDS:
+            raise ValueError(
+                f"{ctx}.differential.kind: invalid value '{differential_kind}', expected one of {sorted(ALLOWED_DIFFERENTIAL_KINDS)}"
+            )
+
+        vector_profiles_raw = differential["vector_profiles"]
+        if not isinstance(vector_profiles_raw, list):
+            raise ValueError(f"{ctx}.differential.vector_profiles: expected list")
+        vector_profiles = []
+        for profile_idx, profile in enumerate(vector_profiles_raw):
+            if not isinstance(profile, str) or not profile.strip():
+                raise ValueError(
+                    f"{ctx}.differential.vector_profiles[{profile_idx}]: expected non-empty string"
+                )
+            profile_norm = profile.strip()
+            if profile_norm not in ALLOWED_VECTOR_PROFILES:
+                raise ValueError(
+                    f"{ctx}.differential.vector_profiles[{profile_idx}]: invalid value '{profile_norm}'"
+                )
+            vector_profiles.append(profile_norm)
+        if len(vector_profiles) != len(set(vector_profiles)):
+            raise ValueError(f"{ctx}.differential.vector_profiles: entries must be unique")
+
+        replay_command = normalize_optional_string(
+            differential["replay_command"], f"{ctx}.differential.replay_command"
+        )
+        lean_test_file = normalize_optional_rel_path(
+            differential["lean_test_file"], f"{ctx}.differential.lean_test_file"
+        )
+        backend_module = normalize_optional_string(
+            differential["backend_module"], f"{ctx}.differential.backend_module"
+        )
+        backend_contract = normalize_optional_string(
+            differential["backend_contract"], f"{ctx}.differential.backend_contract"
+        )
+
+        if differential_kind == "none":
+            if vector_profiles:
+                raise ValueError(
+                    f"{ctx}.differential: kind 'none' requires empty vector_profiles"
+                )
+            if replay_command or lean_test_file or backend_module or backend_contract:
+                raise ValueError(
+                    f"{ctx}.differential: kind 'none' requires replay/lean/backend fields to be null"
+                )
+        elif differential_kind == "composite":
+            required_profiles = {"normal", "boundary", "failure"}
+            if not required_profiles.issubset(set(vector_profiles)):
+                raise ValueError(
+                    f"{ctx}.differential: kind 'composite' requires vector_profiles to include normal,boundary,failure"
+                )
+            if not replay_command:
+                raise ValueError(
+                    f"{ctx}.differential: kind 'composite' requires replay_command"
+                )
+            if not lean_test_file:
+                raise ValueError(
+                    f"{ctx}.differential: kind 'composite' requires lean_test_file"
+                )
+            if not lean_test_file.startswith("tests/lean/"):
+                raise ValueError(
+                    f"{ctx}.differential.lean_test_file must be under tests/lean/: {lean_test_file}"
+                )
+            if not backend_module:
+                raise ValueError(
+                    f"{ctx}.differential: kind 'composite' requires backend_module"
+                )
+            if not backend_contract:
+                raise ValueError(
+                    f"{ctx}.differential: kind 'composite' requires backend_contract"
+                )
 
         for source in lean_sources:
             if not source.startswith(f"{lean_dir}/"):
