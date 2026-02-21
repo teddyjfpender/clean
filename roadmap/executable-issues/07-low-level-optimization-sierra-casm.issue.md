@@ -42,13 +42,17 @@ Deliver verified and benchmarked optimization from MIR through Sierra/CASM-relev
 2. Differential semantic tests remain green.
 
 ### O3 Cost model calibration
-- Status: NOT DONE
+- Status: DONE - 017c025
+- Evidence tests: `scripts/test/cost_model_calibration_reproducibility.sh`; `scripts/test/cost_model_calibration_negative.sh`; `scripts/bench/check_optimizer_non_regression.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `scripts/bench/generate_cost_model_calibration.py`; `generated/examples/cost-model-calibration.json`; `generated/examples/cost-model-calibration.md`; `roadmap/reports/cost-model-calibration-thresholds.json`
 - Acceptance tests:
 1. Cost model reproduces ranking on benchmark corpus.
 2. Calibration artifacts are versioned and reproducible.
 
 ### O4 Benchmark gate hardening
-- Status: NOT DONE
+- Status: DONE - bdd376b
+- Evidence tests: `scripts/bench/check_optimizer_non_regression.sh`; `scripts/bench/check_optimizer_family_thresholds.sh`; `scripts/test/benchmark_family_thresholds_negative.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `scripts/bench/check_optimizer_non_regression.sh`; `scripts/bench/check_optimizer_family_thresholds.sh`; `config/examples-manifest.json`; `roadmap/reports/release-go-no-go-report.json`
 - Acceptance tests:
 1. Non-regression gate is strict and deterministic.
 2. Per-family regression thresholds enforced in CI.
