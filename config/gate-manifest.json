@@ -172,14 +172,19 @@
     "scripts/test/sierra_failfast_unsupported.sh",
     "scripts/bench/check_optimizer_non_regression.sh",
     "scripts/bench/check_optimizer_family_thresholds.sh",
-    "scripts/test/eval_unsupported_domain_failfast.sh"
+    "scripts/test/backend_parity_aggregate_collection.sh",
+    "scripts/test/eval_unsupported_domain_failfast.sh",
+    "scripts/test/sierra_aggregate_collection_e2e.sh"
   ],
   "obligation_derived_gates": [
     "scripts/bench/check_optimizer_family_thresholds.sh",
     "scripts/bench/check_optimizer_non_regression.sh",
     "scripts/bench/generated/run_manifest_benchmarks.sh",
     "scripts/test/backend_parity.sh",
+    "scripts/test/backend_parity_aggregate_collection.sh",
+    "scripts/test/eval_aggregate_wrapper_semantics.sh",
     "scripts/test/eval_unsupported_domain_failfast.sh",
+    "scripts/test/sierra_aggregate_collection_e2e.sh",
     "scripts/test/sierra_differential.sh",
     "scripts/test/sierra_failfast_unsupported.sh",
     "scripts/test/sierra_scalar_e2e.sh",

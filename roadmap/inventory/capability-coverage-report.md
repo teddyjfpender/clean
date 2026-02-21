@@ -5,19 +5,19 @@ Source registry: `roadmap/capabilities/registry.json`
 ## Totals
 
 - Total capabilities: `15`
-- overall_status_counts: `implemented=7`, `fail_fast=1`, `planned=7`
-- sierra_status_counts: `implemented=7`, `fail_fast=1`, `planned=7`
-- cairo_status_counts: `implemented=7`, `fail_fast=0`, `planned=8`
-- proof_status_counts: `complete=0`, `partial=7`, `planned=8`
-- closure_ratios: `overall=0.466667`, `sierra=0.466667`, `cairo=0.466667`
+- overall_status_counts: `implemented=9`, `fail_fast=1`, `planned=5`
+- sierra_status_counts: `implemented=9`, `fail_fast=1`, `planned=5`
+- cairo_status_counts: `implemented=9`, `fail_fast=0`, `planned=6`
+- proof_status_counts: `complete=0`, `partial=9`, `planned=6`
+- closure_ratios: `overall=0.6`, `sierra=0.6`, `cairo=0.6`
 
 ## Family Matrix
 
 | Family | Total | Overall implemented | Overall fail_fast | Overall planned |
 | --- | ---: | ---: | ---: | ---: |
-| `aggregate` | 1 | 0 | 0 | 1 |
+| `aggregate` | 1 | 1 | 0 | 0 |
 | `circuit` | 1 | 0 | 0 | 1 |
-| `collection` | 1 | 0 | 0 | 1 |
+| `collection` | 1 | 1 | 0 | 0 |
 | `control` | 1 | 0 | 0 | 1 |
 | `crypto` | 1 | 0 | 0 | 1 |
 | `field` | 1 | 0 | 0 | 1 |
@@ -29,9 +29,9 @@ Source registry: `roadmap/capabilities/registry.json`
 
 | Family | Overall implemented ratio | Sierra implemented ratio | Cairo implemented ratio |
 | --- | ---: | ---: | ---: |
-| `aggregate` | 0.0 | 0.0 | 0.0 |
+| `aggregate` | 1.0 | 1.0 | 1.0 |
 | `circuit` | 0.0 | 0.0 | 0.0 |
-| `collection` | 0.0 | 0.0 | 0.0 |
+| `collection` | 1.0 | 1.0 | 1.0 |
 | `control` | 0.0 | 0.0 | 0.0 |
 | `crypto` | 0.0 | 0.0 | 0.0 |
 | `field` | 0.0 | 0.0 | 0.0 |
@@ -43,9 +43,9 @@ Source registry: `roadmap/capabilities/registry.json`
 
 | Capability ID | Family | Overall | Sierra | Cairo | Diverges | Divergence constraints |
 | --- | --- | --- | --- | --- | --- | --- |
-| `cap.aggregate.tuple_struct_enum` | `aggregate` | `planned` | `planned` | `planned` | `false` | none |
+| `cap.aggregate.tuple_struct_enum` | `aggregate` | `implemented` | `implemented` | `implemented` | `false` | none |
 | `cap.circuit.constraint_gate` | `circuit` | `planned` | `planned` | `planned` | `false` | none |
-| `cap.collection.array_span_dict` | `collection` | `planned` | `planned` | `planned` | `false` | none |
+| `cap.collection.array_span_dict` | `collection` | `implemented` | `implemented` | `implemented` | `false` | none |
 | `cap.control.calls_loops_panic` | `control` | `planned` | `planned` | `planned` | `false` | none |
 | `cap.crypto.round_mix` | `crypto` | `planned` | `planned` | `planned` | `false` | none |
 | `cap.field.qm31` | `field` | `planned` | `planned` | `planned` | `false` | none |
@@ -62,6 +62,8 @@ Source registry: `roadmap/capabilities/registry.json`
 ## Capability IDs
 
 ### implemented_capability_ids
+- `cap.aggregate.tuple_struct_enum`
+- `cap.collection.array_span_dict`
 - `cap.integer.u128.add.wrapping`
 - `cap.integer.u128.mul.wrapping`
 - `cap.integer.u128.sub.wrapping`
@@ -74,9 +76,7 @@ Source registry: `roadmap/capabilities/registry.json`
 - `cap.integer.family.non_u128`
 
 ### planned_capability_ids
-- `cap.aggregate.tuple_struct_enum`
 - `cap.circuit.constraint_gate`
-- `cap.collection.array_span_dict`
 - `cap.control.calls_loops_panic`
 - `cap.crypto.round_mix`
 - `cap.field.qm31`

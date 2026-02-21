@@ -8,33 +8,50 @@ import json
 from pathlib import Path
 
 
-DIRECT_TO_ABI = {
-    "felt252": "core::felt252",
-    "u128": "core::integer::u128",
-    "u256": "core::integer::u256",
-    "bool": "core::bool",
-    "core::bool": "core::bool",
-    "i8": "core::integer::i8",
-    "i16": "core::integer::i16",
-    "i32": "core::integer::i32",
-    "i64": "core::integer::i64",
-    "i128": "core::integer::i128",
-    "u8": "core::integer::u8",
-    "u16": "core::integer::u16",
-    "u32": "core::integer::u32",
-    "u64": "core::integer::u64",
-    "qm31": "core::qm31",
-    "RangeCheck": "core::range_check::RangeCheck",
-    "GasBuiltin": "core::gas::GasBuiltin",
-    "SegmentArena": "core::segment_arena::SegmentArena",
-    "PanicSignal": "core::panic::PanicSignal",
+CANONICAL_PRIMITIVES = {
+    "felt252": "felt252",
+    "core::felt252": "felt252",
+    "u128": "u128",
+    "u256": "u256",
+    "bool": "bool",
+    "core::bool": "bool",
+    "i8": "i8",
+    "i16": "i16",
+    "i32": "i32",
+    "i64": "i64",
+    "i128": "i128",
+    "u8": "u8",
+    "u16": "u16",
+    "u32": "u32",
+    "u64": "u64",
+    "qm31": "qm31",
+    "core::integer::u128": "u128",
+    "core::integer::u256": "u256",
+    "core::integer::i8": "i8",
+    "core::integer::i16": "i16",
+    "core::integer::i32": "i32",
+    "core::integer::i64": "i64",
+    "core::integer::i128": "i128",
+    "core::integer::u8": "u8",
+    "core::integer::u16": "u16",
+    "core::integer::u32": "u32",
+    "core::integer::u64": "u64",
+    "core::qm31": "qm31",
+    "RangeCheck": "RangeCheck",
+    "GasBuiltin": "GasBuiltin",
+    "SegmentArena": "SegmentArena",
+    "PanicSignal": "PanicSignal",
+    "core::range_check::RangeCheck": "RangeCheck",
+    "core::gas::GasBuiltin": "GasBuiltin",
+    "core::segment_arena::SegmentArena": "SegmentArena",
+    "core::panic::PanicSignal": "PanicSignal",
 }
 
 RESOURCE_TYPES = {
-    "core::range_check::RangeCheck",
-    "core::gas::GasBuiltin",
-    "core::segment_arena::SegmentArena",
-    "core::panic::PanicSignal",
+    "RangeCheck",
+    "GasBuiltin",
+    "SegmentArena",
+    "PanicSignal",
 }
 
 
@@ -73,8 +90,54 @@ def to_snake_case(value: str) -> str:
     return "".join(out)
 
 
-def canonicalize_type(debug_name: str) -> str:
-    return DIRECT_TO_ABI.get(debug_name, debug_name)
+def split_top_level_generic(type_name: str) -> tuple[str, list[str]] | None:
+    start = type_name.find("<")
+    if start == -1 or not type_name.endswith(">"):
+        return None
+    base = type_name[:start]
+    inner = type_name[start + 1 : -1]
+    args: list[str] = []
+    depth = 0
+    current: list[str] = []
+    for ch in inner:
+        if ch == "<":
+            depth += 1
+            current.append(ch)
+            continue
+        if ch == ">":
+            depth -= 1
+            current.append(ch)
+            continue
+        if ch == "," and depth == 0:
+            arg = "".join(current).strip()
+            if arg:
+                args.append(arg)
+            current = []
+            continue
+        current.append(ch)
+    tail = "".join(current).strip()
+    if tail:
+        args.append(tail)
+    return base, args
+
+
+def canonicalize_base(base: str) -> str:
+    normalized = base.replace(" ", "")
+    if normalized in CANONICAL_PRIMITIVES:
+        return CANONICAL_PRIMITIVES[normalized]
+    if "::" in normalized:
+        return normalized.split("::")[-1]
+    return normalized
+
+
+def canonicalize_type(type_name: str) -> str:
+    normalized = type_name.replace("::<", "<").replace(" ", "")
+    split = split_top_level_generic(normalized)
+    if split is None:
+        return canonicalize_base(normalized)
+    base, args = split
+    rendered_args = [canonicalize_type(arg) for arg in args]
+    return f"{canonicalize_base(base)}<{', '.join(rendered_args)}>"
 
 
 def normalize_signature_types(types: list[str]) -> list[str]:
@@ -127,7 +190,10 @@ def collect_abi_signatures(payload: dict) -> dict[str, dict[str, list[str]]]:
                 raise ValueError("ABI function missing name")
             params = [inp.get("type", "") for inp in item.get("inputs", [])]
             outputs = [out.get("type", "") for out in item.get("outputs", [])]
-            signatures[name] = {"params": params, "outputs": outputs}
+            signatures[name] = {
+                "params": normalize_signature_types(params),
+                "outputs": normalize_signature_types(outputs),
+            }
     return signatures
 
 

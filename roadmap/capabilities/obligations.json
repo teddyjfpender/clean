@@ -6,6 +6,50 @@
         "scripts/bench/check_optimizer_family_thresholds.sh",
         "scripts/bench/check_optimizer_non_regression.sh"
       ],
+      "capability_id": "cap.aggregate.tuple_struct_enum",
+      "notes": "Aggregate signature and wrapper lanes must preserve constructor/destructor law invariants.",
+      "proof_refs": [
+        "struct_roundtrip",
+        "enum_roundtrip",
+        "tuple2_roundtrip_first",
+        "tuple2_roundtrip_second"
+      ],
+      "required_for_states": [
+        "implemented"
+      ],
+      "test_refs": [
+        "scripts/test/eval_aggregate_wrapper_semantics.sh",
+        "scripts/test/sierra_aggregate_collection_e2e.sh",
+        "scripts/test/backend_parity_aggregate_collection.sh"
+      ]
+    },
+    {
+      "benchmark_refs": [
+        "scripts/bench/check_optimizer_family_thresholds.sh",
+        "scripts/bench/check_optimizer_non_regression.sh",
+        "scripts/bench/generated/run_manifest_benchmarks.sh"
+      ],
+      "capability_id": "cap.collection.array_span_dict",
+      "notes": "Collection signature lane must preserve typed wrapper/alias laws and explicit fail-fast for unsupported dict operations.",
+      "proof_refs": [
+        "array_append_length",
+        "box_wrap_unwrap",
+        "nullable_wrap_unwrap"
+      ],
+      "required_for_states": [
+        "implemented"
+      ],
+      "test_refs": [
+        "scripts/test/eval_aggregate_wrapper_semantics.sh",
+        "scripts/test/sierra_aggregate_collection_e2e.sh",
+        "scripts/test/backend_parity_aggregate_collection.sh"
+      ]
+    },
+    {
+      "benchmark_refs": [
+        "scripts/bench/check_optimizer_family_thresholds.sh",
+        "scripts/bench/check_optimizer_non_regression.sh"
+      ],
       "capability_id": "cap.integer.family.non_u128",
       "notes": "Fail-fast lane must remain covered until non-u128 lowering is implemented.",
       "proof_refs": [

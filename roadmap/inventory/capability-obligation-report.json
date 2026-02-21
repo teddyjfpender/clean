@@ -1,21 +1,23 @@
 {
-  "implemented_capability_count": 7,
+  "implemented_capability_count": 9,
   "implemented_missing_obligations": [],
-  "implemented_with_satisfied_obligations": 7,
-  "obligation_entry_count": 8,
+  "implemented_with_satisfied_obligations": 9,
+  "obligation_entry_count": 10,
   "obligations": "roadmap/capabilities/obligations.json",
   "registry": "roadmap/capabilities/registry.json",
   "rows": [
     {
-      "benchmark_ref_count": 0,
+      "benchmark_ref_count": 2,
       "capability_id": "cap.aggregate.tuple_struct_enum",
       "family_group": "aggregate",
-      "has_obligation_entry": false,
-      "overall_support_state": "planned",
-      "proof_ref_count": 0,
-      "required_for_states": [],
-      "satisfies_current_state": false,
-      "test_ref_count": 0
+      "has_obligation_entry": true,
+      "overall_support_state": "implemented",
+      "proof_ref_count": 4,
+      "required_for_states": [
+        "implemented"
+      ],
+      "satisfies_current_state": true,
+      "test_ref_count": 3
     },
     {
       "benchmark_ref_count": 0,
@@ -29,15 +31,17 @@
       "test_ref_count": 0
     },
     {
-      "benchmark_ref_count": 0,
+      "benchmark_ref_count": 3,
       "capability_id": "cap.collection.array_span_dict",
       "family_group": "collection",
-      "has_obligation_entry": false,
-      "overall_support_state": "planned",
-      "proof_ref_count": 0,
-      "required_for_states": [],
-      "satisfies_current_state": false,
-      "test_ref_count": 0
+      "has_obligation_entry": true,
+      "overall_support_state": "implemented",
+      "proof_ref_count": 3,
+      "required_for_states": [
+        "implemented"
+      ],
+      "satisfies_current_state": true,
+      "test_ref_count": 3
     },
     {
       "benchmark_ref_count": 0,

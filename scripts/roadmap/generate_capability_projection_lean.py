@@ -26,6 +26,16 @@ TY_MAP: Dict[str, str] = {
 }
 
 SIGNATURE_TYPE_IDS: Set[str] = set(TY_MAP.keys())
+SIGNATURE_FAMILY_MAP: Dict[str, str] = {
+    "Struct": "struct",
+    "Enum": "enum",
+    "Array": "array",
+    "Span": "span",
+    "Nullable": "nullable",
+    "Box": "boxed",
+    "NonZero": "nonzero",
+    "Felt252Dict": "dict",
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -44,9 +54,17 @@ def format_string_list(name: str, values: List[str]) -> str:
 
 
 def format_ty_list(name: str, values: List[str]) -> str:
-    lines = [f"def {name} : List Ty :=", "["]
+  lines = [f"def {name} : List Ty :=", "["]
+  for value in values:
+    lines.append(f"  {value},")
+  lines.append("]")
+  return "\n".join(lines)
+
+
+def format_ty_family_list(name: str, values: List[str]) -> str:
+    lines = [f"def {name} : List String :=", "["]
     for value in values:
-        lines.append(f"  {value},")
+        lines.append(f'  "{value}",')
     lines.append("]")
     return "\n".join(lines)
 
@@ -64,6 +82,7 @@ def main() -> int:
     sierra_implemented = []
     sierra_fail_fast = []
     signature_tys = set()
+    signature_ty_families = set()
 
     for cap in capabilities:
         if not isinstance(cap, dict):
@@ -85,6 +104,8 @@ def main() -> int:
                         type_id_str = str(type_id)
                         if type_id_str in SIGNATURE_TYPE_IDS:
                             signature_tys.add(TY_MAP[type_id_str])
+                        if type_id_str in SIGNATURE_FAMILY_MAP:
+                            signature_ty_families.add(SIGNATURE_FAMILY_MAP[type_id_str])
         elif sierra_state == "fail_fast":
             if cap_id:
                 sierra_fail_fast.append(cap_id)
@@ -92,6 +113,7 @@ def main() -> int:
     sierra_implemented = sorted(set(sierra_implemented))
     sierra_fail_fast = sorted(set(sierra_fail_fast))
     signature_ty_list = sorted(signature_tys)
+    signature_ty_family_list = sorted(signature_ty_families)
 
     content = "\n\n".join(
         [
@@ -101,8 +123,26 @@ def main() -> int:
             format_string_list("sierraImplementedCapabilityIds", sierra_implemented),
             format_string_list("sierraFailFastCapabilityIds", sierra_fail_fast),
             format_ty_list("sierraSupportedSignatureTys", signature_ty_list),
+            format_ty_family_list("sierraSupportedSignatureTyFamilies", signature_ty_family_list),
             "def isSierraCapabilityImplemented (capabilityId : String) : Bool :=\n  sierraImplementedCapabilityIds.contains capabilityId",
-            "def isSierraSignatureTySupported (ty : Ty) : Bool :=\n  sierraSupportedSignatureTys.contains ty",
+            (
+                "def isSierraSignatureTyFamilySupported (ty : Ty) : Bool :=\n"
+                "  match ty with\n"
+                "  | .tuple _ => sierraSupportedSignatureTyFamilies.contains \"struct\"\n"
+                "  | .structTy _ => sierraSupportedSignatureTyFamilies.contains \"struct\"\n"
+                "  | .enumTy _ => sierraSupportedSignatureTyFamilies.contains \"enum\"\n"
+                "  | .array _ => sierraSupportedSignatureTyFamilies.contains \"array\"\n"
+                "  | .span _ => sierraSupportedSignatureTyFamilies.contains \"span\"\n"
+                "  | .nullable _ => sierraSupportedSignatureTyFamilies.contains \"nullable\"\n"
+                "  | .boxed _ => sierraSupportedSignatureTyFamilies.contains \"boxed\"\n"
+                "  | .dict _ _ => sierraSupportedSignatureTyFamilies.contains \"dict\"\n"
+                "  | .nonZero _ => sierraSupportedSignatureTyFamilies.contains \"nonzero\"\n"
+                "  | _ => false"
+            ),
+            (
+                "def isSierraSignatureTySupported (ty : Ty) : Bool :=\n"
+                "  sierraSupportedSignatureTys.contains ty || isSierraSignatureTyFamilySupported ty"
+            ),
             "end LeanCairo.Backend.Sierra.Generated",
         ]
     )

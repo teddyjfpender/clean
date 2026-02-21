@@ -4,33 +4,35 @@
       "benchmark_class": "aggregate-core",
       "cairo_targets": {
         "forms": [
-          "aggregate_family_placeholder"
+          "aggregate_signature_passthrough",
+          "aggregate_opaque_roundtrip"
         ]
       },
       "capability_id": "cap.aggregate.tuple_struct_enum",
       "family_group": "aggregate",
       "mir_nodes": [
-        "aggregate_family_placeholder"
+        "var",
+        "letE"
       ],
       "proof_class": "aggregate-laws",
-      "proof_status": "planned",
+      "proof_status": "partial",
       "resource_requirements": [],
       "semantic_class": "partial",
       "sierra_targets": {
         "generic_libfunc_ids": [
-          "structure_family_placeholder",
-          "enm_family_placeholder"
+          "drop",
+          "dup",
+          "store_temp"
         ],
         "generic_type_ids": [
-          "Tuple",
           "Struct",
           "Enum"
         ]
       },
       "support_state": {
-        "cairo": "planned",
-        "overall": "planned",
-        "sierra": "planned"
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
       },
       "test_class": "aggregate-differential"
     },
@@ -67,35 +69,39 @@
       "benchmark_class": "collection-core",
       "cairo_targets": {
         "forms": [
-          "collection_family_placeholder"
+          "collection_signature_passthrough",
+          "collection_wrapper_roundtrip"
         ]
       },
       "capability_id": "cap.collection.array_span_dict",
       "family_group": "collection",
       "mir_nodes": [
-        "collection_family_placeholder"
+        "var",
+        "letE"
       ],
       "proof_class": "collection-laws",
-      "proof_status": "planned",
+      "proof_status": "partial",
       "resource_requirements": [
         "segment_arena"
       ],
       "semantic_class": "partial",
       "sierra_targets": {
         "generic_libfunc_ids": [
-          "array_family_placeholder",
-          "dict_family_placeholder"
+          "drop",
+          "dup",
+          "store_temp"
         ],
         "generic_type_ids": [
           "Array",
           "Span",
-          "Felt252Dict"
+          "Nullable",
+          "Box"
         ]
       },
       "support_state": {
-        "cairo": "planned",
-        "overall": "planned",
-        "sierra": "planned"
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
       },
       "test_class": "collection-differential"
     },

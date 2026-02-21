@@ -24,6 +24,10 @@ lean_lib MyLeanSierraScalar where
 
 lean_lib MyLeanSierraU128RangeChecked where
 
+lean_lib MyLeanSierraAggregateCollection where
+
+lean_lib MyLeanSierraAggregateCollectionParity where
+
 lean_lib newton_u128 where
   srcDir := "../examples/Lean"
 

@@ -5,8 +5,8 @@
   "backend_divergence_count": 1,
   "cairo_status_counts": {
     "fail_fast": 0,
-    "implemented": 7,
-    "planned": 8
+    "implemented": 9,
+    "planned": 6
   },
   "capability_status_rows": [
     {
@@ -15,9 +15,9 @@
       "diverges": false,
       "family_group": "aggregate",
       "support_state": {
-        "cairo": "planned",
-        "overall": "planned",
-        "sierra": "planned"
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
       }
     },
     {
@@ -37,9 +37,9 @@
       "diverges": false,
       "family_group": "collection",
       "support_state": {
-        "cairo": "planned",
-        "overall": "planned",
-        "sierra": "planned"
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
       }
     },
     {
@@ -178,9 +178,9 @@
     }
   ],
   "closure_ratios": {
-    "cairo_implemented_ratio": 0.466667,
-    "overall_implemented_ratio": 0.466667,
-    "sierra_implemented_ratio": 0.466667
+    "cairo_implemented_ratio": 0.6,
+    "overall_implemented_ratio": 0.6,
+    "sierra_implemented_ratio": 0.6
   },
   "fail_fast_capability_ids": [
     "cap.integer.family.non_u128"
@@ -189,23 +189,23 @@
     "aggregate": {
       "cairo": {
         "fail_fast": 0,
-        "implemented": 0,
-        "planned": 1
+        "implemented": 1,
+        "planned": 0
       },
       "closure_ratios": {
-        "cairo_implemented_ratio": 0.0,
-        "overall_implemented_ratio": 0.0,
-        "sierra_implemented_ratio": 0.0
+        "cairo_implemented_ratio": 1.0,
+        "overall_implemented_ratio": 1.0,
+        "sierra_implemented_ratio": 1.0
       },
       "overall": {
         "fail_fast": 0,
-        "implemented": 0,
-        "planned": 1
+        "implemented": 1,
+        "planned": 0
       },
       "sierra": {
         "fail_fast": 0,
-        "implemented": 0,
-        "planned": 1
+        "implemented": 1,
+        "planned": 0
       },
       "total": 1
     },
@@ -235,23 +235,23 @@
     "collection": {
       "cairo": {
         "fail_fast": 0,
-        "implemented": 0,
-        "planned": 1
+        "implemented": 1,
+        "planned": 0
       },
       "closure_ratios": {
-        "cairo_implemented_ratio": 0.0,
-        "overall_implemented_ratio": 0.0,
-        "sierra_implemented_ratio": 0.0
+        "cairo_implemented_ratio": 1.0,
+        "overall_implemented_ratio": 1.0,
+        "sierra_implemented_ratio": 1.0
       },
       "overall": {
         "fail_fast": 0,
-        "implemented": 0,
-        "planned": 1
+        "implemented": 1,
+        "planned": 0
       },
       "sierra": {
         "fail_fast": 0,
-        "implemented": 0,
-        "planned": 1
+        "implemented": 1,
+        "planned": 0
       },
       "total": 1
     },
@@ -395,6 +395,8 @@
     }
   },
   "implemented_capability_ids": [
+    "cap.aggregate.tuple_struct_enum",
+    "cap.collection.array_span_dict",
     "cap.integer.u128.add.wrapping",
     "cap.integer.u128.mul.wrapping",
     "cap.integer.u128.sub.wrapping",
@@ -405,13 +407,11 @@
   ],
   "overall_status_counts": {
     "fail_fast": 1,
-    "implemented": 7,
-    "planned": 7
+    "implemented": 9,
+    "planned": 5
   },
   "planned_capability_ids": [
-    "cap.aggregate.tuple_struct_enum",
     "cap.circuit.constraint_gate",
-    "cap.collection.array_span_dict",
     "cap.control.calls_loops_panic",
     "cap.crypto.round_mix",
     "cap.field.qm31",
@@ -419,13 +419,13 @@
   ],
   "proof_status_counts": {
     "complete": 0,
-    "partial": 7,
-    "planned": 8
+    "partial": 9,
+    "planned": 6
   },
   "sierra_status_counts": {
     "fail_fast": 1,
-    "implemented": 7,
-    "planned": 7
+    "implemented": 9,
+    "planned": 5
   },
   "total_capabilities": 15,
   "version": 1

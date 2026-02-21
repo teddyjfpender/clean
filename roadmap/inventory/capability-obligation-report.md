@@ -3,16 +3,16 @@
 - Registry: `roadmap/capabilities/registry.json`
 - Obligations: `roadmap/capabilities/obligations.json`
 - Total capabilities: `15`
-- Obligation entries: `8`
-- Implemented obligation closure: `7/7`
+- Obligation entries: `10`
+- Implemented obligation closure: `9/9`
 
 ## Capability Matrix
 
 | Capability ID | Family | Overall state | Has obligation | Required states | Satisfies current state | Proof refs | Test refs | Benchmark refs |
 | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: |
-| `cap.aggregate.tuple_struct_enum` | `aggregate` | `planned` | `false` | `none` | `false` | `0` | `0` | `0` |
+| `cap.aggregate.tuple_struct_enum` | `aggregate` | `implemented` | `true` | `implemented` | `true` | `4` | `3` | `2` |
 | `cap.circuit.constraint_gate` | `circuit` | `planned` | `false` | `none` | `false` | `0` | `0` | `0` |
-| `cap.collection.array_span_dict` | `collection` | `planned` | `false` | `none` | `false` | `0` | `0` | `0` |
+| `cap.collection.array_span_dict` | `collection` | `implemented` | `true` | `implemented` | `true` | `3` | `3` | `3` |
 | `cap.control.calls_loops_panic` | `control` | `planned` | `false` | `none` | `false` | `0` | `0` | `0` |
 | `cap.crypto.round_mix` | `crypto` | `planned` | `false` | `none` | `false` | `0` | `0` | `0` |
 | `cap.field.qm31` | `field` | `planned` | `false` | `none` | `false` | `0` | `0` | `0` |

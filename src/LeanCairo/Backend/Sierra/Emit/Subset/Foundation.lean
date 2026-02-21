@@ -71,6 +71,8 @@ def unitTypeDebugName : String := "Unit"
 def boolTypeDebugName : String := "core::bool"
 def tupleUserTypeDebugName : String := "Tuple"
 
+def tupleTypeDebugName (arity : Nat) : String := s!"Tuple{arity}"
+
 def ensureKnownGenericTypeId (genericId : String) : Except EmitError Unit :=
   if genericTypeIds.contains genericId then
     .ok ()
@@ -93,6 +95,26 @@ def tyGenericTypeId : Ty -> Except EmitError String
   | .rangeCheck => do
       ensureKnownGenericTypeId "RangeCheck"
       pure "RangeCheck"
+  | .tuple _ | .structTy _ => do
+      ensureKnownGenericTypeId "Struct"
+      pure "Struct"
+  | .enumTy _ => do
+      ensureKnownGenericTypeId "Enum"
+      pure "Enum"
+  | .array _ => do
+      ensureKnownGenericTypeId "Array"
+      pure "Array"
+  | .span _ => do
+      ensureKnownGenericTypeId "Span"
+      pure "Span"
+  | .nullable _ => do
+      ensureKnownGenericTypeId "Nullable"
+      pure "Nullable"
+  | .boxed _ => do
+      ensureKnownGenericTypeId "Box"
+      pure "Box"
+  | .dict _ _ =>
+      .error "felt252 dict is not yet supported in direct Sierra subset backend (typed dict operation lowering pending)"
   | .u256 =>
       .error "u256 is not yet supported in direct Sierra subset backend (struct-based lowering pending)"
   | .bool =>
@@ -109,6 +131,14 @@ def tyDebugName (ty : Ty) : Except EmitError String := do
   match ty with
   | .bool => pure boolTypeDebugName
   | .nonZero innerTag => pure s!"NonZero<{innerTag}>"
+  | .tuple arity => pure (tupleTypeDebugName arity)
+  | .structTy name => pure name
+  | .enumTy name => pure name
+  | .array elemTag => pure s!"Array<{elemTag}>"
+  | .span elemTag => pure s!"Span<{elemTag}>"
+  | .nullable elemTag => pure s!"Nullable<{elemTag}>"
+  | .boxed elemTag => pure s!"Box<{elemTag}>"
+  | .dict keyTag valueTag => pure s!"Felt252Dict<{keyTag}, {valueTag}>"
   | _ =>
       let genericId <- tyGenericTypeId ty
       pure genericId
@@ -127,6 +157,26 @@ def innerTyOfNonZeroTag (innerTag : String) : Except EmitError Ty :=
   | "u256" => .ok .u256
   | "bool" => .ok .bool
   | _ => .error s!"unsupported NonZero inner tag '{innerTag}' in direct Sierra subset backend"
+
+def tyOfElementTag (elemTag : String) : Except EmitError Ty :=
+  match elemTag with
+  | "felt252" => .ok .felt252
+  | "u128" => .ok .u128
+  | "u256" => .ok .u256
+  | "bool" => .ok .bool
+  | "i8" => .ok .i8
+  | "i16" => .ok .i16
+  | "i32" => .ok .i32
+  | "i64" => .ok .i64
+  | "i128" => .ok .i128
+  | "u8" => .ok .u8
+  | "u16" => .ok .u16
+  | "u32" => .ok .u32
+  | "u64" => .ok .u64
+  | "qm31" => .ok .qm31
+  | _ =>
+      .error
+        s!"unsupported collection element tag '{elemTag}' in direct Sierra subset backend"
 
 def unitTypeDeclJson : Except EmitError Json := do
   ensureKnownGenericTypeId "Struct"
@@ -168,6 +218,125 @@ def typeDeclJson (ty : Ty) : Except EmitError Json := do
   match ty with
   | .bool =>
       boolTypeDeclJson
+  | .tuple arity => do
+      ensureKnownGenericTypeId "Struct"
+      let tyId <- typeIdJson ty
+      let unitTyId := idJson unitTypeDebugName
+      let fieldArgs := (List.replicate arity (typeArgJson unitTyId))
+      pure <|
+        Json.mkObj
+          [
+            ("id", tyId),
+            ( "long_id",
+              Json.mkObj
+                [
+                  ("generic_id", Json.str "Struct"),
+                  ("generic_args", Json.arr (([userTypeArgJson (tupleTypeDebugName arity)] ++ fieldArgs).toArray))
+                ] ),
+            ("declared_type_info", Json.null)
+          ]
+  | .structTy typeName => do
+      ensureKnownGenericTypeId "Struct"
+      let tyId <- typeIdJson ty
+      pure <|
+        Json.mkObj
+          [
+            ("id", tyId),
+            ( "long_id",
+              Json.mkObj
+                [
+                  ("generic_id", Json.str "Struct"),
+                  ("generic_args", Json.arr #[userTypeArgJson typeName])
+                ] ),
+            ("declared_type_info", Json.null)
+          ]
+  | .enumTy typeName => do
+      ensureKnownGenericTypeId "Enum"
+      let tyId <- typeIdJson ty
+      let unitTyId := idJson unitTypeDebugName
+      pure <|
+        Json.mkObj
+          [
+            ("id", tyId),
+            ( "long_id",
+              Json.mkObj
+                [
+                  ("generic_id", Json.str "Enum"),
+                  ("generic_args", Json.arr #[userTypeArgJson typeName, typeArgJson unitTyId, typeArgJson unitTyId])
+                ] ),
+            ("declared_type_info", Json.null)
+          ]
+  | .array elemTag => do
+      ensureKnownGenericTypeId "Array"
+      let elemTy <- tyOfElementTag elemTag
+      let elemTyId <- typeIdJson elemTy
+      let tyId <- typeIdJson ty
+      pure <|
+        Json.mkObj
+          [
+            ("id", tyId),
+            ( "long_id",
+              Json.mkObj
+                [
+                  ("generic_id", Json.str "Array"),
+                  ("generic_args", Json.arr #[typeArgJson elemTyId])
+                ] ),
+            ("declared_type_info", Json.null)
+          ]
+  | .span elemTag => do
+      ensureKnownGenericTypeId "Span"
+      let elemTy <- tyOfElementTag elemTag
+      let elemTyId <- typeIdJson elemTy
+      let tyId <- typeIdJson ty
+      pure <|
+        Json.mkObj
+          [
+            ("id", tyId),
+            ( "long_id",
+              Json.mkObj
+                [
+                  ("generic_id", Json.str "Span"),
+                  ("generic_args", Json.arr #[typeArgJson elemTyId])
+                ] ),
+            ("declared_type_info", Json.null)
+          ]
+  | .nullable elemTag => do
+      ensureKnownGenericTypeId "Nullable"
+      let elemTy <- tyOfElementTag elemTag
+      let elemTyId <- typeIdJson elemTy
+      let tyId <- typeIdJson ty
+      pure <|
+        Json.mkObj
+          [
+            ("id", tyId),
+            ( "long_id",
+              Json.mkObj
+                [
+                  ("generic_id", Json.str "Nullable"),
+                  ("generic_args", Json.arr #[typeArgJson elemTyId])
+                ] ),
+            ("declared_type_info", Json.null)
+          ]
+  | .boxed elemTag => do
+      ensureKnownGenericTypeId "Box"
+      let elemTy <- tyOfElementTag elemTag
+      let elemTyId <- typeIdJson elemTy
+      let tyId <- typeIdJson ty
+      pure <|
+        Json.mkObj
+          [
+            ("id", tyId),
+            ( "long_id",
+              Json.mkObj
+                [
+                  ("generic_id", Json.str "Box"),
+                  ("generic_args", Json.arr #[typeArgJson elemTyId])
+                ] ),
+            ("declared_type_info", Json.null)
+          ]
+  | .dict _ _ =>
+      .error
+        "felt252 dict type declarations are not yet supported in direct Sierra subset backend (typed dict operation lowering pending)"
   | .nonZero innerTag => do
       ensureKnownGenericTypeId "NonZero"
       let innerTy <- innerTyOfNonZeroTag innerTag
@@ -308,6 +477,14 @@ def registerTypeDecl (ty : Ty) : EmitM Json := do
   | .bool =>
       let unitDecl <- liftExcept unitTypeDeclJson
       modify (fun st => { st with typeDecls := insertDeclIfMissing st.typeDecls unitTypeDebugName unitDecl })
+  | .tuple _ | .structTy _ | .enumTy _ =>
+      let unitDecl <- liftExcept unitTypeDeclJson
+      modify (fun st => { st with typeDecls := insertDeclIfMissing st.typeDecls unitTypeDebugName unitDecl })
+  | .array elemTag | .span elemTag | .nullable elemTag | .boxed elemTag =>
+      let elemTy <- liftExcept (tyOfElementTag elemTag)
+      let elemTyDecl <- liftExcept (typeDeclJson elemTy)
+      let elemDebugName <- liftExcept (tyDebugName elemTy)
+      modify (fun st => { st with typeDecls := insertDeclIfMissing st.typeDecls elemDebugName elemTyDecl })
   | .nonZero innerTag =>
       let innerTy <- liftExcept (innerTyOfNonZeroTag innerTag)
       let innerTyDecl <- liftExcept (typeDeclJson innerTy)
