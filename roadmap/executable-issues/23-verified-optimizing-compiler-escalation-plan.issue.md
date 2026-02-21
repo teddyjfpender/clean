@@ -56,7 +56,9 @@ Escalate to a verified optimizing compiler pipeline for the constrained Lean sub
 3. Resource legality checks pass.
 
 ### OPTX-4 CASM-aware cost-guided decisions
-- Status: NOT DONE
+- Status: DONE - 017c025
+- Evidence tests: `scripts/test/cost_model_calibration_reproducibility.sh`; `scripts/bench/check_optimizer_family_thresholds.sh`; `scripts/bench/check_optimizer_non_regression.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `scripts/bench/generate_cost_model_calibration.py`; `generated/examples/cost-model-calibration.json`; `generated/examples/cost-model-calibration.md`; `roadmap/reports/cost-model-calibration-thresholds.json`; `roadmap/reports/release-go-no-go-report.json`
 - Acceptance tests:
 1. Cost-guided decisions are reproducible.
 2. Calibration and ranking checks pass policy thresholds.
