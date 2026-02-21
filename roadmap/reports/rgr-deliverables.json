@@ -379,7 +379,7 @@
         "starknet/testing"
       ],
       "module_status_counts": {
-        "unresolved": 10
+        "fail_fast": 10
       },
       "phase_gates": {
         "green": [

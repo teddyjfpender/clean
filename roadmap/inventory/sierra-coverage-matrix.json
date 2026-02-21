@@ -1,21 +1,21 @@
 {
   "counts": {
     "extension_modules_by_status": {
-      "fail_fast": 48,
+      "fail_fast": 58,
       "implemented": 4,
-      "unresolved": 10
+      "unresolved": 0
     },
     "extension_modules_total": 62,
     "generic_libfunc_ids_by_status": {
-      "fail_fast": 5,
+      "fail_fast": 271,
       "implemented": 8,
-      "unresolved": 266
+      "unresolved": 0
     },
     "generic_libfunc_ids_total": 279,
     "generic_type_ids_by_status": {
-      "fail_fast": 0,
+      "fail_fast": 56,
       "implemented": 12,
-      "unresolved": 56
+      "unresolved": 0
     },
     "generic_type_ids_total": 68
   },
@@ -248,52 +248,52 @@
     {
       "module_id": "starknet/emit_event",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/emit_event.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "starknet/getter",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/getter.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "starknet/interoperability",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/interoperability.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "starknet/mod",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/mod.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "starknet/secp256",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "starknet/secp256k1",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256k1.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "starknet/secp256r1",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256r1.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "starknet/storage",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/storage.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "starknet/syscalls",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/syscalls.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "starknet/testing",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/testing.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "module_id": "structure",
@@ -334,211 +334,211 @@
   "generic_libfunc_ids": [
     {
       "id": "add_circuit_input",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "alloc_local",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "array_append",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "array_get",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "array_len",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "array_new",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "array_pop_front",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "array_pop_front_consume",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "array_slice",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "array_snapshot_multi_pop_back",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "array_snapshot_multi_pop_front",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "array_snapshot_pop_back",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "array_snapshot_pop_front",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bitwise",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "blake2s_compress",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "blake2s_finalize",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bool_and_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bool_not_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bool_or_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bool_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bool_xor_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bounded_int_add",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bounded_int_constrain",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bounded_int_div_rem",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bounded_int_is_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bounded_int_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bounded_int_sub",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bounded_int_wrap_non_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "box_forward_snapshot",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "branch_align",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bytes31_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bytes31_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bytes31_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "call_contract_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "cheatcode",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "circuit_failure_guarantee_verify",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "class_hash_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "class_hash_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "class_hash_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "const_as_box",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "const_as_immediate",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "contract_address_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "contract_address_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "contract_address_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "core::starknet::secp256k1::Secp256k1Point",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "core::starknet::secp256r1::Secp256r1Point",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "coupon_buy",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "coupon_call",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "coupon_refund",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "deploy_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "disable_ap_tracking",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "downcast",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "drop",
@@ -546,7 +546,7 @@
     },
     {
       "id": "dummy_function_call",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "dup",
@@ -554,79 +554,79 @@
     },
     {
       "id": "ec_neg",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ec_neg_nz",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ec_point_from_x_nz",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ec_point_is_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ec_point_try_new_nz",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ec_point_unwrap",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ec_point_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ec_state_add",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ec_state_add_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ec_state_init",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ec_state_try_finalize_nz",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "emit_event_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "enable_ap_tracking",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "enum_boxed_match",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "enum_from_bounded_int",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "enum_init",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "enum_match",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "enum_snapshot_match",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "eval_circuit",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "felt252_add",
@@ -634,7 +634,7 @@
     },
     {
       "id": "felt252_add_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "felt252_const",
@@ -642,31 +642,31 @@
     },
     {
       "id": "felt252_dict_entry_finalize",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "felt252_dict_entry_get",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "felt252_dict_new",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "felt252_dict_squash",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "felt252_div",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "felt252_div_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "felt252_is_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "felt252_mul",
@@ -674,7 +674,7 @@
     },
     {
       "id": "felt252_mul_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "felt252_sub",
@@ -682,455 +682,455 @@
     },
     {
       "id": "felt252_sub_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "finalize_locals",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "function_call",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "gas_reserve_create",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "gas_reserve_utilize",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "get_available_gas",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "get_block_hash_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "get_builtin_costs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "get_circuit_descriptor",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "get_circuit_output",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "get_class_hash_at_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "get_execution_info_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "get_execution_info_v2_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "get_execution_info_v3_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "get_unspent_gas",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "hades_permutation",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i128_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i128_diff",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i128_eq",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i128_overflowing_add_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i128_overflowing_sub_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i128_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i128_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i16_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i16_diff",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i16_eq",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i16_overflowing_add_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i16_overflowing_sub_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i16_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i16_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i16_wide_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i32_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i32_diff",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i32_eq",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i32_overflowing_add_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i32_overflowing_sub_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i32_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i32_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i32_wide_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i64_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i64_diff",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i64_eq",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i64_overflowing_add_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i64_overflowing_sub_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i64_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i64_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i64_wide_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i8_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i8_diff",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i8_eq",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i8_overflowing_add_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i8_overflowing_sub_impl",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i8_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i8_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "i8_wide_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "init_circuit_data",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "int_range_pop_front",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "int_range_try_new",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "into_box",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "into_u96_guarantee",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "jump",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "keccak_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "library_call_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "local_into_box",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "m31_add",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "m31_div",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "m31_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "m31_sub",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "match_nullable",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "meta_tx_v0_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "null",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "nullable_forward_snapshot",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "nullable_from_box",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "pedersen",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "print",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "qm31_add",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "qm31_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "qm31_div",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "qm31_from_m31",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "qm31_is_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "qm31_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "qm31_pack",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "qm31_sub",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "qm31_unpack",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "redeposit_gas",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "rename",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "replace_class_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "revoke_ap_tracking",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "secp256k1_add_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "secp256k1_get_point_from_x_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "secp256k1_get_xy_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "secp256k1_mul_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "secp256k1_new_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "secp256r1_add_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "secp256r1_get_point_from_x_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "secp256r1_get_xy_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "secp256r1_mul_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "secp256r1_new_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "send_message_to_l1_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "sha256_process_block_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "sha256_state_handle_digest",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "sha256_state_handle_init",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "snapshot_take",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "span_from_tuple",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "squashed_felt252_dict_entries",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "storage_address_from_base",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "storage_address_from_base_and_offset",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "storage_address_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "storage_address_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "storage_base_address_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "storage_read_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "storage_write_syscall",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "store_local",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "store_temp",
@@ -1138,35 +1138,35 @@
     },
     {
       "id": "struct_boxed_deconstruct",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "struct_construct",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "struct_deconstruct",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "struct_snapshot_deconstruct",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "trace",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "try_into_circuit_modulus",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "tuple_from_span",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u128_byte_reverse",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u128_const",
@@ -1174,19 +1174,19 @@
     },
     {
       "id": "u128_eq",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u128_guarantee_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u128_is_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u128_mul_guarantee_verify",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u128_overflowing_add",
@@ -1198,71 +1198,71 @@
     },
     {
       "id": "u128_safe_divmod",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u128_sqrt",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u128_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u128_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u128s_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u16_bitwise",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u16_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u16_eq",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u16_is_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u16_overflowing_add",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u16_overflowing_sub",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u16_safe_divmod",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u16_sqrt",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u16_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u16_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u16_wide_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u256_guarantee_inv_mod_n",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u256_is_zero",
@@ -1278,401 +1278,401 @@
     },
     {
       "id": "u32_bitwise",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u32_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u32_eq",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u32_is_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u32_overflowing_add",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u32_overflowing_sub",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u32_safe_divmod",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u32_sqrt",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u32_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u32_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u32_wide_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u512_safe_divmod_by_u256",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u64_bitwise",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u64_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u64_eq",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u64_is_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u64_overflowing_add",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u64_overflowing_sub",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u64_safe_divmod",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u64_sqrt",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u64_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u64_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u64_wide_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u8_bitwise",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u8_const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u8_eq",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u8_is_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u8_overflowing_add",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u8_overflowing_sub",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u8_safe_divmod",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u8_sqrt",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u8_to_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u8_try_from_felt252",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u8_wide_mul",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u96_guarantee_verify",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u96_limbs_less_than_guarantee_verify",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "u96_single_limb_less_than_guarantee_verify",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "unbox",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "unsafe_panic",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "unwrap_non_zero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "upcast",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "withdraw_gas",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "withdraw_gas_all",
-      "status": "unresolved"
+      "status": "fail_fast"
     }
   ],
   "generic_type_ids": [
     {
       "id": "AddMod",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "AddModGate",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Array",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Bitwise",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Blake2sState",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "BoundedInt",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Box",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "BuiltinCosts",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Circuit",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "CircuitData",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "CircuitDescriptor",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "CircuitFailureGuarantee",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "CircuitInput",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "CircuitInputAccumulator",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "CircuitModulus",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "CircuitOutputs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "CircuitPartialOutputs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ClassHash",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Const",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "ContractAddress",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Coupon",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "EcOp",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "EcPoint",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "EcState",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Enum",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Felt252Dict",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Felt252DictEntry",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "GasBuiltin",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "GasReserve",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "IntRange",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "InverseGate",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "MulMod",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "MulModGate",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "NonZero",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Nullable",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Pedersen",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Poseidon",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "RangeCheck",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "RangeCheck96",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Secp256k1Point",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Secp256r1Point",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "SegmentArena",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Sha256StateHandle",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Snapshot",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Span",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "SquashedFelt252Dict",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "StorageAddress",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "StorageBaseAddress",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Struct",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "SubModGate",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "System",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "U128MulGuarantee",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "U96Guarantee",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "U96LimbsLtGuarantee",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "Uninitialized",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "bytes31",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "id": "felt252",

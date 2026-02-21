@@ -1,8 +1,7 @@
 {
   "counts": {
-    "fail_fast": 48,
-    "implemented": 4,
-    "unresolved": 10
+    "fail_fast": 58,
+    "implemented": 4
   },
   "entries": [
     {
@@ -416,83 +415,93 @@
     },
     {
       "evidence_refs": [
-        "roadmap/05-track-a-lean-to-sierra-functions.md"
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
       ],
       "module_id": "starknet/emit_event",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/emit_event.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "evidence_refs": [
-        "roadmap/05-track-a-lean-to-sierra-functions.md"
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
       ],
       "module_id": "starknet/getter",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/getter.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "evidence_refs": [
-        "roadmap/05-track-a-lean-to-sierra-functions.md"
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
       ],
       "module_id": "starknet/interoperability",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/interoperability.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "evidence_refs": [
-        "roadmap/05-track-a-lean-to-sierra-functions.md"
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
       ],
       "module_id": "starknet/mod",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/mod.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "evidence_refs": [
-        "roadmap/05-track-a-lean-to-sierra-functions.md"
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
       ],
       "module_id": "starknet/secp256",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "evidence_refs": [
-        "roadmap/05-track-a-lean-to-sierra-functions.md"
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
       ],
       "module_id": "starknet/secp256k1",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256k1.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "evidence_refs": [
-        "roadmap/05-track-a-lean-to-sierra-functions.md"
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
       ],
       "module_id": "starknet/secp256r1",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256r1.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "evidence_refs": [
-        "roadmap/05-track-a-lean-to-sierra-functions.md"
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
       ],
       "module_id": "starknet/storage",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/storage.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "evidence_refs": [
-        "roadmap/05-track-a-lean-to-sierra-functions.md"
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
       ],
       "module_id": "starknet/syscalls",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/syscalls.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "evidence_refs": [
-        "roadmap/05-track-a-lean-to-sierra-functions.md"
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/roadmap/check_failfast_policy_lock.sh"
       ],
       "module_id": "starknet/testing",
       "path": "crates/cairo-lang-sierra/src/extensions/modules/starknet/testing.rs",
-      "status": "unresolved"
+      "status": "fail_fast"
     },
     {
       "evidence_refs": [

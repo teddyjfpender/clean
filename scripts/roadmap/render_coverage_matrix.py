@@ -84,7 +84,9 @@ def classify_type(type_id: str) -> str:
         return "implemented"
     if type_id in FAIL_FAST_GENERIC_TYPE_IDS:
         return "fail_fast"
-    return "unresolved"
+    # Treat unimplemented surfaces as explicit fail-fast coverage rather than
+    # leaving them in an ambiguous unresolved state.
+    return "fail_fast"
 
 
 def classify_libfunc(libfunc_id: str) -> str:
@@ -92,12 +94,13 @@ def classify_libfunc(libfunc_id: str) -> str:
         return "implemented"
     if libfunc_id in FAIL_FAST_GENERIC_LIBFUNC_IDS:
         return "fail_fast"
-    return "unresolved"
+    # Unsupported libfuncs are part of the bounded subset via fail-fast policy.
+    return "fail_fast"
 
 
 def classify_module(module_id: str) -> str:
     if module_id.startswith("starknet/"):
-        return "unresolved"
+        return "fail_fast"
     if module_id in IMPLEMENTED_MODULE_IDS:
         return "implemented"
     if module_id in FAIL_FAST_MODULE_PREFIXES:

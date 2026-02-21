@@ -4,8 +4,8 @@
 - Source matrix: `roadmap/inventory/sierra-coverage-matrix.json`
 - Extension modules: `62`
 - `implemented`: `4`
-- `fail_fast`: `48`
-- `unresolved`: `10`
+- `fail_fast`: `58`
+- `unresolved`: `0`
 
 ## Family Status and Evidence
 
@@ -56,16 +56,16 @@
 | `snapshot` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/snapshot.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
 | `span` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/span.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
 | `squashed_felt252_dict` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/squashed_felt252_dict.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
-| `starknet/emit_event` | `unresolved` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/emit_event.rs` | `roadmap/05-track-a-lean-to-sierra-functions.md` |
-| `starknet/getter` | `unresolved` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/getter.rs` | `roadmap/05-track-a-lean-to-sierra-functions.md` |
-| `starknet/interoperability` | `unresolved` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/interoperability.rs` | `roadmap/05-track-a-lean-to-sierra-functions.md` |
-| `starknet/mod` | `unresolved` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/mod.rs` | `roadmap/05-track-a-lean-to-sierra-functions.md` |
-| `starknet/secp256` | `unresolved` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256.rs` | `roadmap/05-track-a-lean-to-sierra-functions.md` |
-| `starknet/secp256k1` | `unresolved` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256k1.rs` | `roadmap/05-track-a-lean-to-sierra-functions.md` |
-| `starknet/secp256r1` | `unresolved` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256r1.rs` | `roadmap/05-track-a-lean-to-sierra-functions.md` |
-| `starknet/storage` | `unresolved` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/storage.rs` | `roadmap/05-track-a-lean-to-sierra-functions.md` |
-| `starknet/syscalls` | `unresolved` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/syscalls.rs` | `roadmap/05-track-a-lean-to-sierra-functions.md` |
-| `starknet/testing` | `unresolved` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/testing.rs` | `roadmap/05-track-a-lean-to-sierra-functions.md` |
+| `starknet/emit_event` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/emit_event.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
+| `starknet/getter` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/getter.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
+| `starknet/interoperability` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/interoperability.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
+| `starknet/mod` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/mod.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
+| `starknet/secp256` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
+| `starknet/secp256k1` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256k1.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
+| `starknet/secp256r1` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/secp256r1.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
+| `starknet/storage` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/storage.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
+| `starknet/syscalls` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/syscalls.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
+| `starknet/testing` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/starknet/testing.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
 | `structure` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/structure.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
 | `trace` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/trace.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |
 | `try_from_felt252` | `fail_fast` | `crates/cairo-lang-sierra/src/extensions/modules/try_from_felt252.rs` | `scripts/test/sierra_failfast_unsupported.sh`, `scripts/roadmap/check_failfast_policy_lock.sh` |

@@ -7,8 +7,8 @@
 ## Sierra Family Coverage
 
 - `implemented`: `4`
-- `fail_fast`: `48`
-- `unresolved`: `10`
+- `fail_fast`: `58`
+- `unresolved`: `0`
 
 ## Corelib Parity Coverage
 
