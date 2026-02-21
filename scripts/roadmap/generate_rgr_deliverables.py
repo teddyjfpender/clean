@@ -59,7 +59,11 @@ def load_json(path: Path, label: str) -> Dict[str, Any]:
 
 
 def rel(path: Path) -> str:
-    return str(path.resolve().relative_to(ROOT))
+    resolved = path.resolve()
+    try:
+        return str(resolved.relative_to(ROOT))
+    except ValueError:
+        return str(resolved)
 
 
 def load_status_source(path: Path) -> Dict[str, Dict[str, Any]]:
