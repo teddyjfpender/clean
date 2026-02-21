@@ -38,7 +38,9 @@ Escalate to a verified optimizing compiler pipeline for the constrained Lean sub
 3. Pipeline contract checks pass.
 
 ### OPTX-2 MIR optimization expansion with proofs
-- Status: NOT DONE
+- Status: DONE - 5754656
+- Evidence tests: `scripts/test/optimizer_pass_regression.sh`; `scripts/test/canonicalization_regression.sh`; `scripts/roadmap/check_proof_obligations.sh`; `scripts/roadmap/check_proof_debt_policy.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Optimize/Expr.lean`; `src/LeanCairo/Compiler/Optimize/CSELetNorm.lean`; `src/LeanCairo/Compiler/Proof/OptimizeSound.lean`; `src/LeanCairo/Compiler/Proof/CSELetNormSound.lean`; `roadmap/proof-debt.json`
 - Acceptance tests:
 1. MIR pass regression suites pass.
 2. Soundness theorems compile for enabled passes.
