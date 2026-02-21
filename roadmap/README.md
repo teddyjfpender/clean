@@ -43,6 +43,7 @@ This plan treats `spec.md` and `spec2.md` as canonical constraints and assumes p
 - [`roadmap/23-verified-optimizing-compiler-escalation-plan.md`](23-verified-optimizing-compiler-escalation-plan.md): escalation path to verified optimizing compiler behavior.
 - [`roadmap/24-ci-gate-orchestration-and-release-automation.md`](24-ci-gate-orchestration-and-release-automation.md): CI gate orchestration and release automation scaling.
 - [`roadmap/25-full-function-compiler-completion-matrix.md`](25-full-function-compiler-completion-matrix.md): final completion matrix and certification program.
+- [`roadmap/26-red-green-refactor-delivery-loop-spec.md`](26-red-green-refactor-delivery-loop-spec.md): deterministic RED->GREEN->REFACTOR loop specification and transition law.
 - [`roadmap/inventory/corelib-src-inventory.md`](inventory/corelib-src-inventory.md): pinned corelib source inventory.
 - [`roadmap/inventory/sierra-extensions-inventory.md`](inventory/sierra-extensions-inventory.md): pinned Sierra module inventory.
 - [`roadmap/inventory/compiler-crates-inventory.md`](inventory/compiler-crates-inventory.md): pinned compiler crate focus inventory.

@@ -34,6 +34,7 @@ Status legend:
 - `roadmap/23-verified-optimizing-compiler-escalation-plan.md` -> `roadmap/executable-issues/23-verified-optimizing-compiler-escalation-plan.issue.md` (`NOT DONE`)
 - `roadmap/24-ci-gate-orchestration-and-release-automation.md` -> `roadmap/executable-issues/24-ci-gate-orchestration-and-release-automation.issue.md` (`NOT DONE`)
 - `roadmap/25-full-function-compiler-completion-matrix.md` -> `roadmap/executable-issues/25-full-function-compiler-completion-matrix.issue.md` (`NOT DONE`)
+- `roadmap/26-red-green-refactor-delivery-loop-spec.md` -> `roadmap/executable-issues/26-red-green-refactor-delivery-loop-spec.issue.md` (`NOT DONE`)
 
 ## Inventory files -> executable issues
 
