@@ -29,7 +29,9 @@ Execute full function-domain Sierra family closure for Track A with explicit low
 ## Milestone status ledger
 
 ### SCL-1 Sierra emitter architecture split and scaffold integration
-- Status: NOT DONE
+- Status: DONE - 1063d7e
+- Evidence tests: `scripts/test/architecture_boundaries.sh`; `scripts/roadmap/check_lowering_scaffold_sync.sh`; `scripts/roadmap/check_capability_projection_usage.sh`; `scripts/test/sierra_failfast_unsupported.sh`
+- Evidence proofs: `src/LeanCairo/Backend/Sierra/Emit/Subset/Foundation.lean`; `src/LeanCairo/Backend/Sierra/Emit/Subset/Expr.lean`; `src/LeanCairo/Backend/Sierra/Emit/Subset/Function.lean`; `src/LeanCairo/Backend/Sierra/Generated/LoweringScaffold.lean`
 - Acceptance tests:
 1. Family-scoped emitter module boundaries are enforced.
 2. Scaffold/projection sync checks pass.
