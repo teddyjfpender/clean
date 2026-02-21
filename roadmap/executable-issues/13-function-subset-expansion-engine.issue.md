@@ -31,7 +31,9 @@ Implement the capability-driven expansion engine that systematizes function-fami
 ## Milestone status ledger
 
 ### SXP-1 Capability registry schema and validators
-- Status: NOT DONE
+- Status: DONE - ff05fdf
+- Evidence tests: `python3 scripts/roadmap/validate_capability_registry.py --registry roadmap/capabilities/registry.json`; `scripts/test/capability_registry_negative.sh`; `scripts/roadmap/check_capability_registry.sh`
+- Evidence proofs: `roadmap/capabilities/schema.md`; `roadmap/capabilities/registry.json`; `scripts/roadmap/validate_capability_registry.py`
 - Acceptance tests:
 1. Registry schema validator rejects malformed capability records.
 2. Registry-to-report projection scripts are deterministic.

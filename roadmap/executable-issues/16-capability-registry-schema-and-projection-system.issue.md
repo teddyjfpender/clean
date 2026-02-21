@@ -28,14 +28,18 @@ Implement a canonical capability registry and projection pipeline as the single 
 ## Milestone status ledger
 
 ### CREG-1 Registry schema and validator
-- Status: NOT DONE
+- Status: DONE - ff05fdf
+- Evidence tests: `python3 scripts/roadmap/validate_capability_registry.py --registry roadmap/capabilities/registry.json`; `scripts/test/capability_registry_negative.sh`; `scripts/roadmap/check_capability_registry.sh`
+- Evidence proofs: `roadmap/capabilities/schema.md`; `roadmap/capabilities/registry.json`; `scripts/roadmap/validate_capability_registry.py`
 - Acceptance tests:
 1. Invalid capability entries fail schema validation.
 2. Duplicate capability IDs are rejected.
 3. Illegal status transitions fail validation.
 
 ### CREG-2 Projection generators and report sync
-- Status: NOT DONE
+- Status: DONE - ff05fdf
+- Evidence tests: `scripts/roadmap/check_capability_registry.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`; `scripts/roadmap/check_issue_evidence.sh`
+- Evidence proofs: `scripts/roadmap/project_capability_reports.py`; `roadmap/inventory/capability-coverage-report.json`; `roadmap/inventory/capability-coverage-report.md`
 - Acceptance tests:
 1. Sierra and Cairo coverage reports generate deterministically from registry.
 2. Drift between registry and generated reports fails checks.
