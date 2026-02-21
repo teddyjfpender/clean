@@ -1,0 +1,420 @@
+{
+  "deliverables": [
+    {
+      "computed_ready": true,
+      "evidence_proofs": [],
+      "evidence_tests": [],
+      "id": "d00-non-starknet-closure-guard",
+      "module_count": 52,
+      "module_scope": [
+        "ap_tracking",
+        "array",
+        "bitwise",
+        "blake",
+        "boolean",
+        "bounded_int",
+        "boxing",
+        "branch_align",
+        "bytes31",
+        "casts",
+        "circuit",
+        "const_type",
+        "consts",
+        "coupon",
+        "debug",
+        "drop",
+        "duplicate",
+        "ec",
+        "enm",
+        "felt252",
+        "felt252_dict",
+        "function_call",
+        "gas",
+        "gas_reserve",
+        "int/mod",
+        "int/signed",
+        "int/signed128",
+        "int/unsigned",
+        "int/unsigned128",
+        "int/unsigned256",
+        "int/unsigned512",
+        "is_zero",
+        "mem",
+        "mod",
+        "non_zero",
+        "nullable",
+        "pedersen",
+        "poseidon",
+        "qm31",
+        "range",
+        "range_check",
+        "segment_arena",
+        "snapshot",
+        "span",
+        "squashed_felt252_dict",
+        "structure",
+        "trace",
+        "try_from_felt252",
+        "unconditional_jump",
+        "uninitialized",
+        "unsafe_panic",
+        "utils"
+      ],
+      "module_status_counts": {
+        "fail_fast": 48,
+        "implemented": 4
+      },
+      "phase_gates": {
+        "green": [
+          "scripts/roadmap/check_sierra_primary_closure.sh"
+        ],
+        "red": [
+          "scripts/test/sierra_primary_closure_negative.sh"
+        ],
+        "refactor": [
+          "scripts/roadmap/check_coverage_matrix_freshness.sh",
+          "scripts/roadmap/check_sierra_coverage_report_freshness.sh"
+        ]
+      },
+      "priority": 0,
+      "remaining_count": 0,
+      "remaining_module_ids": [],
+      "status": "NOT DONE",
+      "target_policy": "implemented_or_failfast",
+      "title": "Non-Starknet closure guard"
+    },
+    {
+      "computed_ready": false,
+      "evidence_proofs": [],
+      "evidence_tests": [],
+      "id": "d01-range-and-integer-families",
+      "module_count": 14,
+      "module_scope": [
+        "bounded_int",
+        "casts",
+        "int/mod",
+        "int/signed",
+        "int/signed128",
+        "int/unsigned",
+        "int/unsigned128",
+        "int/unsigned256",
+        "int/unsigned512",
+        "is_zero",
+        "non_zero",
+        "range",
+        "range_check",
+        "try_from_felt252"
+      ],
+      "module_status_counts": {
+        "fail_fast": 14
+      },
+      "phase_gates": {
+        "green": [
+          "scripts/test/eval_integer_width_semantics.sh",
+          "scripts/test/eval_conversion_legality.sh",
+          "scripts/test/sierra_u128_range_checked_e2e.sh",
+          "scripts/test/sierra_u128_wrapping_differential.sh"
+        ],
+        "red": [
+          "scripts/test/sierra_failfast_unsupported.sh",
+          "scripts/test/eval_unsupported_domain_failfast.sh"
+        ],
+        "refactor": [
+          "scripts/test/sierra_structural_optimization_reproducibility.sh",
+          "scripts/bench/check_optimizer_family_thresholds.sh"
+        ]
+      },
+      "priority": 1,
+      "remaining_count": 14,
+      "remaining_module_ids": [
+        "bounded_int",
+        "casts",
+        "int/mod",
+        "int/signed",
+        "int/signed128",
+        "int/unsigned",
+        "int/unsigned128",
+        "int/unsigned256",
+        "int/unsigned512",
+        "is_zero",
+        "non_zero",
+        "range",
+        "range_check",
+        "try_from_felt252"
+      ],
+      "status": "NOT DONE",
+      "target_policy": "implemented_only",
+      "title": "Range-checked and integer family expansion"
+    },
+    {
+      "computed_ready": false,
+      "evidence_proofs": [],
+      "evidence_tests": [],
+      "id": "d02-aggregate-and-collection-families",
+      "module_count": 9,
+      "module_scope": [
+        "array",
+        "boxing",
+        "enm",
+        "felt252_dict",
+        "nullable",
+        "snapshot",
+        "span",
+        "squashed_felt252_dict",
+        "structure"
+      ],
+      "module_status_counts": {
+        "fail_fast": 9
+      },
+      "phase_gates": {
+        "green": [
+          "scripts/test/sierra_aggregate_collection_e2e.sh",
+          "scripts/test/sierra_aggregate_branch_typing.sh",
+          "scripts/test/backend_parity_aggregate_collection.sh"
+        ],
+        "red": [
+          "scripts/test/sierra_failfast_unsupported.sh",
+          "scripts/test/eval_aggregate_wrapper_semantics.sh"
+        ],
+        "refactor": [
+          "scripts/test/sierra_structural_optimization_reproducibility.sh",
+          "scripts/test/examples_regeneration_deterministic.sh"
+        ]
+      },
+      "priority": 2,
+      "remaining_count": 9,
+      "remaining_module_ids": [
+        "array",
+        "boxing",
+        "enm",
+        "felt252_dict",
+        "nullable",
+        "snapshot",
+        "span",
+        "squashed_felt252_dict",
+        "structure"
+      ],
+      "status": "NOT DONE",
+      "target_policy": "implemented_only",
+      "title": "Aggregate and collection expansion"
+    },
+    {
+      "computed_ready": false,
+      "evidence_proofs": [],
+      "evidence_tests": [],
+      "id": "d03-control-and-call-families",
+      "module_count": 6,
+      "module_scope": [
+        "branch_align",
+        "coupon",
+        "function_call",
+        "mod",
+        "unconditional_jump",
+        "unsafe_panic"
+      ],
+      "module_status_counts": {
+        "fail_fast": 6
+      },
+      "phase_gates": {
+        "green": [
+          "scripts/test/call_panic_semantics_regression.sh",
+          "scripts/test/sierra_differential.sh",
+          "scripts/test/sierra_e2e.sh"
+        ],
+        "red": [
+          "scripts/test/sierra_failfast_unsupported.sh",
+          "scripts/test/control_flow_normalization_regression.sh"
+        ],
+        "refactor": [
+          "scripts/test/canonicalization_regression.sh",
+          "scripts/test/sierra_structural_optimization_reproducibility.sh"
+        ]
+      },
+      "priority": 3,
+      "remaining_count": 6,
+      "remaining_module_ids": [
+        "branch_align",
+        "coupon",
+        "function_call",
+        "mod",
+        "unconditional_jump",
+        "unsafe_panic"
+      ],
+      "status": "NOT DONE",
+      "target_policy": "implemented_only",
+      "title": "Control-flow and call-family expansion"
+    },
+    {
+      "computed_ready": false,
+      "evidence_proofs": [],
+      "evidence_tests": [],
+      "id": "d04-resource-and-runtime-families",
+      "module_count": 10,
+      "module_scope": [
+        "ap_tracking",
+        "const_type",
+        "consts",
+        "debug",
+        "gas",
+        "gas_reserve",
+        "segment_arena",
+        "trace",
+        "uninitialized",
+        "utils"
+      ],
+      "module_status_counts": {
+        "fail_fast": 10
+      },
+      "phase_gates": {
+        "green": [
+          "scripts/roadmap/check_effect_metadata.sh",
+          "scripts/test/effect_resource_regression.sh",
+          "scripts/test/sierra_e2e.sh"
+        ],
+        "red": [
+          "scripts/test/sierra_failfast_unsupported.sh",
+          "scripts/test/effect_resource_regression.sh"
+        ],
+        "refactor": [
+          "scripts/test/benchmark_family_thresholds_negative.sh",
+          "scripts/bench/check_optimizer_family_thresholds.sh"
+        ]
+      },
+      "priority": 4,
+      "remaining_count": 10,
+      "remaining_module_ids": [
+        "ap_tracking",
+        "const_type",
+        "consts",
+        "debug",
+        "gas",
+        "gas_reserve",
+        "segment_arena",
+        "trace",
+        "uninitialized",
+        "utils"
+      ],
+      "status": "NOT DONE",
+      "target_policy": "implemented_only",
+      "title": "Resource and runtime family expansion"
+    },
+    {
+      "computed_ready": false,
+      "evidence_proofs": [],
+      "evidence_tests": [],
+      "id": "d05-crypto-field-circuit-families",
+      "module_count": 9,
+      "module_scope": [
+        "bitwise",
+        "blake",
+        "boolean",
+        "bytes31",
+        "circuit",
+        "ec",
+        "pedersen",
+        "poseidon",
+        "qm31"
+      ],
+      "module_status_counts": {
+        "fail_fast": 9
+      },
+      "phase_gates": {
+        "green": [
+          "scripts/test/sierra_advanced_family_e2e.sh",
+          "scripts/test/backend_parity_advanced_family.sh",
+          "scripts/test/eval_qm31_semantics.sh"
+        ],
+        "red": [
+          "scripts/test/sierra_failfast_unsupported.sh",
+          "scripts/test/eval_qm31_semantics.sh"
+        ],
+        "refactor": [
+          "scripts/bench/check_optimizer_non_regression.sh",
+          "scripts/bench/check_optimizer_family_thresholds.sh"
+        ]
+      },
+      "priority": 5,
+      "remaining_count": 9,
+      "remaining_module_ids": [
+        "bitwise",
+        "blake",
+        "boolean",
+        "bytes31",
+        "circuit",
+        "ec",
+        "pedersen",
+        "poseidon",
+        "qm31"
+      ],
+      "status": "NOT DONE",
+      "target_policy": "implemented_only",
+      "title": "Crypto, field, and circuit family expansion"
+    },
+    {
+      "computed_ready": false,
+      "evidence_proofs": [],
+      "evidence_tests": [],
+      "id": "d06-starknet-unresolved-families",
+      "module_count": 10,
+      "module_scope": [
+        "starknet/emit_event",
+        "starknet/getter",
+        "starknet/interoperability",
+        "starknet/mod",
+        "starknet/secp256",
+        "starknet/secp256k1",
+        "starknet/secp256r1",
+        "starknet/storage",
+        "starknet/syscalls",
+        "starknet/testing"
+      ],
+      "module_status_counts": {
+        "unresolved": 10
+      },
+      "phase_gates": {
+        "green": [
+          "scripts/test/e2e.sh",
+          "scripts/test/sierra_primary_without_cairo.sh"
+        ],
+        "red": [
+          "scripts/test/sierra_primary_cairo_coupling_guard.sh"
+        ],
+        "refactor": [
+          "scripts/test/architecture_boundaries.sh",
+          "scripts/roadmap/check_architecture_boundaries.sh"
+        ]
+      },
+      "priority": 6,
+      "remaining_count": 10,
+      "remaining_module_ids": [
+        "starknet/emit_event",
+        "starknet/getter",
+        "starknet/interoperability",
+        "starknet/mod",
+        "starknet/secp256",
+        "starknet/secp256k1",
+        "starknet/secp256r1",
+        "starknet/storage",
+        "starknet/syscalls",
+        "starknet/testing"
+      ],
+      "status": "NOT DONE",
+      "target_policy": "implemented_only",
+      "title": "Starknet unresolved family expansion"
+    }
+  ],
+  "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617",
+  "sources": {
+    "matrix": "roadmap/inventory/sierra-coverage-matrix.json",
+    "spec": "config/rgr-deliverable-spec.json",
+    "status_source": "roadmap/reports/rgr-deliverables.json"
+  },
+  "summary": {
+    "deliverable_count": 7,
+    "status_counts": {
+      "done": 0,
+      "not_done": 7
+    }
+  },
+  "version": 1
+}
