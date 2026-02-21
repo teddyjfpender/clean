@@ -43,7 +43,9 @@ Deliver deterministic function-level Lean -> Cairo emission from shared MIR with
 2. Overflow and checked-op semantics match expected outputs.
 
 ### B2 Aggregate/collection parity
-- Status: NOT DONE
+- Status: DONE - 0052b25
+- Evidence tests: `scripts/test/backend_parity_aggregate_collection.sh`; `scripts/test/sierra_aggregate_collection_e2e.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Backend/Cairo/EmitIRContract.lean`; `scripts/utils/check_backend_parity.py`; `src/Examples/SierraAggregateCollectionParity.lean`; `roadmap/capabilities/registry.json`
 - Acceptance tests:
 1. ADT and collection fixtures emit valid Cairo and compile.
 2. Behavior matches primary backend on shared vectors.

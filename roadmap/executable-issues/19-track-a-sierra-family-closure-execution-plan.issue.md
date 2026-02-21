@@ -47,7 +47,9 @@ Execute full function-domain Sierra family closure for Track A with explicit low
 3. Range-check/resource contracts are explicit and verified.
 
 ### SCL-3 Aggregate and collection family closure
-- Status: NOT DONE
+- Status: DONE - 0052b25
+- Evidence tests: `scripts/test/sierra_aggregate_collection_e2e.sh`; `scripts/test/sierra_aggregate_branch_typing.sh`; `scripts/test/backend_parity_aggregate_collection.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `src/LeanCairo/Backend/Sierra/Emit/Subset/Foundation.lean`; `src/LeanCairo/Backend/Sierra/Generated/CapabilityProjection.lean`; `roadmap/capabilities/registry.json`; `roadmap/capabilities/obligations.json`
 - Acceptance tests:
 1. Aggregate/collection fixtures validate and compile.
 2. Ownership/aliasing invariants are test-covered.

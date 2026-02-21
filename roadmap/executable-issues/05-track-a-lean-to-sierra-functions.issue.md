@@ -60,7 +60,9 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 3. Integer differential tests cover overflow/checked paths.
 
 ### A3 Aggregates (struct/enum/tuple)
-- Status: NOT DONE
+- Status: DONE - 0052b25
+- Evidence tests: `scripts/test/sierra_aggregate_collection_e2e.sh`; `scripts/test/sierra_aggregate_branch_typing.sh`; `scripts/test/eval_aggregate_wrapper_semantics.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `src/LeanCairo/Backend/Sierra/Emit/Subset/Foundation.lean`; `src/LeanCairo/Compiler/Semantics/Aggregates.lean`; `src/LeanCairo/Backend/Sierra/Generated/CapabilityProjection.lean`; `roadmap/capabilities/registry.json`
 - Acceptance tests:
 1. ADT fixtures compile, validate, and run equivalently.
 2. Pattern-match branch typing tests pass.
