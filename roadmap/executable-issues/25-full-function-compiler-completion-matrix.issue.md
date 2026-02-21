@@ -44,7 +44,9 @@ Deliver machine-verifiable completion audits and certification for function-doma
 3. Audit diagnostics are reproducible.
 
 ### AUD-3 Track-B completion audit automation
-- Status: NOT DONE
+- Status: DONE - a6e6422
+- Evidence tests: `scripts/roadmap/check_track_b_completion_audit.sh`; `scripts/roadmap/check_corelib_parity_trend.sh`; `scripts/roadmap/check_capability_registry.sh`; `scripts/roadmap/check_gate_manifest_sync.sh`
+- Evidence proofs: `scripts/roadmap/generate_track_b_completion_audit.py`; `scripts/roadmap/check_track_b_completion_audit.sh`; `roadmap/reports/track-b-completion-audit.json`; `roadmap/reports/track-b-completion-audit.md`; `roadmap/capabilities/registry.json`
 - Acceptance tests:
 1. Track-B parity/reviewability predicates are validated automatically.
 2. Undocumented divergence blocks completion.
