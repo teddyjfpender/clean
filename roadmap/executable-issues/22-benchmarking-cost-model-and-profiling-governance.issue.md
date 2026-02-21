@@ -63,7 +63,9 @@ Deliver deterministic benchmarking/profiling governance and cost-model calibrati
 3. False-positive control tests pass.
 
 ### BEN-5 Release benchmark dossier generation
-- Status: NOT DONE
+- Status: DONE - 1024e24
+- Evidence tests: `scripts/roadmap/check_release_reports_freshness.sh`; `scripts/roadmap/check_release_go_no_go.sh`; `scripts/roadmap/check_capability_obligations.sh`; `scripts/bench/generated/run_manifest_benchmarks.sh`
+- Evidence proofs: `roadmap/reports/release-benchmark-report.md`; `roadmap/reports/release-go-no-go-report.md`; `roadmap/reports/release-go-no-go-report.json`; `scripts/roadmap/generate_release_reports.py`; `generated/examples/benchmark-summary.json`; `roadmap/capabilities/obligations.json`; `scripts/roadmap/validate_capability_obligations.py`
 - Acceptance tests:
 1. Release benchmark report includes family deltas and hotspots.
 2. Missing benchmark evidence for promoted capabilities fails checks.
