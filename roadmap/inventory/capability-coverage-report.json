@@ -1,0 +1,170 @@
+{
+  "cairo_status_counts": {
+    "fail_fast": 0,
+    "implemented": 6,
+    "planned": 6
+  },
+  "fail_fast_capability_ids": [
+    "cap.integer.family.non_u128"
+  ],
+  "families": {
+    "aggregate": {
+      "cairo": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "overall": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "sierra": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "total": 1
+    },
+    "collection": {
+      "cairo": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "overall": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "sierra": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "total": 1
+    },
+    "control": {
+      "cairo": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "overall": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "sierra": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "total": 1
+    },
+    "field": {
+      "cairo": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "overall": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "sierra": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "total": 1
+    },
+    "integer": {
+      "cairo": {
+        "fail_fast": 0,
+        "implemented": 3,
+        "planned": 1
+      },
+      "overall": {
+        "fail_fast": 1,
+        "implemented": 3,
+        "planned": 0
+      },
+      "sierra": {
+        "fail_fast": 1,
+        "implemented": 3,
+        "planned": 0
+      },
+      "total": 4
+    },
+    "resource": {
+      "cairo": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "overall": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "sierra": {
+        "fail_fast": 0,
+        "implemented": 0,
+        "planned": 1
+      },
+      "total": 1
+    },
+    "scalar": {
+      "cairo": {
+        "fail_fast": 0,
+        "implemented": 3,
+        "planned": 0
+      },
+      "overall": {
+        "fail_fast": 0,
+        "implemented": 3,
+        "planned": 0
+      },
+      "sierra": {
+        "fail_fast": 0,
+        "implemented": 3,
+        "planned": 0
+      },
+      "total": 3
+    }
+  },
+  "implemented_capability_ids": [
+    "cap.integer.u128.add.wrapping",
+    "cap.integer.u128.mul.wrapping",
+    "cap.integer.u128.sub.wrapping",
+    "cap.scalar.felt252.add",
+    "cap.scalar.felt252.mul",
+    "cap.scalar.felt252.sub"
+  ],
+  "overall_status_counts": {
+    "fail_fast": 1,
+    "implemented": 6,
+    "planned": 5
+  },
+  "planned_capability_ids": [
+    "cap.aggregate.tuple_struct_enum",
+    "cap.collection.array_span_dict",
+    "cap.control.calls_loops_panic",
+    "cap.field.qm31",
+    "cap.resource.gas_ap_segment"
+  ],
+  "proof_status_counts": {
+    "complete": 0,
+    "partial": 6,
+    "planned": 6
+  },
+  "sierra_status_counts": {
+    "fail_fast": 1,
+    "implemented": 6,
+    "planned": 5
+  },
+  "total_capabilities": 12,
+  "version": 1
+}

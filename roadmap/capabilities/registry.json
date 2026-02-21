@@ -1,0 +1,418 @@
+{
+  "capabilities": [
+    {
+      "benchmark_class": "aggregate-core",
+      "cairo_targets": {
+        "forms": [
+          "aggregate_family_placeholder"
+        ]
+      },
+      "capability_id": "cap.aggregate.tuple_struct_enum",
+      "family_group": "aggregate",
+      "mir_nodes": [
+        "aggregate_family_placeholder"
+      ],
+      "proof_class": "aggregate-laws",
+      "proof_status": "planned",
+      "resource_requirements": [],
+      "semantic_class": "partial",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "structure_family_placeholder",
+          "enm_family_placeholder"
+        ],
+        "generic_type_ids": [
+          "Tuple",
+          "Struct",
+          "Enum"
+        ]
+      },
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      },
+      "test_class": "aggregate-differential"
+    },
+    {
+      "benchmark_class": "collection-core",
+      "cairo_targets": {
+        "forms": [
+          "collection_family_placeholder"
+        ]
+      },
+      "capability_id": "cap.collection.array_span_dict",
+      "family_group": "collection",
+      "mir_nodes": [
+        "collection_family_placeholder"
+      ],
+      "proof_class": "collection-laws",
+      "proof_status": "planned",
+      "resource_requirements": [
+        "segment_arena"
+      ],
+      "semantic_class": "partial",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "array_family_placeholder",
+          "dict_family_placeholder"
+        ],
+        "generic_type_ids": [
+          "Array",
+          "Span",
+          "Felt252Dict"
+        ]
+      },
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      },
+      "test_class": "collection-differential"
+    },
+    {
+      "benchmark_class": "control-flow",
+      "cairo_targets": {
+        "forms": [
+          "control_family_placeholder"
+        ]
+      },
+      "capability_id": "cap.control.calls_loops_panic",
+      "family_group": "control",
+      "mir_nodes": [
+        "control_family_placeholder"
+      ],
+      "proof_class": "control-flow-laws",
+      "proof_status": "planned",
+      "resource_requirements": [
+        "panic_signal"
+      ],
+      "semantic_class": "effectful",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "function_call",
+          "unconditional_jump",
+          "branch_align",
+          "panic_placeholder"
+        ],
+        "generic_type_ids": [
+          "PanicSignal"
+        ]
+      },
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      },
+      "test_class": "control-differential"
+    },
+    {
+      "benchmark_class": "field-core",
+      "cairo_targets": {
+        "forms": [
+          "field_family_placeholder"
+        ]
+      },
+      "capability_id": "cap.field.qm31",
+      "family_group": "field",
+      "mir_nodes": [
+        "field_family_placeholder"
+      ],
+      "proof_class": "field-laws",
+      "proof_status": "planned",
+      "resource_requirements": [],
+      "semantic_class": "pure",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "qm31_family_placeholder"
+        ],
+        "generic_type_ids": [
+          "qm31"
+        ]
+      },
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      },
+      "test_class": "field-differential"
+    },
+    {
+      "benchmark_class": "integer-extended",
+      "cairo_targets": {
+        "forms": [
+          "typed_integer_family_placeholder"
+        ]
+      },
+      "capability_id": "cap.integer.family.non_u128",
+      "family_group": "integer",
+      "mir_nodes": [
+        "typed_integer_family_placeholder"
+      ],
+      "proof_class": "integer-family-closure",
+      "proof_status": "planned",
+      "resource_requirements": [
+        "range_check"
+      ],
+      "semantic_class": "partial",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "integer_family_placeholder"
+        ],
+        "generic_type_ids": [
+          "u8",
+          "u16",
+          "u32",
+          "u64",
+          "i8",
+          "i16",
+          "i32",
+          "i64",
+          "i128"
+        ]
+      },
+      "support_state": {
+        "cairo": "planned",
+        "overall": "fail_fast",
+        "sierra": "fail_fast"
+      },
+      "test_class": "integer-family-failfast"
+    },
+    {
+      "benchmark_class": "integer-core",
+      "cairo_targets": {
+        "forms": [
+          "u128_add_expr"
+        ]
+      },
+      "capability_id": "cap.integer.u128.add.wrapping",
+      "family_group": "integer",
+      "mir_nodes": [
+        "addU128"
+      ],
+      "proof_class": "integer-wrapping",
+      "proof_status": "partial",
+      "resource_requirements": [
+        "range_check"
+      ],
+      "semantic_class": "pure",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "u128_overflowing_add"
+        ],
+        "generic_type_ids": [
+          "u128",
+          "RangeCheck"
+        ]
+      },
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      },
+      "test_class": "u128-wrapping-differential"
+    },
+    {
+      "benchmark_class": "integer-core",
+      "cairo_targets": {
+        "forms": [
+          "u128_mul_expr"
+        ]
+      },
+      "capability_id": "cap.integer.u128.mul.wrapping",
+      "family_group": "integer",
+      "mir_nodes": [
+        "mulU128"
+      ],
+      "proof_class": "integer-wrapping",
+      "proof_status": "partial",
+      "resource_requirements": [
+        "range_check"
+      ],
+      "semantic_class": "pure",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "u128_guarantee_mul",
+          "u128_mul_guarantee_verify"
+        ],
+        "generic_type_ids": [
+          "u128",
+          "RangeCheck",
+          "U128MulGuarantee"
+        ]
+      },
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      },
+      "test_class": "u128-wrapping-differential"
+    },
+    {
+      "benchmark_class": "integer-core",
+      "cairo_targets": {
+        "forms": [
+          "u128_sub_expr"
+        ]
+      },
+      "capability_id": "cap.integer.u128.sub.wrapping",
+      "family_group": "integer",
+      "mir_nodes": [
+        "subU128"
+      ],
+      "proof_class": "integer-wrapping",
+      "proof_status": "partial",
+      "resource_requirements": [
+        "range_check"
+      ],
+      "semantic_class": "pure",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "u128_overflowing_sub"
+        ],
+        "generic_type_ids": [
+          "u128",
+          "RangeCheck"
+        ]
+      },
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      },
+      "test_class": "u128-wrapping-differential"
+    },
+    {
+      "benchmark_class": "runtime-resource",
+      "cairo_targets": {
+        "forms": [
+          "resource_family_placeholder"
+        ]
+      },
+      "capability_id": "cap.resource.gas_ap_segment",
+      "family_group": "resource",
+      "mir_nodes": [
+        "resource_family_placeholder"
+      ],
+      "proof_class": "resource-legality",
+      "proof_status": "planned",
+      "resource_requirements": [
+        "gas",
+        "ap_tracking",
+        "segment_arena"
+      ],
+      "semantic_class": "effectful",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "gas_placeholder",
+          "ap_tracking_placeholder",
+          "segment_arena_placeholder"
+        ],
+        "generic_type_ids": [
+          "GasBuiltin",
+          "SegmentArena"
+        ]
+      },
+      "support_state": {
+        "cairo": "planned",
+        "overall": "planned",
+        "sierra": "planned"
+      },
+      "test_class": "resource-legality"
+    },
+    {
+      "benchmark_class": "scalar-core",
+      "cairo_targets": {
+        "forms": [
+          "felt252_add_expr"
+        ]
+      },
+      "capability_id": "cap.scalar.felt252.add",
+      "family_group": "scalar",
+      "mir_nodes": [
+        "addFelt252"
+      ],
+      "proof_class": "scalar-algebraic",
+      "proof_status": "partial",
+      "resource_requirements": [],
+      "semantic_class": "pure",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "felt252_add"
+        ],
+        "generic_type_ids": [
+          "felt252"
+        ]
+      },
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      },
+      "test_class": "scalar-differential"
+    },
+    {
+      "benchmark_class": "scalar-core",
+      "cairo_targets": {
+        "forms": [
+          "felt252_mul_expr"
+        ]
+      },
+      "capability_id": "cap.scalar.felt252.mul",
+      "family_group": "scalar",
+      "mir_nodes": [
+        "mulFelt252"
+      ],
+      "proof_class": "scalar-algebraic",
+      "proof_status": "partial",
+      "resource_requirements": [],
+      "semantic_class": "pure",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "felt252_mul"
+        ],
+        "generic_type_ids": [
+          "felt252"
+        ]
+      },
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      },
+      "test_class": "scalar-differential"
+    },
+    {
+      "benchmark_class": "scalar-core",
+      "cairo_targets": {
+        "forms": [
+          "felt252_sub_expr"
+        ]
+      },
+      "capability_id": "cap.scalar.felt252.sub",
+      "family_group": "scalar",
+      "mir_nodes": [
+        "subFelt252"
+      ],
+      "proof_class": "scalar-algebraic",
+      "proof_status": "partial",
+      "resource_requirements": [],
+      "semantic_class": "pure",
+      "sierra_targets": {
+        "generic_libfunc_ids": [
+          "felt252_sub"
+        ],
+        "generic_type_ids": [
+          "felt252"
+        ]
+      },
+      "support_state": {
+        "cairo": "implemented",
+        "overall": "implemented",
+        "sierra": "implemented"
+      },
+      "test_class": "scalar-differential"
+    }
+  ],
+  "version": 1
+}

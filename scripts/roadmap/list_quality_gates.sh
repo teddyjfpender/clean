@@ -16,6 +16,7 @@ MANDATORY_GATES=(
   "scripts/roadmap/check_pin_consistency.sh"
   "scripts/roadmap/check_inventory_reproducibility.sh"
   "scripts/roadmap/check_inventory_freshness.sh"
+  "scripts/roadmap/check_capability_registry.sh"
   "scripts/roadmap/check_corelib_parity_freshness.sh"
   "scripts/roadmap/check_crate_dependency_matrix_freshness.sh"
   "scripts/roadmap/check_coverage_matrix_freshness.sh"
@@ -30,6 +31,7 @@ MANDATORY_GATES=(
   "scripts/test/sierra_u128_wrapping_differential.sh"
   "scripts/test/backend_parity.sh"
   "scripts/test/optimizer_pass_regression.sh"
+  "scripts/test/capability_registry_negative.sh"
   "scripts/bench/check_optimizer_non_regression.sh"
   "scripts/bench/check_optimizer_family_thresholds.sh"
 )

@@ -34,3 +34,16 @@ Prerequisite:
 - `sierra-coverage-summary.md`
 - `sierra-family-coverage-report.json`
 - `sierra-family-coverage-report.md`
+- `capability-coverage-report.json`
+- `capability-coverage-report.md`
+
+## Capability Coverage Generator
+
+Run:
+
+```bash
+python3 scripts/roadmap/project_capability_reports.py \
+  --registry roadmap/capabilities/registry.json \
+  --out-json roadmap/inventory/capability-coverage-report.json \
+  --out-md roadmap/inventory/capability-coverage-report.md
+```
