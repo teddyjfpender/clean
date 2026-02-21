@@ -112,5 +112,6 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 "$ROOT_DIR/scripts/test/sierra_differential.sh"
 "$ROOT_DIR/scripts/test/sierra_u128_wrapping_differential.sh"
 "$ROOT_DIR/scripts/test/backend_parity_aggregate_collection.sh"
+"$ROOT_DIR/scripts/test/backend_parity_advanced_family.sh"
 
 echo "all Sierra pipeline checks passed"

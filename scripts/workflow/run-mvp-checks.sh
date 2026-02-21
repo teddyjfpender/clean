@@ -122,6 +122,7 @@ export PATH="$HOME/.elan/bin:$PATH"
 "$ROOT_DIR/scripts/test/sierra_differential.sh"
 "$ROOT_DIR/scripts/test/sierra_u128_wrapping_differential.sh"
 "$ROOT_DIR/scripts/test/backend_parity_aggregate_collection.sh"
+"$ROOT_DIR/scripts/test/backend_parity_advanced_family.sh"
 "$ROOT_DIR/scripts/bench/check_optimizer_non_regression.sh"
 "$ROOT_DIR/scripts/bench/check_optimizer_non_regression.sh" MyLeanContractCSEBench CSEBenchContract
 "$ROOT_DIR/scripts/bench/check_optimizer_family_thresholds.sh"
