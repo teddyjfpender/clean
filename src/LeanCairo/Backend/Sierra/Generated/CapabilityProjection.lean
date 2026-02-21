@@ -26,7 +26,16 @@ def sierraSupportedSignatureTys : List Ty :=
 [
   .bool,
   .felt252,
+  .i128,
+  .i16,
+  .i32,
+  .i64,
+  .i8,
   .u128,
+  .u16,
+  .u32,
+  .u64,
+  .u8,
 ]
 
 def sierraSupportedSignatureTyFamilies : List String :=

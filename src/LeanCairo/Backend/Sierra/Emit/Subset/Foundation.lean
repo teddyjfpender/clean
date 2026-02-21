@@ -14,7 +14,8 @@ open LeanCairo.Core.Spec
 Sierra subset backend invariants (phase-2 direct Lean -> Sierra lane):
 - storage must be empty,
 - functions must be view-only and write-free,
-- supported user signature types: felt252, u128, bool,
+- supported user signature scalar types:
+  felt252, bool, u128, u8/u16/u32/u64, i8/i16/i32/i64/i128,
 - range-check lane: when u128 add/sub appears, emitter injects explicit `RangeCheck`
   input/output in Sierra signatures,
 - supported expressions:
@@ -89,6 +90,36 @@ def tyGenericTypeId : Ty -> Except EmitError String
   | .felt252 => do
       ensureKnownGenericTypeId "felt252"
       pure "felt252"
+  | .i8 => do
+      ensureKnownGenericTypeId "i8"
+      pure "i8"
+  | .i16 => do
+      ensureKnownGenericTypeId "i16"
+      pure "i16"
+  | .i32 => do
+      ensureKnownGenericTypeId "i32"
+      pure "i32"
+  | .i64 => do
+      ensureKnownGenericTypeId "i64"
+      pure "i64"
+  | .i128 => do
+      ensureKnownGenericTypeId "i128"
+      pure "i128"
+  | .u8 => do
+      ensureKnownGenericTypeId "u8"
+      pure "u8"
+  | .u16 => do
+      ensureKnownGenericTypeId "u16"
+      pure "u16"
+  | .u32 => do
+      ensureKnownGenericTypeId "u32"
+      pure "u32"
+  | .u64 => do
+      ensureKnownGenericTypeId "u64"
+      pure "u64"
+  | .qm31 => do
+      ensureKnownGenericTypeId "qm31"
+      pure "qm31"
   | .u128 => do
       ensureKnownGenericTypeId "u128"
       pure "u128"
@@ -156,6 +187,16 @@ def innerTyOfNonZeroTag (innerTag : String) : Except EmitError Ty :=
   | "u128" => .ok .u128
   | "u256" => .ok .u256
   | "bool" => .ok .bool
+  | "i8" => .ok .i8
+  | "i16" => .ok .i16
+  | "i32" => .ok .i32
+  | "i64" => .ok .i64
+  | "i128" => .ok .i128
+  | "u8" => .ok .u8
+  | "u16" => .ok .u16
+  | "u32" => .ok .u32
+  | "u64" => .ok .u64
+  | "qm31" => .ok .qm31
   | _ => .error s!"unsupported NonZero inner tag '{innerTag}' in direct Sierra subset backend"
 
 def tyOfElementTag (elemTag : String) : Except EmitError Ty :=

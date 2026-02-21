@@ -96,6 +96,14 @@ def main() -> int:
         if sierra_state == "implemented":
             if cap_id:
                 sierra_implemented.append(cap_id)
+        elif sierra_state == "fail_fast":
+            if cap_id:
+                sierra_fail_fast.append(cap_id)
+
+        # Signature typing support is orthogonal to operation-level lowering state.
+        # A capability may be fail-fast for expression lowering while still allowing
+        # deterministic signature typing for its scalar type IDs.
+        if sierra_state in {"implemented", "fail_fast"}:
             targets = cap.get("sierra_targets", {})
             if isinstance(targets, dict):
                 type_ids = targets.get("generic_type_ids", [])
@@ -106,9 +114,6 @@ def main() -> int:
                             signature_tys.add(TY_MAP[type_id_str])
                         if type_id_str in SIGNATURE_FAMILY_MAP:
                             signature_ty_families.add(SIGNATURE_FAMILY_MAP[type_id_str])
-        elif sierra_state == "fail_fast":
-            if cap_id:
-                sierra_fail_fast.append(cap_id)
 
     sierra_implemented = sorted(set(sierra_implemented))
     sierra_fail_fast = sorted(set(sierra_fail_fast))
