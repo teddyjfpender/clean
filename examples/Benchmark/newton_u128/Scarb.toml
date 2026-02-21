@@ -1,0 +1,13 @@
+[package]
+name = "newton_u128_benchmark"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+starknet = ">=2.14.0"
+
+[dev-dependencies]
+snforge_std = "0.55.0"
+
+[cairo]
+enable-gas = true

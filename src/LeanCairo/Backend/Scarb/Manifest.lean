@@ -26,6 +26,8 @@ private def renderScarbManifestWithPackageName
       "[dependencies]",
       "starknet = \">=2.14.0\"",
       "",
+      "[[target.lib]]",
+      "",
       "[[target.starknet-contract]]",
       "sierra = true",
       s!"casm = {boolToml emitCasm}",

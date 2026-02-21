@@ -162,6 +162,11 @@ Manifest:
 
 Details: `examples/README.md`
 
+Additional example tracks:
+
+1. `examples/Cairo-Baseline/<example-id>/`: handwritten Cairo baselines.
+2. `examples/Benchmark/<example-id>/`: gas comparison harnesses for baseline vs optimized implementations.
+
 ## Proof and Optimization Status
 
 Key components:

@@ -8,11 +8,16 @@ This directory is the canonical examples workspace for formal end-to-end checks.
    generated Sierra artifacts.
 3. `examples/Cairo/<example-id>/`:
    generated Cairo project artifacts.
+4. `examples/Cairo-Baseline/<example-id>/`:
+   handwritten Cairo baseline reference implementations.
+5. `examples/Benchmark/<example-id>/`:
+   gas/step comparison harnesses for baseline vs optimized paths.
 
 Rules:
 1. Example source belongs in `examples/Lean/`, not `src/`.
 2. Every `<example-id>` must exist in all three roots with the same name.
 3. `examples/Sierra/` and `examples/Cairo/` are generated outputs.
+4. `examples/Cairo-Baseline/` and `examples/Benchmark/` are manual reference/measurement packages.
 
 ## Regenerate
 
