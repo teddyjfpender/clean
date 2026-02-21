@@ -7,11 +7,11 @@
 ## Sierra Family Coverage
 
 - `implemented`: `4`
-- `fail_fast`: `13`
-- `unresolved`: `45`
+- `fail_fast`: `48`
+- `unresolved`: `10`
 
 ## Corelib Parity Coverage
 
 - `supported`: `1`
-- `partial`: `2`
-- `excluded`: `157`
+- `partial`: `8`
+- `excluded`: `151`

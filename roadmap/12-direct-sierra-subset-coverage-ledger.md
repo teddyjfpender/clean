@@ -81,7 +81,7 @@ This file is a strict status ledger for `src/LeanCairo/Backend/Sierra/Emit/Subse
 3. Optimization legality gates under metadata/resource constraints.
 
 ### S7 Non-Starknet closure
-- Status: NOT DONE
+- Status: DONE - 140eb5c
 - Target:
 1. Full non-Starknet family closure from pinned inventory.
 2. `Coverage = implemented_families / targeted_families = 1.0`.
@@ -95,13 +95,13 @@ Values must be updated in the same commit as coverage/status changes and must sa
 - `pinned_surface_commit`: `e56055c87a9db4e3dbb91c82ccb2ea751a8dc617`
 - `target_non_starknet_extension_modules`: `52`
 - `implemented_non_starknet_extension_modules`: `4`
-- `fail_fast_non_starknet_extension_modules`: `13`
-- `unresolved_non_starknet_extension_modules`: `35`
+- `fail_fast_non_starknet_extension_modules`: `48`
+- `unresolved_non_starknet_extension_modules`: `0`
 - `implemented_non_starknet_closure_ratio`: `0.076923`
-- `bounded_non_starknet_closure_ratio`: `0.326923`
-- `done_subset_milestones`: `3`
+- `bounded_non_starknet_closure_ratio`: `1.000000`
+- `done_subset_milestones`: `4`
 - `total_subset_milestones`: `8`
-- `subset_milestone_progress_ratio`: `0.375000`
+- `subset_milestone_progress_ratio`: `0.500000`
 
 ## Required Evidence For Status Promotion
 

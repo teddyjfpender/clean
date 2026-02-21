@@ -1,15 +1,15 @@
 {
   "counts": {
-    "excluded": 157,
-    "partial": 2,
+    "excluded": 151,
+    "partial": 8,
     "supported": 1
   },
   "entries": [
     {
       "module_id": "array",
       "path": "corelib/src/array.cairo",
-      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
-      "status": "excluded"
+      "reason": "mapped Sierra module is fail-fast bounded in current direct backend lane",
+      "status": "partial"
     },
     {
       "module_id": "",
@@ -26,8 +26,8 @@
     {
       "module_id": "boxing",
       "path": "corelib/src/box.cairo",
-      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
-      "status": "excluded"
+      "reason": "mapped Sierra module is fail-fast bounded in current direct backend lane",
+      "status": "partial"
     },
     {
       "module_id": "",
@@ -38,8 +38,8 @@
     {
       "module_id": "bytes31",
       "path": "corelib/src/bytes_31.cairo",
-      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
-      "status": "excluded"
+      "reason": "mapped Sierra module is fail-fast bounded in current direct backend lane",
+      "status": "partial"
     },
     {
       "module_id": "",
@@ -68,8 +68,8 @@
     {
       "module_id": "felt252_dict",
       "path": "corelib/src/dict.cairo",
-      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
-      "status": "excluded"
+      "reason": "mapped Sierra module is fail-fast bounded in current direct backend lane",
+      "status": "partial"
     },
     {
       "module_id": "",
@@ -248,8 +248,8 @@
     {
       "module_id": "nullable",
       "path": "corelib/src/nullable.cairo",
-      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
-      "status": "excluded"
+      "reason": "mapped Sierra module is fail-fast bounded in current direct backend lane",
+      "status": "partial"
     },
     {
       "module_id": "",
@@ -446,8 +446,8 @@
     {
       "module_id": "qm31",
       "path": "corelib/src/qm31.cairo",
-      "reason": "mapped Sierra module status is 'unresolved' (not yet in supported/partial lane)",
-      "status": "excluded"
+      "reason": "mapped Sierra module is fail-fast bounded in current direct backend lane",
+      "status": "partial"
     },
     {
       "module_id": "",

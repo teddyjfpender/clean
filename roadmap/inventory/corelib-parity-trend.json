@@ -7,23 +7,23 @@
       "pass": true
     },
     {
-      "current": 3,
+      "current": 9,
       "metric": "bounded_count",
       "minimum": 3,
       "pass": true
     },
     {
-      "current": 0.01875,
+      "current": 0.05625,
       "metric": "bounded_ratio",
       "minimum": 0.01875,
       "pass": true
     }
   ],
   "counts": {
-    "bounded": 3,
-    "bounded_ratio": 0.01875,
-    "excluded": 157,
-    "partial": 2,
+    "bounded": 9,
+    "bounded_ratio": 0.05625,
+    "excluded": 151,
+    "partial": 8,
     "supported": 1,
     "total": 160
   },

@@ -105,7 +105,9 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 3. Resource law tests pass.
 
 ### A8 Full non-Starknet function-family closure
-- Status: NOT DONE
+- Status: DONE - 140eb5c
+- Evidence tests: `scripts/roadmap/check_sierra_primary_closure.sh`; `scripts/roadmap/check_coverage_matrix_freshness.sh`; `scripts/roadmap/check_sierra_coverage_report_freshness.sh`; `scripts/test/sierra_primary_closure_negative.sh`; `scripts/workflow/run-sierra-checks.sh`
+- Evidence proofs: `scripts/roadmap/render_coverage_matrix.py`; `roadmap/inventory/sierra-coverage-matrix.json`; `roadmap/inventory/sierra-family-coverage-report.json`; `roadmap/inventory/sierra-family-coverage-report.md`; `scripts/roadmap/check_sierra_primary_closure.sh`
 - Acceptance tests:
 1. Coverage report shows 100% closure for targeted non-Starknet families.
 2. No unresolved TODO in enabled families without fail-fast guard.

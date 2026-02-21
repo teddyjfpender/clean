@@ -5,8 +5,8 @@
 - Coverage matrix input: `roadmap/inventory/sierra-coverage-matrix.json`
 - Total corelib files classified: `160`
 - `supported`: `1`
-- `partial`: `2`
-- `excluded`: `157`
+- `partial`: `8`
+- `excluded`: `151`
 
 ## Classification Rules
 
@@ -21,17 +21,17 @@
 
 | Corelib file | Status | Sierra module | Reason |
 | --- | --- | --- | --- |
-| `corelib/src/array.cairo` | `excluded` | `array` | mapped Sierra module status is 'unresolved' (not yet in supported/partial lane) |
+| `corelib/src/array.cairo` | `partial` | `array` | mapped Sierra module is fail-fast bounded in current direct backend lane |
 | `corelib/src/blake.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/boolean.cairo` | `partial` | `boolean` | mapped Sierra module is fail-fast bounded in current direct backend lane |
-| `corelib/src/box.cairo` | `excluded` | `boxing` | mapped Sierra module status is 'unresolved' (not yet in supported/partial lane) |
+| `corelib/src/box.cairo` | `partial` | `boxing` | mapped Sierra module is fail-fast bounded in current direct backend lane |
 | `corelib/src/byte_array.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
-| `corelib/src/bytes_31.cairo` | `excluded` | `bytes31` | mapped Sierra module status is 'unresolved' (not yet in supported/partial lane) |
+| `corelib/src/bytes_31.cairo` | `partial` | `bytes31` | mapped Sierra module is fail-fast bounded in current direct backend lane |
 | `corelib/src/circuit.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/clone.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/cmp.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/debug.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
-| `corelib/src/dict.cairo` | `excluded` | `felt252_dict` | mapped Sierra module status is 'unresolved' (not yet in supported/partial lane) |
+| `corelib/src/dict.cairo` | `partial` | `felt252_dict` | mapped Sierra module is fail-fast bounded in current direct backend lane |
 | `corelib/src/ec.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/ecdsa.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/felt_252.cairo` | `supported` | `felt252` | mapped Sierra module is implemented in current direct backend lane |
@@ -61,7 +61,7 @@
 | `corelib/src/lib.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/math.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/metaprogramming.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
-| `corelib/src/nullable.cairo` | `excluded` | `nullable` | mapped Sierra module status is 'unresolved' (not yet in supported/partial lane) |
+| `corelib/src/nullable.cairo` | `partial` | `nullable` | mapped Sierra module is fail-fast bounded in current direct backend lane |
 | `corelib/src/num.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/num/traits.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/num/traits/bit_size.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
@@ -94,7 +94,7 @@
 | `corelib/src/prelude/v2023_01.cairo` | `excluded` | `-` | excluded by scope prefix 'corelib/src/prelude/' |
 | `corelib/src/prelude/v2023_10.cairo` | `excluded` | `-` | excluded by scope prefix 'corelib/src/prelude/' |
 | `corelib/src/prelude/v2024_07.cairo` | `excluded` | `-` | excluded by scope prefix 'corelib/src/prelude/' |
-| `corelib/src/qm31.cairo` | `excluded` | `qm31` | mapped Sierra module status is 'unresolved' (not yet in supported/partial lane) |
+| `corelib/src/qm31.cairo` | `partial` | `qm31` | mapped Sierra module is fail-fast bounded in current direct backend lane |
 | `corelib/src/result.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/serde.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |
 | `corelib/src/sha256.cairo` | `excluded` | `-` | no direct Sierra module mapping in current parity rules |

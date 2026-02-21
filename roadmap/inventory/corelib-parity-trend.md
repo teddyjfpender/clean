@@ -8,14 +8,14 @@
 | Metric | Current | Minimum | Pass |
 | --- | ---: | ---: | --- |
 | `supported_count` | `1` | `1` | `true` |
-| `bounded_count` | `3` | `3` | `true` |
-| `bounded_ratio` | `0.01875` | `0.01875` | `true` |
+| `bounded_count` | `9` | `3` | `true` |
+| `bounded_ratio` | `0.05625` | `0.01875` | `true` |
 
 ## Counts
 
 - Supported: `1`
-- Partial: `2`
-- Excluded: `157`
+- Partial: `8`
+- Excluded: `151`
 - Total: `160`
-- Bounded (supported + partial): `3`
-- Bounded ratio: `0.01875`
+- Bounded (supported + partial): `9`
+- Bounded ratio: `0.05625`
