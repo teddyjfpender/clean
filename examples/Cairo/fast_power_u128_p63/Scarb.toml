@@ -1,0 +1,19 @@
+[package]
+name = "fast_power_u128_p63_contract"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+starknet = ">=2.14.0"
+
+[[target.lib]]
+
+[[target.starknet-contract]]
+sierra = true
+casm = false
+
+[profile.dev.cairo]
+inlining-strategy = "default"
+
+[profile.release.cairo]
+inlining-strategy = "default"

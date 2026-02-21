@@ -1,0 +1,12 @@
+[package]
+name = "fast_power_u128_p63_benchmark"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+
+[dev-dependencies]
+snforge_std = "0.55.0"
+
+[cairo]
+enable-gas = true

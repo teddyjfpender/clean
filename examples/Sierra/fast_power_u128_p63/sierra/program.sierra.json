@@ -1,0 +1,652 @@
+{"version": 1,
+ "type_declarations":
+ [{"long_id": {"generic_id": "RangeCheck", "generic_args": []},
+   "id": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+   "declared_type_info": null},
+  {"long_id": {"generic_id": "u128", "generic_args": []},
+   "id": {"id": 10698497612269247729, "debug_name": "u128"},
+   "declared_type_info": null},
+  {"long_id": {"generic_id": "U128MulGuarantee", "generic_args": []},
+   "id": {"id": 11371311946252800753, "debug_name": "U128MulGuarantee"},
+   "declared_type_info": null}],
+ "statements":
+ [{"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7074387970719099196, "debug_name": "pow63U128::tmp::dup_keep::0"},
+       {"id": 4297887809624246099,
+        "debug_name": "pow63U128::tmp::dup_use::1"}]}],
+    "args":
+    [{"id": 16220407098789425765, "debug_name": "pow63U128::param::x"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7074390169742355618, "debug_name": "pow63U128::tmp::dup_keep::2"},
+       {"id": 4297890008647502521,
+        "debug_name": "pow63U128::tmp::dup_use::3"}]}],
+    "args":
+    [{"id": 4297887809624246099, "debug_name": "pow63U128::tmp::dup_use::1"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15134564516858103190,
+        "debug_name": "pow63U128::tmp::u128_mul_high_raw::4"},
+       {"id": 18264805629107057349,
+        "debug_name": "pow63U128::tmp::u128_mul_low_raw::5"},
+       {"id": 1888613468105020416,
+        "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::6"}]}],
+    "args":
+    [{"id": 4297890008647502521, "debug_name": "pow63U128::tmp::dup_use::3"},
+     {"id": 7074390169742355618,
+      "debug_name": "pow63U128::tmp::dup_keep::2"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 15134564516858103190,
+      "debug_name": "pow63U128::tmp::u128_mul_high_raw::4"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10691754370770741452,
+        "debug_name": "pow63U128::tmp::u128_mul_range_check_out::8"}]}],
+    "args":
+    [{"id": 7454153531952964881,
+      "debug_name": "pow63U128::param::__range_check"},
+     {"id": 1888613468105020416,
+      "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::6"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 16370067380208438966,
+        "debug_name": "pow63U128::tmp::store_temp::9"}]}],
+    "args":
+    [{"id": 18264805629107057349,
+      "debug_name": "pow63U128::tmp::u128_mul_low_raw::5"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15355911642771544301,
+        "debug_name": "pow63U128::tmp::dup_keep::10"},
+       {"id": 8948110813167356806,
+        "debug_name": "pow63U128::tmp::dup_use::11"}]}],
+    "args":
+    [{"id": 16370067380208438966,
+      "debug_name": "pow63U128::tmp::store_temp::9"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15355909443748287879,
+        "debug_name": "pow63U128::tmp::dup_keep::12"},
+       {"id": 8948108614144100384,
+        "debug_name": "pow63U128::tmp::dup_use::13"}]}],
+    "args":
+    [{"id": 8948110813167356806,
+      "debug_name": "pow63U128::tmp::dup_use::11"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8358534837737685523,
+        "debug_name": "pow63U128::tmp::u128_mul_high_raw::14"},
+       {"id": 3517251533555854244,
+        "debug_name": "pow63U128::tmp::u128_mul_low_raw::15"},
+       {"id": 17612587678661284745,
+        "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::16"}]}],
+    "args":
+    [{"id": 8948108614144100384, "debug_name": "pow63U128::tmp::dup_use::13"},
+     {"id": 15355909443748287879,
+      "debug_name": "pow63U128::tmp::dup_keep::12"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8358534837737685523,
+      "debug_name": "pow63U128::tmp::u128_mul_high_raw::14"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11937423581276698589,
+        "debug_name": "pow63U128::tmp::u128_mul_range_check_out::18"}]}],
+    "args":
+    [{"id": 10691754370770741452,
+      "debug_name": "pow63U128::tmp::u128_mul_range_check_out::8"},
+     {"id": 17612587678661284745,
+      "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::16"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10383797966658985525,
+        "debug_name": "pow63U128::tmp::store_temp::19"}]}],
+    "args":
+    [{"id": 3517251533555854244,
+      "debug_name": "pow63U128::tmp::u128_mul_low_raw::15"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15356868217887898646,
+        "debug_name": "pow63U128::tmp::dup_keep::20"},
+       {"id": 8949104771679070325,
+        "debug_name": "pow63U128::tmp::dup_use::21"}]}],
+    "args":
+    [{"id": 10383797966658985525,
+      "debug_name": "pow63U128::tmp::store_temp::19"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15356866018864642224,
+        "debug_name": "pow63U128::tmp::dup_keep::22"},
+       {"id": 8949102572655813903,
+        "debug_name": "pow63U128::tmp::dup_use::23"}]}],
+    "args":
+    [{"id": 8949104771679070325,
+      "debug_name": "pow63U128::tmp::dup_use::21"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8355594743644416984,
+        "debug_name": "pow63U128::tmp::u128_mul_high_raw::24"},
+       {"id": 3514419191602150383,
+        "debug_name": "pow63U128::tmp::u128_mul_low_raw::25"},
+       {"id": 17609788322056427214,
+        "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::26"}]}],
+    "args":
+    [{"id": 8949102572655813903, "debug_name": "pow63U128::tmp::dup_use::23"},
+     {"id": 15356866018864642224,
+      "debug_name": "pow63U128::tmp::dup_keep::22"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8355594743644416984,
+      "debug_name": "pow63U128::tmp::u128_mul_high_raw::24"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11938397748579104310,
+        "debug_name": "pow63U128::tmp::u128_mul_range_check_out::28"}]}],
+    "args":
+    [{"id": 11937423581276698589,
+      "debug_name": "pow63U128::tmp::u128_mul_range_check_out::18"},
+     {"id": 17609788322056427214,
+      "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::26"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10382804008147272006,
+        "debug_name": "pow63U128::tmp::store_temp::29"}]}],
+    "args":
+    [{"id": 3514419191602150383,
+      "debug_name": "pow63U128::tmp::u128_mul_low_raw::25"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15357859977376355743,
+        "debug_name": "pow63U128::tmp::dup_keep::30"},
+       {"id": 8949953594655859992,
+        "debug_name": "pow63U128::tmp::dup_use::31"}]}],
+    "args":
+    [{"id": 10382804008147272006,
+      "debug_name": "pow63U128::tmp::store_temp::29"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15357862176399612165,
+        "debug_name": "pow63U128::tmp::dup_keep::32"},
+       {"id": 8949955793679116414,
+        "debug_name": "pow63U128::tmp::dup_use::33"}]}],
+    "args":
+    [{"id": 8949953594655859992,
+      "debug_name": "pow63U128::tmp::dup_use::31"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8356586503132874081,
+        "debug_name": "pow63U128::tmp::u128_mul_high_raw::34"},
+       {"id": 3515408752067351058,
+        "debug_name": "pow63U128::tmp::u128_mul_low_raw::35"},
+       {"id": 17610634946009960459,
+        "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::36"}]}],
+    "args":
+    [{"id": 8949955793679116414, "debug_name": "pow63U128::tmp::dup_use::33"},
+     {"id": 15357862176399612165,
+      "debug_name": "pow63U128::tmp::dup_keep::32"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8356586503132874081,
+      "debug_name": "pow63U128::tmp::u128_mul_high_raw::34"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11939248770579150399,
+        "debug_name": "pow63U128::tmp::u128_mul_range_check_out::38"}]}],
+    "args":
+    [{"id": 11938397748579104310,
+      "debug_name": "pow63U128::tmp::u128_mul_range_check_out::28"},
+     {"id": 17610634946009960459,
+      "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::36"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10381814447682071331,
+        "debug_name": "pow63U128::tmp::store_temp::39"}]}],
+    "args":
+    [{"id": 3515408752067351058,
+      "debug_name": "pow63U128::tmp::u128_mul_low_raw::35"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15351093582817669824,
+        "debug_name": "pow63U128::tmp::dup_keep::40"},
+       {"id": 8950947553167573511,
+        "debug_name": "pow63U128::tmp::dup_use::41"}]}],
+    "args":
+    [{"id": 10381814447682071331,
+      "debug_name": "pow63U128::tmp::store_temp::39"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5357369253888360067, "debug_name": "dup_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15351095781840926246,
+        "debug_name": "pow63U128::tmp::dup_keep::42"},
+       {"id": 8950949752190829933,
+        "debug_name": "pow63U128::tmp::dup_use::43"}]}],
+    "args":
+    [{"id": 8950947553167573511,
+      "debug_name": "pow63U128::tmp::dup_use::41"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8353751962155913798,
+        "debug_name": "pow63U128::tmp::u128_mul_high_raw::44"},
+       {"id": 3520193826672379205,
+        "debug_name": "pow63U128::tmp::u128_mul_low_raw::45"},
+       {"id": 17607800405033000176,
+        "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::46"}]}],
+    "args":
+    [{"id": 8950949752190829933, "debug_name": "pow63U128::tmp::dup_use::43"},
+     {"id": 15351095781840926246,
+      "debug_name": "pow63U128::tmp::dup_keep::42"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8353751962155913798,
+      "debug_name": "pow63U128::tmp::u128_mul_high_raw::44"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11932623113508875488,
+        "debug_name": "pow63U128::tmp::u128_mul_range_check_out::48"}]}],
+    "args":
+    [{"id": 11939248770579150399,
+      "debug_name": "pow63U128::tmp::u128_mul_range_check_out::38"},
+     {"id": 17607800405033000176,
+      "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::46"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10388578643217500828,
+        "debug_name": "pow63U128::tmp::store_temp::49"}]}],
+    "args":
+    [{"id": 3520193826672379205,
+      "debug_name": "pow63U128::tmp::u128_mul_low_raw::45"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8354748119690883739,
+        "debug_name": "pow63U128::tmp::u128_mul_high_raw::50"},
+       {"id": 3521178989091067036,
+        "debug_name": "pow63U128::tmp::u128_mul_low_raw::51"},
+       {"id": 17608800960614482961,
+        "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::52"}]}],
+    "args":
+    [{"id": 10388578643217500828,
+      "debug_name": "pow63U128::tmp::store_temp::49"},
+     {"id": 15351093582817669824,
+      "debug_name": "pow63U128::tmp::dup_keep::40"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8354748119690883739,
+      "debug_name": "pow63U128::tmp::u128_mul_high_raw::50"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11933628067136871117,
+        "debug_name": "pow63U128::tmp::u128_mul_range_check_out::54"}]}],
+    "args":
+    [{"id": 11932623113508875488,
+      "debug_name": "pow63U128::tmp::u128_mul_range_check_out::48"},
+     {"id": 17608800960614482961,
+      "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::52"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10387602276891838685,
+        "debug_name": "pow63U128::tmp::store_temp::55"}]}],
+    "args":
+    [{"id": 3521178989091067036,
+      "debug_name": "pow63U128::tmp::u128_mul_low_raw::51"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8354754716760653005,
+        "debug_name": "pow63U128::tmp::u128_mul_high_raw::56"},
+       {"id": 3521176790067810614,
+        "debug_name": "pow63U128::tmp::u128_mul_low_raw::57"},
+       {"id": 17608789965498200851,
+        "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::58"}]}],
+    "args":
+    [{"id": 10387602276891838685,
+      "debug_name": "pow63U128::tmp::store_temp::55"},
+     {"id": 15357859977376355743,
+      "debug_name": "pow63U128::tmp::dup_keep::30"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8354754716760653005,
+      "debug_name": "pow63U128::tmp::u128_mul_high_raw::56"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11934474691090404362,
+        "debug_name": "pow63U128::tmp::u128_mul_range_check_out::60"}]}],
+    "args":
+    [{"id": 11933628067136871117,
+      "debug_name": "pow63U128::tmp::u128_mul_range_check_out::54"},
+     {"id": 17608789965498200851,
+      "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::58"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10386603920333612322,
+        "debug_name": "pow63U128::tmp::store_temp::61"}]}],
+    "args":
+    [{"id": 3521176790067810614,
+      "debug_name": "pow63U128::tmp::u128_mul_low_raw::57"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8351775040248768870,
+        "debug_name": "pow63U128::tmp::u128_mul_high_raw::62"},
+       {"id": 3518243293044311341,
+        "debug_name": "pow63U128::tmp::u128_mul_low_raw::63"},
+       {"id": 17605968618660779100,
+        "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::64"}]}],
+    "args":
+    [{"id": 10386603920333612322,
+      "debug_name": "pow63U128::tmp::store_temp::61"},
+     {"id": 15356868217887898646,
+      "debug_name": "pow63U128::tmp::dup_keep::20"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8351775040248768870,
+      "debug_name": "pow63U128::tmp::u128_mul_high_raw::62"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11934468094020635096,
+        "debug_name": "pow63U128::tmp::u128_mul_range_check_out::66"}]}],
+    "args":
+    [{"id": 11934474691090404362,
+      "debug_name": "pow63U128::tmp::u128_mul_range_check_out::60"},
+     {"id": 17605968618660779100,
+      "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::64"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10386597323263843056,
+        "debug_name": "pow63U128::tmp::store_temp::67"}]}],
+    "args":
+    [{"id": 3518243293044311341,
+      "debug_name": "pow63U128::tmp::u128_mul_low_raw::63"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8351781637318538136,
+        "debug_name": "pow63U128::tmp::u128_mul_high_raw::68"},
+       {"id": 3518232297928029231,
+        "debug_name": "pow63U128::tmp::u128_mul_low_raw::69"},
+       {"id": 17606815242614312345,
+        "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::70"}]}],
+    "args":
+    [{"id": 10386597323263843056,
+      "debug_name": "pow63U128::tmp::store_temp::67"},
+     {"id": 15355911642771544301,
+      "debug_name": "pow63U128::tmp::dup_keep::10"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8351781637318538136,
+      "debug_name": "pow63U128::tmp::u128_mul_high_raw::68"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11935433465230015129,
+        "debug_name": "pow63U128::tmp::u128_mul_range_check_out::72"}]}],
+    "args":
+    [{"id": 11934468094020635096,
+      "debug_name": "pow63U128::tmp::u128_mul_range_check_out::66"},
+     {"id": 17606815242614312345,
+      "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::70"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10385616558891668069,
+        "debug_name": "pow63U128::tmp::store_temp::73"}]}],
+    "args":
+    [{"id": 3518232297928029231,
+      "debug_name": "pow63U128::tmp::u128_mul_low_raw::69"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 8352768998760482389,
+        "debug_name": "pow63U128::tmp::u128_mul_high_raw::74"},
+       {"id": 3519226256439742750,
+        "debug_name": "pow63U128::tmp::u128_mul_low_raw::75"},
+       {"id": 17606817441637568767,
+        "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::76"}]}],
+    "args":
+    [{"id": 10385616558891668069,
+      "debug_name": "pow63U128::tmp::store_temp::73"},
+     {"id": 7074387970719099196,
+      "debug_name": "pow63U128::tmp::dup_keep::0"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 8352768998760482389,
+      "debug_name": "pow63U128::tmp::u128_mul_high_raw::74"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11935440062299784395,
+        "debug_name": "pow63U128::tmp::u128_mul_range_check_out::78"}]}],
+    "args":
+    [{"id": 11935433465230015129,
+      "debug_name": "pow63U128::tmp::u128_mul_range_check_out::72"},
+     {"id": 17606817441637568767,
+      "debug_name": "pow63U128::tmp::u128_mul_guarantee_raw::76"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10385623155961437335,
+        "debug_name": "pow63U128::tmp::store_temp::79"}]}],
+    "args":
+    [{"id": 3519226256439742750,
+      "debug_name": "pow63U128::tmp::u128_mul_low_raw::75"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10377039268681697083,
+        "debug_name": "pow63U128::tmp::store_temp::80"}]}],
+    "args":
+    [{"id": 11935440062299784395,
+      "debug_name": "pow63U128::tmp::u128_mul_range_check_out::78"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10377038169170068872,
+        "debug_name": "pow63U128::tmp::store_temp::81"}]}],
+    "args":
+    [{"id": 10385623155961437335,
+      "debug_name": "pow63U128::tmp::store_temp::79"}]}},
+  {"Return":
+   [{"id": 10377039268681697083,
+     "debug_name": "pow63U128::tmp::store_temp::80"},
+    {"id": 10377038169170068872,
+     "debug_name": "pow63U128::tmp::store_temp::81"}]}],
+ "libfunc_declarations":
+ [{"long_id":
+   {"generic_id": "dup",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}}]},
+   "id": {"id": 5357369253888360067, "debug_name": "dup_u128"}},
+  {"long_id": {"generic_id": "u128_guarantee_mul", "generic_args": []},
+   "id": {"id": 1500015517831439693, "debug_name": "u128_guarantee_mul"}},
+  {"long_id":
+   {"generic_id": "drop",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}}]},
+   "id": {"id": 8180805564406204157, "debug_name": "drop_u128"}},
+  {"long_id": {"generic_id": "u128_mul_guarantee_verify", "generic_args": []},
+   "id":
+   {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}}]},
+   "id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 5158587525321846130, "debug_name": "RangeCheck"}}]},
+   "id": {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"}}],
+ "funcs":
+ [{"signature":
+   {"ret_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 10698497612269247729, "debug_name": "u128"}],
+    "param_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 10698497612269247729, "debug_name": "u128"}]},
+   "params":
+   [{"ty": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     "id":
+     {"id": 7454153531952964881,
+      "debug_name": "pow63U128::param::__range_check"}},
+    {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
+     "id": {"id": 16220407098789425765, "debug_name": "pow63U128::param::x"}}],
+   "id": {"id": 1207134373944344202, "debug_name": "pow63U128"},
+   "entry_point": 0}]}

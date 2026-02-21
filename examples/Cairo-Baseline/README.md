@@ -5,3 +5,4 @@ Handwritten Cairo baseline implementations used for side-by-side comparison agai
 Current baseline set:
 - `newton_u128`
 - `fast_power_u128`
+- `fast_power_u128_p63`
