@@ -49,7 +49,9 @@ Implement the capability-driven expansion engine that systematizes function-fami
 3. Evaluator and optimizer recognize expanded MIR families without unsound fallback.
 
 ### SXP-3 Generated lowering scaffold pipeline
-- Status: NOT DONE
+- Status: DONE - edff160
+- Evidence tests: `scripts/roadmap/check_lowering_scaffold_sync.sh`; `scripts/test/lowering_scaffold_reproducibility.sh`; `scripts/test/lowering_scaffold_sync_negative.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`; `python3 scripts/roadmap/generate_lowering_scaffolds.py --registry roadmap/capabilities/registry.json --out-sierra src/LeanCairo/Backend/Sierra/Generated/LoweringScaffold.lean --out-cairo src/LeanCairo/Backend/Cairo/Generated/LoweringScaffold.lean`
+- Evidence proofs: `scripts/roadmap/generate_lowering_scaffolds.py`; `scripts/roadmap/check_lowering_scaffold_sync.sh`; `src/LeanCairo/Backend/Sierra/Generated/LoweringScaffold.lean`; `src/LeanCairo/Backend/Cairo/Generated/LoweringScaffold.lean`; `roadmap/capabilities/registry.json`
 - Acceptance tests:
 1. Sierra and Cairo lowering scaffold generation is reproducible.
 2. Non-implemented capabilities generate fail-fast stubs.
