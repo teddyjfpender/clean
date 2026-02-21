@@ -64,6 +64,11 @@ python3 scripts/bench/generate_profile_artifacts.py \
   --out-json generated/examples/profile-artifacts.json \
   --out-md generated/examples/profile-artifacts.md
 ./scripts/roadmap/check_profile_artifacts_freshness.sh
+python3 scripts/bench/generate_cost_model_calibration.py \
+  --summary generated/examples/benchmark-summary.json \
+  --out-json generated/examples/cost-model-calibration.json \
+  --out-md generated/examples/cost-model-calibration.md
+./scripts/roadmap/check_cost_model_calibration_freshness.sh
 ```
 
 ## Validate Structure

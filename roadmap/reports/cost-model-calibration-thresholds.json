@@ -1,0 +1,8 @@
+{
+  "global": {
+    "max_max_abs_pct_error": 0.1,
+    "max_mean_abs_pct_error": 0.1,
+    "min_case_count": 3
+  },
+  "version": 1
+}

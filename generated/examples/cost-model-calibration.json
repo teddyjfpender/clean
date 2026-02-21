@@ -1,0 +1,65 @@
+{
+  "case_count": 5,
+  "cases": [
+    {
+      "abs_error": 11.95515999943018,
+      "abs_error_pct": 5.985339993016035e-05,
+      "baseline_sierra_gas": 108703670.0,
+      "coefficient": 0.183748,
+      "family": "integer",
+      "id": "fast_power_u128",
+      "measured_sierra_gas": 19974070.0,
+      "predicted_sierra_gas": 19974081.95516
+    },
+    {
+      "abs_error": 16.560249999165535,
+      "abs_error_pct": 4.4287849558279585e-05,
+      "baseline_sierra_gas": 191565750.0,
+      "coefficient": 0.195193,
+      "family": "integer",
+      "id": "fast_power_u128_p63",
+      "measured_sierra_gas": 37392310.0,
+      "predicted_sierra_gas": 37392293.43975
+    },
+    {
+      "abs_error": 47.06155999994371,
+      "abs_error_pct": 0.005983289047097287,
+      "baseline_sierra_gas": 147523830.0,
+      "coefficient": 0.005332,
+      "family": "integer",
+      "id": "karatsuba_u128",
+      "measured_sierra_gas": 786550.0,
+      "predicted_sierra_gas": 786597.06156
+    },
+    {
+      "abs_error": 39.52521000802517,
+      "abs_error_pct": 3.336460572111117e-05,
+      "baseline_sierra_gas": 121444330.0,
+      "coefficient": 0.975463,
+      "family": "fixed_point",
+      "id": "newton_u128",
+      "measured_sierra_gas": 118464490.0,
+      "predicted_sierra_gas": 118464450.47478999
+    },
+    {
+      "abs_error": 0.0,
+      "abs_error_pct": 0.0,
+      "baseline_sierra_gas": 32128950.0,
+      "coefficient": 1.0,
+      "family": "fixed_point",
+      "id": "sq128x128_u128",
+      "measured_sierra_gas": 32128950.0,
+      "predicted_sierra_gas": 32128950.0
+    }
+  ],
+  "metrics": {
+    "max_abs_pct_error": 0.005983289047097287,
+    "mean_abs_pct_error": 0.0012241589804613676
+  },
+  "model": {
+    "description": "Per-case baseline-to-generated ratio bootstrap calibration.",
+    "name": "ratio_by_case_v1"
+  },
+  "summary_source": "/Users/theodorepender/Coding/clean/generated/examples/benchmark-summary.json",
+  "version": 1
+}
