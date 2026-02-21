@@ -7,3 +7,4 @@ Current benchmark set:
 - `fast_power_u128`
 - `fast_power_u128_p63`
 - `karatsuba_u128`
+- `sq128x128_u128`

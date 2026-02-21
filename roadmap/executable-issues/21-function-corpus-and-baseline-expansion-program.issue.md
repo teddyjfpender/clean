@@ -1,0 +1,76 @@
+# Executable Issue: `roadmap/21-function-corpus-and-baseline-expansion-program.md`
+
+- Source roadmap file: [`roadmap/21-function-corpus-and-baseline-expansion-program.md`](../21-function-corpus-and-baseline-expansion-program.md)
+- Issue class: Corpus and baseline expansion
+- Priority: P0
+- Overall status: NOT DONE
+
+## Objective
+
+Build a manifest-driven complex function corpus program with baseline ingestion, vector generation, and capability-linked coverage reporting.
+
+## Implementation loci
+
+1. `config/examples-manifest.json`
+2. `examples/**`
+3. `scripts/examples/**`
+4. `scripts/test/examples_structure.sh`
+5. `scripts/test/sierra_differential.sh`
+6. `scripts/test/backend_parity.sh`
+7. `roadmap/21-function-corpus-and-baseline-expansion-program.md`
+
+## Formal method requirements
+
+1. Corpus and baseline generation is reproducible.
+2. Baseline provenance and patching is explicit.
+3. Capability promotion requires linked corpus evidence.
+
+## Milestone status ledger
+
+### COR-1 Unified corpus manifest schema and validation
+- Status: NOT DONE
+- Acceptance tests:
+1. Manifest validates corpus, baseline, benchmark, and capability mapping fields.
+2. Missing mirror artifacts fail structure checks.
+3. Regeneration is deterministic.
+
+### COR-2 Baseline ingestion and patch governance
+- Status: NOT DONE
+- Acceptance tests:
+1. Baseline pull/sync scripts are reproducible and pinned.
+2. Baseline patches are scripted and justified.
+3. Provenance metadata checks pass.
+
+### COR-3 Differential vector generation and replay tooling
+- Status: NOT DONE
+- Acceptance tests:
+1. Equivalence vectors generate deterministically.
+2. Boundary/failure vectors are generated per capability class.
+3. Replay tooling reproduces mismatches.
+
+### COR-4 Complex kernel pack expansion
+- Status: NOT DONE
+- Acceptance tests:
+1. Medium/high complexity kernels exist across all planned family domains.
+2. Generated and baseline paths remain signature-aligned.
+3. Complex corpus differential suites pass.
+
+### COR-5 Corpus-capability coverage reporting
+- Status: NOT DONE
+- Acceptance tests:
+1. Coverage report maps implemented capabilities to corpus items.
+2. Missing coverage for implemented capabilities fails checks.
+3. Coverage trend reports are generated and fresh.
+
+## Global strict acceptance tests
+
+1. `./scripts/examples/generate_examples.sh`
+2. `./scripts/test/examples_structure.sh`
+3. `scripts/test/sierra_differential.sh`
+4. `scripts/test/backend_parity.sh`
+
+## Completion criteria
+
+1. COR-1 through COR-5 are `DONE - <commit>`.
+2. Complex corpus growth is deterministic and capability-linked.
+3. Baseline comparisons are provenance-safe and reproducible.

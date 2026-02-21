@@ -31,6 +31,19 @@ EXPLICIT_DEPS: Dict[str, List[str]] = {
     "R1": ["Q3"],
     "X1": ["M-00-3"],
     "E1": ["M-04-1"],
+    "SXP-1": ["A2", "B2", "O2"],
+    "CFB-1": ["SXP-2"],
+    "LPA-1": ["SXP-3", "CFB-2", "Q3"],
+    "CREG-1": ["SXP-1"],
+    "TYC-1": ["CREG-2", "E3"],
+    "EFF-1": ["TYC-2"],
+    "SCL-1": ["CREG-3", "EFF-2", "A2"],
+    "CPL-1": ["CREG-3", "TYC-4", "B2"],
+    "COR-1": ["CFB-1", "CREG-2"],
+    "BEN-1": ["CFB-3", "COR-2"],
+    "OPTX-1": ["O2", "EFF-4", "BEN-2"],
+    "CIX-1": ["LPA-2", "BEN-4", "COR-5"],
+    "AUD-1": ["CIX-4", "LPA-4", "SCL-5", "CPL-4", "OPTX-5"],
 }
 
 

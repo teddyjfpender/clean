@@ -43,6 +43,13 @@
       "lean_sources": [
         "examples/Lean/karatsuba_u128/Example.lean"
       ]
+    },
+    {
+      "id": "sq128x128_u128",
+      "module": "sq128x128_u128.Example",
+      "lean_sources": [
+        "examples/Lean/sq128x128_u128/Example.lean"
+      ]
     }
   ]
 }

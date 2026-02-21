@@ -30,6 +30,19 @@ This plan treats `spec.md` and `spec2.md` as canonical constraints and assumes p
 - [`roadmap/10-risk-register-and-mitigations.md`](10-risk-register-and-mitigations.md): risk control plan.
 - [`roadmap/11-evaluator-type-domain-separation.md`](11-evaluator-type-domain-separation.md): typed evaluator domains, fail-fast semantics, and proof closure for non-interference.
 - [`roadmap/12-direct-sierra-subset-coverage-ledger.md`](12-direct-sierra-subset-coverage-ledger.md): strict completed/pending subset ledger for the direct Sierra emitter lane.
+- [`roadmap/13-function-subset-expansion-engine.md`](13-function-subset-expansion-engine.md): capability-driven engine for rapid, formally constrained subset growth.
+- [`roadmap/14-complex-function-corpus-and-benchmarking-lab.md`](14-complex-function-corpus-and-benchmarking-lab.md): manifest-driven complex corpus generation and benchmark scaling.
+- [`roadmap/15-proof-obligation-and-gate-scaling.md`](15-proof-obligation-and-gate-scaling.md): automated proof/gate governance for large capability growth.
+- [`roadmap/16-capability-registry-schema-and-projection-system.md`](16-capability-registry-schema-and-projection-system.md): canonical capability schema and projection system for support-state governance.
+- [`roadmap/17-type-system-and-semantics-closure-program.md`](17-type-system-and-semantics-closure-program.md): full type-family semantic closure program.
+- [`roadmap/18-effects-control-flow-and-resource-semantics.md`](18-effects-control-flow-and-resource-semantics.md): effect/control/resource semantics closure for complex kernels.
+- [`roadmap/19-track-a-sierra-family-closure-execution-plan.md`](19-track-a-sierra-family-closure-execution-plan.md): strict Track-A family closure execution plan.
+- [`roadmap/20-track-b-cairo-parity-and-reviewability-plan.md`](20-track-b-cairo-parity-and-reviewability-plan.md): strict Track-B parity and reviewability plan.
+- [`roadmap/21-function-corpus-and-baseline-expansion-program.md`](21-function-corpus-and-baseline-expansion-program.md): complex corpus and baseline expansion program.
+- [`roadmap/22-benchmarking-cost-model-and-profiling-governance.md`](22-benchmarking-cost-model-and-profiling-governance.md): benchmarking/profiling governance and cost-model calibration plan.
+- [`roadmap/23-verified-optimizing-compiler-escalation-plan.md`](23-verified-optimizing-compiler-escalation-plan.md): escalation path to verified optimizing compiler behavior.
+- [`roadmap/24-ci-gate-orchestration-and-release-automation.md`](24-ci-gate-orchestration-and-release-automation.md): CI gate orchestration and release automation scaling.
+- [`roadmap/25-full-function-compiler-completion-matrix.md`](25-full-function-compiler-completion-matrix.md): final completion matrix and certification program.
 - [`roadmap/inventory/corelib-src-inventory.md`](inventory/corelib-src-inventory.md): pinned corelib source inventory.
 - [`roadmap/inventory/sierra-extensions-inventory.md`](inventory/sierra-extensions-inventory.md): pinned Sierra module inventory.
 - [`roadmap/inventory/compiler-crates-inventory.md`](inventory/compiler-crates-inventory.md): pinned compiler crate focus inventory.

@@ -42,6 +42,9 @@ lean_lib fast_power_u128_p63 where
 lean_lib karatsuba_u128 where
   srcDir := "../examples/Lean"
 
+lean_lib sq128x128_u128 where
+  srcDir := "../examples/Lean"
+
 @[default_target]
 lean_exe «leancairo-gen» where
   root := `LeanCairo.CLI.Main

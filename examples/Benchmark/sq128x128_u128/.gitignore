@@ -1,0 +1,5 @@
+.snfoundry_cache/
+snfoundry_trace/
+.artifacts/
+target/
+Scarb.lock

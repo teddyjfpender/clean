@@ -55,6 +55,45 @@ deps_for_issue() {
     11-evaluator-type-domain-separation.issue.md)
       echo "03-typed-ir-generalization-plan.issue.md 04-semantics-proof-and-law-plan.issue.md"
       ;;
+    13-function-subset-expansion-engine.issue.md)
+      echo "03-typed-ir-generalization-plan.issue.md 04-semantics-proof-and-law-plan.issue.md 05-track-a-lean-to-sierra-functions.issue.md 06-track-b-lean-to-cairo-functions.issue.md 12-direct-sierra-subset-coverage-ledger.issue.md"
+      ;;
+    14-complex-function-corpus-and-benchmarking-lab.issue.md)
+      echo "05-track-a-lean-to-sierra-functions.issue.md 06-track-b-lean-to-cairo-functions.issue.md 07-low-level-optimization-sierra-casm.issue.md 13-function-subset-expansion-engine.issue.md"
+      ;;
+    15-proof-obligation-and-gate-scaling.issue.md)
+      echo "08-quality-gates-bench-and-release.issue.md 13-function-subset-expansion-engine.issue.md 14-complex-function-corpus-and-benchmarking-lab.issue.md"
+      ;;
+    16-capability-registry-schema-and-projection-system.issue.md)
+      echo "03-typed-ir-generalization-plan.issue.md 04-semantics-proof-and-law-plan.issue.md 13-function-subset-expansion-engine.issue.md"
+      ;;
+    17-type-system-and-semantics-closure-program.issue.md)
+      echo "11-evaluator-type-domain-separation.issue.md 16-capability-registry-schema-and-projection-system.issue.md"
+      ;;
+    18-effects-control-flow-and-resource-semantics.issue.md)
+      echo "04-semantics-proof-and-law-plan.issue.md 17-type-system-and-semantics-closure-program.issue.md"
+      ;;
+    19-track-a-sierra-family-closure-execution-plan.issue.md)
+      echo "05-track-a-lean-to-sierra-functions.issue.md 16-capability-registry-schema-and-projection-system.issue.md 17-type-system-and-semantics-closure-program.issue.md 18-effects-control-flow-and-resource-semantics.issue.md"
+      ;;
+    20-track-b-cairo-parity-and-reviewability-plan.issue.md)
+      echo "06-track-b-lean-to-cairo-functions.issue.md 16-capability-registry-schema-and-projection-system.issue.md 17-type-system-and-semantics-closure-program.issue.md 18-effects-control-flow-and-resource-semantics.issue.md"
+      ;;
+    21-function-corpus-and-baseline-expansion-program.issue.md)
+      echo "14-complex-function-corpus-and-benchmarking-lab.issue.md 16-capability-registry-schema-and-projection-system.issue.md 19-track-a-sierra-family-closure-execution-plan.issue.md 20-track-b-cairo-parity-and-reviewability-plan.issue.md"
+      ;;
+    22-benchmarking-cost-model-and-profiling-governance.issue.md)
+      echo "07-low-level-optimization-sierra-casm.issue.md 14-complex-function-corpus-and-benchmarking-lab.issue.md 21-function-corpus-and-baseline-expansion-program.issue.md"
+      ;;
+    23-verified-optimizing-compiler-escalation-plan.issue.md)
+      echo "07-low-level-optimization-sierra-casm.issue.md 15-proof-obligation-and-gate-scaling.issue.md 17-type-system-and-semantics-closure-program.issue.md 18-effects-control-flow-and-resource-semantics.issue.md 19-track-a-sierra-family-closure-execution-plan.issue.md 22-benchmarking-cost-model-and-profiling-governance.issue.md"
+      ;;
+    24-ci-gate-orchestration-and-release-automation.issue.md)
+      echo "08-quality-gates-bench-and-release.issue.md 15-proof-obligation-and-gate-scaling.issue.md 21-function-corpus-and-baseline-expansion-program.issue.md 22-benchmarking-cost-model-and-profiling-governance.issue.md 23-verified-optimizing-compiler-escalation-plan.issue.md"
+      ;;
+    25-full-function-compiler-completion-matrix.issue.md)
+      echo "09-milestones-and-execution-order.issue.md 10-risk-register-and-mitigations.issue.md 15-proof-obligation-and-gate-scaling.issue.md 19-track-a-sierra-family-closure-execution-plan.issue.md 20-track-b-cairo-parity-and-reviewability-plan.issue.md 22-benchmarking-cost-model-and-profiling-governance.issue.md 23-verified-optimizing-compiler-escalation-plan.issue.md 24-ci-gate-orchestration-and-release-automation.issue.md"
+      ;;
     inventory/README.issue.md)
       echo "01-canonical-upstream-surfaces.issue.md"
       ;;

@@ -21,6 +21,19 @@ Status legend:
 - `roadmap/10-risk-register-and-mitigations.md` -> `roadmap/executable-issues/10-risk-register-and-mitigations.issue.md` (`DONE - 1607761`)
 - `roadmap/11-evaluator-type-domain-separation.md` -> `roadmap/executable-issues/11-evaluator-type-domain-separation.issue.md` (`DONE - 9461b3d`)
 - `roadmap/12-direct-sierra-subset-coverage-ledger.md` -> `roadmap/executable-issues/12-direct-sierra-subset-coverage-ledger.issue.md` (`DONE - 00057f5`)
+- `roadmap/13-function-subset-expansion-engine.md` -> `roadmap/executable-issues/13-function-subset-expansion-engine.issue.md` (`NOT DONE`)
+- `roadmap/14-complex-function-corpus-and-benchmarking-lab.md` -> `roadmap/executable-issues/14-complex-function-corpus-and-benchmarking-lab.issue.md` (`NOT DONE`)
+- `roadmap/15-proof-obligation-and-gate-scaling.md` -> `roadmap/executable-issues/15-proof-obligation-and-gate-scaling.issue.md` (`NOT DONE`)
+- `roadmap/16-capability-registry-schema-and-projection-system.md` -> `roadmap/executable-issues/16-capability-registry-schema-and-projection-system.issue.md` (`NOT DONE`)
+- `roadmap/17-type-system-and-semantics-closure-program.md` -> `roadmap/executable-issues/17-type-system-and-semantics-closure-program.issue.md` (`NOT DONE`)
+- `roadmap/18-effects-control-flow-and-resource-semantics.md` -> `roadmap/executable-issues/18-effects-control-flow-and-resource-semantics.issue.md` (`NOT DONE`)
+- `roadmap/19-track-a-sierra-family-closure-execution-plan.md` -> `roadmap/executable-issues/19-track-a-sierra-family-closure-execution-plan.issue.md` (`NOT DONE`)
+- `roadmap/20-track-b-cairo-parity-and-reviewability-plan.md` -> `roadmap/executable-issues/20-track-b-cairo-parity-and-reviewability-plan.issue.md` (`NOT DONE`)
+- `roadmap/21-function-corpus-and-baseline-expansion-program.md` -> `roadmap/executable-issues/21-function-corpus-and-baseline-expansion-program.issue.md` (`NOT DONE`)
+- `roadmap/22-benchmarking-cost-model-and-profiling-governance.md` -> `roadmap/executable-issues/22-benchmarking-cost-model-and-profiling-governance.issue.md` (`NOT DONE`)
+- `roadmap/23-verified-optimizing-compiler-escalation-plan.md` -> `roadmap/executable-issues/23-verified-optimizing-compiler-escalation-plan.issue.md` (`NOT DONE`)
+- `roadmap/24-ci-gate-orchestration-and-release-automation.md` -> `roadmap/executable-issues/24-ci-gate-orchestration-and-release-automation.issue.md` (`NOT DONE`)
+- `roadmap/25-full-function-compiler-completion-matrix.md` -> `roadmap/executable-issues/25-full-function-compiler-completion-matrix.issue.md` (`NOT DONE`)
 
 ## Inventory files -> executable issues
 

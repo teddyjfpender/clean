@@ -1,0 +1,69 @@
+# Executable Issue: `roadmap/25-full-function-compiler-completion-matrix.md`
+
+- Source roadmap file: [`roadmap/25-full-function-compiler-completion-matrix.md`](../25-full-function-compiler-completion-matrix.md)
+- Issue class: Final completion audit and certification
+- Priority: P0
+- Overall status: NOT DONE
+
+## Objective
+
+Deliver machine-verifiable completion audits and certification for function-domain delivery across Track A and Track B.
+
+## Implementation loci
+
+1. `roadmap/25-full-function-compiler-completion-matrix.md`
+2. `roadmap/reports/**`
+3. `scripts/roadmap/**`
+4. `scripts/workflow/**`
+5. `roadmap/executable-issues/**`
+
+## Formal method requirements
+
+1. Completion status is derived from machine-validated metrics and evidence.
+2. Track-A and Track-B completion predicates are explicit and checkable.
+3. Program-level completion cannot be declared without closure gates.
+
+## Milestone status ledger
+
+### AUD-1 Completion matrix schema and data sources
+- Status: NOT DONE
+- Acceptance tests:
+1. Completion matrix schema validates required fields.
+2. Missing required data sources fail checks.
+3. Matrix generation is deterministic.
+
+### AUD-2 Track-A completion audit automation
+- Status: NOT DONE
+- Acceptance tests:
+1. Track-A closure predicates are validated automatically.
+2. Missing family/proof/benchmark closure fails audit.
+3. Audit diagnostics are reproducible.
+
+### AUD-3 Track-B completion audit automation
+- Status: NOT DONE
+- Acceptance tests:
+1. Track-B parity/reviewability predicates are validated automatically.
+2. Undocumented divergence blocks completion.
+3. Audit diagnostics are reproducible.
+
+### AUD-4 Program completion certificate
+- Status: NOT DONE
+- Acceptance tests:
+1. Completion certificate generation is deterministic.
+2. Certificate is blocked if any mandatory dimension is not ready.
+3. Certificate includes evidence links and closure summaries.
+
+## Global strict acceptance tests
+
+1. `scripts/roadmap/check_issue_statuses.sh`
+2. `scripts/roadmap/check_issue_dependencies.sh`
+3. `scripts/roadmap/check_milestone_dependencies.py`
+4. `scripts/roadmap/check_release_reports_freshness.sh`
+5. `./scripts/workflow/run-sierra-checks.sh`
+6. `./scripts/workflow/run-mvp-checks.sh`
+
+## Completion criteria
+
+1. AUD-1 through AUD-4 are `DONE - <commit>`.
+2. Completion claims are fully automated and evidence-backed.
+3. Final certification is reproducible and audit-ready.

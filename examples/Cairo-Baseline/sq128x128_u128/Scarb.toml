@@ -1,0 +1,9 @@
+[package]
+name = "sq128x128_u128_baseline"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+
+[cairo]
+enable-gas = true
