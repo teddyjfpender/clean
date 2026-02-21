@@ -36,6 +36,8 @@ Prerequisite:
 - `sierra-family-coverage-report.md`
 - `capability-coverage-report.json`
 - `capability-coverage-report.md`
+- `capability-obligation-report.json`
+- `capability-obligation-report.md`
 
 ## Capability Coverage Generator
 
@@ -52,4 +54,22 @@ Capability closure SLO gate:
 
 ```bash
 scripts/roadmap/check_capability_closure_slo.sh
+```
+
+## Capability Obligation Generator
+
+Run:
+
+```bash
+python3 scripts/roadmap/project_capability_obligations.py \
+  --registry roadmap/capabilities/registry.json \
+  --obligations roadmap/capabilities/obligations.json \
+  --out-json roadmap/inventory/capability-obligation-report.json \
+  --out-md roadmap/inventory/capability-obligation-report.md
+```
+
+Capability obligation gate:
+
+```bash
+scripts/roadmap/check_capability_obligations.sh
 ```

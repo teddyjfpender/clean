@@ -1,0 +1,193 @@
+{
+  "implemented_capability_count": 7,
+  "implemented_missing_obligations": [],
+  "implemented_with_satisfied_obligations": 7,
+  "obligation_entry_count": 8,
+  "obligations": "roadmap/capabilities/obligations.json",
+  "registry": "roadmap/capabilities/registry.json",
+  "rows": [
+    {
+      "benchmark_ref_count": 0,
+      "capability_id": "cap.aggregate.tuple_struct_enum",
+      "family_group": "aggregate",
+      "has_obligation_entry": false,
+      "overall_support_state": "planned",
+      "proof_ref_count": 0,
+      "required_for_states": [],
+      "satisfies_current_state": false,
+      "test_ref_count": 0
+    },
+    {
+      "benchmark_ref_count": 0,
+      "capability_id": "cap.circuit.constraint_gate",
+      "family_group": "circuit",
+      "has_obligation_entry": false,
+      "overall_support_state": "planned",
+      "proof_ref_count": 0,
+      "required_for_states": [],
+      "satisfies_current_state": false,
+      "test_ref_count": 0
+    },
+    {
+      "benchmark_ref_count": 0,
+      "capability_id": "cap.collection.array_span_dict",
+      "family_group": "collection",
+      "has_obligation_entry": false,
+      "overall_support_state": "planned",
+      "proof_ref_count": 0,
+      "required_for_states": [],
+      "satisfies_current_state": false,
+      "test_ref_count": 0
+    },
+    {
+      "benchmark_ref_count": 0,
+      "capability_id": "cap.control.calls_loops_panic",
+      "family_group": "control",
+      "has_obligation_entry": false,
+      "overall_support_state": "planned",
+      "proof_ref_count": 0,
+      "required_for_states": [],
+      "satisfies_current_state": false,
+      "test_ref_count": 0
+    },
+    {
+      "benchmark_ref_count": 0,
+      "capability_id": "cap.crypto.round_mix",
+      "family_group": "crypto",
+      "has_obligation_entry": false,
+      "overall_support_state": "planned",
+      "proof_ref_count": 0,
+      "required_for_states": [],
+      "satisfies_current_state": false,
+      "test_ref_count": 0
+    },
+    {
+      "benchmark_ref_count": 0,
+      "capability_id": "cap.field.qm31",
+      "family_group": "field",
+      "has_obligation_entry": false,
+      "overall_support_state": "planned",
+      "proof_ref_count": 0,
+      "required_for_states": [],
+      "satisfies_current_state": false,
+      "test_ref_count": 0
+    },
+    {
+      "benchmark_ref_count": 2,
+      "capability_id": "cap.integer.family.non_u128",
+      "family_group": "integer",
+      "has_obligation_entry": true,
+      "overall_support_state": "fail_fast",
+      "proof_ref_count": 1,
+      "required_for_states": [
+        "fail_fast"
+      ],
+      "satisfies_current_state": true,
+      "test_ref_count": 2
+    },
+    {
+      "benchmark_ref_count": 3,
+      "capability_id": "cap.integer.u128.add.wrapping",
+      "family_group": "integer",
+      "has_obligation_entry": true,
+      "overall_support_state": "implemented",
+      "proof_ref_count": 2,
+      "required_for_states": [
+        "implemented"
+      ],
+      "satisfies_current_state": true,
+      "test_ref_count": 3
+    },
+    {
+      "benchmark_ref_count": 3,
+      "capability_id": "cap.integer.u128.mul.wrapping",
+      "family_group": "integer",
+      "has_obligation_entry": true,
+      "overall_support_state": "implemented",
+      "proof_ref_count": 2,
+      "required_for_states": [
+        "implemented"
+      ],
+      "satisfies_current_state": true,
+      "test_ref_count": 3
+    },
+    {
+      "benchmark_ref_count": 3,
+      "capability_id": "cap.integer.u128.sub.wrapping",
+      "family_group": "integer",
+      "has_obligation_entry": true,
+      "overall_support_state": "implemented",
+      "proof_ref_count": 2,
+      "required_for_states": [
+        "implemented"
+      ],
+      "satisfies_current_state": true,
+      "test_ref_count": 3
+    },
+    {
+      "benchmark_ref_count": 0,
+      "capability_id": "cap.resource.gas_ap_segment",
+      "family_group": "resource",
+      "has_obligation_entry": false,
+      "overall_support_state": "planned",
+      "proof_ref_count": 0,
+      "required_for_states": [],
+      "satisfies_current_state": false,
+      "test_ref_count": 0
+    },
+    {
+      "benchmark_ref_count": 2,
+      "capability_id": "cap.scalar.bool.literal",
+      "family_group": "scalar",
+      "has_obligation_entry": true,
+      "overall_support_state": "implemented",
+      "proof_ref_count": 2,
+      "required_for_states": [
+        "implemented"
+      ],
+      "satisfies_current_state": true,
+      "test_ref_count": 3
+    },
+    {
+      "benchmark_ref_count": 2,
+      "capability_id": "cap.scalar.felt252.add",
+      "family_group": "scalar",
+      "has_obligation_entry": true,
+      "overall_support_state": "implemented",
+      "proof_ref_count": 2,
+      "required_for_states": [
+        "implemented"
+      ],
+      "satisfies_current_state": true,
+      "test_ref_count": 3
+    },
+    {
+      "benchmark_ref_count": 2,
+      "capability_id": "cap.scalar.felt252.mul",
+      "family_group": "scalar",
+      "has_obligation_entry": true,
+      "overall_support_state": "implemented",
+      "proof_ref_count": 2,
+      "required_for_states": [
+        "implemented"
+      ],
+      "satisfies_current_state": true,
+      "test_ref_count": 3
+    },
+    {
+      "benchmark_ref_count": 2,
+      "capability_id": "cap.scalar.felt252.sub",
+      "family_group": "scalar",
+      "has_obligation_entry": true,
+      "overall_support_state": "implemented",
+      "proof_ref_count": 2,
+      "required_for_states": [
+        "implemented"
+      ],
+      "satisfies_current_state": true,
+      "test_ref_count": 3
+    }
+  ],
+  "total_capabilities": 15,
+  "version": 1
+}

@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "obligations": [
+    {
+      "benchmark_refs": [
+        "scripts/bench/check_optimizer_family_thresholds.sh",
+        "scripts/bench/check_optimizer_non_regression.sh"
+      ],
+      "capability_id": "cap.integer.family.non_u128",
+      "notes": "Fail-fast lane must remain covered until non-u128 lowering is implemented.",
+      "proof_refs": [
+        "readVarStrict_unsupported_failfast"
+      ],
+      "required_for_states": [
+        "fail_fast"
+      ],
+      "test_refs": [
+        "scripts/test/eval_unsupported_domain_failfast.sh",
+        "scripts/test/sierra_failfast_unsupported.sh"
+      ]
+    },
+    {
+      "benchmark_refs": [
+        "scripts/bench/check_optimizer_family_thresholds.sh",
+        "scripts/bench/check_optimizer_non_regression.sh",
+        "scripts/bench/generated/run_manifest_benchmarks.sh"
+      ],
+      "capability_id": "cap.integer.u128.add.wrapping",
+      "notes": "Range-checked u128 addition path.",
+      "proof_refs": [
+        "evalExprStateStrict_success_transition",
+        "optimizeExprPipelineSound"
+      ],
+      "required_for_states": [
+        "implemented"
+      ],
+      "test_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/test/sierra_u128_range_checked_e2e.sh",
+        "scripts/test/sierra_u128_wrapping_differential.sh"
+      ]
+    },
+    {
+      "benchmark_refs": [
+        "scripts/bench/check_optimizer_family_thresholds.sh",
+        "scripts/bench/check_optimizer_non_regression.sh",
+        "scripts/bench/generated/run_manifest_benchmarks.sh"
+      ],
+      "capability_id": "cap.integer.u128.mul.wrapping",
+      "notes": "Range-checked u128 multiplication path.",
+      "proof_refs": [
+        "evalExprStateStrict_success_transition",
+        "optimizeExprPipelineSound"
+      ],
+      "required_for_states": [
+        "implemented"
+      ],
+      "test_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/test/sierra_u128_range_checked_e2e.sh",
+        "scripts/test/sierra_u128_wrapping_differential.sh"
+      ]
+    },
+    {
+      "benchmark_refs": [
+        "scripts/bench/check_optimizer_family_thresholds.sh",
+        "scripts/bench/check_optimizer_non_regression.sh",
+        "scripts/bench/generated/run_manifest_benchmarks.sh"
+      ],
+      "capability_id": "cap.integer.u128.sub.wrapping",
+      "notes": "Range-checked u128 subtraction path.",
+      "proof_refs": [
+        "evalExprStateStrict_success_transition",
+        "optimizeExprPipelineSound"
+      ],
+      "required_for_states": [
+        "implemented"
+      ],
+      "test_refs": [
+        "scripts/test/sierra_failfast_unsupported.sh",
+        "scripts/test/sierra_u128_range_checked_e2e.sh",
+        "scripts/test/sierra_u128_wrapping_differential.sh"
+      ]
+    },
+    {
+      "benchmark_refs": [
+        "scripts/bench/check_optimizer_family_thresholds.sh",
+        "scripts/bench/check_optimizer_non_regression.sh"
+      ],
+      "capability_id": "cap.scalar.bool.literal",
+      "notes": "Scalar boolean literal lane.",
+      "proof_refs": [
+        "evalExprState_success_transition",
+        "readVar_bindVar_type_non_interference"
+      ],
+      "required_for_states": [
+        "implemented"
+      ],
+      "test_refs": [
+        "scripts/test/backend_parity.sh",
+        "scripts/test/sierra_differential.sh",
+        "scripts/test/sierra_scalar_e2e.sh"
+      ]
+    },
+    {
+      "benchmark_refs": [
+        "scripts/bench/check_optimizer_family_thresholds.sh",
+        "scripts/bench/check_optimizer_non_regression.sh"
+      ],
+      "capability_id": "cap.scalar.felt252.add",
+      "notes": "Scalar felt252 addition lane.",
+      "proof_refs": [
+        "evalExprState_success_transition",
+        "optimizeExprSound"
+      ],
+      "required_for_states": [
+        "implemented"
+      ],
+      "test_refs": [
+        "scripts/test/backend_parity.sh",
+        "scripts/test/sierra_differential.sh",
+        "scripts/test/sierra_scalar_e2e.sh"
+      ]
+    },
+    {
+      "benchmark_refs": [
+        "scripts/bench/check_optimizer_family_thresholds.sh",
+        "scripts/bench/check_optimizer_non_regression.sh"
+      ],
+      "capability_id": "cap.scalar.felt252.mul",
+      "notes": "Scalar felt252 multiplication lane.",
+      "proof_refs": [
+        "evalExprState_success_transition",
+        "optimizeExprSound"
+      ],
+      "required_for_states": [
+        "implemented"
+      ],
+      "test_refs": [
+        "scripts/test/backend_parity.sh",
+        "scripts/test/sierra_differential.sh",
+        "scripts/test/sierra_scalar_e2e.sh"
+      ]
+    },
+    {
+      "benchmark_refs": [
+        "scripts/bench/check_optimizer_family_thresholds.sh",
+        "scripts/bench/check_optimizer_non_regression.sh"
+      ],
+      "capability_id": "cap.scalar.felt252.sub",
+      "notes": "Scalar felt252 subtraction lane.",
+      "proof_refs": [
+        "evalExprState_success_transition",
+        "optimizeExprSound"
+      ],
+      "required_for_states": [
+        "implemented"
+      ],
+      "test_refs": [
+        "scripts/test/backend_parity.sh",
+        "scripts/test/sierra_differential.sh",
+        "scripts/test/sierra_scalar_e2e.sh"
+      ]
+    }
+  ]
+}
