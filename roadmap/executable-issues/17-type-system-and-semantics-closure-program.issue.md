@@ -28,7 +28,9 @@ Close full function-domain type semantics for MIR/evaluator/backends with explic
 ## Milestone status ledger
 
 ### TYC-1 Type universe closure in Core and MIR
-- Status: NOT DONE
+- Status: DONE - cdd0bdd
+- Evidence tests: `scripts/test/type_universe_regression.sh`; `scripts/test/eval_unsupported_domain_failfast.sh`; `scripts/roadmap/check_mir_family_contract.sh`; `scripts/roadmap/check_lowering_scaffold_sync.sh`
+- Evidence proofs: `src/LeanCairo/Core/Domain/Ty.lean`; `src/LeanCairo/Compiler/IR/Expr.lean`; `roadmap/capabilities/mir-family-contract.json`; `scripts/roadmap/validate_mir_family_contract.py`; `scripts/roadmap/generate_lowering_scaffolds.py`; `src/LeanCairo/Backend/Sierra/Generated/LoweringScaffold.lean`; `src/LeanCairo/Backend/Cairo/Generated/LoweringScaffold.lean`
 - Acceptance tests:
 1. Declared type families have MIR representation or explicit fail-fast status.
 2. Exhaustive type handling checks pass.
