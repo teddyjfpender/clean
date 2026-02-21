@@ -40,7 +40,9 @@ Implement the capability-driven expansion engine that systematizes function-fami
 3. Drift between registry and projected reports fails CI.
 
 ### SXP-2 MIR family expansion contracts
-- Status: NOT DONE
+- Status: DONE - cdd0bdd
+- Evidence tests: `scripts/roadmap/check_mir_family_contract.sh`; `scripts/test/mir_family_contract_negative.sh`; `scripts/test/eval_unsupported_domain_failfast.sh`; `scripts/test/optimizer_pass_regression.sh`; `scripts/test/sierra_failfast_unsupported.sh`
+- Evidence proofs: `roadmap/capabilities/mir-family-contract.json`; `scripts/roadmap/validate_mir_family_contract.py`; `src/LeanCairo/Compiler/IR/Expr.lean`; `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/Optimize/Expr.lean`; `scripts/roadmap/list_quality_gates.sh`
 - Acceptance tests:
 1. Expanded MIR family nodes compile and satisfy type/effect invariants.
 2. Missing capability handlers fail fast with stable error messages.
