@@ -37,7 +37,9 @@ Close full function-domain type semantics for MIR/evaluator/backends with explic
 3. Type universe regression tests are green.
 
 ### TYC-2 Integer and field semantics closure
-- Status: NOT DONE
+- Status: DONE - fbb51b0
+- Evidence tests: `scripts/test/eval_integer_width_semantics.sh`; `scripts/test/eval_qm31_semantics.sh`; `scripts/test/eval_scalar_domain_isolation.sh`; `scripts/test/eval_typed_resource_mixed.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `src/LeanCairo/Compiler/Semantics/TypedValue.lean`; `src/LeanCairo/Compiler/Semantics/ValueDomain.lean`; `tests/lean/eval_integer_width_semantics.lean`; `tests/lean/eval_qm31_semantics.lean`
 - Acceptance tests:
 1. Integer width/sign semantics tests pass.
 2. Field-domain semantics tests (`qm31` and related) pass.
