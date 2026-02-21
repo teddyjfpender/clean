@@ -45,7 +45,9 @@ Automate and harden CI gate orchestration and release-governance workflows as ca
 3. Negative drift tests pass.
 
 ### CIX-3 Deterministic scaled execution topology
-- Status: NOT DONE
+- Status: DONE - b88ee2f
+- Evidence tests: `scripts/roadmap/check_gate_sharding_pipeline.sh`; `scripts/test/gate_sharding_reproducibility.sh`; `scripts/test/gate_shard_aggregation_reproducibility.sh`; `scripts/test/gate_retry_determinism.sh`
+- Evidence proofs: `scripts/workflow/run-gates-sharded.sh`; `scripts/workflow/aggregate_gate_shard_reports.py`; `scripts/workflow/run_gate_with_retry.sh`; `config/gate-manifest.json`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
 - Acceptance tests:
 1. Sharded/partitioned gate execution remains deterministic.
 2. Report aggregation is stable and reproducible.
