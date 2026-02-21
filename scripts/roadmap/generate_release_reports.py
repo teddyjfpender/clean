@@ -24,6 +24,7 @@ SEM_DIR = ROOT / "src" / "LeanCairo" / "Compiler" / "Semantics"
 OPT_DIR = ROOT / "src" / "LeanCairo" / "Compiler" / "Optimize"
 PROOF_DEBT_FILE = ROOT / "roadmap" / "proof-debt.json"
 GO_NO_GO_THRESHOLDS = ROOT / "roadmap" / "reports" / "release-go-no-go-thresholds.json"
+OPTIMIZATION_CLOSURE_REPORT = ROOT / "roadmap" / "reports" / "optimization-closure-report.json"
 
 
 def parse_args() -> argparse.Namespace:
@@ -382,6 +383,7 @@ def render_go_no_go_report(
     capability_metrics: dict,
     proof_metrics: dict,
     benchmark_metrics: dict,
+    optimization_metrics: dict,
 ) -> None:
     thresholds = load_go_no_go_thresholds()
     threshold_source_raw = str(thresholds.get("__source_path", GO_NO_GO_THRESHOLDS))
@@ -409,6 +411,9 @@ def render_go_no_go_report(
     hotspot_improvement = float(benchmark_metrics.get("hotspot_sierra_improvement_pct", 0.0))
     min_cases = int(benchmark_thresholds.get("min_case_count", 0))
     min_hotspot = float(benchmark_thresholds.get("min_hotspot_sierra_improvement_pct", 0.0))
+    optimization_done = int(optimization_metrics.get("done_count", 0))
+    optimization_target = int(optimization_metrics.get("target_count", 0))
+    optimization_pass = bool(optimization_metrics.get("pass", False))
 
     capability_pass = cap_ratio >= cap_ratio_min and cap_violations == 0
     proof_pass = (
@@ -417,7 +422,7 @@ def render_go_no_go_report(
         and open_high <= max_open_high
     )
     benchmark_pass = case_count >= min_cases and hotspot_improvement >= min_hotspot
-    overall_pass = capability_pass and proof_pass and benchmark_pass
+    overall_pass = capability_pass and proof_pass and benchmark_pass and optimization_pass
 
     lines = [
         "# Release Go/No-Go Report",
@@ -444,6 +449,11 @@ def render_go_no_go_report(
         f"- Benchmark case count: `{case_count}` (threshold `>= {min_cases}`)",
         f"- Hotspot Sierra improvement: `{hotspot_improvement}` (threshold `>= {min_hotspot}`)",
         f"- Section result: `{'PASS' if benchmark_pass else 'FAIL'}`",
+        "",
+        "## Optimization Closure",
+        "",
+        f"- OPTX milestones done: `{optimization_done}` / `{optimization_target}`",
+        f"- Optimization closure status: `{'PASS' if optimization_pass else 'FAIL'}`",
         "",
     ]
 
@@ -473,6 +483,11 @@ def render_go_no_go_report(
             "min_hotspot_sierra_improvement_pct": min_hotspot,
             "pass": benchmark_pass,
         },
+        "optimization": {
+            "done_count": optimization_done,
+            "target_count": optimization_target,
+            "pass": optimization_pass,
+        },
     }
 
     (out_dir / "release-go-no-go-report.md").write_text("\n".join(lines), encoding="utf-8")
@@ -480,6 +495,19 @@ def render_go_no_go_report(
         json.dumps(payload, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
+
+
+def load_optimization_metrics() -> dict:
+    if not OPTIMIZATION_CLOSURE_REPORT.exists():
+        return {"done_count": 0, "target_count": 1, "pass": False}
+    payload = json.loads(OPTIMIZATION_CLOSURE_REPORT.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        return {"done_count": 0, "target_count": 1, "pass": False}
+    return {
+        "done_count": int(payload.get("done_count", 0)),
+        "target_count": int(payload.get("target_count", 0)),
+        "pass": str(payload.get("result", "FAIL")) == "PASS",
+    }
 
 
 def main() -> int:
@@ -492,12 +520,14 @@ def main() -> int:
     proof_metrics = render_proof_report(out_dir, pinned_commit)
     benchmark_metrics = render_benchmark_report(out_dir, pinned_commit)
     capability_metrics = render_capability_closure_report(out_dir, pinned_commit)
+    optimization_metrics = load_optimization_metrics()
     render_go_no_go_report(
         out_dir,
         pinned_commit,
         capability_metrics=capability_metrics,
         proof_metrics=proof_metrics,
         benchmark_metrics=benchmark_metrics,
+        optimization_metrics=optimization_metrics,
     )
     return 0
 

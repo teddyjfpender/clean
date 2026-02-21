@@ -34,6 +34,7 @@ CORE_GATES: List[str] = [
     "scripts/roadmap/check_profile_artifacts_freshness.sh",
     "scripts/roadmap/check_cost_model_calibration_freshness.sh",
     "scripts/roadmap/check_corelib_parity_freshness.sh",
+    "scripts/roadmap/check_optimization_closure_report.sh",
     "scripts/roadmap/check_crate_dependency_matrix_freshness.sh",
     "scripts/roadmap/check_coverage_matrix_freshness.sh",
     "scripts/roadmap/check_sierra_coverage_report_freshness.sh",

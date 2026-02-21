@@ -1,0 +1,25 @@
+{
+  "done_count": 4,
+  "issue": "roadmap/executable-issues/23-verified-optimizing-compiler-escalation-plan.issue.md",
+  "milestone_statuses": {
+    "OPTX-1": "DONE - 5754656",
+    "OPTX-2": "DONE - 5754656",
+    "OPTX-3": "DONE - e1842a0",
+    "OPTX-4": "DONE - 017c025"
+  },
+  "missing_artifacts": [],
+  "required_artifacts": [
+    "src/LeanCairo/Compiler/Optimize/Pass.lean",
+    "src/LeanCairo/Compiler/Optimize/Pipeline.lean",
+    "src/LeanCairo/Compiler/Proof/OptimizeSound.lean",
+    "src/LeanCairo/Compiler/Proof/CSELetNormSound.lean",
+    "scripts/bench/check_optimizer_non_regression.sh",
+    "scripts/bench/check_optimizer_family_thresholds.sh",
+    "generated/examples/cost-model-calibration.json",
+    "generated/examples/cost-model-calibration.md",
+    "roadmap/reports/release-go-no-go-report.json"
+  ],
+  "result": "PASS",
+  "target_count": 4,
+  "version": 1
+}

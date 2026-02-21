@@ -36,5 +36,9 @@ if ! rg -q "^## Benchmark Closure$" "$REPORT_MD"; then
   echo "missing benchmark closure section in release go/no-go report"
   exit 1
 fi
+if ! rg -q "^## Optimization Closure$" "$REPORT_MD"; then
+  echo "missing optimization closure section in release go/no-go report"
+  exit 1
+fi
 
 echo "release go/no-go checks passed"

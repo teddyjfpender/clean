@@ -22,3 +22,8 @@
 - Benchmark case count: `5` (threshold `>= 1`)
 - Hotspot Sierra improvement: `0.0` (threshold `>= 0.0`)
 - Section result: `PASS`
+
+## Optimization Closure
+
+- OPTX milestones done: `4` / `4`
+- Optimization closure status: `PASS`

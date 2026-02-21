@@ -13,6 +13,11 @@
     "violations": 0
   },
   "commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617",
+  "optimization": {
+    "done_count": 4,
+    "pass": true,
+    "target_count": 4
+  },
   "proof": {
     "max_missing_required_theorems": 0,
     "max_open_high_severity_debt": 0,
