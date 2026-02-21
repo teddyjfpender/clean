@@ -57,6 +57,7 @@ CORE_GATES: List[str] = [
     "scripts/test/sierra_u128_wrapping_differential.sh",
     "scripts/test/backend_parity.sh",
     "scripts/test/eval_conversion_legality.sh",
+    "scripts/test/eval_aggregate_wrapper_semantics.sh",
     "scripts/test/optimizer_pass_regression.sh",
     "scripts/test/capability_registry_negative.sh",
     "scripts/test/effect_metadata_negative.sh",
