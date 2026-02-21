@@ -39,7 +39,9 @@ Deliver a manifest-driven complex function corpus with deterministic differentia
 3. Regeneration from manifest is deterministic.
 
 ### CFB-2 Differential harness autogeneration
-- Status: NOT DONE
+- Status: DONE - 4ca44aa
+- Evidence tests: `scripts/roadmap/check_differential_harness_sync.sh`; `scripts/test/differential_harness_reproducibility.sh`; `scripts/test/examples_differential_vectors_negative.sh`; `scripts/test/backend_parity.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `config/examples-manifest.json`; `scripts/examples/validate_examples_manifest.py`; `scripts/examples/generate_differential_harness.py`; `scripts/test/generated/run_manifest_differential.sh`; `generated/examples/differential-harness.json`; `scripts/test/run_backend_parity_case.sh`; `scripts/test/backend_parity.sh`
 - Acceptance tests:
 1. Generated differential tests compare evaluator/Sierra/Cairo outputs on shared vectors.
 2. Boundary and failure vectors are included per corpus family.
