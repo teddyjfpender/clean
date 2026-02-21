@@ -55,7 +55,9 @@ Close Track-B function parity and reviewability guarantees while preserving Trac
 3. Mismatch diagnostics are reproducible.
 
 ### CPL-4 Reviewability and traceability closure
-- Status: NOT DONE
+- Status: DONE - a70c31f
+- Evidence tests: `scripts/test/sierra_review_lift.sh`; `scripts/test/sierra_review_lift_complex.sh`; `scripts/roadmap/check_review_lift_isolation.sh`; `scripts/test/sierra_primary_cairo_coupling_guard.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `scripts/sierra/render_review_lift.py`; `scripts/test/sierra_review_lift.sh`; `scripts/test/sierra_review_lift_complex.sh`; `src/LeanCairo/Pipeline/Sierra/Main.lean`; `src/LeanCairo/Backend/Cairo/EmitIRContract.lean`
 - Acceptance tests:
 1. Sierra review-lift trace links are generated and stable.
 2. Review output does not feed compilation semantics.

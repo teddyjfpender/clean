@@ -96,7 +96,9 @@ Deliver full function-level Lean -> Sierra -> CASM support for the pinned Sierra
 3. Performance benchmarks are non-regressive.
 
 ### A7 Gas/AP/segment-arena/diagnostics
-- Status: NOT DONE
+- Status: DONE - c22a9ea
+- Evidence tests: `scripts/roadmap/check_effect_metadata.sh`; `scripts/test/effect_resource_regression.sh`; `scripts/test/benchmark_family_thresholds_negative.sh`; `scripts/bench/check_optimizer_non_regression.sh`; `scripts/bench/check_optimizer_family_thresholds.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `config/effect-metadata.json`; `scripts/roadmap/validate_effect_metadata.py`; `scripts/bench/check_optimizer_family_thresholds.sh`; `scripts/bench/check_optimizer_non_regression.sh`; `roadmap/reports/cost-model-calibration-thresholds.json`
 - Acceptance tests:
 1. Gas/AP-sensitive corpus passes with metadata checks.
 2. Illegal optimization under gas/AP constraints is rejected.
