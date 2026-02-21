@@ -59,6 +59,11 @@ python3 scripts/examples/generate_benchmark_harness.py \
   --out-script scripts/bench/generated/run_manifest_benchmarks.sh
 ./scripts/roadmap/check_benchmark_harness_sync.sh
 scripts/bench/generated/run_manifest_benchmarks.sh
+python3 scripts/bench/generate_profile_artifacts.py \
+  --summary generated/examples/benchmark-summary.json \
+  --out-json generated/examples/profile-artifacts.json \
+  --out-md generated/examples/profile-artifacts.md
+./scripts/roadmap/check_profile_artifacts_freshness.sh
 ```
 
 ## Validate Structure

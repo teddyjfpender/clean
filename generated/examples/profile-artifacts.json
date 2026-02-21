@@ -1,0 +1,71 @@
+{
+  "families": [
+    {
+      "avg_hotspot_ratio": 0.987732,
+      "case_count": 2,
+      "family": "fixed_point",
+      "generated_sierra_total": 150593440.0
+    },
+    {
+      "avg_hotspot_ratio": 0.128091,
+      "case_count": 3,
+      "family": "integer",
+      "generated_sierra_total": 58152930.0
+    }
+  ],
+  "hotspots": [
+    {
+      "baseline_sierra_gas": 121444330.0,
+      "delta_sierra_gas": 2979840.0,
+      "family": "fixed_point",
+      "generated_sierra_gas": 118464490.0,
+      "hotspot_ratio": 0.9754633254594924,
+      "id": "newton_u128",
+      "l2_improvement_pct": 2.45,
+      "sierra_improvement_pct": 2.45
+    },
+    {
+      "baseline_sierra_gas": 191565750.0,
+      "delta_sierra_gas": 154173440.0,
+      "family": "integer",
+      "generated_sierra_gas": 37392310.0,
+      "hotspot_ratio": 0.19519308644682049,
+      "id": "fast_power_u128_p63",
+      "l2_improvement_pct": 80.48,
+      "sierra_improvement_pct": 80.48
+    },
+    {
+      "baseline_sierra_gas": 32128950.0,
+      "delta_sierra_gas": 0.0,
+      "family": "fixed_point",
+      "generated_sierra_gas": 32128950.0,
+      "hotspot_ratio": 1.0,
+      "id": "sq128x128_u128",
+      "l2_improvement_pct": 0.0,
+      "sierra_improvement_pct": 0.0
+    },
+    {
+      "baseline_sierra_gas": 108703670.0,
+      "delta_sierra_gas": 88729600.0,
+      "family": "integer",
+      "generated_sierra_gas": 19974070.0,
+      "hotspot_ratio": 0.18374789002064051,
+      "id": "fast_power_u128",
+      "l2_improvement_pct": 81.63,
+      "sierra_improvement_pct": 81.63
+    },
+    {
+      "baseline_sierra_gas": 147523830.0,
+      "delta_sierra_gas": 146737280.0,
+      "family": "integer",
+      "generated_sierra_gas": 786550.0,
+      "hotspot_ratio": 0.005331680990115292,
+      "id": "karatsuba_u128",
+      "l2_improvement_pct": 99.47,
+      "sierra_improvement_pct": 99.47
+    }
+  ],
+  "profile_case_count": 5,
+  "summary_source": "/Users/theodorepender/Coding/clean/generated/examples/benchmark-summary.json",
+  "version": 1
+}
