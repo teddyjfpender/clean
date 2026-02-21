@@ -14,7 +14,20 @@ DEFAULT_OUT_MD = ROOT / "roadmap" / "inventory" / "sierra-coverage-summary.md"
 
 MODULE_PREFIX = "crates/cairo-lang-sierra/src/extensions/modules/"
 
-IMPLEMENTED_GENERIC_TYPE_IDS = {"felt252", "u128"}
+IMPLEMENTED_GENERIC_TYPE_IDS = {
+    "felt252",
+    "i8",
+    "i16",
+    "i32",
+    "i64",
+    "i128",
+    "qm31",
+    "u8",
+    "u16",
+    "u32",
+    "u64",
+    "u128",
+}
 FAIL_FAST_GENERIC_TYPE_IDS = {"bool", "u256"}
 
 IMPLEMENTED_GENERIC_LIBFUNC_IDS = {

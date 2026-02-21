@@ -14,8 +14,8 @@
     "generic_libfunc_ids_total": 279,
     "generic_type_ids_by_status": {
       "fail_fast": 0,
-      "implemented": 2,
-      "unresolved": 66
+      "implemented": 12,
+      "unresolved": 56
     },
     "generic_type_ids_total": 68
   },
@@ -1680,27 +1680,27 @@
     },
     {
       "id": "i128",
-      "status": "unresolved"
+      "status": "implemented"
     },
     {
       "id": "i16",
-      "status": "unresolved"
+      "status": "implemented"
     },
     {
       "id": "i32",
-      "status": "unresolved"
+      "status": "implemented"
     },
     {
       "id": "i64",
-      "status": "unresolved"
+      "status": "implemented"
     },
     {
       "id": "i8",
-      "status": "unresolved"
+      "status": "implemented"
     },
     {
       "id": "qm31",
-      "status": "unresolved"
+      "status": "implemented"
     },
     {
       "id": "u128",
@@ -1708,19 +1708,19 @@
     },
     {
       "id": "u16",
-      "status": "unresolved"
+      "status": "implemented"
     },
     {
       "id": "u32",
-      "status": "unresolved"
+      "status": "implemented"
     },
     {
       "id": "u64",
-      "status": "unresolved"
+      "status": "implemented"
     },
     {
       "id": "u8",
-      "status": "unresolved"
+      "status": "implemented"
     }
   ],
   "pinned_commit": "e56055c87a9db4e3dbb91c82ccb2ea751a8dc617"
