@@ -58,7 +58,9 @@ Implement the capability-driven expansion engine that systematizes function-fami
 3. Manual edits in generated regions are detected and rejected.
 
 ### SXP-4 Cross-backend capability parity projection
-- Status: NOT DONE
+- Status: DONE - 167bfae
+- Evidence tests: `scripts/roadmap/check_capability_registry.sh`; `scripts/test/capability_registry_negative.sh`; `scripts/roadmap/check_capability_closure_slo.sh`; `scripts/roadmap/check_release_reports_freshness.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`
+- Evidence proofs: `roadmap/capabilities/registry.json`; `roadmap/capabilities/schema.md`; `scripts/roadmap/validate_capability_registry.py`; `scripts/roadmap/project_capability_reports.py`; `roadmap/inventory/capability-coverage-report.json`; `roadmap/inventory/capability-coverage-report.md`; `roadmap/capabilities/capability-closure-slo-baseline.json`; `roadmap/reports/release-capability-closure-report.md`
 - Acceptance tests:
 1. Capability report includes Sierra state and Cairo state per capability ID.
 2. Unsupported divergence requires explicit documented constraint.
