@@ -46,7 +46,9 @@ Close full function-domain type semantics for MIR/evaluator/backends with explic
 3. No integer family aliases another storage domain in evaluator.
 
 ### TYC-3 Conversion and cast legality closure
-- Status: NOT DONE
+- Status: DONE - f654fb6
+- Evidence tests: `scripts/test/eval_conversion_legality.sh`; `scripts/test/eval_integer_width_semantics.sh`; `scripts/test/eval_qm31_semantics.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
+- Evidence proofs: `src/LeanCairo/Compiler/Semantics/Eval.lean`; `tests/lean/eval_conversion_legality.lean`; `config/gate-manifest.json`; `scripts/roadmap/generate_gate_manifest.py`
 - Acceptance tests:
 1. Conversion legality matrix is enforced.
 2. Invalid cast paths fail fast with stable diagnostics.
