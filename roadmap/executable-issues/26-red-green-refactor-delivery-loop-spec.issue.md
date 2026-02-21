@@ -3,7 +3,9 @@
 - Source roadmap file: [`roadmap/26-red-green-refactor-delivery-loop-spec.md`](../26-red-green-refactor-delivery-loop-spec.md)
 - Issue class: Delivery loop governance and automation
 - Priority: P0
-- Overall status: NOT DONE
+- Overall status: DONE - 077c2d1
+- Completion evidence tests: `scripts/roadmap/check_rgr_deliverables.sh`; `scripts/test/rgr_deliverables_negative.sh`; `scripts/test/rgr_loop_smoke.sh`; `scripts/test/rgr_status_transition_negative.sh`; `./scripts/workflow/run-sierra-checks.sh`; `./scripts/workflow/run-mvp-checks.sh`
+- Completion evidence proofs: `roadmap/reports/rgr-deliverables.json`; `roadmap/reports/rgr-deliverables.md`; `scripts/roadmap/run_rgr_loop.sh`; `scripts/roadmap/mark_rgr_deliverable_done.py`; `config/rgr-deliverable-spec.json`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
 
 ## Objective
 
@@ -55,7 +57,9 @@ Implement a strict, deterministic RED->GREEN->REFACTOR loop pipeline with machin
 3. Transition negative tests pass.
 
 ### RGL-4 Workflow integration + bootstrap loop completion
-- Status: NOT DONE
+- Status: DONE - 077c2d1
+- Evidence tests: `scripts/roadmap/check_gate_manifest_sync.sh`; `scripts/roadmap/list_quality_gates.sh --validate-workflows`; `scripts/roadmap/run_rgr_loop.sh --deliverable d00-non-starknet-closure-guard`; `scripts/roadmap/check_rgr_deliverables.sh`
+- Evidence proofs: `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`; `scripts/roadmap/generate_gate_manifest.py`; `config/gate-manifest.json`; `roadmap/reports/rgr-deliverables.json`; `roadmap/reports/rgr-deliverables.md`
 - Acceptance tests:
 1. Loop checks are integrated into workflow gate execution.
 2. Bootstrap deliverable completes full loop and is marked `DONE - <commit>`.
