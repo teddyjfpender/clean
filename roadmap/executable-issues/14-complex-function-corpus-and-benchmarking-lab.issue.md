@@ -57,7 +57,9 @@ Deliver a manifest-driven complex function corpus with deterministic differentia
 3. Family-level regression thresholds are enforced.
 
 ### CFB-4 Complex family scale-out and reporting
-- Status: NOT DONE
+- Status: DONE - 9ffe25e
+- Evidence tests: `scripts/roadmap/check_examples_manifest_schema.sh`; `scripts/examples/generate_examples.sh`; `scripts/test/examples_structure.sh`; `scripts/roadmap/check_corpus_coverage_report_sync.sh`; `scripts/test/corpus_coverage_reproducibility.sh`; `scripts/test/corpus_coverage_negative.sh`; `scripts/roadmap/check_release_reports_freshness.sh`; `scripts/bench/generated/run_manifest_benchmarks.sh`
+- Evidence proofs: `config/examples-manifest.json`; `scripts/examples/validate_examples_manifest.py`; `scripts/examples/generate_corpus_coverage_report.py`; `generated/examples/corpus-coverage-report.json`; `generated/examples/corpus-coverage-report.md`; `roadmap/capabilities/registry.json`; `roadmap/reports/release-benchmark-report.md`; `scripts/roadmap/generate_release_reports.py`; `scripts/roadmap/list_quality_gates.sh`; `scripts/workflow/run-sierra-checks.sh`; `scripts/workflow/run-mvp-checks.sh`
 - Acceptance tests:
 1. Medium/high complexity kernels exist for integer, fixed-point, control-flow, aggregate, and crypto/circuit families.
 2. Corpus coverage report maps kernels to capability IDs.
