@@ -53,7 +53,9 @@ Deliver machine-verifiable completion audits and certification for function-doma
 3. Audit diagnostics are reproducible.
 
 ### AUD-4 Program completion certificate
-- Status: NOT DONE
+- Status: DONE - cc2f105
+- Evidence tests: `scripts/roadmap/check_completion_certificate.sh`; `scripts/roadmap/check_completion_matrix.sh`; `scripts/roadmap/check_track_a_completion_audit.sh`; `scripts/roadmap/check_track_b_completion_audit.sh`; `scripts/roadmap/check_gate_manifest_sync.sh`
+- Evidence proofs: `scripts/roadmap/generate_completion_certificate.py`; `scripts/roadmap/check_completion_certificate.sh`; `roadmap/reports/program-completion-certificate.json`; `roadmap/reports/program-completion-certificate.md`; `roadmap/reports/completion-matrix.json`; `roadmap/reports/track-a-completion-audit.json`; `roadmap/reports/track-b-completion-audit.json`
 - Acceptance tests:
 1. Completion certificate generation is deterministic.
 2. Certificate is blocked if any mandatory dimension is not ready.
