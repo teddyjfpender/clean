@@ -46,7 +46,9 @@ Implement a strict, deterministic RED->GREEN->REFACTOR loop pipeline with machin
 3. Loop smoke test is deterministic.
 
 ### RGL-3 Status-transition tooling and legality guards
-- Status: NOT DONE
+- Status: DONE - 1951ceb
+- Evidence tests: `scripts/test/rgr_status_transition_negative.sh`; `scripts/roadmap/check_rgr_deliverables.sh`; `python3 scripts/roadmap/mark_rgr_deliverable_done.py --deliverable d00-non-starknet-closure-guard --catalog roadmap/reports/rgr-deliverables.json --commit $(git rev-parse --short=12 HEAD)`
+- Evidence proofs: `scripts/roadmap/mark_rgr_deliverable_done.py`; `scripts/roadmap/validate_rgr_deliverables.py`; `roadmap/reports/rgr-deliverables.json`; `roadmap/reports/rgr-deliverables.md`
 - Acceptance tests:
 1. `NOT DONE -> DONE - <commit>` requires computed readiness and evidence.
 2. Illegal transitions fail validation.
