@@ -1,10 +1,10 @@
 {
   "families": [
     {
-      "avg_hotspot_ratio": 0.987732,
+      "avg_hotspot_ratio": 0.509152,
       "case_count": 2,
       "family": "fixed_point",
-      "generated_sierra_total": 150593440.0
+      "generated_sierra_total": 222092920.0
     },
     {
       "avg_hotspot_ratio": 0.128091,
@@ -25,6 +25,16 @@
       "sierra_improvement_pct": 2.45
     },
     {
+      "baseline_sierra_gas": 2418876464.0,
+      "delta_sierra_gas": 2315248034.0,
+      "family": "fixed_point",
+      "generated_sierra_gas": 103628430.0,
+      "hotspot_ratio": 0.04284155538420254,
+      "id": "sq128x128_u128",
+      "l2_improvement_pct": 95.72,
+      "sierra_improvement_pct": 95.72
+    },
+    {
       "baseline_sierra_gas": 191565750.0,
       "delta_sierra_gas": 154173440.0,
       "family": "integer",
@@ -33,16 +43,6 @@
       "id": "fast_power_u128_p63",
       "l2_improvement_pct": 80.48,
       "sierra_improvement_pct": 80.48
-    },
-    {
-      "baseline_sierra_gas": 32128950.0,
-      "delta_sierra_gas": 0.0,
-      "family": "fixed_point",
-      "generated_sierra_gas": 32128950.0,
-      "hotspot_ratio": 1.0,
-      "id": "sq128x128_u128",
-      "l2_improvement_pct": 0.0,
-      "sierra_improvement_pct": 0.0
     },
     {
       "baseline_sierra_gas": 108703670.0,

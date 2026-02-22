@@ -42,19 +42,19 @@
       "predicted_sierra_gas": 118464450.47478999
     },
     {
-      "abs_error": 0.0,
-      "abs_error_pct": 0.0,
-      "baseline_sierra_gas": 32128950.0,
-      "coefficient": 1.0,
+      "abs_error": 1075.4706880003214,
+      "abs_error_pct": 0.0010378143218036995,
+      "baseline_sierra_gas": 2418876464.0,
+      "coefficient": 0.042842,
       "family": "fixed_point",
       "id": "sq128x128_u128",
-      "measured_sierra_gas": 32128950.0,
-      "predicted_sierra_gas": 32128950.0
+      "measured_sierra_gas": 103628430.0,
+      "predicted_sierra_gas": 103629505.470688
     }
   ],
   "metrics": {
     "max_abs_pct_error": 0.005983289047097287,
-    "mean_abs_pct_error": 0.0012241589804613676
+    "mean_abs_pct_error": 0.0014317218448221076
   },
   "model": {
     "description": "Per-case baseline-to-generated ratio bootstrap calibration.",

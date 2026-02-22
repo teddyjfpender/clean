@@ -1,7 +1,7 @@
 {
   "benchmark": {
     "case_count": 5,
-    "hotspot_sierra_improvement_pct": 0.0,
+    "hotspot_sierra_improvement_pct": 2.45,
     "min_case_count": 1,
     "min_hotspot_sierra_improvement_pct": 0.0,
     "pass": true

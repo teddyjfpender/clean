@@ -20,7 +20,7 @@
 ## Benchmark Closure
 
 - Benchmark case count: `5` (threshold `>= 1`)
-- Hotspot Sierra improvement: `0.0` (threshold `>= 0.0`)
+- Hotspot Sierra improvement: `2.45` (threshold `>= 0.0`)
 - Section result: `PASS`
 
 ## Optimization Closure

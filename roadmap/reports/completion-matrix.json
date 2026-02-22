@@ -74,7 +74,7 @@
       "required_metrics": [
         "benchmark_pass=True",
         "case_count=5",
-        "hotspot_sierra_improvement_pct=0.0"
+        "hotspot_sierra_improvement_pct=2.45"
       ],
       "status": "ready",
       "target_scope": "lean->sierra->casm"
