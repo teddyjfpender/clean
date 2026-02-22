@@ -313,6 +313,116 @@ partial def emitU32MulWrapping
   setRangeCheckVar mergedRangeCheck
   pure (envAfterRhs, mergedValue)
 
+partial def emitU16OverflowingWrapping
+    (fnName : String)
+    (env : Env)
+    (lhs rhs : IRExpr .u16)
+    (genericId : String)
+    (opTag : String) : EmitM (Env × Json) := do
+  let (envAfterLhs, lhsVar) <- emitExpr fnName env lhs
+  let (envAfterRhs, rhsVar) <- emitExpr fnName envAfterLhs rhs
+  let rcIn <- requireRangeCheckVar fnName
+  let _ <- registerTypeDecl .rangeCheck
+  let _ <- registerTypeDecl .u16
+  let invocationIdx <- nextAbsoluteStatementIdx
+  let overflowTarget := invocationIdx + 5
+
+  let overflowingLibfuncId <- registerLibfuncDecl genericId genericId []
+  let rcNonOverflow <- freshVarId fnName s!"{opTag}_range_check_non_overflow"
+  let valueNonOverflow <- freshVarId fnName s!"{opTag}_result_non_overflow"
+  let rcOverflow <- freshVarId fnName s!"{opTag}_range_check_overflow"
+  let valueOverflow <- freshVarId fnName s!"{opTag}_result_overflow"
+  pushStmt <|
+    invocationStmtBranchesJson
+      overflowingLibfuncId
+      [rcIn, lhsVar, rhsVar]
+      [
+        (fallthroughTargetJson, [rcNonOverflow, valueNonOverflow]),
+        (statementTargetJson overflowTarget, [rcOverflow, valueOverflow])
+      ]
+
+  emitBranchAlign
+  let mergedRangeCheck <- freshVarId fnName s!"{opTag}_range_check_merged"
+  let mergedValue <- freshVarId fnName s!"{opTag}_result_merged"
+  emitStoreTempTo .rangeCheck rcNonOverflow mergedRangeCheck
+  emitStoreTempTo .u16 valueNonOverflow mergedValue
+  emitJump (invocationIdx + 8)
+
+  emitBranchAlign
+  emitStoreTempTo .rangeCheck rcOverflow mergedRangeCheck
+  emitStoreTempTo .u16 valueOverflow mergedValue
+  setRangeCheckVar mergedRangeCheck
+  pure (envAfterRhs, mergedValue)
+
+partial def emitU16MulWrapping
+    (fnName : String)
+    (env : Env)
+    (lhs rhs : IRExpr .u16) : EmitM (Env × Json) := do
+  let (envAfterLhs, lhsVar) <- emitExpr fnName env lhs
+  let (envAfterRhs, rhsVar) <- emitExpr fnName envAfterLhs rhs
+  let rcIn <- requireRangeCheckVar fnName
+  let _ <- registerTypeDecl .rangeCheck
+  let _ <- registerTypeDecl .u16
+  let _ <- registerTypeDecl .u32
+  let _ <- registerTypeDecl (.nonZero "u32")
+
+  let wideMulLibfuncId <- registerLibfuncDecl "u16_wide_mul" "u16_wide_mul" []
+  let wideProductRaw <- freshVarId fnName "u16_mul_wide_product_raw"
+  pushStmt (invocationStmtJson wideMulLibfuncId [lhsVar, rhsVar] [wideProductRaw])
+  let wideProduct <- emitStoreTemp fnName .u32 wideProductRaw
+
+  let modulusNonZero <- emitNonZeroU32Const fnName (2 ^ 16)
+
+  let safeDivmodLibfuncId <- registerLibfuncDecl "u32_safe_divmod" "u32_safe_divmod" []
+  let rcAfterDiv <- freshVarId fnName "u16_mul_range_check_after_divmod"
+  let quotientRaw <- freshVarId fnName "u16_mul_quotient_raw"
+  let remainderRaw <- freshVarId fnName "u16_mul_remainder_raw"
+  pushStmt <|
+    invocationStmtJson
+      safeDivmodLibfuncId
+      [rcIn, wideProduct, modulusNonZero]
+      [rcAfterDiv, quotientRaw, remainderRaw]
+  emitDrop fnName .u32 quotientRaw
+
+  let u32TyId <- registerTypeDecl .u32
+  let u16TyId <- registerTypeDecl .u16
+  let downcastLibfuncId <-
+    registerLibfuncDecl
+      "downcast_u32_to_u16"
+      "downcast"
+      [typeArgJson u32TyId, typeArgJson u16TyId]
+
+  let downcastInvocationIdx <- nextAbsoluteStatementIdx
+  let downcastOverflowTarget := downcastInvocationIdx + 5
+
+  let rcDowncastOk <- freshVarId fnName "u16_mul_range_check_downcast_ok"
+  let valueDowncastOk <- freshVarId fnName "u16_mul_value_downcast_ok"
+  let rcDowncastOverflow <- freshVarId fnName "u16_mul_range_check_downcast_overflow"
+  pushStmt <|
+    invocationStmtBranchesJson
+      downcastLibfuncId
+      [rcAfterDiv, remainderRaw]
+      [
+        (fallthroughTargetJson, [rcDowncastOk, valueDowncastOk]),
+        (statementTargetJson downcastOverflowTarget, [rcDowncastOverflow])
+      ]
+
+  emitBranchAlign
+  let mergedRangeCheck <- freshVarId fnName "u16_mul_range_check_merged"
+  let mergedValue <- freshVarId fnName "u16_mul_value_merged"
+  emitStoreTempTo .rangeCheck rcDowncastOk mergedRangeCheck
+  emitStoreTempTo .u16 valueDowncastOk mergedValue
+  emitJump (downcastInvocationIdx + 10)
+
+  emitBranchAlign
+  -- `remainderRaw` is mathematically `< 2^16`; overflow branch is unreachable.
+  -- Keep branch shape total by materializing a deterministic placeholder.
+  let unreachableFallback <- emitU16Const fnName 0
+  emitStoreTempTo .rangeCheck rcDowncastOverflow mergedRangeCheck
+  emitStoreTempTo .u16 unreachableFallback mergedValue
+  setRangeCheckVar mergedRangeCheck
+  pure (envAfterRhs, mergedValue)
+
 partial def emitExpr (fnName : String) (env : Env) : IRExpr ty -> EmitM (Env × Json)
   | .var name =>
       consumeVar fnName env ty name
@@ -338,6 +448,9 @@ partial def emitExpr (fnName : String) (env : Env) : IRExpr ty -> EmitM (Env × 
   | .litInt .u32 value => do
       let outVar <- emitU32Const fnName value
       pure (env, outVar)
+  | .litInt .u16 value => do
+      let outVar <- emitU16Const fnName value
+      pure (env, outVar)
   | .litInt ty _ =>
       unsupportedExpr fnName s!"typed literal lowering is not yet implemented for '{Ty.toCairo ty}'"
   | .addFelt252 lhs rhs =>
@@ -352,6 +465,8 @@ partial def emitExpr (fnName : String) (env : Env) : IRExpr ty -> EmitM (Env × 
       emitU64OverflowingWrapping fnName env lhs rhs "u64_overflowing_add" "u64_add"
   | .addInt .u32 lhs rhs =>
       emitU32OverflowingWrapping fnName env lhs rhs "u32_overflowing_add" "u32_add"
+  | .addInt .u16 lhs rhs =>
+      emitU16OverflowingWrapping fnName env lhs rhs "u16_overflowing_add" "u16_add"
   | .addInt ty _ _ =>
       unsupportedExpr fnName s!"typed integer add lowering is not yet implemented for '{Ty.toCairo ty}'"
   | .subInt .u128 lhs rhs =>
@@ -360,6 +475,8 @@ partial def emitExpr (fnName : String) (env : Env) : IRExpr ty -> EmitM (Env × 
       emitU64OverflowingWrapping fnName env lhs rhs "u64_overflowing_sub" "u64_sub"
   | .subInt .u32 lhs rhs =>
       emitU32OverflowingWrapping fnName env lhs rhs "u32_overflowing_sub" "u32_sub"
+  | .subInt .u16 lhs rhs =>
+      emitU16OverflowingWrapping fnName env lhs rhs "u16_overflowing_sub" "u16_sub"
   | .subInt ty _ _ =>
       unsupportedExpr fnName s!"typed integer sub lowering is not yet implemented for '{Ty.toCairo ty}'"
   | .mulInt .u128 lhs rhs =>
@@ -368,6 +485,8 @@ partial def emitExpr (fnName : String) (env : Env) : IRExpr ty -> EmitM (Env × 
       emitU64MulWrapping fnName env lhs rhs
   | .mulInt .u32 lhs rhs =>
       emitU32MulWrapping fnName env lhs rhs
+  | .mulInt .u16 lhs rhs =>
+      emitU16MulWrapping fnName env lhs rhs
   | .mulInt ty _ _ =>
       unsupportedExpr fnName s!"typed integer mul lowering is not yet implemented for '{Ty.toCairo ty}'"
   | .divInt ty _ _ =>

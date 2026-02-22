@@ -92,6 +92,11 @@ function_names = [
     "sq128x128_mul_raw",
     "sq128x128_delta_raw",
     "sq128x128_affine_kernel",
+    "sq128x128_add_raw_u16",
+    "sq128x128_sub_raw_u16",
+    "sq128x128_mul_raw_u16",
+    "sq128x128_delta_raw_u16",
+    "sq128x128_affine_kernel_u16",
     "sq128x128_add_raw_u32",
     "sq128x128_sub_raw_u32",
     "sq128x128_mul_raw_u32",
@@ -162,6 +167,7 @@ use super::upstream::sq128::{
 
 const TWO_POW_64: u128 = 0x1_0000_0000_0000_0000_u128;
 const TWO_POW_32: u64 = 0x1_0000_0000_u64;
+const TWO_POW_16: u32 = 0x1_0000_u32;
 
 fn sq_to_u128_integer_unchecked(value: SQ128x128) -> u128 {
     let raw = to_raw(value);
@@ -177,6 +183,10 @@ fn wrap_u64(value: u128) -> u64 {
 
 fn wrap_u32(value: u64) -> u32 {
     (value % TWO_POW_32).try_into().unwrap()
+}
+
+fn wrap_u16(value: u32) -> u16 {
+    (value % TWO_POW_16).try_into().unwrap()
 }
 
 pub fn sq128x128_add_raw_baseline_fn(a_raw: u128, b_raw: u128) -> u128 {
@@ -210,6 +220,31 @@ pub fn sq128x128_affine_kernel_baseline_fn(
     let delta_cd = sq128x128_sub_raw_baseline_fn(c_raw, d_raw);
     let mul_term = sq128x128_mul_raw_baseline_fn(sum_ab, delta_cd);
     sq128x128_add_raw_baseline_fn(mul_term, e_raw)
+}
+
+pub fn sq128x128_add_raw_u16_baseline_fn(a_raw: u16, b_raw: u16) -> u16 {
+    wrap_u16(a_raw.into() + b_raw.into())
+}
+
+pub fn sq128x128_sub_raw_u16_baseline_fn(a_raw: u16, b_raw: u16) -> u16 {
+    wrap_u16(a_raw.into() + TWO_POW_16 - b_raw.into())
+}
+
+pub fn sq128x128_mul_raw_u16_baseline_fn(a_raw: u16, b_raw: u16) -> u16 {
+    wrap_u16(a_raw.into() * b_raw.into())
+}
+
+pub fn sq128x128_delta_raw_u16_baseline_fn(a_raw: u16, b_raw: u16) -> u16 {
+    sq128x128_sub_raw_u16_baseline_fn(b_raw, a_raw)
+}
+
+pub fn sq128x128_affine_kernel_u16_baseline_fn(
+    a_raw: u16, b_raw: u16, c_raw: u16, d_raw: u16, e_raw: u16,
+) -> u16 {
+    let sum_ab = sq128x128_add_raw_u16_baseline_fn(a_raw, b_raw);
+    let delta_cd = sq128x128_sub_raw_u16_baseline_fn(c_raw, d_raw);
+    let mul_term = sq128x128_mul_raw_u16_baseline_fn(sum_ab, delta_cd);
+    sq128x128_add_raw_u16_baseline_fn(mul_term, e_raw)
 }
 
 pub fn sq128x128_add_raw_u32_baseline_fn(a_raw: u32, b_raw: u32) -> u32 {
