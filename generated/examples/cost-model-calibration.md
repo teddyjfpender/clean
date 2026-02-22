@@ -3,7 +3,7 @@
 - Summary source: `/Users/theodorepender/Coding/clean/generated/examples/benchmark-summary.json`
 - Model: `ratio_by_case_v1`
 - Case count: `5`
-- Mean absolute pct error: `0.0012323371290849446`
+- Mean absolute pct error: `0.001240871014487775`
 - Max absolute pct error: `0.005983289047097287`
 
 | Case | Family | Coefficient | Measured Sierra Gas | Predicted Sierra Gas | Abs Error % |
@@ -12,4 +12,4 @@
 | `fast_power_u128_p63` | `integer` | `0.195193` | `37392310.0` | `37392293.43975` | `4.4287849558279585e-05` |
 | `karatsuba_u128` | `integer` | `0.005332` | `786550.0` | `786597.06156` | `0.005983289047097287` |
 | `newton_u128` | `fixed_point` | `0.975463` | `118464490.0` | `118464450.47478999` | `3.336460572111117e-05` |
-| `sq128x128_u128` | `fixed_point` | `0.143743` | `435894470.0` | `435894291.759512` | `4.089074311788436e-05` |
+| `sq128x128_u128` | `fixed_point` | `0.17357` | `545339220.0` | `545339675.68638` | `8.356017013203721e-05` |

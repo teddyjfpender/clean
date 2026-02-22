@@ -25,6 +25,11 @@ pub trait ISQ128x128TypedLaneContract<TContractState> {
     fn sq128x128_mul_raw_u8(self: @TContractState, a_lane: u8, b_lane: u8) -> u8;
     fn sq128x128_delta_raw_u8(self: @TContractState, a_lane: u8, b_lane: u8) -> u8;
     fn sq128x128_affine_kernel_u8(self: @TContractState, a_lane: u8, b_lane: u8, c_lane: u8, d_lane: u8, e_lane: u8) -> u8;
+    fn sq128x128_add_raw_i16(self: @TContractState, a_lane: i16, b_lane: i16) -> i16;
+    fn sq128x128_sub_raw_i16(self: @TContractState, a_lane: i16, b_lane: i16) -> i16;
+    fn sq128x128_mul_raw_i16(self: @TContractState, a_lane: i16, b_lane: i16) -> i16;
+    fn sq128x128_delta_raw_i16(self: @TContractState, a_lane: i16, b_lane: i16) -> i16;
+    fn sq128x128_affine_kernel_i16(self: @TContractState, a_lane: i16, b_lane: i16, c_lane: i16, d_lane: i16, e_lane: i16) -> i16;
 }
 
 #[starknet::contract]
@@ -173,6 +178,35 @@ mod SQ128x128TypedLaneContract {
                     let delta_cd: u8 = (c_lane - d_lane);
                     {
                         let mul_term: u8 = (sum_ab * delta_cd);
+                        (mul_term + e_lane)
+                    }
+                }
+            }
+        }
+
+        fn sq128x128_add_raw_i16(self: @ContractState, a_lane: i16, b_lane: i16) -> i16 {
+            (a_lane + b_lane)
+        }
+
+        fn sq128x128_sub_raw_i16(self: @ContractState, a_lane: i16, b_lane: i16) -> i16 {
+            (a_lane - b_lane)
+        }
+
+        fn sq128x128_mul_raw_i16(self: @ContractState, a_lane: i16, b_lane: i16) -> i16 {
+            (a_lane * b_lane)
+        }
+
+        fn sq128x128_delta_raw_i16(self: @ContractState, a_lane: i16, b_lane: i16) -> i16 {
+            (b_lane - a_lane)
+        }
+
+        fn sq128x128_affine_kernel_i16(self: @ContractState, a_lane: i16, b_lane: i16, c_lane: i16, d_lane: i16, e_lane: i16) -> i16 {
+            {
+                let sum_ab: i16 = (a_lane + b_lane);
+                {
+                    let delta_cd: i16 = (c_lane - d_lane);
+                    {
+                        let mul_term: i16 = (sum_ab * delta_cd);
                         (mul_term + e_lane)
                     }
                 }

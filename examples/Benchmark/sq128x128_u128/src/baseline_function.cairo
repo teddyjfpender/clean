@@ -122,6 +122,31 @@ pub fn sq128x128_affine_kernel_u8_baseline_fn(
     sq128x128_add_raw_u8_baseline_fn(mul_term, e_raw)
 }
 
+pub fn sq128x128_add_raw_i16_baseline_fn(a_raw: i16, b_raw: i16) -> i16 {
+    a_raw + b_raw
+}
+
+pub fn sq128x128_sub_raw_i16_baseline_fn(a_raw: i16, b_raw: i16) -> i16 {
+    a_raw - b_raw
+}
+
+pub fn sq128x128_mul_raw_i16_baseline_fn(a_raw: i16, b_raw: i16) -> i16 {
+    a_raw * b_raw
+}
+
+pub fn sq128x128_delta_raw_i16_baseline_fn(a_raw: i16, b_raw: i16) -> i16 {
+    sq128x128_sub_raw_i16_baseline_fn(b_raw, a_raw)
+}
+
+pub fn sq128x128_affine_kernel_i16_baseline_fn(
+    a_raw: i16, b_raw: i16, c_raw: i16, d_raw: i16, e_raw: i16,
+) -> i16 {
+    let sum_ab = sq128x128_add_raw_i16_baseline_fn(a_raw, b_raw);
+    let delta_cd = sq128x128_sub_raw_i16_baseline_fn(c_raw, d_raw);
+    let mul_term = sq128x128_mul_raw_i16_baseline_fn(sum_ab, delta_cd);
+    sq128x128_add_raw_i16_baseline_fn(mul_term, e_raw)
+}
+
 pub fn sq128x128_add_raw_u32_baseline_fn(a_raw: u32, b_raw: u32) -> u32 {
     wrap_u32(a_raw.into() + b_raw.into())
 }
