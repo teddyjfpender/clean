@@ -24,6 +24,9 @@ private def normalizeU128 (value : Nat) : Nat :=
 private def normalizeU64 (value : Nat) : Nat :=
   IntegerDomains.normalizeUnsigned 64 value
 
+private def normalizeU32 (value : Nat) : Nat :=
+  IntegerDomains.normalizeUnsigned 32 value
+
 private def refAdd (lhs rhs : Nat) : Nat :=
   normalizeU128 (normalizeU128 lhs + normalizeU128 rhs)
 
@@ -53,6 +56,21 @@ private def refAffineU64 (a b c d e : Nat) : Nat :=
   let delta := refSubU64 c d
   let mul := refMulU64 sum delta
   refAddU64 mul e
+
+private def refAddU32 (lhs rhs : Nat) : Nat :=
+  normalizeU32 (normalizeU32 lhs + normalizeU32 rhs)
+
+private def refSubU32 (lhs rhs : Nat) : Nat :=
+  normalizeU32 (normalizeU32 lhs + IntegerDomains.pow2 32 - normalizeU32 rhs)
+
+private def refMulU32 (lhs rhs : Nat) : Nat :=
+  normalizeU32 (normalizeU32 lhs * normalizeU32 rhs)
+
+private def refAffineU32 (a b c d e : Nat) : Nat :=
+  let sum := refAddU32 a b
+  let delta := refSubU32 c d
+  let mul := refMulU32 sum delta
+  refAddU32 mul e
 
 private def typedAddExpr : IRExpr .u128 :=
   .addInt .u128 (.var (ty := .u128) "lhs") (.var (ty := .u128) "rhs")
@@ -125,6 +143,30 @@ private def typedAffineExprU64 : IRExpr .u64 :=
         .u64
         (.mulInt .u64 (.var (ty := .u64) "sum_ab") (.var (ty := .u64) "delta_cd"))
         (.addInt .u64 (.var (ty := .u64) "mul_term") (.var (ty := .u64) "e"))))
+
+private def typedAddExprU32 : IRExpr .u32 :=
+  .addInt .u32 (.var (ty := .u32) "lhs") (.var (ty := .u32) "rhs")
+
+private def typedSubExprU32 : IRExpr .u32 :=
+  .subInt .u32 (.var (ty := .u32) "lhs") (.var (ty := .u32) "rhs")
+
+private def typedMulExprU32 : IRExpr .u32 :=
+  .mulInt .u32 (.var (ty := .u32) "lhs") (.var (ty := .u32) "rhs")
+
+private def typedAffineExprU32 : IRExpr .u32 :=
+  .letE
+    "sum_ab"
+    .u32
+    (.addInt .u32 (.var (ty := .u32) "a") (.var (ty := .u32) "b"))
+    (.letE
+      "delta_cd"
+      .u32
+      (.subInt .u32 (.var (ty := .u32) "c") (.var (ty := .u32) "d"))
+      (.letE
+        "mul_term"
+        .u32
+        (.mulInt .u32 (.var (ty := .u32) "sum_ab") (.var (ty := .u32) "delta_cd"))
+        (.addInt .u32 (.var (ty := .u32) "mul_term") (.var (ty := .u32) "e"))))
 
 #eval do
   let maxU128 := IntegerDomains.pow2 128 - 1
@@ -267,4 +309,69 @@ private def typedAffineExprU64 : IRExpr .u64 :=
     let expected := refAffineU64 aRaw bRaw cRaw dRaw eRaw
     assertCondition (typedObserved = expected)
       s!"sq128 typed u64 affine reference mismatch for row={row}"
+  )
+
+  let maxU32 := IntegerDomains.pow2 32 - 1
+
+  let binaryCasesU32 : List (Nat × Nat) :=
+    [
+      (0, 0),
+      (1, 2),
+      (maxU32, 1),
+      (maxU32, maxU32),
+      (maxU32 + 7, maxU32 + 11),
+      (999999, 123456)
+    ]
+
+  binaryCasesU32.forM (fun pair => do
+    let (lhsRaw, rhsRaw) := pair
+    let ctx : EvalContext :=
+      {
+        u32Vars := fun name =>
+          if name = "lhs" then lhsRaw
+          else if name = "rhs" then rhsRaw
+          else 0
+      }
+
+    let addTyped <- runExpr ctx typedAddExprU32
+    let addExpected := refAddU32 lhsRaw rhsRaw
+    assertCondition (addTyped = addExpected)
+      s!"sq128 typed u32 add reference mismatch for lhs={lhsRaw}, rhs={rhsRaw}"
+
+    let subTyped <- runExpr ctx typedSubExprU32
+    let subExpected := refSubU32 lhsRaw rhsRaw
+    assertCondition (subTyped = subExpected)
+      s!"sq128 typed u32 sub reference mismatch for lhs={lhsRaw}, rhs={rhsRaw}"
+
+    let mulTyped <- runExpr ctx typedMulExprU32
+    let mulExpected := refMulU32 lhsRaw rhsRaw
+    assertCondition (mulTyped = mulExpected)
+      s!"sq128 typed u32 mul reference mismatch for lhs={lhsRaw}, rhs={rhsRaw}"
+  )
+
+  let affineCasesU32 : List (Nat × Nat × Nat × Nat × Nat) :=
+    [
+      (1000, 2000, 700, 200, 9),
+      (12345, 54321, 5000, 1234, 42),
+      (maxU32, 1, maxU32, 7, 19),
+      (maxU32 + 13, maxU32 + 21, maxU32 + 3, maxU32 + 9, maxU32 + 5)
+    ]
+
+  affineCasesU32.forM (fun row => do
+    let (aRaw, bRaw, cRaw, dRaw, eRaw) := row
+    let ctx : EvalContext :=
+      {
+        u32Vars := fun name =>
+          if name = "a" then aRaw
+          else if name = "b" then bRaw
+          else if name = "c" then cRaw
+          else if name = "d" then dRaw
+          else if name = "e" then eRaw
+          else 0
+      }
+
+    let typedObserved <- runExpr ctx typedAffineExprU32
+    let expected := refAffineU32 aRaw bRaw cRaw dRaw eRaw
+    assertCondition (typedObserved = expected)
+      s!"sq128 typed u32 affine reference mismatch for row={row}"
   )
