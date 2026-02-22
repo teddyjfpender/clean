@@ -75,14 +75,14 @@
       "log_file": ".artifacts/manifest_benchmark/sq128x128_u128.log",
       "metrics": {
         "baseline_fn_avg_gas": 0.0,
-        "baseline_l2_gas": 2887744474.0,
-        "baseline_sierra_gas": 2887744474.0,
+        "baseline_l2_gas": 3032455784.0,
+        "baseline_sierra_gas": 3032455784.0,
         "fn_improvement_pct": 0.0,
         "generated_fn_avg_gas": 0.0,
-        "generated_l2_gas": 352827960.0,
-        "generated_sierra_gas": 352827960.0,
-        "l2_improvement_pct": 87.78,
-        "sierra_improvement_pct": 87.78
+        "generated_l2_gas": 435894470.0,
+        "generated_sierra_gas": 435894470.0,
+        "l2_improvement_pct": 85.63,
+        "sierra_improvement_pct": 85.63
       },
       "runner_script": "examples/Benchmark/sq128x128_u128/scripts/run_gas_comparison.sh"
     }
@@ -90,8 +90,8 @@
   "config": "generated/examples/benchmark-harness.json",
   "families": [
     {
-      "avg_l2_improvement_pct": 45.115,
-      "avg_sierra_improvement_pct": 45.115,
+      "avg_l2_improvement_pct": 44.04,
+      "avg_sierra_improvement_pct": 44.04,
       "case_count": 2,
       "family": "fixed_point"
     },

@@ -17,11 +17,12 @@ Sierra subset backend invariants (phase-2 direct Lean -> Sierra lane):
 - supported user signature scalar types:
   felt252, bool, u128, u8/u16/u32/u64, i8/i16/i32/i64/i128,
 - range-check lane: when range-checked integer arithmetic appears (currently u128/u64/u32/u16
+- range-check lane: when range-checked integer arithmetic appears (currently u128/u64/u32/u16/u8
   wrapping add/sub/mul), emitter injects explicit `RangeCheck` input/output in
   Sierra signatures,
 - supported expressions:
   - vars / letE,
-  - literals: felt252, u128, u64, u32, u16 (typed literal form), bool,
+  - literals: felt252, u128, u64, u32, u16, u8 (typed literal form), bool,
   - felt252 arithmetic: add/sub/mul,
   - top-level equality returns for felt252/u128.
 
@@ -596,6 +597,10 @@ def registerConstU32TypeDecl (value : Nat) : EmitM Json := do
   let u32TyId <- registerTypeDecl .u32
   registerConstTypeDecl s!"Const<u32, {value}>" u32TyId (valueArgJson (Int.ofNat value))
 
+def registerConstU16TypeDecl (value : Nat) : EmitM Json := do
+  let u16TyId <- registerTypeDecl .u16
+  registerConstTypeDecl s!"Const<u16, {value}>" u16TyId (valueArgJson (Int.ofNat value))
+
 def registerConstNonZeroU128TypeDecl (value : Nat) : EmitM Json := do
   if value = 0 then
     throw "internal error: NonZero<u128> constant requires value > 0"
@@ -631,6 +636,18 @@ def registerConstNonZeroU32TypeDecl (value : Nat) : EmitM Json := do
     s!"Const<NonZero<u32>, Const<u32, {value}>>"
     nonZeroTyId
     (typeArgJson constU32TyId)
+
+def registerConstNonZeroU16TypeDecl (value : Nat) : EmitM Json := do
+  if value = 0 then
+    throw "internal error: NonZero<u16> constant requires value > 0"
+  else
+    pure ()
+  let nonZeroTyId <- registerTypeDecl (.nonZero "u16")
+  let constU16TyId <- registerConstU16TypeDecl value
+  registerConstTypeDecl
+    s!"Const<NonZero<u16>, Const<u16, {value}>>"
+    nonZeroTyId
+    (typeArgJson constU16TyId)
 
 def registerLibfuncDecl (debugName : String) (genericId : String) (genericArgs : List Json) : EmitM Json := do
   let _ <- liftExcept (ensureKnownGenericLibfuncId genericId)
@@ -758,12 +775,22 @@ def u32ConstDebugName (value : Nat) : String :=
 def u16ConstDebugName (value : Nat) : String :=
   s!"u16_const_{value}"
 
+def u8ConstDebugName (value : Nat) : String :=
+  s!"u8_const_{value}"
+
 def emitU16Const (fnName : String) (value : Nat) : EmitM Json := do
   let _ <- registerTypeDecl .u16
   let libfuncId <- registerLibfuncDecl (u16ConstDebugName value) "u16_const" [valueArgJson (Int.ofNat value)]
   let rawVar <- freshVarId fnName "u16_const_raw"
   pushStmt (invocationStmtJson libfuncId [] [rawVar])
   emitStoreTemp fnName .u16 rawVar
+
+def emitU8Const (fnName : String) (value : Nat) : EmitM Json := do
+  let _ <- registerTypeDecl .u8
+  let libfuncId <- registerLibfuncDecl (u8ConstDebugName value) "u8_const" [valueArgJson (Int.ofNat value)]
+  let rawVar <- freshVarId fnName "u8_const_raw"
+  pushStmt (invocationStmtJson libfuncId [] [rawVar])
+  emitStoreTemp fnName .u8 rawVar
 
 def emitU32Const (fnName : String) (value : Nat) : EmitM Json := do
   let _ <- registerTypeDecl .u32
@@ -795,6 +822,14 @@ def emitNonZeroU32Const (fnName : String) (value : Nat) : EmitM Json := do
   let rawVar <- freshVarId fnName "nonzero_u32_const_raw"
   pushStmt (invocationStmtJson libfuncId [] [rawVar])
   emitStoreTemp fnName (.nonZero "u32") rawVar
+
+def emitNonZeroU16Const (fnName : String) (value : Nat) : EmitM Json := do
+  let constTyId <- registerConstNonZeroU16TypeDecl value
+  let debugName := s!"const_as_immediate<Const<NonZero<u16>, Const<u16, {value}>>>"
+  let libfuncId <- registerLibfuncDecl debugName "const_as_immediate" [typeArgJson constTyId]
+  let rawVar <- freshVarId fnName "nonzero_u16_const_raw"
+  pushStmt (invocationStmtJson libfuncId [] [rawVar])
+  emitStoreTemp fnName (.nonZero "u16") rawVar
 
 structure LinearVar where
   ty : Ty
@@ -930,37 +965,39 @@ partial def exprUsesRangeCheckedIntArith : IRExpr ty -> Bool
   | .addInt ty lhs rhs =>
       exprUsesRangeCheckedIntArith lhs ||
       exprUsesRangeCheckedIntArith rhs ||
-      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16
+      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16 || ty = .u8
   | .subInt ty lhs rhs =>
       exprUsesRangeCheckedIntArith lhs ||
       exprUsesRangeCheckedIntArith rhs ||
-      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16
+      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16 || ty = .u8
   | .mulInt ty lhs rhs =>
       exprUsesRangeCheckedIntArith lhs ||
       exprUsesRangeCheckedIntArith rhs ||
-      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16
+      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16 || ty = .u8
   | .divInt ty lhs rhs =>
       exprUsesRangeCheckedIntArith lhs ||
       exprUsesRangeCheckedIntArith rhs ||
-      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16
+      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16 || ty = .u8
   | .modInt ty lhs rhs =>
       exprUsesRangeCheckedIntArith lhs ||
       exprUsesRangeCheckedIntArith rhs ||
-      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16
+      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16 || ty = .u8
   | .bitAndInt ty lhs rhs =>
       exprUsesRangeCheckedIntArith lhs ||
       exprUsesRangeCheckedIntArith rhs ||
-      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16
+      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16 || ty = .u8
   | .bitOrInt ty lhs rhs =>
       exprUsesRangeCheckedIntArith lhs ||
       exprUsesRangeCheckedIntArith rhs ||
-      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16
+      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16 || ty = .u8
   | .bitXorInt ty lhs rhs =>
       exprUsesRangeCheckedIntArith lhs ||
       exprUsesRangeCheckedIntArith rhs ||
-      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16
-  | .shlInt ty lhs _ => exprUsesRangeCheckedIntArith lhs || ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16
-  | .shrInt ty lhs _ => exprUsesRangeCheckedIntArith lhs || ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16
+      ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16 || ty = .u8
+  | .shlInt ty lhs _ =>
+      exprUsesRangeCheckedIntArith lhs || ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16 || ty = .u8
+  | .shrInt ty lhs _ =>
+      exprUsesRangeCheckedIntArith lhs || ty = .u128 || ty = .u64 || ty = .u32 || ty = .u16 || ty = .u8
   | .addU128 _ _ => true
   | .subU128 _ _ => true
   | .mulU128 _ _ => true

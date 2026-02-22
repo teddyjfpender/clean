@@ -30,6 +30,35 @@ pub fn sq128x128_affine_kernel_generated(a_lane: u128, b_lane: u128, c_lane: u12
             }
         }
 
+pub fn sq128x128_add_raw_u8_generated(a_lane: u8, b_lane: u8) -> u8 {
+            (a_lane + b_lane)
+        }
+
+pub fn sq128x128_sub_raw_u8_generated(a_lane: u8, b_lane: u8) -> u8 {
+            (a_lane - b_lane)
+        }
+
+pub fn sq128x128_mul_raw_u8_generated(a_lane: u8, b_lane: u8) -> u8 {
+            (a_lane * b_lane)
+        }
+
+pub fn sq128x128_delta_raw_u8_generated(a_lane: u8, b_lane: u8) -> u8 {
+            (b_lane - a_lane)
+        }
+
+pub fn sq128x128_affine_kernel_u8_generated(a_lane: u8, b_lane: u8, c_lane: u8, d_lane: u8, e_lane: u8) -> u8 {
+            {
+                let sum_ab: u8 = (a_lane + b_lane);
+                {
+                    let delta_cd: u8 = (c_lane - d_lane);
+                    {
+                        let mul_term: u8 = (sum_ab * delta_cd);
+                        (mul_term + e_lane)
+                    }
+                }
+            }
+        }
+
 pub fn sq128x128_add_raw_u16_generated(a_lane: u16, b_lane: u16) -> u16 {
             (a_lane + b_lane)
         }

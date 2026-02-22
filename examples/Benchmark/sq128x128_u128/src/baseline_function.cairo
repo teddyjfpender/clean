@@ -13,6 +13,7 @@ use super::upstream::sq128::{
 const TWO_POW_64: u128 = 0x1_0000_0000_0000_0000_u128;
 const TWO_POW_32: u64 = 0x1_0000_0000_u64;
 const TWO_POW_16: u32 = 0x1_0000_u32;
+const TWO_POW_8: u16 = 0x100_u16;
 
 fn sq_to_u128_integer_unchecked(value: SQ128x128) -> u128 {
     let raw = to_raw(value);
@@ -32,6 +33,10 @@ fn wrap_u32(value: u64) -> u32 {
 
 fn wrap_u16(value: u32) -> u16 {
     (value % TWO_POW_16).try_into().unwrap()
+}
+
+fn wrap_u8(value: u16) -> u8 {
+    (value % TWO_POW_8).try_into().unwrap()
 }
 
 pub fn sq128x128_add_raw_baseline_fn(a_raw: u128, b_raw: u128) -> u128 {
@@ -90,6 +95,31 @@ pub fn sq128x128_affine_kernel_u16_baseline_fn(
     let delta_cd = sq128x128_sub_raw_u16_baseline_fn(c_raw, d_raw);
     let mul_term = sq128x128_mul_raw_u16_baseline_fn(sum_ab, delta_cd);
     sq128x128_add_raw_u16_baseline_fn(mul_term, e_raw)
+}
+
+pub fn sq128x128_add_raw_u8_baseline_fn(a_raw: u8, b_raw: u8) -> u8 {
+    wrap_u8(a_raw.into() + b_raw.into())
+}
+
+pub fn sq128x128_sub_raw_u8_baseline_fn(a_raw: u8, b_raw: u8) -> u8 {
+    wrap_u8(a_raw.into() + TWO_POW_8 - b_raw.into())
+}
+
+pub fn sq128x128_mul_raw_u8_baseline_fn(a_raw: u8, b_raw: u8) -> u8 {
+    wrap_u8(a_raw.into() * b_raw.into())
+}
+
+pub fn sq128x128_delta_raw_u8_baseline_fn(a_raw: u8, b_raw: u8) -> u8 {
+    sq128x128_sub_raw_u8_baseline_fn(b_raw, a_raw)
+}
+
+pub fn sq128x128_affine_kernel_u8_baseline_fn(
+    a_raw: u8, b_raw: u8, c_raw: u8, d_raw: u8, e_raw: u8,
+) -> u8 {
+    let sum_ab = sq128x128_add_raw_u8_baseline_fn(a_raw, b_raw);
+    let delta_cd = sq128x128_sub_raw_u8_baseline_fn(c_raw, d_raw);
+    let mul_term = sq128x128_mul_raw_u8_baseline_fn(sum_ab, delta_cd);
+    sq128x128_add_raw_u8_baseline_fn(mul_term, e_raw)
 }
 
 pub fn sq128x128_add_raw_u32_baseline_fn(a_raw: u32, b_raw: u32) -> u32 {

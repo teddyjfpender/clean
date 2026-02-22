@@ -30,6 +30,9 @@ private def normalizeU32 (value : Nat) : Nat :=
 private def normalizeU16 (value : Nat) : Nat :=
   IntegerDomains.normalizeUnsigned 16 value
 
+private def normalizeU8 (value : Nat) : Nat :=
+  IntegerDomains.normalizeUnsigned 8 value
+
 private def refAdd (lhs rhs : Nat) : Nat :=
   normalizeU128 (normalizeU128 lhs + normalizeU128 rhs)
 
@@ -89,6 +92,21 @@ private def refAffineU16 (a b c d e : Nat) : Nat :=
   let delta := refSubU16 c d
   let mul := refMulU16 sum delta
   refAddU16 mul e
+
+private def refAddU8 (lhs rhs : Nat) : Nat :=
+  normalizeU8 (normalizeU8 lhs + normalizeU8 rhs)
+
+private def refSubU8 (lhs rhs : Nat) : Nat :=
+  normalizeU8 (normalizeU8 lhs + IntegerDomains.pow2 8 - normalizeU8 rhs)
+
+private def refMulU8 (lhs rhs : Nat) : Nat :=
+  normalizeU8 (normalizeU8 lhs * normalizeU8 rhs)
+
+private def refAffineU8 (a b c d e : Nat) : Nat :=
+  let sum := refAddU8 a b
+  let delta := refSubU8 c d
+  let mul := refMulU8 sum delta
+  refAddU8 mul e
 
 private def typedAddExpr : IRExpr .u128 :=
   .addInt .u128 (.var (ty := .u128) "lhs") (.var (ty := .u128) "rhs")
@@ -209,6 +227,30 @@ private def typedAffineExprU16 : IRExpr .u16 :=
         .u16
         (.mulInt .u16 (.var (ty := .u16) "sum_ab") (.var (ty := .u16) "delta_cd"))
         (.addInt .u16 (.var (ty := .u16) "mul_term") (.var (ty := .u16) "e"))))
+
+private def typedAddExprU8 : IRExpr .u8 :=
+  .addInt .u8 (.var (ty := .u8) "lhs") (.var (ty := .u8) "rhs")
+
+private def typedSubExprU8 : IRExpr .u8 :=
+  .subInt .u8 (.var (ty := .u8) "lhs") (.var (ty := .u8) "rhs")
+
+private def typedMulExprU8 : IRExpr .u8 :=
+  .mulInt .u8 (.var (ty := .u8) "lhs") (.var (ty := .u8) "rhs")
+
+private def typedAffineExprU8 : IRExpr .u8 :=
+  .letE
+    "sum_ab"
+    .u8
+    (.addInt .u8 (.var (ty := .u8) "a") (.var (ty := .u8) "b"))
+    (.letE
+      "delta_cd"
+      .u8
+      (.subInt .u8 (.var (ty := .u8) "c") (.var (ty := .u8) "d"))
+      (.letE
+        "mul_term"
+        .u8
+        (.mulInt .u8 (.var (ty := .u8) "sum_ab") (.var (ty := .u8) "delta_cd"))
+        (.addInt .u8 (.var (ty := .u8) "mul_term") (.var (ty := .u8) "e"))))
 
 #eval do
   let maxU128 := IntegerDomains.pow2 128 - 1
@@ -481,4 +523,69 @@ private def typedAffineExprU16 : IRExpr .u16 :=
     let expected := refAffineU16 aRaw bRaw cRaw dRaw eRaw
     assertCondition (typedObserved = expected)
       s!"sq128 typed u16 affine reference mismatch for row={row}"
+  )
+
+  let maxU8 := IntegerDomains.pow2 8 - 1
+
+  let binaryCasesU8 : List (Nat × Nat) :=
+    [
+      (0, 0),
+      (1, 2),
+      (maxU8, 1),
+      (maxU8, maxU8),
+      (maxU8 + 7, maxU8 + 11),
+      (99, 123)
+    ]
+
+  binaryCasesU8.forM (fun pair => do
+    let (lhsRaw, rhsRaw) := pair
+    let ctx : EvalContext :=
+      {
+        u8Vars := fun name =>
+          if name = "lhs" then lhsRaw
+          else if name = "rhs" then rhsRaw
+          else 0
+      }
+
+    let addTyped <- runExpr ctx typedAddExprU8
+    let addExpected := refAddU8 lhsRaw rhsRaw
+    assertCondition (addTyped = addExpected)
+      s!"sq128 typed u8 add reference mismatch for lhs={lhsRaw}, rhs={rhsRaw}"
+
+    let subTyped <- runExpr ctx typedSubExprU8
+    let subExpected := refSubU8 lhsRaw rhsRaw
+    assertCondition (subTyped = subExpected)
+      s!"sq128 typed u8 sub reference mismatch for lhs={lhsRaw}, rhs={rhsRaw}"
+
+    let mulTyped <- runExpr ctx typedMulExprU8
+    let mulExpected := refMulU8 lhsRaw rhsRaw
+    assertCondition (mulTyped = mulExpected)
+      s!"sq128 typed u8 mul reference mismatch for lhs={lhsRaw}, rhs={rhsRaw}"
+  )
+
+  let affineCasesU8 : List (Nat × Nat × Nat × Nat × Nat) :=
+    [
+      (10, 20, 70, 20, 9),
+      (123, 221, 200, 34, 42),
+      (maxU8, 1, maxU8, 7, 19),
+      (maxU8 + 13, maxU8 + 21, maxU8 + 3, maxU8 + 9, maxU8 + 5)
+    ]
+
+  affineCasesU8.forM (fun row => do
+    let (aRaw, bRaw, cRaw, dRaw, eRaw) := row
+    let ctx : EvalContext :=
+      {
+        u8Vars := fun name =>
+          if name = "a" then aRaw
+          else if name = "b" then bRaw
+          else if name = "c" then cRaw
+          else if name = "d" then dRaw
+          else if name = "e" then eRaw
+          else 0
+      }
+
+    let typedObserved <- runExpr ctx typedAffineExprU8
+    let expected := refAffineU8 aRaw bRaw cRaw dRaw eRaw
+    assertCondition (typedObserved = expected)
+      s!"sq128 typed u8 affine reference mismatch for row={row}"
   )

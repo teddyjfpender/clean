@@ -6,44 +6,54 @@ mod generated_function;
 mod tests {
     use super::baseline_function::{
         sq128x128_add_raw_baseline_fn,
+        sq128x128_add_raw_u8_baseline_fn,
         sq128x128_add_raw_u16_baseline_fn,
         sq128x128_add_raw_u32_baseline_fn,
         sq128x128_add_raw_u64_baseline_fn,
         sq128x128_affine_kernel_baseline_fn,
+        sq128x128_affine_kernel_u8_baseline_fn,
         sq128x128_affine_kernel_u16_baseline_fn,
         sq128x128_affine_kernel_u32_baseline_fn,
         sq128x128_affine_kernel_u64_baseline_fn,
         sq128x128_delta_raw_baseline_fn,
+        sq128x128_delta_raw_u8_baseline_fn,
         sq128x128_delta_raw_u16_baseline_fn,
         sq128x128_delta_raw_u32_baseline_fn,
         sq128x128_delta_raw_u64_baseline_fn,
         sq128x128_mul_raw_baseline_fn,
+        sq128x128_mul_raw_u8_baseline_fn,
         sq128x128_mul_raw_u16_baseline_fn,
         sq128x128_mul_raw_u32_baseline_fn,
         sq128x128_mul_raw_u64_baseline_fn,
         sq128x128_sub_raw_baseline_fn,
+        sq128x128_sub_raw_u8_baseline_fn,
         sq128x128_sub_raw_u16_baseline_fn,
         sq128x128_sub_raw_u32_baseline_fn,
         sq128x128_sub_raw_u64_baseline_fn,
     };
     use super::generated_function::{
         sq128x128_add_raw_generated,
+        sq128x128_add_raw_u8_generated,
         sq128x128_add_raw_u16_generated,
         sq128x128_add_raw_u32_generated,
         sq128x128_add_raw_u64_generated,
         sq128x128_affine_kernel_generated,
+        sq128x128_affine_kernel_u8_generated,
         sq128x128_affine_kernel_u16_generated,
         sq128x128_affine_kernel_u32_generated,
         sq128x128_affine_kernel_u64_generated,
         sq128x128_delta_raw_generated,
+        sq128x128_delta_raw_u8_generated,
         sq128x128_delta_raw_u16_generated,
         sq128x128_delta_raw_u32_generated,
         sq128x128_delta_raw_u64_generated,
         sq128x128_mul_raw_generated,
+        sq128x128_mul_raw_u8_generated,
         sq128x128_mul_raw_u16_generated,
         sq128x128_mul_raw_u32_generated,
         sq128x128_mul_raw_u64_generated,
         sq128x128_sub_raw_generated,
+        sq128x128_sub_raw_u8_generated,
         sq128x128_sub_raw_u16_generated,
         sq128x128_sub_raw_u32_generated,
         sq128x128_sub_raw_u64_generated,
@@ -62,6 +72,12 @@ mod tests {
     const EXPECTED_MUL_U16_ACC: u128 = 121821184_u128;
     const EXPECTED_DELTA_U16_ACC: u128 = 40708096_u128;
     const EXPECTED_AFFINE_U16_ACC: u128 = 49674240_u128;
+
+    const EXPECTED_ADD_U8_ACC: u128 = 307200_u128;
+    const EXPECTED_SUB_U8_ACC: u128 = 538624_u128;
+    const EXPECTED_MUL_U8_ACC: u128 = 925696_u128;
+    const EXPECTED_DELTA_U8_ACC: u128 = 405504_u128;
+    const EXPECTED_AFFINE_U8_ACC: u128 = 677888_u128;
 
     const EXPECTED_ADD_U32_ACC: u128 = 6280535377920_u128;
     const EXPECTED_SUB_U32_ACC: u128 = 7939160496128_u128;
@@ -123,11 +139,27 @@ mod tests {
         }
     }
 
+    fn add_u8_inputs(i: usize) -> (u8, u8) {
+        if i % 2_usize == 0_usize {
+            (10_u8, 20_u8)
+        } else {
+            (50_u8, 70_u8)
+        }
+    }
+
     fn sub_u16_inputs(i: usize) -> (u16, u16) {
         if i % 2_usize == 0_usize {
             (60000_u16, 12345_u16)
         } else {
             (40000_u16, 23456_u16)
+        }
+    }
+
+    fn sub_u8_inputs(i: usize) -> (u8, u8) {
+        if i % 2_usize == 0_usize {
+            (200_u8, 123_u8)
+        } else {
+            (220_u8, 34_u8)
         }
     }
 
@@ -139,6 +171,14 @@ mod tests {
         }
     }
 
+    fn mul_u8_inputs(i: usize) -> (u8, u8) {
+        if i % 2_usize == 0_usize {
+            (10_u8, 20_u8)
+        } else {
+            (12_u8, 21_u8)
+        }
+    }
+
     fn delta_u16_inputs(i: usize) -> (u16, u16) {
         if i % 2_usize == 0_usize {
             (10000_u16, 20000_u16)
@@ -147,11 +187,27 @@ mod tests {
         }
     }
 
+    fn delta_u8_inputs(i: usize) -> (u8, u8) {
+        if i % 2_usize == 0_usize {
+            (100_u8, 200_u8)
+        } else {
+            (123_u8, 221_u8)
+        }
+    }
+
     fn affine_u16_inputs(i: usize) -> (u16, u16, u16, u16, u16) {
         if i % 2_usize == 0_usize {
             (10_u16, 20_u16, 70_u16, 20_u16, 9_u16)
         } else {
             (123_u16, 221_u16, 300_u16, 234_u16, 42_u16)
+        }
+    }
+
+    fn affine_u8_inputs(i: usize) -> (u8, u8, u8, u8, u8) {
+        if i % 2_usize == 0_usize {
+            (5_u8, 10_u8, 20_u8, 5_u8, 3_u8)
+        } else {
+            (12_u8, 8_u8, 25_u8, 20_u8, 3_u8)
         }
     }
 
@@ -361,6 +417,136 @@ mod tests {
             }
             let (a, b, c, d, e) = affine_inputs(i);
             acc = acc + sq128x128_affine_kernel_generated(a, b, c, d, e);
+            i = i + 1_usize;
+        }
+    }
+
+    fn run_baseline_add_u8(rounds: usize) -> u128 {
+        let mut i = 0_usize;
+        let mut acc = 0_u128;
+        loop {
+            if i == rounds {
+                break acc;
+            }
+            let (a, b) = add_u8_inputs(i);
+            acc = acc + sq128x128_add_raw_u8_baseline_fn(a, b).into();
+            i = i + 1_usize;
+        }
+    }
+
+    fn run_generated_add_u8(rounds: usize) -> u128 {
+        let mut i = 0_usize;
+        let mut acc = 0_u128;
+        loop {
+            if i == rounds {
+                break acc;
+            }
+            let (a, b) = add_u8_inputs(i);
+            acc = acc + sq128x128_add_raw_u8_generated(a, b).into();
+            i = i + 1_usize;
+        }
+    }
+
+    fn run_baseline_sub_u8(rounds: usize) -> u128 {
+        let mut i = 0_usize;
+        let mut acc = 0_u128;
+        loop {
+            if i == rounds {
+                break acc;
+            }
+            let (a, b) = sub_u8_inputs(i);
+            acc = acc + sq128x128_sub_raw_u8_baseline_fn(a, b).into();
+            i = i + 1_usize;
+        }
+    }
+
+    fn run_generated_sub_u8(rounds: usize) -> u128 {
+        let mut i = 0_usize;
+        let mut acc = 0_u128;
+        loop {
+            if i == rounds {
+                break acc;
+            }
+            let (a, b) = sub_u8_inputs(i);
+            acc = acc + sq128x128_sub_raw_u8_generated(a, b).into();
+            i = i + 1_usize;
+        }
+    }
+
+    fn run_baseline_mul_u8(rounds: usize) -> u128 {
+        let mut i = 0_usize;
+        let mut acc = 0_u128;
+        loop {
+            if i == rounds {
+                break acc;
+            }
+            let (a, b) = mul_u8_inputs(i);
+            acc = acc + sq128x128_mul_raw_u8_baseline_fn(a, b).into();
+            i = i + 1_usize;
+        }
+    }
+
+    fn run_generated_mul_u8(rounds: usize) -> u128 {
+        let mut i = 0_usize;
+        let mut acc = 0_u128;
+        loop {
+            if i == rounds {
+                break acc;
+            }
+            let (a, b) = mul_u8_inputs(i);
+            acc = acc + sq128x128_mul_raw_u8_generated(a, b).into();
+            i = i + 1_usize;
+        }
+    }
+
+    fn run_baseline_delta_u8(rounds: usize) -> u128 {
+        let mut i = 0_usize;
+        let mut acc = 0_u128;
+        loop {
+            if i == rounds {
+                break acc;
+            }
+            let (a, b) = delta_u8_inputs(i);
+            acc = acc + sq128x128_delta_raw_u8_baseline_fn(a, b).into();
+            i = i + 1_usize;
+        }
+    }
+
+    fn run_generated_delta_u8(rounds: usize) -> u128 {
+        let mut i = 0_usize;
+        let mut acc = 0_u128;
+        loop {
+            if i == rounds {
+                break acc;
+            }
+            let (a, b) = delta_u8_inputs(i);
+            acc = acc + sq128x128_delta_raw_u8_generated(a, b).into();
+            i = i + 1_usize;
+        }
+    }
+
+    fn run_baseline_affine_u8(rounds: usize) -> u128 {
+        let mut i = 0_usize;
+        let mut acc = 0_u128;
+        loop {
+            if i == rounds {
+                break acc;
+            }
+            let (a, b, c, d, e) = affine_u8_inputs(i);
+            acc = acc + sq128x128_affine_kernel_u8_baseline_fn(a, b, c, d, e).into();
+            i = i + 1_usize;
+        }
+    }
+
+    fn run_generated_affine_u8(rounds: usize) -> u128 {
+        let mut i = 0_usize;
+        let mut acc = 0_u128;
+        loop {
+            if i == rounds {
+                break acc;
+            }
+            let (a, b, c, d, e) = affine_u8_inputs(i);
+            acc = acc + sq128x128_affine_kernel_u8_generated(a, b, c, d, e).into();
             i = i + 1_usize;
         }
     }
@@ -781,6 +967,67 @@ mod tests {
         );
 
         assert(
+            sq128x128_add_raw_u8_baseline_fn(10_u8, 20_u8)
+                == sq128x128_add_raw_u8_generated(10_u8, 20_u8),
+            'eq_add_u8_a',
+        );
+        assert(
+            sq128x128_add_raw_u8_baseline_fn(50_u8, 70_u8)
+                == sq128x128_add_raw_u8_generated(50_u8, 70_u8),
+            'eq_add_u8_b',
+        );
+
+        assert(
+            sq128x128_sub_raw_u8_baseline_fn(200_u8, 123_u8)
+                == sq128x128_sub_raw_u8_generated(200_u8, 123_u8),
+            'eq_sub_u8_a',
+        );
+        assert(
+            sq128x128_sub_raw_u8_baseline_fn(220_u8, 34_u8)
+                == sq128x128_sub_raw_u8_generated(220_u8, 34_u8),
+            'eq_sub_u8_b',
+        );
+
+        assert(
+            sq128x128_mul_raw_u8_baseline_fn(10_u8, 20_u8)
+                == sq128x128_mul_raw_u8_generated(10_u8, 20_u8),
+            'eq_mul_u8_a',
+        );
+        assert(
+            sq128x128_mul_raw_u8_baseline_fn(12_u8, 21_u8)
+                == sq128x128_mul_raw_u8_generated(12_u8, 21_u8),
+            'eq_mul_u8_b',
+        );
+
+        assert(
+            sq128x128_delta_raw_u8_baseline_fn(100_u8, 200_u8)
+                == sq128x128_delta_raw_u8_generated(100_u8, 200_u8),
+            'eq_delta_u8_a',
+        );
+        assert(
+            sq128x128_delta_raw_u8_baseline_fn(123_u8, 221_u8)
+                == sq128x128_delta_raw_u8_generated(123_u8, 221_u8),
+            'eq_delta_u8_b',
+        );
+
+        assert(
+            sq128x128_affine_kernel_u8_baseline_fn(
+                5_u8, 10_u8, 20_u8, 5_u8, 3_u8,
+            ) == sq128x128_affine_kernel_u8_generated(
+                5_u8, 10_u8, 20_u8, 5_u8, 3_u8,
+            ),
+            'eq_affine_u8_a',
+        );
+        assert(
+            sq128x128_affine_kernel_u8_baseline_fn(
+                12_u8, 8_u8, 25_u8, 20_u8, 3_u8,
+            ) == sq128x128_affine_kernel_u8_generated(
+                12_u8, 8_u8, 25_u8, 20_u8, 3_u8,
+            ),
+            'eq_affine_u8_b',
+        );
+
+        assert(
             sq128x128_add_raw_u16_baseline_fn(10000_u16, 20000_u16)
                 == sq128x128_add_raw_u16_generated(10000_u16, 20000_u16),
             'eq_add_u16_a',
@@ -1012,6 +1259,56 @@ mod tests {
     #[test]
     fn test_gas_generated_affine_case() {
         assert(run_generated_affine(ROUNDS) == EXPECTED_AFFINE_ACC, 'generated_affine_wrong');
+    }
+
+    #[test]
+    fn test_gas_baseline_add_u8_case() {
+        assert(run_baseline_add_u8(ROUNDS) == EXPECTED_ADD_U8_ACC, 'baseline_add_u8_wrong');
+    }
+
+    #[test]
+    fn test_gas_generated_add_u8_case() {
+        assert(run_generated_add_u8(ROUNDS) == EXPECTED_ADD_U8_ACC, 'generated_add_u8_wrong');
+    }
+
+    #[test]
+    fn test_gas_baseline_sub_u8_case() {
+        assert(run_baseline_sub_u8(ROUNDS) == EXPECTED_SUB_U8_ACC, 'baseline_sub_u8_wrong');
+    }
+
+    #[test]
+    fn test_gas_generated_sub_u8_case() {
+        assert(run_generated_sub_u8(ROUNDS) == EXPECTED_SUB_U8_ACC, 'generated_sub_u8_wrong');
+    }
+
+    #[test]
+    fn test_gas_baseline_mul_u8_case() {
+        assert(run_baseline_mul_u8(ROUNDS) == EXPECTED_MUL_U8_ACC, 'baseline_mul_u8_wrong');
+    }
+
+    #[test]
+    fn test_gas_generated_mul_u8_case() {
+        assert(run_generated_mul_u8(ROUNDS) == EXPECTED_MUL_U8_ACC, 'generated_mul_u8_wrong');
+    }
+
+    #[test]
+    fn test_gas_baseline_delta_u8_case() {
+        assert(run_baseline_delta_u8(ROUNDS) == EXPECTED_DELTA_U8_ACC, 'baseline_delta_u8_wrong');
+    }
+
+    #[test]
+    fn test_gas_generated_delta_u8_case() {
+        assert(run_generated_delta_u8(ROUNDS) == EXPECTED_DELTA_U8_ACC, 'generated_delta_u8_wrong');
+    }
+
+    #[test]
+    fn test_gas_baseline_affine_u8_case() {
+        assert(run_baseline_affine_u8(ROUNDS) == EXPECTED_AFFINE_U8_ACC, 'baseline_affine_u8_wrong');
+    }
+
+    #[test]
+    fn test_gas_generated_affine_u8_case() {
+        assert(run_generated_affine_u8(ROUNDS) == EXPECTED_AFFINE_U8_ACC, 'generated_affine_u8_wrong');
     }
 
     #[test]

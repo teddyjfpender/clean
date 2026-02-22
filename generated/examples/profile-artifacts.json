@@ -1,10 +1,10 @@
 {
   "families": [
     {
-      "avg_hotspot_ratio": 0.548822,
+      "avg_hotspot_ratio": 0.559603,
       "case_count": 2,
       "family": "fixed_point",
-      "generated_sierra_total": 471292450.0
+      "generated_sierra_total": 554358960.0
     },
     {
       "avg_hotspot_ratio": 0.128091,
@@ -15,14 +15,14 @@
   ],
   "hotspots": [
     {
-      "baseline_sierra_gas": 2887744474.0,
-      "delta_sierra_gas": 2534916514.0,
+      "baseline_sierra_gas": 3032455784.0,
+      "delta_sierra_gas": 2596561314.0,
       "family": "fixed_point",
-      "generated_sierra_gas": 352827960.0,
-      "hotspot_ratio": 0.12218115666975041,
+      "generated_sierra_gas": 435894470.0,
+      "hotspot_ratio": 0.1437430587776049,
       "id": "sq128x128_u128",
-      "l2_improvement_pct": 87.78,
-      "sierra_improvement_pct": 87.78
+      "l2_improvement_pct": 85.63,
+      "sierra_improvement_pct": 85.63
     },
     {
       "baseline_sierra_gas": 121444330.0,

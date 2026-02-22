@@ -11,6 +11,11 @@ Compared lanes:
 - `sq128x128_mul_raw`
 - `sq128x128_delta_raw`
 - `sq128x128_affine_kernel`
+- `sq128x128_add_raw_u8`
+- `sq128x128_sub_raw_u8`
+- `sq128x128_mul_raw_u8`
+- `sq128x128_delta_raw_u8`
+- `sq128x128_affine_kernel_u8`
 - `sq128x128_add_raw_u16`
 - `sq128x128_sub_raw_u16`
 - `sq128x128_mul_raw_u16`
