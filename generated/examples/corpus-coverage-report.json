@@ -152,7 +152,8 @@
     {
       "capability_ids": [
         "cap.integer.u128.add.wrapping",
-        "cap.integer.u128.mul.wrapping"
+        "cap.integer.u128.mul.wrapping",
+        "cap.integer.u128.sub.wrapping"
       ],
       "complexity_tier": "high",
       "family_tags": [

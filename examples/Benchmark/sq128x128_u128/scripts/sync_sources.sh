@@ -92,6 +92,11 @@ function_names = [
     "sq128x128_mul_raw",
     "sq128x128_delta_raw",
     "sq128x128_affine_kernel",
+    "sq128x128_add_raw_u64",
+    "sq128x128_sub_raw_u64",
+    "sq128x128_mul_raw_u64",
+    "sq128x128_delta_raw_u64",
+    "sq128x128_affine_kernel_u64",
 ]
 
 chunks: list[str] = [
@@ -160,6 +165,10 @@ fn sq_to_u128_integer_unchecked(value: SQ128x128) -> u128 {
     raw.limb2.into() + raw.limb3.into() * TWO_POW_64
 }
 
+fn wrap_u64(value: u128) -> u64 {
+    (value % TWO_POW_64).try_into().unwrap()
+}
+
 pub fn sq128x128_add_raw_baseline_fn(a_raw: u128, b_raw: u128) -> u128 {
     let a: SQ128x128 = a_raw.into();
     let b: SQ128x128 = b_raw.into();
@@ -191,6 +200,31 @@ pub fn sq128x128_affine_kernel_baseline_fn(
     let delta_cd = sq128x128_sub_raw_baseline_fn(c_raw, d_raw);
     let mul_term = sq128x128_mul_raw_baseline_fn(sum_ab, delta_cd);
     sq128x128_add_raw_baseline_fn(mul_term, e_raw)
+}
+
+pub fn sq128x128_add_raw_u64_baseline_fn(a_raw: u64, b_raw: u64) -> u64 {
+    wrap_u64(a_raw.into() + b_raw.into())
+}
+
+pub fn sq128x128_sub_raw_u64_baseline_fn(a_raw: u64, b_raw: u64) -> u64 {
+    wrap_u64(a_raw.into() + TWO_POW_64 - b_raw.into())
+}
+
+pub fn sq128x128_mul_raw_u64_baseline_fn(a_raw: u64, b_raw: u64) -> u64 {
+    wrap_u64(a_raw.into() * b_raw.into())
+}
+
+pub fn sq128x128_delta_raw_u64_baseline_fn(a_raw: u64, b_raw: u64) -> u64 {
+    sq128x128_sub_raw_u64_baseline_fn(b_raw, a_raw)
+}
+
+pub fn sq128x128_affine_kernel_u64_baseline_fn(
+    a_raw: u64, b_raw: u64, c_raw: u64, d_raw: u64, e_raw: u64,
+) -> u64 {
+    let sum_ab = sq128x128_add_raw_u64_baseline_fn(a_raw, b_raw);
+    let delta_cd = sq128x128_sub_raw_u64_baseline_fn(c_raw, d_raw);
+    let mul_term = sq128x128_mul_raw_u64_baseline_fn(sum_ab, delta_cd);
+    sq128x128_add_raw_u64_baseline_fn(mul_term, e_raw)
 }
 EOF2
 

@@ -32,12 +32,7 @@ def emitFunction (entryPoint : Nat) (fnSpec : IRFuncSpec) : Except EmitError Emi
   ensureViewNoWrites fnSpec
   fnSpec.args.forM (fun arg => ensureFunctionTySupported fnSpec.name "parameter" arg.ty)
   ensureFunctionTySupported fnSpec.name "return" fnSpec.ret
-  let usesRangeCheckLane := exprUsesU128Arith fnSpec.body
-  if usesRangeCheckLane && fnSpec.ret != .u128 then
-    .error
-      s!"unsupported return type '{Ty.toCairo fnSpec.ret}' in function '{fnSpec.name}': u128 arithmetic lane currently requires return type 'u128' for explicit RangeCheck threading"
-  else
-    pure ()
+  let usesRangeCheckLane := exprUsesRangeCheckedIntArith fnSpec.body
 
   let paramTypeIds <- fnSpec.args.mapM (fun arg => typeIdJson arg.ty)
   let retTypeId <- typeIdJson fnSpec.ret

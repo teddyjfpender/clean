@@ -17,7 +17,7 @@
 | `karatsuba_u128` | `high` | `integer` | `cap.integer.u128.add.wrapping, cap.integer.u128.mul.wrapping, cap.integer.u128.sub.wrapping` |
 | `newton_u128` | `high` | `control_flow, fixed_point` | `cap.control.calls_loops_panic, cap.integer.u128.mul.wrapping, cap.integer.u128.sub.wrapping` |
 | `scalar_core` | `medium` | `scalar` | `cap.scalar.bool.literal, cap.scalar.felt252.add, cap.scalar.felt252.mul` |
-| `sq128x128_u128` | `high` | `fixed_point` | `cap.integer.u128.add.wrapping, cap.integer.u128.mul.wrapping` |
+| `sq128x128_u128` | `high` | `fixed_point` | `cap.integer.u128.add.wrapping, cap.integer.u128.mul.wrapping, cap.integer.u128.sub.wrapping` |
 | `u128_range_checked` | `medium` | `integer` | `cap.integer.u128.add.wrapping, cap.integer.u128.mul.wrapping, cap.integer.u128.sub.wrapping` |
 
 ## Implemented Capability Coverage

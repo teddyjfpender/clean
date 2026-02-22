@@ -9,9 +9,13 @@ open LeanCairo.Core.Spec
 open LeanCairo.Core.Syntax
 
 private abbrev sqLaneTy : Ty := .u128
+private abbrev sqLaneTyU64 : Ty := .u64
 
 private def varSqLane (name : String) : Expr sqLaneTy :=
   Expr.var (ty := sqLaneTy) name
+
+private def varSqLaneU64 (name : String) : Expr sqLaneTyU64 :=
+  Expr.var (ty := sqLaneTyU64) name
 
 private def addSqLane (lhs rhs : Expr sqLaneTy) : Expr sqLaneTy :=
   Expr.addInt sqLaneTy lhs rhs
@@ -22,14 +26,28 @@ private def subSqLane (lhs rhs : Expr sqLaneTy) : Expr sqLaneTy :=
 private def mulSqLane (lhs rhs : Expr sqLaneTy) : Expr sqLaneTy :=
   Expr.mulInt sqLaneTy lhs rhs
 
+private def addSqLaneU64 (lhs rhs : Expr sqLaneTyU64) : Expr sqLaneTyU64 :=
+  Expr.addInt sqLaneTyU64 lhs rhs
+
+private def subSqLaneU64 (lhs rhs : Expr sqLaneTyU64) : Expr sqLaneTyU64 :=
+  Expr.subInt sqLaneTyU64 lhs rhs
+
+private def mulSqLaneU64 (lhs rhs : Expr sqLaneTyU64) : Expr sqLaneTyU64 :=
+  Expr.mulInt sqLaneTyU64 lhs rhs
+
 /-
-Reduced SQ128x128 raw-lane model over `u128`:
+Reduced SQ128x128 raw-lane model over typed integer lanes:
 - Represents the SQ raw magnitude in a constrained `u128` domain.
 - Mirrors the unchecked fast path style from upstream SQ128 arithmetic:
   add, sub, mul, delta.
 - Caller preconditions:
   1) arithmetic does not overflow `u128`;
   2) subtraction arguments satisfy lhs >= rhs.
+
+Extended lane contract:
+- `u64` lane uses strict wrapping semantics for add/sub/mul (`mod 2^64`).
+- `u64` affine kernel composes those wrapped ops:
+  `((a + b) * (c - d) + e) mod 2^64`.
 
 Reference source family:
 https://github.com/teddyjfpender/the-situation/tree/main/contracts/src/types/sq128
@@ -65,6 +83,37 @@ private def affineKernelBody : Expr sqLaneTy :=
         (addSqLane
           (Expr.var (ty := sqLaneTy) "mul_term")
           (varSqLane "eLane"))))
+
+private def addRawBodyU64 : Expr sqLaneTyU64 :=
+  addSqLaneU64 (varSqLaneU64 "aLane") (varSqLaneU64 "bLane")
+
+private def subRawBodyU64 : Expr sqLaneTyU64 :=
+  subSqLaneU64 (varSqLaneU64 "aLane") (varSqLaneU64 "bLane")
+
+private def mulRawBodyU64 : Expr sqLaneTyU64 :=
+  mulSqLaneU64 (varSqLaneU64 "aLane") (varSqLaneU64 "bLane")
+
+private def deltaRawBodyU64 : Expr sqLaneTyU64 :=
+  subSqLaneU64 (varSqLaneU64 "bLane") (varSqLaneU64 "aLane")
+
+private def affineKernelBodyU64 : Expr sqLaneTyU64 :=
+  Expr.letE
+    "sum_ab"
+    sqLaneTyU64
+    (addSqLaneU64 (varSqLaneU64 "aLane") (varSqLaneU64 "bLane"))
+    (Expr.letE
+      "delta_cd"
+      sqLaneTyU64
+      (subSqLaneU64 (varSqLaneU64 "cLane") (varSqLaneU64 "dLane"))
+      (Expr.letE
+        "mul_term"
+        sqLaneTyU64
+        (mulSqLaneU64
+          (Expr.var (ty := sqLaneTyU64) "sum_ab")
+          (Expr.var (ty := sqLaneTyU64) "delta_cd"))
+        (addSqLaneU64
+          (Expr.var (ty := sqLaneTyU64) "mul_term")
+          (varSqLaneU64 "eLane"))))
 
 def contract : ContractSpec :=
   {
@@ -108,6 +157,43 @@ def contract : ContractSpec :=
             ]
           ret := sqLaneTy
           body := affineKernelBody
+        },
+        {
+          name := "sq128x128AddRawU64"
+          args := [{ name := "aLane", ty := sqLaneTyU64 }, { name := "bLane", ty := sqLaneTyU64 }]
+          ret := sqLaneTyU64
+          body := addRawBodyU64
+        },
+        {
+          name := "sq128x128SubRawU64"
+          args := [{ name := "aLane", ty := sqLaneTyU64 }, { name := "bLane", ty := sqLaneTyU64 }]
+          ret := sqLaneTyU64
+          body := subRawBodyU64
+        },
+        {
+          name := "sq128x128MulRawU64"
+          args := [{ name := "aLane", ty := sqLaneTyU64 }, { name := "bLane", ty := sqLaneTyU64 }]
+          ret := sqLaneTyU64
+          body := mulRawBodyU64
+        },
+        {
+          name := "sq128x128DeltaRawU64"
+          args := [{ name := "aLane", ty := sqLaneTyU64 }, { name := "bLane", ty := sqLaneTyU64 }]
+          ret := sqLaneTyU64
+          body := deltaRawBodyU64
+        },
+        {
+          name := "sq128x128AffineKernelU64"
+          args :=
+            [
+              { name := "aLane", ty := sqLaneTyU64 },
+              { name := "bLane", ty := sqLaneTyU64 },
+              { name := "cLane", ty := sqLaneTyU64 },
+              { name := "dLane", ty := sqLaneTyU64 },
+              { name := "eLane", ty := sqLaneTyU64 }
+            ]
+          ret := sqLaneTyU64
+          body := affineKernelBodyU64
         }
       ]
   }

@@ -16,11 +16,12 @@ Sierra subset backend invariants (phase-2 direct Lean -> Sierra lane):
 - functions must be view-only and write-free,
 - supported user signature scalar types:
   felt252, bool, u128, u8/u16/u32/u64, i8/i16/i32/i64/i128,
-- range-check lane: when u128 add/sub appears, emitter injects explicit `RangeCheck`
-  input/output in Sierra signatures,
+- range-check lane: when range-checked integer arithmetic appears (currently u128/u64
+  wrapping add/sub/mul), emitter injects explicit `RangeCheck` input/output in
+  Sierra signatures,
 - supported expressions:
   - vars / letE,
-  - literals: felt252, u128, bool,
+  - literals: felt252, u128, u64 (typed literal form), bool,
   - felt252 arithmetic: add/sub/mul,
   - top-level equality returns for felt252/u128.
 
@@ -506,7 +507,7 @@ def requireRangeCheckVar (fnName : String) : EmitM Json := do
   | some value => pure value
   | none =>
       throw
-        s!"unsupported u128 arithmetic in function '{fnName}': missing explicit range-check resource lane in current emitter scope"
+        s!"unsupported range-checked integer arithmetic in function '{fnName}': missing explicit range-check resource lane in current emitter scope"
 
 def nextAbsoluteStatementIdx : EmitM Nat := do
   let st <- get
@@ -564,6 +565,40 @@ def registerOpaqueNoArgTypeDecl (debugName genericId : String) : EmitM Json := d
 
 def registerU128MulGuaranteeTypeDecl : EmitM Json :=
   registerOpaqueNoArgTypeDecl "U128MulGuarantee" "U128MulGuarantee"
+
+def registerConstTypeDecl (debugName : String) (valueTyId : Json) (constArg : Json) : EmitM Json := do
+  let _ <- liftExcept (ensureKnownGenericTypeId "Const")
+  let tyId := idJson debugName
+  let decl :=
+    Json.mkObj
+      [
+        ("id", tyId),
+        ( "long_id",
+          Json.mkObj
+            [
+              ("generic_id", Json.str "Const"),
+              ("generic_args", Json.arr #[typeArgJson valueTyId, constArg])
+            ] ),
+        ("declared_type_info", Json.null)
+      ]
+  modify (fun st => { st with typeDecls := insertDeclIfMissing st.typeDecls debugName decl })
+  pure tyId
+
+def registerConstU128TypeDecl (value : Nat) : EmitM Json := do
+  let u128TyId <- registerTypeDecl .u128
+  registerConstTypeDecl s!"Const<u128, {value}>" u128TyId (valueArgJson (Int.ofNat value))
+
+def registerConstNonZeroU128TypeDecl (value : Nat) : EmitM Json := do
+  if value = 0 then
+    throw "internal error: NonZero<u128> constant requires value > 0"
+  else
+    pure ()
+  let nonZeroTyId <- registerTypeDecl (.nonZero "u128")
+  let constU128TyId <- registerConstU128TypeDecl value
+  registerConstTypeDecl
+    s!"Const<NonZero<u128>, Const<u128, {value}>>"
+    nonZeroTyId
+    (typeArgJson constU128TyId)
 
 def registerLibfuncDecl (debugName : String) (genericId : String) (genericArgs : List Json) : EmitM Json := do
   let _ <- liftExcept (ensureKnownGenericLibfuncId genericId)
@@ -674,6 +709,24 @@ def emitU128Const (fnName : String) (value : Nat) : EmitM Json := do
   let rawVar <- freshVarId fnName "u128_const_raw"
   pushStmt (invocationStmtJson libfuncId [] [rawVar])
   emitStoreTemp fnName .u128 rawVar
+
+def u64ConstDebugName (value : Nat) : String :=
+  s!"u64_const_{value}"
+
+def emitU64Const (fnName : String) (value : Nat) : EmitM Json := do
+  let _ <- registerTypeDecl .u64
+  let libfuncId <- registerLibfuncDecl (u64ConstDebugName value) "u64_const" [valueArgJson (Int.ofNat value)]
+  let rawVar <- freshVarId fnName "u64_const_raw"
+  pushStmt (invocationStmtJson libfuncId [] [rawVar])
+  emitStoreTemp fnName .u64 rawVar
+
+def emitNonZeroU128Const (fnName : String) (value : Nat) : EmitM Json := do
+  let constTyId <- registerConstNonZeroU128TypeDecl value
+  let debugName := s!"const_as_immediate<Const<NonZero<u128>, Const<u128, {value}>>>"
+  let libfuncId <- registerLibfuncDecl debugName "const_as_immediate" [typeArgJson constTyId]
+  let rawVar <- freshVarId fnName "nonzero_u128_const_raw"
+  pushStmt (invocationStmtJson libfuncId [] [rawVar])
+  emitStoreTemp fnName (.nonZero "u128") rawVar
 
 structure LinearVar where
   ty : Ty
@@ -795,7 +848,7 @@ def u128ArithUnsupported (fnName : String) (opName : String) : EmitM α :=
   throw
     s!"unsupported u128 arithmetic ({opName}) in function '{fnName}': direct Sierra backend currently implements only add/sub/mul wrapping paths with explicit RangeCheck threading"
 
-partial def exprUsesU128Arith : IRExpr ty -> Bool
+partial def exprUsesRangeCheckedIntArith : IRExpr ty -> Bool
   | .var _ => false
   | .storageRead _ => false
   | .litU128 _ => false
@@ -803,19 +856,43 @@ partial def exprUsesU128Arith : IRExpr ty -> Bool
   | .litBool _ => false
   | .litFelt252 _ => false
   | .litInt _ _ => false
-  | .addFelt252 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .subFelt252 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .mulFelt252 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .addInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
-  | .subInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
-  | .mulInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
-  | .divInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
-  | .modInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
-  | .bitAndInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
-  | .bitOrInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
-  | .bitXorInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
-  | .shlInt ty lhs _ => exprUsesU128Arith lhs || ty = .u128
-  | .shrInt ty lhs _ => exprUsesU128Arith lhs || ty = .u128
+  | .addFelt252 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .subFelt252 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .mulFelt252 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .addInt ty lhs rhs =>
+      exprUsesRangeCheckedIntArith lhs ||
+      exprUsesRangeCheckedIntArith rhs ||
+      ty = .u128 || ty = .u64
+  | .subInt ty lhs rhs =>
+      exprUsesRangeCheckedIntArith lhs ||
+      exprUsesRangeCheckedIntArith rhs ||
+      ty = .u128 || ty = .u64
+  | .mulInt ty lhs rhs =>
+      exprUsesRangeCheckedIntArith lhs ||
+      exprUsesRangeCheckedIntArith rhs ||
+      ty = .u128 || ty = .u64
+  | .divInt ty lhs rhs =>
+      exprUsesRangeCheckedIntArith lhs ||
+      exprUsesRangeCheckedIntArith rhs ||
+      ty = .u128 || ty = .u64
+  | .modInt ty lhs rhs =>
+      exprUsesRangeCheckedIntArith lhs ||
+      exprUsesRangeCheckedIntArith rhs ||
+      ty = .u128 || ty = .u64
+  | .bitAndInt ty lhs rhs =>
+      exprUsesRangeCheckedIntArith lhs ||
+      exprUsesRangeCheckedIntArith rhs ||
+      ty = .u128 || ty = .u64
+  | .bitOrInt ty lhs rhs =>
+      exprUsesRangeCheckedIntArith lhs ||
+      exprUsesRangeCheckedIntArith rhs ||
+      ty = .u128 || ty = .u64
+  | .bitXorInt ty lhs rhs =>
+      exprUsesRangeCheckedIntArith lhs ||
+      exprUsesRangeCheckedIntArith rhs ||
+      ty = .u128 || ty = .u64
+  | .shlInt ty lhs _ => exprUsesRangeCheckedIntArith lhs || ty = .u128 || ty = .u64
+  | .shrInt ty lhs _ => exprUsesRangeCheckedIntArith lhs || ty = .u128 || ty = .u64
   | .addU128 _ _ => true
   | .subU128 _ _ => true
   | .mulU128 _ _ => true
@@ -826,30 +903,32 @@ partial def exprUsesU128Arith : IRExpr ty -> Bool
   | .bitXorU128 _ _ => true
   | .shlU128 _ _ => true
   | .shrU128 _ _ => true
-  | .addU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .subU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .mulU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .divU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .modU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .bitAndU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .bitOrU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .bitXorU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .shlU256 lhs _ => exprUsesU128Arith lhs
-  | .shrU256 lhs _ => exprUsesU128Arith lhs
-  | .u256FromLimbs low high => exprUsesU128Arith low || exprUsesU128Arith high
-  | .u256Low value => exprUsesU128Arith value
-  | .u256High value => exprUsesU128Arith value
-  | .eq lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .ltInt _ lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .leInt _ lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .ltU128 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .leU128 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .ltU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
-  | .leU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
+  | .addU256 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .subU256 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .mulU256 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .divU256 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .modU256 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .bitAndU256 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .bitOrU256 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .bitXorU256 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .shlU256 lhs _ => exprUsesRangeCheckedIntArith lhs
+  | .shrU256 lhs _ => exprUsesRangeCheckedIntArith lhs
+  | .u256FromLimbs low high => exprUsesRangeCheckedIntArith low || exprUsesRangeCheckedIntArith high
+  | .u256Low value => exprUsesRangeCheckedIntArith value
+  | .u256High value => exprUsesRangeCheckedIntArith value
+  | .eq lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .ltInt _ lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .leInt _ lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .ltU128 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .leU128 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .ltU256 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
+  | .leU256 lhs rhs => exprUsesRangeCheckedIntArith lhs || exprUsesRangeCheckedIntArith rhs
   | .ite cond thenBranch elseBranch =>
-      exprUsesU128Arith cond || exprUsesU128Arith thenBranch || exprUsesU128Arith elseBranch
+      exprUsesRangeCheckedIntArith cond ||
+      exprUsesRangeCheckedIntArith thenBranch ||
+      exprUsesRangeCheckedIntArith elseBranch
   | .letE _ _ bound body =>
-      exprUsesU128Arith bound || exprUsesU128Arith body
+      exprUsesRangeCheckedIntArith bound || exprUsesRangeCheckedIntArith body
 
 def u256ArithUnsupported (fnName : String) (opName : String) : EmitM α :=
   throw

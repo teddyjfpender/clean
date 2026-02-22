@@ -8,6 +8,35 @@
    "declared_type_info": null},
   {"long_id": {"generic_id": "U128MulGuarantee", "generic_args": []},
    "id": {"id": 11371311946252800753, "debug_name": "U128MulGuarantee"},
+   "declared_type_info": null},
+  {"long_id": {"generic_id": "u64", "generic_args": []},
+   "id": {"id": 5563585020063213298, "debug_name": "u64"},
+   "declared_type_info": null},
+  {"long_id":
+   {"generic_id": "NonZero",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}}]},
+   "id": {"id": 18013561560785948340, "debug_name": "NonZero<u128>"},
+   "declared_type_info": null},
+  {"long_id":
+   {"generic_id": "Const",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}},
+     {"Value": [1, [0, 0, 0, 0, 0, 0, 0, 0, 1]]}]},
+   "id":
+   {"id": 16541869047067444934,
+    "debug_name": "Const<u128, 18446744073709551616>"},
+   "declared_type_info": null},
+  {"long_id":
+   {"generic_id": "Const",
+    "generic_args":
+    [{"Type": {"id": 18013561560785948340, "debug_name": "NonZero<u128>"}},
+     {"Type":
+      {"id": 16541869047067444934,
+       "debug_name": "Const<u128, 18446744073709551616>"}}]},
+   "id":
+   {"id": 1506911968294090446,
+    "debug_name": "Const<NonZero<u128>, Const<u128, 18446744073709551616>>"},
    "declared_type_info": null}],
  "statements":
  [{"Invocation":
@@ -756,7 +785,1020 @@
    [{"id": 9138475998955231604,
      "debug_name": "sq128x128AffineKernel::tmp::store_temp::24"},
     {"id": 9138477098466859815,
-     "debug_name": "sq128x128AffineKernel::tmp::store_temp::25"}]}],
+     "debug_name": "sq128x128AffineKernel::tmp::store_temp::25"}]},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 5065393602069275119, "debug_name": "u64_overflowing_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11574781872414342639,
+        "debug_name":
+        "sq128x128AddRawU64::tmp::u64_add_range_check_non_overflow::0"},
+       {"id": 7638270080499374011,
+        "debug_name":
+        "sq128x128AddRawU64::tmp::u64_add_result_non_overflow::1"}]},
+     {"target": {"Statement": 76},
+      "results":
+      [{"id": 12758299133019603153,
+        "debug_name":
+        "sq128x128AddRawU64::tmp::u64_add_range_check_overflow::2"},
+       {"id": 17186225152625221341,
+        "debug_name": "sq128x128AddRawU64::tmp::u64_add_result_overflow::3"}]}],
+    "args":
+    [{"id": 7026512437575570870,
+      "debug_name": "sq128x128AddRawU64::param::__range_check"},
+     {"id": 9501021719770876859,
+      "debug_name": "sq128x128AddRawU64::param::aLane"},
+     {"id": 2061601631341825122,
+      "debug_name": "sq128x128AddRawU64::param::bLane"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 895750186207612425,
+        "debug_name":
+        "sq128x128AddRawU64::tmp::u64_add_range_check_merged::4"}]}],
+    "args":
+    [{"id": 11574781872414342639,
+      "debug_name":
+      "sq128x128AddRawU64::tmp::u64_add_range_check_non_overflow::0"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 184529799311572681,
+        "debug_name": "sq128x128AddRawU64::tmp::u64_add_result_merged::5"}]}],
+    "args":
+    [{"id": 7638270080499374011,
+      "debug_name":
+      "sq128x128AddRawU64::tmp::u64_add_result_non_overflow::1"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 79}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 895750186207612425,
+        "debug_name":
+        "sq128x128AddRawU64::tmp::u64_add_range_check_merged::4"}]}],
+    "args":
+    [{"id": 12758299133019603153,
+      "debug_name":
+      "sq128x128AddRawU64::tmp::u64_add_range_check_overflow::2"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 184529799311572681,
+        "debug_name": "sq128x128AddRawU64::tmp::u64_add_result_merged::5"}]}],
+    "args":
+    [{"id": 17186225152625221341,
+      "debug_name": "sq128x128AddRawU64::tmp::u64_add_result_overflow::3"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11706761690518686428,
+        "debug_name": "sq128x128AddRawU64::tmp::store_temp::6"}]}],
+    "args":
+    [{"id": 895750186207612425,
+      "debug_name":
+      "sq128x128AddRawU64::tmp::u64_add_range_check_merged::4"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11706762790030314639,
+        "debug_name": "sq128x128AddRawU64::tmp::store_temp::7"}]}],
+    "args":
+    [{"id": 184529799311572681,
+      "debug_name": "sq128x128AddRawU64::tmp::u64_add_result_merged::5"}]}},
+  {"Return":
+   [{"id": 11706761690518686428,
+     "debug_name": "sq128x128AddRawU64::tmp::store_temp::6"},
+    {"id": 11706762790030314639,
+     "debug_name": "sq128x128AddRawU64::tmp::store_temp::7"}]},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14910471293585079190, "debug_name": "u64_overflowing_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 14612960676189681123,
+        "debug_name":
+        "sq128x128SubRawU64::tmp::u64_sub_range_check_non_overflow::0"},
+       {"id": 5505482018679553503,
+        "debug_name":
+        "sq128x128SubRawU64::tmp::u64_sub_result_non_overflow::1"}]},
+     {"target": {"Statement": 87},
+      "results":
+      [{"id": 3130329935914383269,
+        "debug_name":
+        "sq128x128SubRawU64::tmp::u64_sub_range_check_overflow::2"},
+       {"id": 10790582294775312161,
+        "debug_name": "sq128x128SubRawU64::tmp::u64_sub_result_overflow::3"}]}],
+    "args":
+    [{"id": 3132041449003853415,
+      "debug_name": "sq128x128SubRawU64::param::__range_check"},
+     {"id": 9797298645576576966,
+      "debug_name": "sq128x128SubRawU64::param::aLane"},
+     {"id": 8444012967339651151,
+      "debug_name": "sq128x128SubRawU64::param::bLane"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15026177080370526229,
+        "debug_name":
+        "sq128x128SubRawU64::tmp::u64_sub_range_check_merged::4"}]}],
+    "args":
+    [{"id": 14612960676189681123,
+      "debug_name":
+      "sq128x128SubRawU64::tmp::u64_sub_range_check_non_overflow::0"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15859434970383380709,
+        "debug_name": "sq128x128SubRawU64::tmp::u64_sub_result_merged::5"}]}],
+    "args":
+    [{"id": 5505482018679553503,
+      "debug_name":
+      "sq128x128SubRawU64::tmp::u64_sub_result_non_overflow::1"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 90}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15026177080370526229,
+        "debug_name":
+        "sq128x128SubRawU64::tmp::u64_sub_range_check_merged::4"}]}],
+    "args":
+    [{"id": 3130329935914383269,
+      "debug_name":
+      "sq128x128SubRawU64::tmp::u64_sub_range_check_overflow::2"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15859434970383380709,
+        "debug_name": "sq128x128SubRawU64::tmp::u64_sub_result_merged::5"}]}],
+    "args":
+    [{"id": 10790582294775312161,
+      "debug_name": "sq128x128SubRawU64::tmp::u64_sub_result_overflow::3"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 444793625009140249,
+        "debug_name": "sq128x128SubRawU64::tmp::store_temp::6"}]}],
+    "args":
+    [{"id": 15026177080370526229,
+      "debug_name":
+      "sq128x128SubRawU64::tmp::u64_sub_range_check_merged::4"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 444792525497512038,
+        "debug_name": "sq128x128SubRawU64::tmp::store_temp::7"}]}],
+    "args":
+    [{"id": 15859434970383380709,
+      "debug_name": "sq128x128SubRawU64::tmp::u64_sub_result_merged::5"}]}},
+  {"Return":
+   [{"id": 444793625009140249,
+     "debug_name": "sq128x128SubRawU64::tmp::store_temp::6"},
+    {"id": 444792525497512038,
+     "debug_name": "sq128x128SubRawU64::tmp::store_temp::7"}]},
+  {"Invocation":
+   {"libfunc_id": {"id": 10020849058391676305, "debug_name": "u64_wide_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13642560051774684674,
+        "debug_name":
+        "sq128x128MulRawU64::tmp::u64_mul_wide_product_raw::0"}]}],
+    "args":
+    [{"id": 15151861451539937458,
+      "debug_name": "sq128x128MulRawU64::param::aLane"},
+     {"id": 4520020502046848203,
+      "debug_name": "sq128x128MulRawU64::param::bLane"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3226991181962153472,
+        "debug_name": "sq128x128MulRawU64::tmp::store_temp::1"}]}],
+    "args":
+    [{"id": 13642560051774684674,
+      "debug_name": "sq128x128MulRawU64::tmp::u64_mul_wide_product_raw::0"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 10816351239301491384,
+     "debug_name":
+     "const_as_immediate<Const<NonZero<u128>, Const<u128, 18446744073709551616>>>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 9778855366799904524,
+        "debug_name": "sq128x128MulRawU64::tmp::nonzero_u128_const_raw::2"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 9723454027365929409, "debug_name": "store_temp_NonZero<u128>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3226993380985409894,
+        "debug_name": "sq128x128MulRawU64::tmp::store_temp::3"}]}],
+    "args":
+    [{"id": 9778855366799904524,
+      "debug_name": "sq128x128MulRawU64::tmp::nonzero_u128_const_raw::2"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13543698959822946193, "debug_name": "u128_safe_divmod"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15822467930705308207,
+        "debug_name":
+        "sq128x128MulRawU64::tmp::u64_mul_range_check_after_divmod::4"},
+       {"id": 14089441543417204847,
+        "debug_name": "sq128x128MulRawU64::tmp::u64_mul_quotient_raw::5"},
+       {"id": 4429533942820601696,
+        "debug_name": "sq128x128MulRawU64::tmp::u64_mul_remainder_raw::6"}]}],
+    "args":
+    [{"id": 15709820222178553587,
+      "debug_name": "sq128x128MulRawU64::param::__range_check"},
+     {"id": 3226991181962153472,
+      "debug_name": "sq128x128MulRawU64::tmp::store_temp::1"},
+     {"id": 3226993380985409894,
+      "debug_name": "sq128x128MulRawU64::tmp::store_temp::3"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 14089441543417204847,
+      "debug_name": "sq128x128MulRawU64::tmp::u64_mul_quotient_raw::5"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 948915364444375491, "debug_name": "downcast_u128_to_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6840396820111261537,
+        "debug_name":
+        "sq128x128MulRawU64::tmp::u64_mul_range_check_downcast_ok::8"},
+       {"id": 666957794199416991,
+        "debug_name":
+        "sq128x128MulRawU64::tmp::u64_mul_value_downcast_ok::9"}]},
+     {"target": {"Statement": 104},
+      "results":
+      [{"id": 7165985340720623598,
+        "debug_name":
+        "sq128x128MulRawU64::tmp::u64_mul_range_check_downcast_overflow::10"}]}],
+    "args":
+    [{"id": 15822467930705308207,
+      "debug_name":
+      "sq128x128MulRawU64::tmp::u64_mul_range_check_after_divmod::4"},
+     {"id": 4429533942820601696,
+      "debug_name": "sq128x128MulRawU64::tmp::u64_mul_remainder_raw::6"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 510032060773354357,
+        "debug_name":
+        "sq128x128MulRawU64::tmp::u64_mul_range_check_merged::11"}]}],
+    "args":
+    [{"id": 6840396820111261537,
+      "debug_name":
+      "sq128x128MulRawU64::tmp::u64_mul_range_check_downcast_ok::8"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3720334789678306961,
+        "debug_name": "sq128x128MulRawU64::tmp::u64_mul_value_merged::12"}]}],
+    "args":
+    [{"id": 666957794199416991,
+      "debug_name": "sq128x128MulRawU64::tmp::u64_mul_value_downcast_ok::9"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 109}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 18213986178264843573, "debug_name": "u64_const_0"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3958945768186695975,
+        "debug_name": "sq128x128MulRawU64::tmp::u64_const_raw::13"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4963146513558282844,
+        "debug_name": "sq128x128MulRawU64::tmp::store_temp::14"}]}],
+    "args":
+    [{"id": 3958945768186695975,
+      "debug_name": "sq128x128MulRawU64::tmp::u64_const_raw::13"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 510032060773354357,
+        "debug_name":
+        "sq128x128MulRawU64::tmp::u64_mul_range_check_merged::11"}]}],
+    "args":
+    [{"id": 7165985340720623598,
+      "debug_name":
+      "sq128x128MulRawU64::tmp::u64_mul_range_check_downcast_overflow::10"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3720334789678306961,
+        "debug_name": "sq128x128MulRawU64::tmp::u64_mul_value_merged::12"}]}],
+    "args":
+    [{"id": 4963146513558282844,
+      "debug_name": "sq128x128MulRawU64::tmp::store_temp::14"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4963147613069911055,
+        "debug_name": "sq128x128MulRawU64::tmp::store_temp::15"}]}],
+    "args":
+    [{"id": 510032060773354357,
+      "debug_name":
+      "sq128x128MulRawU64::tmp::u64_mul_range_check_merged::11"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4963148712581539266,
+        "debug_name": "sq128x128MulRawU64::tmp::store_temp::16"}]}],
+    "args":
+    [{"id": 3720334789678306961,
+      "debug_name": "sq128x128MulRawU64::tmp::u64_mul_value_merged::12"}]}},
+  {"Return":
+   [{"id": 4963147613069911055,
+     "debug_name": "sq128x128MulRawU64::tmp::store_temp::15"},
+    {"id": 4963148712581539266,
+     "debug_name": "sq128x128MulRawU64::tmp::store_temp::16"}]},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14910471293585079190, "debug_name": "u64_overflowing_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 11953512811899890207,
+        "debug_name":
+        "sq128x128DeltaRawU64::tmp::u64_sub_range_check_non_overflow::0"},
+       {"id": 1923580560167965131,
+        "debug_name":
+        "sq128x128DeltaRawU64::tmp::u64_sub_result_non_overflow::1"}]},
+     {"target": {"Statement": 117},
+      "results":
+      [{"id": 9039861502408273633,
+        "debug_name":
+        "sq128x128DeltaRawU64::tmp::u64_sub_range_check_overflow::2"},
+       {"id": 13164617607488595533,
+        "debug_name":
+        "sq128x128DeltaRawU64::tmp::u64_sub_result_overflow::3"}]}],
+    "args":
+    [{"id": 18275165492765199707,
+      "debug_name": "sq128x128DeltaRawU64::param::__range_check"},
+     {"id": 6393996966468180435,
+      "debug_name": "sq128x128DeltaRawU64::param::bLane"},
+     {"id": 14012440616195131418,
+      "debug_name": "sq128x128DeltaRawU64::param::aLane"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10577816261766851097,
+        "debug_name":
+        "sq128x128DeltaRawU64::tmp::u64_sub_range_check_merged::4"}]}],
+    "args":
+    [{"id": 11953512811899890207,
+      "debug_name":
+      "sq128x128DeltaRawU64::tmp::u64_sub_range_check_non_overflow::0"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13386614050511080953,
+        "debug_name": "sq128x128DeltaRawU64::tmp::u64_sub_result_merged::5"}]}],
+    "args":
+    [{"id": 1923580560167965131,
+      "debug_name":
+      "sq128x128DeltaRawU64::tmp::u64_sub_result_non_overflow::1"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 120}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10577816261766851097,
+        "debug_name":
+        "sq128x128DeltaRawU64::tmp::u64_sub_range_check_merged::4"}]}],
+    "args":
+    [{"id": 9039861502408273633,
+      "debug_name":
+      "sq128x128DeltaRawU64::tmp::u64_sub_range_check_overflow::2"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 13386614050511080953,
+        "debug_name": "sq128x128DeltaRawU64::tmp::u64_sub_result_merged::5"}]}],
+    "args":
+    [{"id": 13164617607488595533,
+      "debug_name": "sq128x128DeltaRawU64::tmp::u64_sub_result_overflow::3"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 12936399574140208925,
+        "debug_name": "sq128x128DeltaRawU64::tmp::store_temp::6"}]}],
+    "args":
+    [{"id": 10577816261766851097,
+      "debug_name":
+      "sq128x128DeltaRawU64::tmp::u64_sub_range_check_merged::4"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 12936398474628580714,
+        "debug_name": "sq128x128DeltaRawU64::tmp::store_temp::7"}]}],
+    "args":
+    [{"id": 13386614050511080953,
+      "debug_name": "sq128x128DeltaRawU64::tmp::u64_sub_result_merged::5"}]}},
+  {"Return":
+   [{"id": 12936399574140208925,
+     "debug_name": "sq128x128DeltaRawU64::tmp::store_temp::6"},
+    {"id": 12936398474628580714,
+     "debug_name": "sq128x128DeltaRawU64::tmp::store_temp::7"}]},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 5065393602069275119, "debug_name": "u64_overflowing_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15549715406722757392,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_range_check_non_overflow::0"},
+       {"id": 3334030866344232030,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_result_non_overflow::1"}]},
+     {"target": {"Statement": 128},
+      "results":
+      [{"id": 17236619670224622962,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_range_check_overflow::2"},
+       {"id": 10544089880647770196,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_result_overflow::3"}]}],
+    "args":
+    [{"id": 17757936299371540413,
+      "debug_name": "sq128x128AffineKernelU64::param::__range_check"},
+     {"id": 2536912424671527804,
+      "debug_name": "sq128x128AffineKernelU64::param::aLane"},
+     {"id": 3653766573288425865,
+      "debug_name": "sq128x128AffineKernelU64::param::bLane"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7270143354291897598,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_range_check_merged::4"}]}],
+    "args":
+    [{"id": 15549715406722757392,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_add_range_check_non_overflow::0"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15860248650484824200,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_result_merged::5"}]}],
+    "args":
+    [{"id": 3334030866344232030,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_add_result_non_overflow::1"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 131}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 7270143354291897598,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_range_check_merged::4"}]}],
+    "args":
+    [{"id": 17236619670224622962,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_add_range_check_overflow::2"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 15860248650484824200,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_result_merged::5"}]}],
+    "args":
+    [{"id": 10544089880647770196,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_add_result_overflow::3"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 14910471293585079190, "debug_name": "u64_overflowing_sub"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6393144611981263083,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_sub_range_check_non_overflow::6"},
+       {"id": 4889289764467744639,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_sub_result_non_overflow::7"}]},
+     {"target": {"Statement": 136},
+      "results":
+      [{"id": 5020079718438855185,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_sub_range_check_overflow::8"},
+       {"id": 7919902442271209821,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_sub_result_overflow::9"}]}],
+    "args":
+    [{"id": 7270143354291897598,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_add_range_check_merged::4"},
+     {"id": 13095252017286250906,
+      "debug_name": "sq128x128AffineKernelU64::param::cLane"},
+     {"id": 18256132989983212951,
+      "debug_name": "sq128x128AffineKernelU64::param::dLane"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17720268535649820112,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_sub_range_check_merged::10"}]}],
+    "args":
+    [{"id": 6393144611981263083,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_sub_range_check_non_overflow::6"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 849606241587591158,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_sub_result_merged::11"}]}],
+    "args":
+    [{"id": 4889289764467744639,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_sub_result_non_overflow::7"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 139}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17720268535649820112,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_sub_range_check_merged::10"}]}],
+    "args":
+    [{"id": 5020079718438855185,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_sub_range_check_overflow::8"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 849606241587591158,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_sub_result_merged::11"}]}],
+    "args":
+    [{"id": 7919902442271209821,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_sub_result_overflow::9"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 10020849058391676305, "debug_name": "u64_wide_mul"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 10489171369435166923,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_mul_wide_product_raw::12"}]}],
+    "args":
+    [{"id": 15860248650484824200,
+      "debug_name": "sq128x128AffineKernelU64::tmp::u64_add_result_merged::5"},
+     {"id": 849606241587591158,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_sub_result_merged::11"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 5334720398334816842, "debug_name": "store_temp_u128"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6655694598713252051,
+        "debug_name": "sq128x128AffineKernelU64::tmp::store_temp::13"}]}],
+    "args":
+    [{"id": 10489171369435166923,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_mul_wide_product_raw::12"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 10816351239301491384,
+     "debug_name":
+     "const_as_immediate<Const<NonZero<u128>, Const<u128, 18446744073709551616>>>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 5696774520449343385,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::nonzero_u128_const_raw::14"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 9723454027365929409, "debug_name": "store_temp_NonZero<u128>"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6655701195783021317,
+        "debug_name": "sq128x128AffineKernelU64::tmp::store_temp::15"}]}],
+    "args":
+    [{"id": 5696774520449343385,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::nonzero_u128_const_raw::14"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13543698959822946193, "debug_name": "u128_safe_divmod"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4519471091142417604,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_mul_range_check_after_divmod::16"},
+       {"id": 17848632613506029518,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_mul_quotient_raw::17"},
+       {"id": 5795831284627648525,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_mul_remainder_raw::18"}]}],
+    "args":
+    [{"id": 17720268535649820112,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_sub_range_check_merged::10"},
+     {"id": 6655694598713252051,
+      "debug_name": "sq128x128AffineKernelU64::tmp::store_temp::13"},
+     {"id": 6655701195783021317,
+      "debug_name": "sq128x128AffineKernelU64::tmp::store_temp::15"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args":
+    [{"id": 17848632613506029518,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_mul_quotient_raw::17"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 948915364444375491, "debug_name": "downcast_u128_to_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 17525458593734940971,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_mul_range_check_downcast_ok::20"},
+       {"id": 15288511393553264619,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_mul_value_downcast_ok::21"}]},
+     {"target": {"Statement": 150},
+      "results":
+      [{"id": 17718825489650745781,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_mul_range_check_downcast_overflow::22"}]}],
+    "args":
+    [{"id": 4519471091142417604,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_mul_range_check_after_divmod::16"},
+     {"id": 5795831284627648525,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_mul_remainder_raw::18"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6847606347009963602,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_mul_range_check_merged::23"}]}],
+    "args":
+    [{"id": 17525458593734940971,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_mul_range_check_downcast_ok::20"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4034523872317332138,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_mul_value_merged::24"}]}],
+    "args":
+    [{"id": 15288511393553264619,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_mul_value_downcast_ok::21"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 155}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 18213986178264843573, "debug_name": "u64_const_0"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 1192724451543147932,
+        "debug_name": "sq128x128AffineKernelU64::tmp::u64_const_raw::25"}]}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6654732526038756651,
+        "debug_name": "sq128x128AffineKernelU64::tmp::store_temp::26"}]}],
+    "args":
+    [{"id": 1192724451543147932,
+      "debug_name": "sq128x128AffineKernelU64::tmp::u64_const_raw::25"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6847606347009963602,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_mul_range_check_merged::23"}]}],
+    "args":
+    [{"id": 17718825489650745781,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_mul_range_check_downcast_overflow::22"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 4034523872317332138,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_mul_value_merged::24"}]}],
+    "args":
+    [{"id": 6654732526038756651,
+      "debug_name": "sq128x128AffineKernelU64::tmp::store_temp::26"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 5065393602069275119, "debug_name": "u64_overflowing_add"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 14993984843560415347,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_range_check_non_overflow::27"},
+       {"id": 4738264756963549129,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_result_non_overflow::28"}]},
+     {"target": {"Statement": 160},
+      "results":
+      [{"id": 13151127679433928305,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_range_check_overflow::29"},
+       {"id": 8220747656294435308,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_result_overflow::30"}]}],
+    "args":
+    [{"id": 6847606347009963602,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_mul_range_check_merged::23"},
+     {"id": 4034523872317332138,
+      "debug_name": "sq128x128AffineKernelU64::tmp::u64_mul_value_merged::24"},
+     {"id": 320069105409503344,
+      "debug_name": "sq128x128AffineKernelU64::param::eLane"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3241511910456295058,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_range_check_merged::31"}]}],
+    "args":
+    [{"id": 14993984843560415347,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_add_range_check_non_overflow::27"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 9659078413926599960,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_result_merged::32"}]}],
+    "args":
+    [{"id": 4738264756963549129,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_add_result_non_overflow::28"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 16940139219101328589, "debug_name": "jump"},
+    "branches": [{"target": {"Statement": 163}, "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
+    "branches": [{"target": "Fallthrough", "results": []}],
+    "args": []}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 3241511910456295058,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_range_check_merged::31"}]}],
+    "args":
+    [{"id": 13151127679433928305,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_add_range_check_overflow::29"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 9659078413926599960,
+        "debug_name":
+        "sq128x128AffineKernelU64::tmp::u64_add_result_merged::32"}]}],
+    "args":
+    [{"id": 8220747656294435308,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_add_result_overflow::30"}]}},
+  {"Invocation":
+   {"libfunc_id":
+    {"id": 13752361534793366941, "debug_name": "store_temp_RangeCheck"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6653750662154953453,
+        "debug_name": "sq128x128AffineKernelU64::tmp::store_temp::33"}]}],
+    "args":
+    [{"id": 3241511910456295058,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_add_range_check_merged::31"}]}},
+  {"Invocation":
+   {"libfunc_id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"},
+    "branches":
+    [{"target": "Fallthrough",
+      "results":
+      [{"id": 6653742965573555976,
+        "debug_name": "sq128x128AffineKernelU64::tmp::store_temp::34"}]}],
+    "args":
+    [{"id": 9659078413926599960,
+      "debug_name":
+      "sq128x128AffineKernelU64::tmp::u64_add_result_merged::32"}]}},
+  {"Return":
+   [{"id": 6653750662154953453,
+     "debug_name": "sq128x128AffineKernelU64::tmp::store_temp::33"},
+    {"id": 6653742965573555976,
+     "debug_name": "sq128x128AffineKernelU64::tmp::store_temp::34"}]}],
  "libfunc_declarations":
  [{"long_id": {"generic_id": "u128_overflowing_add", "generic_args": []},
    "id": {"id": 3443828138563054068, "debug_name": "u128_overflowing_add"}},
@@ -785,7 +1827,44 @@
    "id": {"id": 8180805564406204157, "debug_name": "drop_u128"}},
   {"long_id": {"generic_id": "u128_mul_guarantee_verify", "generic_args": []},
    "id":
-   {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"}}],
+   {"id": 16439499116110212023, "debug_name": "u128_mul_guarantee_verify"}},
+  {"long_id": {"generic_id": "u64_overflowing_add", "generic_args": []},
+   "id": {"id": 5065393602069275119, "debug_name": "u64_overflowing_add"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 5563585020063213298, "debug_name": "u64"}}]},
+   "id": {"id": 1091052965869599459, "debug_name": "store_temp_u64"}},
+  {"long_id": {"generic_id": "u64_overflowing_sub", "generic_args": []},
+   "id": {"id": 14910471293585079190, "debug_name": "u64_overflowing_sub"}},
+  {"long_id": {"generic_id": "u64_wide_mul", "generic_args": []},
+   "id": {"id": 10020849058391676305, "debug_name": "u64_wide_mul"}},
+  {"long_id":
+   {"generic_id": "const_as_immediate",
+    "generic_args":
+    [{"Type":
+      {"id": 1506911968294090446,
+       "debug_name":
+       "Const<NonZero<u128>, Const<u128, 18446744073709551616>>"}}]},
+   "id":
+   {"id": 10816351239301491384,
+    "debug_name":
+    "const_as_immediate<Const<NonZero<u128>, Const<u128, 18446744073709551616>>>"}},
+  {"long_id":
+   {"generic_id": "store_temp",
+    "generic_args":
+    [{"Type": {"id": 18013561560785948340, "debug_name": "NonZero<u128>"}}]},
+   "id": {"id": 9723454027365929409, "debug_name": "store_temp_NonZero<u128>"}},
+  {"long_id": {"generic_id": "u128_safe_divmod", "generic_args": []},
+   "id": {"id": 13543698959822946193, "debug_name": "u128_safe_divmod"}},
+  {"long_id":
+   {"generic_id": "downcast",
+    "generic_args":
+    [{"Type": {"id": 10698497612269247729, "debug_name": "u128"}},
+     {"Type": {"id": 5563585020063213298, "debug_name": "u64"}}]},
+   "id": {"id": 948915364444375491, "debug_name": "downcast_u128_to_u64"}},
+  {"long_id": {"generic_id": "u64_const", "generic_args": [{"Value": [0, []]}]},
+   "id": {"id": 18213986178264843573, "debug_name": "u64_const_0"}}],
  "funcs":
  [{"signature":
    {"ret_types":
@@ -915,4 +1994,134 @@
      {"id": 7358283388725389383,
       "debug_name": "sq128x128AffineKernel::param::eLane"}}],
    "id": {"id": 8460224676857738633, "debug_name": "sq128x128AffineKernel"},
-   "entry_point": 40}]}
+   "entry_point": 40},
+  {"signature":
+   {"ret_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 5563585020063213298, "debug_name": "u64"}],
+    "param_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 5563585020063213298, "debug_name": "u64"},
+     {"id": 5563585020063213298, "debug_name": "u64"}]},
+   "params":
+   [{"ty": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     "id":
+     {"id": 7026512437575570870,
+      "debug_name": "sq128x128AddRawU64::param::__range_check"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 9501021719770876859,
+      "debug_name": "sq128x128AddRawU64::param::aLane"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 2061601631341825122,
+      "debug_name": "sq128x128AddRawU64::param::bLane"}}],
+   "id": {"id": 17327993788003240145, "debug_name": "sq128x128AddRawU64"},
+   "entry_point": 71},
+  {"signature":
+   {"ret_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 5563585020063213298, "debug_name": "u64"}],
+    "param_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 5563585020063213298, "debug_name": "u64"},
+     {"id": 5563585020063213298, "debug_name": "u64"}]},
+   "params":
+   [{"ty": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     "id":
+     {"id": 3132041449003853415,
+      "debug_name": "sq128x128SubRawU64::param::__range_check"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 9797298645576576966,
+      "debug_name": "sq128x128SubRawU64::param::aLane"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 8444012967339651151,
+      "debug_name": "sq128x128SubRawU64::param::bLane"}}],
+   "id": {"id": 1196850491145336088, "debug_name": "sq128x128SubRawU64"},
+   "entry_point": 82},
+  {"signature":
+   {"ret_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 5563585020063213298, "debug_name": "u64"}],
+    "param_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 5563585020063213298, "debug_name": "u64"},
+     {"id": 5563585020063213298, "debug_name": "u64"}]},
+   "params":
+   [{"ty": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     "id":
+     {"id": 15709820222178553587,
+      "debug_name": "sq128x128MulRawU64::param::__range_check"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 15151861451539937458,
+      "debug_name": "sq128x128MulRawU64::param::aLane"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 4520020502046848203,
+      "debug_name": "sq128x128MulRawU64::param::bLane"}}],
+   "id": {"id": 9082141069438358356, "debug_name": "sq128x128MulRawU64"},
+   "entry_point": 93},
+  {"signature":
+   {"ret_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 5563585020063213298, "debug_name": "u64"}],
+    "param_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 5563585020063213298, "debug_name": "u64"},
+     {"id": 5563585020063213298, "debug_name": "u64"}]},
+   "params":
+   [{"ty": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     "id":
+     {"id": 18275165492765199707,
+      "debug_name": "sq128x128DeltaRawU64::param::__range_check"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 14012440616195131418,
+      "debug_name": "sq128x128DeltaRawU64::param::aLane"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 6393996966468180435,
+      "debug_name": "sq128x128DeltaRawU64::param::bLane"}}],
+   "id": {"id": 17423330889560263436, "debug_name": "sq128x128DeltaRawU64"},
+   "entry_point": 112},
+  {"signature":
+   {"ret_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 5563585020063213298, "debug_name": "u64"}],
+    "param_types":
+    [{"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     {"id": 5563585020063213298, "debug_name": "u64"},
+     {"id": 5563585020063213298, "debug_name": "u64"},
+     {"id": 5563585020063213298, "debug_name": "u64"},
+     {"id": 5563585020063213298, "debug_name": "u64"},
+     {"id": 5563585020063213298, "debug_name": "u64"}]},
+   "params":
+   [{"ty": {"id": 5158587525321846130, "debug_name": "RangeCheck"},
+     "id":
+     {"id": 17757936299371540413,
+      "debug_name": "sq128x128AffineKernelU64::param::__range_check"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 2536912424671527804,
+      "debug_name": "sq128x128AffineKernelU64::param::aLane"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 3653766573288425865,
+      "debug_name": "sq128x128AffineKernelU64::param::bLane"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 13095252017286250906,
+      "debug_name": "sq128x128AffineKernelU64::param::cLane"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 18256132989983212951,
+      "debug_name": "sq128x128AffineKernelU64::param::dLane"}},
+    {"ty": {"id": 5563585020063213298, "debug_name": "u64"},
+     "id":
+     {"id": 320069105409503344,
+      "debug_name": "sq128x128AffineKernelU64::param::eLane"}}],
+   "id": {"id": 18006493896072149238, "debug_name": "sq128x128AffineKernelU64"},
+   "entry_point": 123}]}
