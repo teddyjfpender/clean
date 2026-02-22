@@ -86,11 +86,33 @@ private theorem evalNormalizeLet (ctx : EvalContext) (name : String) (boundTy : 
       simp [normalizeLet, evalExpr]
   | litFelt252 value =>
       simp [normalizeLet, evalExpr]
+  | litInt lane value =>
+      simp [normalizeLet, evalExpr]
   | addFelt252 lhs rhs =>
       simp [normalizeLet, evalExpr]
   | subFelt252 lhs rhs =>
       simp [normalizeLet, evalExpr]
   | mulFelt252 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | addInt lane lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | subInt lane lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | mulInt lane lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | divInt lane lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | modInt lane lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | bitAndInt lane lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | bitOrInt lane lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | bitXorInt lane lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | shlInt lane lhs shift =>
+      simp [normalizeLet, evalExpr]
+  | shrInt lane lhs shift =>
       simp [normalizeLet, evalExpr]
   | addU128 lhs rhs =>
       simp [normalizeLet, evalExpr]
@@ -98,14 +120,52 @@ private theorem evalNormalizeLet (ctx : EvalContext) (name : String) (boundTy : 
       simp [normalizeLet, evalExpr]
   | mulU128 lhs rhs =>
       simp [normalizeLet, evalExpr]
+  | divU128 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | modU128 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | bitAndU128 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | bitOrU128 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | bitXorU128 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | shlU128 lhs shift =>
+      simp [normalizeLet, evalExpr]
+  | shrU128 lhs shift =>
+      simp [normalizeLet, evalExpr]
   | addU256 lhs rhs =>
       simp [normalizeLet, evalExpr]
   | subU256 lhs rhs =>
       simp [normalizeLet, evalExpr]
   | mulU256 lhs rhs =>
       simp [normalizeLet, evalExpr]
+  | divU256 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | modU256 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | bitAndU256 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | bitOrU256 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | bitXorU256 lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | shlU256 lhs shift =>
+      simp [normalizeLet, evalExpr]
+  | shrU256 lhs shift =>
+      simp [normalizeLet, evalExpr]
+  | u256FromLimbs low high =>
+      simp [normalizeLet, evalExpr]
+  | u256Low value =>
+      simp [normalizeLet, evalExpr]
+  | u256High value =>
+      simp [normalizeLet, evalExpr]
   | @eq eqTy lhs rhs =>
       cases eqTy <;> simp [normalizeLet, evalExpr]
+  | ltInt lane lhs rhs =>
+      simp [normalizeLet, evalExpr]
+  | leInt lane lhs rhs =>
+      simp [normalizeLet, evalExpr]
   | ltU128 lhs rhs =>
       simp [normalizeLet, evalExpr]
   | leU128 lhs rhs =>
@@ -134,6 +194,8 @@ theorem cseLetNormExprSound (ctx : EvalContext) (expr : IRExpr ty) :
       simp [cseLetNormExpr, evalExpr]
   | litFelt252 value =>
       simp [cseLetNormExpr, evalExpr]
+  | litInt lane value =>
+      simp [cseLetNormExpr, evalExpr]
   | addFelt252 lhs rhs ihLhs ihRhs =>
       calc
         evalExpr ctx (cseLetNormExpr (.addFelt252 lhs rhs)) =
@@ -150,6 +212,26 @@ theorem cseLetNormExprSound (ctx : EvalContext) (expr : IRExpr ty) :
               simpa [cseLetNormExpr] using evalCseMulFelt252 ctx (cseLetNormExpr lhs) (cseLetNormExpr rhs)
         _ = evalExpr ctx (.mulFelt252 lhs rhs) := by
               simp [evalExpr, ihLhs ctx, ihRhs ctx]
+  | addInt lane lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | subInt lane lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | mulInt lane lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | divInt lane lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | modInt lane lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitAndInt lane lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitOrInt lane lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitXorInt lane lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | shlInt lane lhs shift ihLhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx]
+  | shrInt lane lhs shift ihLhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx]
   | addU128 lhs rhs ihLhs ihRhs =>
       calc
         evalExpr ctx (cseLetNormExpr (.addU128 lhs rhs)) =
@@ -166,6 +248,20 @@ theorem cseLetNormExprSound (ctx : EvalContext) (expr : IRExpr ty) :
               simpa [cseLetNormExpr] using evalCseMulU128 ctx (cseLetNormExpr lhs) (cseLetNormExpr rhs)
         _ = evalExpr ctx (.mulU128 lhs rhs) := by
               simp [evalExpr, ihLhs ctx, ihRhs ctx]
+  | divU128 lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | modU128 lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitAndU128 lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitOrU128 lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitXorU128 lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | shlU128 lhs shift ihLhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx]
+  | shrU128 lhs shift ihLhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx]
   | addU256 lhs rhs ihLhs ihRhs =>
       calc
         evalExpr ctx (cseLetNormExpr (.addU256 lhs rhs)) =
@@ -182,6 +278,26 @@ theorem cseLetNormExprSound (ctx : EvalContext) (expr : IRExpr ty) :
               simpa [cseLetNormExpr] using evalCseMulU256 ctx (cseLetNormExpr lhs) (cseLetNormExpr rhs)
         _ = evalExpr ctx (.mulU256 lhs rhs) := by
               simp [evalExpr, ihLhs ctx, ihRhs ctx]
+  | divU256 lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | modU256 lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitAndU256 lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitOrU256 lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitXorU256 lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | shlU256 lhs shift ihLhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx]
+  | shrU256 lhs shift ihLhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx]
+  | u256FromLimbs low high ihLow ihHigh =>
+      simp [cseLetNormExpr, evalExpr, ihLow ctx, ihHigh ctx]
+  | u256Low value ihValue =>
+      simp [cseLetNormExpr, evalExpr, ihValue ctx]
+  | u256High value ihValue =>
+      simp [cseLetNormExpr, evalExpr, ihValue ctx]
   | @eq eqTy lhs rhs ihLhs ihRhs =>
       calc
         evalExpr ctx (cseLetNormExpr (.eq lhs rhs)) =
@@ -189,6 +305,10 @@ theorem cseLetNormExprSound (ctx : EvalContext) (expr : IRExpr ty) :
               simpa [cseLetNormExpr] using evalCseEq (ty := eqTy) ctx (cseLetNormExpr lhs) (cseLetNormExpr rhs)
         _ = evalExpr ctx (.eq lhs rhs) := by
               simp [evalExpr, ihLhs ctx, ihRhs ctx]
+  | ltInt lane lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | leInt lane lhs rhs ihLhs ihRhs =>
+      simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
   | ltU128 lhs rhs ihLhs ihRhs =>
       simp [cseLetNormExpr, evalExpr, ihLhs ctx, ihRhs ctx]
   | leU128 lhs rhs ihLhs ihRhs =>

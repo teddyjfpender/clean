@@ -1,6 +1,6 @@
 # Generated Sierra Program (Subset Backend)
 
-Contract source: `SQ128x128U128Contract`
+Contract source: `SQ128x128TypedLaneContract`
 Optimizer enabled: `true`
 
 ## Outputs

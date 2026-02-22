@@ -173,6 +173,216 @@
       "family_group": "binding",
       "support_state": "implemented",
       "type_invariant": "Result type is the requested variable-typed IR parameter."
+    },
+    {
+      "constructor": "addInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result share the declared typed-int lane."
+    },
+    {
+      "constructor": "bitAndInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result share the declared typed-int lane."
+    },
+    {
+      "constructor": "bitAndU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u128."
+    },
+    {
+      "constructor": "bitAndU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u256."
+    },
+    {
+      "constructor": "bitOrInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result share the declared typed-int lane."
+    },
+    {
+      "constructor": "bitOrU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u128."
+    },
+    {
+      "constructor": "bitOrU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u256."
+    },
+    {
+      "constructor": "bitXorInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result share the declared typed-int lane."
+    },
+    {
+      "constructor": "bitXorU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u128."
+    },
+    {
+      "constructor": "bitXorU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u256."
+    },
+    {
+      "constructor": "divInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result share the declared typed-int lane; strict mode rejects division by zero."
+    },
+    {
+      "constructor": "divU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u128; strict mode rejects division by zero."
+    },
+    {
+      "constructor": "divU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u256; strict mode rejects division by zero."
+    },
+    {
+      "constructor": "leInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands share the declared typed-int lane and result is bool."
+    },
+    {
+      "constructor": "litInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Result type is the declared typed-int lane."
+    },
+    {
+      "constructor": "ltInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands share the declared typed-int lane and result is bool."
+    },
+    {
+      "constructor": "modInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result share the declared typed-int lane; strict mode rejects modulo by zero."
+    },
+    {
+      "constructor": "modU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u128; strict mode rejects modulo by zero."
+    },
+    {
+      "constructor": "modU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result are u256; strict mode rejects modulo by zero."
+    },
+    {
+      "constructor": "mulInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result share the declared typed-int lane."
+    },
+    {
+      "constructor": "shlInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operand and result share the declared typed-int lane."
+    },
+    {
+      "constructor": "shlU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operand and result are u128."
+    },
+    {
+      "constructor": "shlU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operand and result are u256."
+    },
+    {
+      "constructor": "shrInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operand and result share the declared typed-int lane."
+    },
+    {
+      "constructor": "shrU128",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operand and result are u128."
+    },
+    {
+      "constructor": "shrU256",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operand and result are u256."
+    },
+    {
+      "constructor": "subInt",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Operands and result share the declared typed-int lane."
+    },
+    {
+      "constructor": "u256FromLimbs",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Inputs are u128 limbs and result is u256."
+    },
+    {
+      "constructor": "u256High",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Input is u256 and result is high u128 limb."
+    },
+    {
+      "constructor": "u256Low",
+      "effect_invariant": "pure",
+      "family_group": "integer",
+      "support_state": "implemented",
+      "type_invariant": "Input is u256 and result is low u128 limb."
     }
   ],
   "version": 1

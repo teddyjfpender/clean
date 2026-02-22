@@ -120,25 +120,85 @@ theorem optimizeExprSound (ctx : EvalContext) (expr : IRExpr ty) :
       simp [optimizeExpr, evalExpr]
   | litFelt252 value =>
       simp [optimizeExpr, evalExpr]
+  | litInt lane value =>
+      simp [optimizeExpr, evalExpr]
   | addFelt252 lhs rhs ihLhs ihRhs =>
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldAddFelt252 ctx (optimizeExpr lhs) (optimizeExpr rhs)
   | subFelt252 lhs rhs ihLhs ihRhs =>
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldSubFelt252 ctx (optimizeExpr lhs) (optimizeExpr rhs)
   | mulFelt252 lhs rhs ihLhs ihRhs =>
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldMulFelt252 ctx (optimizeExpr lhs) (optimizeExpr rhs)
+  | addInt lane lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | subInt lane lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | mulInt lane lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | divInt lane lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | modInt lane lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitAndInt lane lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitOrInt lane lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitXorInt lane lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | shlInt lane lhs shift ihLhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx]
+  | shrInt lane lhs shift ihLhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx]
   | addU128 lhs rhs ihLhs ihRhs =>
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldAddU128 ctx (optimizeExpr lhs) (optimizeExpr rhs)
   | subU128 lhs rhs ihLhs ihRhs =>
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldSubU128 ctx (optimizeExpr lhs) (optimizeExpr rhs)
   | mulU128 lhs rhs ihLhs ihRhs =>
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldMulU128 ctx (optimizeExpr lhs) (optimizeExpr rhs)
+  | divU128 lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | modU128 lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitAndU128 lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitOrU128 lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitXorU128 lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | shlU128 lhs shift ihLhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx]
+  | shrU128 lhs shift ihLhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx]
   | addU256 lhs rhs ihLhs ihRhs =>
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldAddU256 ctx (optimizeExpr lhs) (optimizeExpr rhs)
   | subU256 lhs rhs ihLhs ihRhs =>
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldSubU256 ctx (optimizeExpr lhs) (optimizeExpr rhs)
   | mulU256 lhs rhs ihLhs ihRhs =>
       simpa [ihLhs ctx, ihRhs ctx] using evalFoldMulU256 ctx (optimizeExpr lhs) (optimizeExpr rhs)
+  | divU256 lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | modU256 lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitAndU256 lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitOrU256 lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | bitXorU256 lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | shlU256 lhs shift ihLhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx]
+  | shrU256 lhs shift ihLhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx]
+  | u256FromLimbs low high ihLow ihHigh =>
+      simp [optimizeExpr, evalExpr, ihLow ctx, ihHigh ctx]
+  | u256Low value ihValue =>
+      simp [optimizeExpr, evalExpr, ihValue ctx]
+  | u256High value ihValue =>
+      simp [optimizeExpr, evalExpr, ihValue ctx]
   | @eq _ lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | ltInt lane lhs rhs ihLhs ihRhs =>
+      simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
+  | leInt lane lhs rhs ihLhs ihRhs =>
       simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]
   | ltU128 lhs rhs ihLhs ihRhs =>
       simp [optimizeExpr, evalExpr, ihLhs ctx, ihRhs ctx]

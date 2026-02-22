@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024_07"
 
 [dependencies]
+corelib_imports = "0.1.2"
 
 [dev-dependencies]
 snforge_std = "0.55.0"

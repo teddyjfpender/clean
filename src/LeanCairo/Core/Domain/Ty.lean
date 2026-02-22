@@ -4,6 +4,7 @@ inductive Ty where
   | felt252
   | u128
   | u256
+  | u512
   | bool
   | i8
   | i16
@@ -36,6 +37,7 @@ def toCairo : Ty -> String
   | .felt252 => "felt252"
   | .u128 => "u128"
   | .u256 => "u256"
+  | .u512 => "u512"
   | .bool => "bool"
   | .i8 => "i8"
   | .i16 => "i16"
@@ -65,6 +67,7 @@ def toAbiCanonical : Ty -> String
   | .felt252 => "core::felt252"
   | .u128 => "core::integer::u128"
   | .u256 => "core::integer::u256"
+  | .u512 => "core::integer::u512"
   | .bool => "core::bool"
   | .i8 => "core::integer::i8"
   | .i16 => "core::integer::i16"
@@ -91,7 +94,7 @@ def toAbiCanonical : Ty -> String
   | .panicSignal => "core::panic::PanicSignal"
 
 def familyTag : Ty -> String
-  | .felt252 | .u128 | .u256 | .bool => "legacy-scalar"
+  | .felt252 | .u128 | .u256 | .u512 | .bool => "legacy-scalar"
   | .i8 | .i16 | .i32 | .i64 | .i128 => "signed-int"
   | .u8 | .u16 | .u32 | .u64 => "unsigned-int"
   | .qm31 => "field"
@@ -117,6 +120,7 @@ abbrev denote : Ty -> Type
   | .felt252 => Int
   | .u128 => Nat
   | .u256 => Nat
+  | .u512 => Nat
   | .bool => Bool
   | .i8 => Int
   | .i16 => Int
@@ -143,6 +147,9 @@ abbrev denote : Ty -> Type
   | .panicSignal => Unit
 
 instance denoteDecidableEq (ty : Ty) : DecidableEq (Ty.denote ty) := by
+  cases ty <;> infer_instance
+
+instance denoteRepr (ty : Ty) : Repr (Ty.denote ty) := by
   cases ty <;> infer_instance
 
 end Ty

@@ -30,6 +30,7 @@ run_case() {
 }
 
 run_case "scalar_core" "tests/lean/sierra_scalar_differential.lean" "MyLeanSierraScalar" "SierraScalarContract" "lake env lean tests/lean/sierra_scalar_differential.lean && scripts/test/run_backend_parity_case.sh MyLeanSierraScalar SierraScalarContract scalar_core"
+run_case "sq128x128_u128" "tests/lean/sierra_sq128x128_typed_differential.lean" "sq128x128_u128.Example" "SQ128x128TypedLaneContract" "lake env lean tests/lean/sierra_sq128x128_typed_differential.lean && scripts/test/run_backend_parity_case.sh sq128x128_u128.Example SQ128x128TypedLaneContract sq128x128_u128"
 run_case "u128_range_checked" "tests/lean/sierra_u128_wrapping_differential.lean" "MyLeanSierraU128RangeChecked" "SierraU128RangeCheckedContract" "lake env lean tests/lean/sierra_u128_wrapping_differential.lean && scripts/test/run_backend_parity_case.sh MyLeanSierraU128RangeChecked SierraU128RangeCheckedContract u128_range_checked"
 
 echo "manifest differential checks passed"

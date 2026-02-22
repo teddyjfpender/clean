@@ -123,6 +123,9 @@ def tyGenericTypeId : Ty -> Except EmitError String
   | .u128 => do
       ensureKnownGenericTypeId "u128"
       pure "u128"
+  | .u512 => do
+      ensureKnownGenericTypeId "u512"
+      pure "u512"
   | .rangeCheck => do
       ensureKnownGenericTypeId "RangeCheck"
       pure "RangeCheck"
@@ -186,6 +189,7 @@ def innerTyOfNonZeroTag (innerTag : String) : Except EmitError Ty :=
   | "felt252" => .ok .felt252
   | "u128" => .ok .u128
   | "u256" => .ok .u256
+  | "u512" => .ok .u512
   | "bool" => .ok .bool
   | "i8" => .ok .i8
   | "i16" => .ok .i16
@@ -204,6 +208,7 @@ def tyOfElementTag (elemTag : String) : Except EmitError Ty :=
   | "felt252" => .ok .felt252
   | "u128" => .ok .u128
   | "u256" => .ok .u256
+  | "u512" => .ok .u512
   | "bool" => .ok .bool
   | "i8" => .ok .i8
   | "i16" => .ok .i16
@@ -698,16 +703,46 @@ partial def countVarUses (target : String) : IRExpr ty -> Nat
   | .litU256 _ => 0
   | .litBool _ => 0
   | .litFelt252 _ => 0
+  | .litInt _ _ => 0
   | .addFelt252 lhs rhs => countVarUses target lhs + countVarUses target rhs
   | .subFelt252 lhs rhs => countVarUses target lhs + countVarUses target rhs
   | .mulFelt252 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .addInt _ lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .subInt _ lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .mulInt _ lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .divInt _ lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .modInt _ lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .bitAndInt _ lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .bitOrInt _ lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .bitXorInt _ lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .shlInt _ lhs _ => countVarUses target lhs
+  | .shrInt _ lhs _ => countVarUses target lhs
   | .addU128 lhs rhs => countVarUses target lhs + countVarUses target rhs
   | .subU128 lhs rhs => countVarUses target lhs + countVarUses target rhs
   | .mulU128 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .divU128 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .modU128 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .bitAndU128 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .bitOrU128 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .bitXorU128 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .shlU128 lhs _ => countVarUses target lhs
+  | .shrU128 lhs _ => countVarUses target lhs
   | .addU256 lhs rhs => countVarUses target lhs + countVarUses target rhs
   | .subU256 lhs rhs => countVarUses target lhs + countVarUses target rhs
   | .mulU256 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .divU256 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .modU256 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .bitAndU256 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .bitOrU256 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .bitXorU256 lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .shlU256 lhs _ => countVarUses target lhs
+  | .shrU256 lhs _ => countVarUses target lhs
+  | .u256FromLimbs low high => countVarUses target low + countVarUses target high
+  | .u256Low value => countVarUses target value
+  | .u256High value => countVarUses target value
   | .eq lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .ltInt _ lhs rhs => countVarUses target lhs + countVarUses target rhs
+  | .leInt _ lhs rhs => countVarUses target lhs + countVarUses target rhs
   | .ltU128 lhs rhs => countVarUses target lhs + countVarUses target rhs
   | .leU128 lhs rhs => countVarUses target lhs + countVarUses target rhs
   | .ltU256 lhs rhs => countVarUses target lhs + countVarUses target rhs
@@ -767,16 +802,46 @@ partial def exprUsesU128Arith : IRExpr ty -> Bool
   | .litU256 _ => false
   | .litBool _ => false
   | .litFelt252 _ => false
+  | .litInt _ _ => false
   | .addFelt252 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
   | .subFelt252 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
   | .mulFelt252 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
+  | .addInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
+  | .subInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
+  | .mulInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
+  | .divInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
+  | .modInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
+  | .bitAndInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
+  | .bitOrInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
+  | .bitXorInt ty lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs || ty = .u128
+  | .shlInt ty lhs _ => exprUsesU128Arith lhs || ty = .u128
+  | .shrInt ty lhs _ => exprUsesU128Arith lhs || ty = .u128
   | .addU128 _ _ => true
   | .subU128 _ _ => true
   | .mulU128 _ _ => true
+  | .divU128 _ _ => true
+  | .modU128 _ _ => true
+  | .bitAndU128 _ _ => true
+  | .bitOrU128 _ _ => true
+  | .bitXorU128 _ _ => true
+  | .shlU128 _ _ => true
+  | .shrU128 _ _ => true
   | .addU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
   | .subU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
   | .mulU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
+  | .divU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
+  | .modU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
+  | .bitAndU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
+  | .bitOrU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
+  | .bitXorU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
+  | .shlU256 lhs _ => exprUsesU128Arith lhs
+  | .shrU256 lhs _ => exprUsesU128Arith lhs
+  | .u256FromLimbs low high => exprUsesU128Arith low || exprUsesU128Arith high
+  | .u256Low value => exprUsesU128Arith value
+  | .u256High value => exprUsesU128Arith value
   | .eq lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
+  | .ltInt _ lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
+  | .leInt _ lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
   | .ltU128 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
   | .leU128 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs
   | .ltU256 lhs rhs => exprUsesU128Arith lhs || exprUsesU128Arith rhs

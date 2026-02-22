@@ -55,19 +55,60 @@ private partial def collectExprTypes (expr : IRExpr ty) (acc : List Ty) : List T
   | .litU256 _ => appendTyIfMissing acc .u256
   | .litBool _ => appendTyIfMissing acc .bool
   | .litFelt252 _ => appendTyIfMissing acc .felt252
+  | .litInt ty _ => appendTyIfMissing acc ty
   | .addFelt252 lhs rhs
   | .subFelt252 lhs rhs
   | .mulFelt252 lhs rhs =>
       collectExprTypes rhs (collectExprTypes lhs (appendTyIfMissing acc .felt252))
+  | .addInt ty lhs rhs
+  | .subInt ty lhs rhs
+  | .mulInt ty lhs rhs
+  | .divInt ty lhs rhs
+  | .modInt ty lhs rhs
+  | .bitAndInt ty lhs rhs
+  | .bitOrInt ty lhs rhs
+  | .bitXorInt ty lhs rhs =>
+      collectExprTypes rhs (collectExprTypes lhs (appendTyIfMissing acc ty))
+  | .shlInt ty lhs _ =>
+      collectExprTypes lhs (appendTyIfMissing acc ty)
+  | .shrInt ty lhs _ =>
+      collectExprTypes lhs (appendTyIfMissing acc ty)
   | .addU128 lhs rhs
   | .subU128 lhs rhs
-  | .mulU128 lhs rhs =>
+  | .mulU128 lhs rhs
+  | .divU128 lhs rhs
+  | .modU128 lhs rhs
+  | .bitAndU128 lhs rhs
+  | .bitOrU128 lhs rhs
+  | .bitXorU128 lhs rhs =>
       collectExprTypes rhs (collectExprTypes lhs (appendTyIfMissing acc .u128))
+  | .shlU128 lhs _ =>
+      collectExprTypes lhs (appendTyIfMissing acc .u128)
+  | .shrU128 lhs _ =>
+      collectExprTypes lhs (appendTyIfMissing acc .u128)
   | .addU256 lhs rhs
   | .subU256 lhs rhs
-  | .mulU256 lhs rhs =>
+  | .mulU256 lhs rhs
+  | .divU256 lhs rhs
+  | .modU256 lhs rhs
+  | .bitAndU256 lhs rhs
+  | .bitOrU256 lhs rhs
+  | .bitXorU256 lhs rhs =>
       collectExprTypes rhs (collectExprTypes lhs (appendTyIfMissing acc .u256))
+  | .shlU256 lhs _ =>
+      collectExprTypes lhs (appendTyIfMissing acc .u256)
+  | .shrU256 lhs _ =>
+      collectExprTypes lhs (appendTyIfMissing acc .u256)
+  | .u256FromLimbs low high =>
+      collectExprTypes high (collectExprTypes low (appendTyIfMissing acc .u256))
+  | .u256Low value =>
+      collectExprTypes value (appendTyIfMissing acc .u128)
+  | .u256High value =>
+      collectExprTypes value (appendTyIfMissing acc .u128)
   | .eq lhs rhs =>
+      collectExprTypes rhs (collectExprTypes lhs (appendTyIfMissing acc .bool))
+  | .ltInt _ lhs rhs
+  | .leInt _ lhs rhs =>
       collectExprTypes rhs (collectExprTypes lhs (appendTyIfMissing acc .bool))
   | .ltU128 lhs rhs
   | .leU128 lhs rhs =>
@@ -145,16 +186,46 @@ private partial def exprUsesStorageRead : IRExpr ty -> Bool
   | .litU256 _ => false
   | .litBool _ => false
   | .litFelt252 _ => false
+  | .litInt _ _ => false
   | .addFelt252 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .subFelt252 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .mulFelt252 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .addInt _ lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .subInt _ lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .mulInt _ lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .divInt _ lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .modInt _ lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .bitAndInt _ lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .bitOrInt _ lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .bitXorInt _ lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .shlInt _ lhs _ => exprUsesStorageRead lhs
+  | .shrInt _ lhs _ => exprUsesStorageRead lhs
   | .addU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .subU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .mulU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .divU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .modU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .bitAndU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .bitOrU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .bitXorU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .shlU128 lhs _ => exprUsesStorageRead lhs
+  | .shrU128 lhs _ => exprUsesStorageRead lhs
   | .addU256 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .subU256 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .mulU256 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .divU256 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .modU256 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .bitAndU256 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .bitOrU256 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .bitXorU256 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .shlU256 lhs _ => exprUsesStorageRead lhs
+  | .shrU256 lhs _ => exprUsesStorageRead lhs
+  | .u256FromLimbs low high => exprUsesStorageRead low || exprUsesStorageRead high
+  | .u256Low value => exprUsesStorageRead value
+  | .u256High value => exprUsesStorageRead value
   | .eq lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .ltInt _ lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
+  | .leInt _ lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .ltU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .leU128 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs
   | .ltU256 lhs rhs => exprUsesStorageRead lhs || exprUsesStorageRead rhs

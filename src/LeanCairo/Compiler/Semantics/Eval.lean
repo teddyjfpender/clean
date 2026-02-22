@@ -24,6 +24,33 @@ def unsignedSub (bits : Nat) (lhs rhs : Nat) : Nat :=
 def unsignedMul (bits : Nat) (lhs rhs : Nat) : Nat :=
   normalizeUnsigned bits (lhs * rhs)
 
+def unsignedDiv (bits : Nat) (lhs rhs : Nat) : Nat :=
+  if rhs = 0 then
+    0
+  else
+    normalizeUnsigned bits (lhs / rhs)
+
+def unsignedMod (bits : Nat) (lhs rhs : Nat) : Nat :=
+  if rhs = 0 then
+    0
+  else
+    normalizeUnsigned bits (lhs % rhs)
+
+def unsignedBitAnd (bits : Nat) (lhs rhs : Nat) : Nat :=
+  normalizeUnsigned bits (Nat.land lhs rhs)
+
+def unsignedBitOr (bits : Nat) (lhs rhs : Nat) : Nat :=
+  normalizeUnsigned bits (Nat.lor lhs rhs)
+
+def unsignedBitXor (bits : Nat) (lhs rhs : Nat) : Nat :=
+  normalizeUnsigned bits (Nat.xor lhs rhs)
+
+def unsignedShl (bits : Nat) (lhs : Nat) (shift : Nat) : Nat :=
+  normalizeUnsigned bits (Nat.shiftLeft lhs shift)
+
+def unsignedShr (bits : Nat) (lhs : Nat) (shift : Nat) : Nat :=
+  normalizeUnsigned bits (Nat.shiftRight lhs shift)
+
 def normalizeSigned (bits : Nat) (value : Int) : Int :=
   let modulusNat := pow2 bits
   let halfNat := pow2 (bits - 1)
@@ -56,7 +83,306 @@ def qm31Sub (lhs rhs : Nat) : Nat :=
 def qm31Mul (lhs rhs : Nat) : Nat :=
   normalizeQm31 (lhs * rhs)
 
+def signedDiv (bits : Nat) (lhs rhs : Int) : Int :=
+  if rhs = 0 then
+    0
+  else
+    normalizeSigned bits (Int.ediv lhs rhs)
+
+def signedMod (bits : Nat) (lhs rhs : Int) : Int :=
+  if rhs = 0 then
+    0
+  else
+    normalizeSigned bits (Int.emod lhs rhs)
+
+def signedToUnsignedTwos (bits : Nat) (value : Int) : Nat :=
+  let modulus := Int.ofNat (pow2 bits)
+  let residue := Int.emod (normalizeSigned bits value) modulus
+  residue.toNat
+
+def unsignedTwosToSigned (bits : Nat) (value : Nat) : Int :=
+  normalizeSigned bits (Int.ofNat (normalizeUnsigned bits value))
+
+def signedBitAnd (bits : Nat) (lhs rhs : Int) : Int :=
+  let lhsNat := signedToUnsignedTwos bits lhs
+  let rhsNat := signedToUnsignedTwos bits rhs
+  unsignedTwosToSigned bits (Nat.land lhsNat rhsNat)
+
+def signedBitOr (bits : Nat) (lhs rhs : Int) : Int :=
+  let lhsNat := signedToUnsignedTwos bits lhs
+  let rhsNat := signedToUnsignedTwos bits rhs
+  unsignedTwosToSigned bits (Nat.lor lhsNat rhsNat)
+
+def signedBitXor (bits : Nat) (lhs rhs : Int) : Int :=
+  let lhsNat := signedToUnsignedTwos bits lhs
+  let rhsNat := signedToUnsignedTwos bits rhs
+  unsignedTwosToSigned bits (Nat.xor lhsNat rhsNat)
+
+def signedShl (bits : Nat) (lhs : Int) (shift : Nat) : Int :=
+  normalizeSigned bits (lhs * Int.ofNat (pow2 shift))
+
+def signedShr (bits : Nat) (lhs : Int) (shift : Nat) : Int :=
+  normalizeSigned bits (Int.ediv lhs (Int.ofNat (pow2 shift)))
+
+def u256LimbModulus : Nat := pow2 128
+
+def u256FromLimbs (low high : Nat) : Nat :=
+  normalizeUnsigned 256 (normalizeUnsigned 128 low + normalizeUnsigned 128 high * u256LimbModulus)
+
+def u256Low (value : Nat) : Nat :=
+  normalizeUnsigned 128 value
+
+def u256High (value : Nat) : Nat :=
+  normalizeUnsigned 128 (value / u256LimbModulus)
+
 end IntegerDomains
+
+namespace IntTySemantics
+
+def isSupportedIntTy : Ty -> Bool
+  | .i8 | .i16 | .i32 | .i64 | .i128 => true
+  | .u8 | .u16 | .u32 | .u64 | .u128 | .u256 | .u512 => true
+  | .qm31 => true
+  | _ => false
+
+def supportsDivMod : Ty -> Bool
+  | .qm31 => false
+  | .i8 | .i16 | .i32 | .i64 | .i128 => true
+  | .u8 | .u16 | .u32 | .u64 | .u128 | .u256 | .u512 => true
+  | _ => false
+
+def supportsBitwise : Ty -> Bool
+  | .qm31 => false
+  | .i8 | .i16 | .i32 | .i64 | .i128 => true
+  | .u8 | .u16 | .u32 | .u64 | .u128 | .u256 | .u512 => true
+  | _ => false
+
+def normalize : (ty : Ty) -> Ty.denote ty -> Ty.denote ty
+  | .i8 => IntegerDomains.normalizeSigned 8
+  | .i16 => IntegerDomains.normalizeSigned 16
+  | .i32 => IntegerDomains.normalizeSigned 32
+  | .i64 => IntegerDomains.normalizeSigned 64
+  | .i128 => IntegerDomains.normalizeSigned 128
+  | .u8 => IntegerDomains.normalizeUnsigned 8
+  | .u16 => IntegerDomains.normalizeUnsigned 16
+  | .u32 => IntegerDomains.normalizeUnsigned 32
+  | .u64 => IntegerDomains.normalizeUnsigned 64
+  | .u128 => IntegerDomains.normalizeUnsigned 128
+  | .u256 => IntegerDomains.normalizeUnsigned 256
+  | .u512 => IntegerDomains.normalizeUnsigned 512
+  | .qm31 => IntegerDomains.normalizeQm31
+  | _ => id
+
+def add : (ty : Ty) -> Ty.denote ty -> Ty.denote ty -> Ty.denote ty
+  | .i8 => IntegerDomains.signedAdd 8
+  | .i16 => IntegerDomains.signedAdd 16
+  | .i32 => IntegerDomains.signedAdd 32
+  | .i64 => IntegerDomains.signedAdd 64
+  | .i128 => IntegerDomains.signedAdd 128
+  | .u8 => IntegerDomains.unsignedAdd 8
+  | .u16 => IntegerDomains.unsignedAdd 16
+  | .u32 => IntegerDomains.unsignedAdd 32
+  | .u64 => IntegerDomains.unsignedAdd 64
+  | .u128 => IntegerDomains.unsignedAdd 128
+  | .u256 => IntegerDomains.unsignedAdd 256
+  | .u512 => IntegerDomains.unsignedAdd 512
+  | .qm31 => IntegerDomains.qm31Add
+  | _ => fun lhs _ => lhs
+
+def sub : (ty : Ty) -> Ty.denote ty -> Ty.denote ty -> Ty.denote ty
+  | .i8 => IntegerDomains.signedSub 8
+  | .i16 => IntegerDomains.signedSub 16
+  | .i32 => IntegerDomains.signedSub 32
+  | .i64 => IntegerDomains.signedSub 64
+  | .i128 => IntegerDomains.signedSub 128
+  | .u8 => IntegerDomains.unsignedSub 8
+  | .u16 => IntegerDomains.unsignedSub 16
+  | .u32 => IntegerDomains.unsignedSub 32
+  | .u64 => IntegerDomains.unsignedSub 64
+  | .u128 => IntegerDomains.unsignedSub 128
+  | .u256 => IntegerDomains.unsignedSub 256
+  | .u512 => IntegerDomains.unsignedSub 512
+  | .qm31 => IntegerDomains.qm31Sub
+  | _ => fun lhs _ => lhs
+
+def mul : (ty : Ty) -> Ty.denote ty -> Ty.denote ty -> Ty.denote ty
+  | .i8 => IntegerDomains.signedMul 8
+  | .i16 => IntegerDomains.signedMul 16
+  | .i32 => IntegerDomains.signedMul 32
+  | .i64 => IntegerDomains.signedMul 64
+  | .i128 => IntegerDomains.signedMul 128
+  | .u8 => IntegerDomains.unsignedMul 8
+  | .u16 => IntegerDomains.unsignedMul 16
+  | .u32 => IntegerDomains.unsignedMul 32
+  | .u64 => IntegerDomains.unsignedMul 64
+  | .u128 => IntegerDomains.unsignedMul 128
+  | .u256 => IntegerDomains.unsignedMul 256
+  | .u512 => IntegerDomains.unsignedMul 512
+  | .qm31 => IntegerDomains.qm31Mul
+  | _ => fun lhs _ => lhs
+
+def div : (ty : Ty) -> Ty.denote ty -> Ty.denote ty -> Ty.denote ty
+  | .i8 => IntegerDomains.signedDiv 8
+  | .i16 => IntegerDomains.signedDiv 16
+  | .i32 => IntegerDomains.signedDiv 32
+  | .i64 => IntegerDomains.signedDiv 64
+  | .i128 => IntegerDomains.signedDiv 128
+  | .u8 => IntegerDomains.unsignedDiv 8
+  | .u16 => IntegerDomains.unsignedDiv 16
+  | .u32 => IntegerDomains.unsignedDiv 32
+  | .u64 => IntegerDomains.unsignedDiv 64
+  | .u128 => IntegerDomains.unsignedDiv 128
+  | .u256 => IntegerDomains.unsignedDiv 256
+  | .u512 => IntegerDomains.unsignedDiv 512
+  | .qm31 => fun lhs rhs => if rhs = 0 then 0 else IntegerDomains.normalizeQm31 (lhs / rhs)
+  | _ => fun lhs _ => lhs
+
+def mod : (ty : Ty) -> Ty.denote ty -> Ty.denote ty -> Ty.denote ty
+  | .i8 => IntegerDomains.signedMod 8
+  | .i16 => IntegerDomains.signedMod 16
+  | .i32 => IntegerDomains.signedMod 32
+  | .i64 => IntegerDomains.signedMod 64
+  | .i128 => IntegerDomains.signedMod 128
+  | .u8 => IntegerDomains.unsignedMod 8
+  | .u16 => IntegerDomains.unsignedMod 16
+  | .u32 => IntegerDomains.unsignedMod 32
+  | .u64 => IntegerDomains.unsignedMod 64
+  | .u128 => IntegerDomains.unsignedMod 128
+  | .u256 => IntegerDomains.unsignedMod 256
+  | .u512 => IntegerDomains.unsignedMod 512
+  | .qm31 => fun lhs rhs => if rhs = 0 then 0 else IntegerDomains.normalizeQm31 (lhs % rhs)
+  | _ => fun lhs _ => lhs
+
+def bitAnd : (ty : Ty) -> Ty.denote ty -> Ty.denote ty -> Ty.denote ty
+  | .i8 => IntegerDomains.signedBitAnd 8
+  | .i16 => IntegerDomains.signedBitAnd 16
+  | .i32 => IntegerDomains.signedBitAnd 32
+  | .i64 => IntegerDomains.signedBitAnd 64
+  | .i128 => IntegerDomains.signedBitAnd 128
+  | .u8 => IntegerDomains.unsignedBitAnd 8
+  | .u16 => IntegerDomains.unsignedBitAnd 16
+  | .u32 => IntegerDomains.unsignedBitAnd 32
+  | .u64 => IntegerDomains.unsignedBitAnd 64
+  | .u128 => IntegerDomains.unsignedBitAnd 128
+  | .u256 => IntegerDomains.unsignedBitAnd 256
+  | .u512 => IntegerDomains.unsignedBitAnd 512
+  | .qm31 => fun lhs rhs => IntegerDomains.normalizeQm31 (Nat.land lhs rhs)
+  | _ => fun lhs _ => lhs
+
+def bitOr : (ty : Ty) -> Ty.denote ty -> Ty.denote ty -> Ty.denote ty
+  | .i8 => IntegerDomains.signedBitOr 8
+  | .i16 => IntegerDomains.signedBitOr 16
+  | .i32 => IntegerDomains.signedBitOr 32
+  | .i64 => IntegerDomains.signedBitOr 64
+  | .i128 => IntegerDomains.signedBitOr 128
+  | .u8 => IntegerDomains.unsignedBitOr 8
+  | .u16 => IntegerDomains.unsignedBitOr 16
+  | .u32 => IntegerDomains.unsignedBitOr 32
+  | .u64 => IntegerDomains.unsignedBitOr 64
+  | .u128 => IntegerDomains.unsignedBitOr 128
+  | .u256 => IntegerDomains.unsignedBitOr 256
+  | .u512 => IntegerDomains.unsignedBitOr 512
+  | .qm31 => fun lhs rhs => IntegerDomains.normalizeQm31 (Nat.lor lhs rhs)
+  | _ => fun lhs _ => lhs
+
+def bitXor : (ty : Ty) -> Ty.denote ty -> Ty.denote ty -> Ty.denote ty
+  | .i8 => IntegerDomains.signedBitXor 8
+  | .i16 => IntegerDomains.signedBitXor 16
+  | .i32 => IntegerDomains.signedBitXor 32
+  | .i64 => IntegerDomains.signedBitXor 64
+  | .i128 => IntegerDomains.signedBitXor 128
+  | .u8 => IntegerDomains.unsignedBitXor 8
+  | .u16 => IntegerDomains.unsignedBitXor 16
+  | .u32 => IntegerDomains.unsignedBitXor 32
+  | .u64 => IntegerDomains.unsignedBitXor 64
+  | .u128 => IntegerDomains.unsignedBitXor 128
+  | .u256 => IntegerDomains.unsignedBitXor 256
+  | .u512 => IntegerDomains.unsignedBitXor 512
+  | .qm31 => fun lhs rhs => IntegerDomains.normalizeQm31 (Nat.xor lhs rhs)
+  | _ => fun lhs _ => lhs
+
+def shl : (ty : Ty) -> Ty.denote ty -> Nat -> Ty.denote ty
+  | .i8 => IntegerDomains.signedShl 8
+  | .i16 => IntegerDomains.signedShl 16
+  | .i32 => IntegerDomains.signedShl 32
+  | .i64 => IntegerDomains.signedShl 64
+  | .i128 => IntegerDomains.signedShl 128
+  | .u8 => IntegerDomains.unsignedShl 8
+  | .u16 => IntegerDomains.unsignedShl 16
+  | .u32 => IntegerDomains.unsignedShl 32
+  | .u64 => IntegerDomains.unsignedShl 64
+  | .u128 => IntegerDomains.unsignedShl 128
+  | .u256 => IntegerDomains.unsignedShl 256
+  | .u512 => IntegerDomains.unsignedShl 512
+  | .qm31 => fun lhs shift => IntegerDomains.normalizeQm31 (Nat.shiftLeft lhs shift)
+  | _ => fun lhs _ => lhs
+
+def shr : (ty : Ty) -> Ty.denote ty -> Nat -> Ty.denote ty
+  | .i8 => IntegerDomains.signedShr 8
+  | .i16 => IntegerDomains.signedShr 16
+  | .i32 => IntegerDomains.signedShr 32
+  | .i64 => IntegerDomains.signedShr 64
+  | .i128 => IntegerDomains.signedShr 128
+  | .u8 => IntegerDomains.unsignedShr 8
+  | .u16 => IntegerDomains.unsignedShr 16
+  | .u32 => IntegerDomains.unsignedShr 32
+  | .u64 => IntegerDomains.unsignedShr 64
+  | .u128 => IntegerDomains.unsignedShr 128
+  | .u256 => IntegerDomains.unsignedShr 256
+  | .u512 => IntegerDomains.unsignedShr 512
+  | .qm31 => fun lhs shift => IntegerDomains.normalizeQm31 (Nat.shiftRight lhs shift)
+  | _ => fun lhs _ => lhs
+
+def lt : (ty : Ty) -> Ty.denote ty -> Ty.denote ty -> Bool
+  | .i8 => (· < ·)
+  | .i16 => (· < ·)
+  | .i32 => (· < ·)
+  | .i64 => (· < ·)
+  | .i128 => (· < ·)
+  | .u8 => (· < ·)
+  | .u16 => (· < ·)
+  | .u32 => (· < ·)
+  | .u64 => (· < ·)
+  | .u128 => (· < ·)
+  | .u256 => (· < ·)
+  | .u512 => (· < ·)
+  | .qm31 => (· < ·)
+  | _ => fun _ _ => false
+
+def le : (ty : Ty) -> Ty.denote ty -> Ty.denote ty -> Bool
+  | .i8 => (· ≤ ·)
+  | .i16 => (· ≤ ·)
+  | .i32 => (· ≤ ·)
+  | .i64 => (· ≤ ·)
+  | .i128 => (· ≤ ·)
+  | .u8 => (· ≤ ·)
+  | .u16 => (· ≤ ·)
+  | .u32 => (· ≤ ·)
+  | .u64 => (· ≤ ·)
+  | .u128 => (· ≤ ·)
+  | .u256 => (· ≤ ·)
+  | .u512 => (· ≤ ·)
+  | .qm31 => (· ≤ ·)
+  | _ => fun _ _ => false
+
+def isZero : (ty : Ty) -> Ty.denote ty -> Bool
+  | .i8 => (· = 0)
+  | .i16 => (· = 0)
+  | .i32 => (· = 0)
+  | .i64 => (· = 0)
+  | .i128 => (· = 0)
+  | .u8 => (· = 0)
+  | .u16 => (· = 0)
+  | .u32 => (· = 0)
+  | .u64 => (· = 0)
+  | .u128 => (· = 0)
+  | .u256 => (· = 0)
+  | .u512 => (· = 0)
+  | .qm31 => (· = 0)
+  | .bool => (!·)
+  | _ => fun _ => false
+
+end IntTySemantics
 
 structure EvalContext where
   feltVars : String -> Int := fun _ => 0
@@ -66,6 +392,7 @@ structure EvalContext where
   i64Vars : String -> Int := fun _ => 0
   i128Vars : String -> Int := fun _ => 0
   u128Vars : String -> Nat := fun _ => 0
+  u512Vars : String -> Nat := fun _ => 0
   u8Vars : String -> Nat := fun _ => 0
   u16Vars : String -> Nat := fun _ => 0
   u32Vars : String -> Nat := fun _ => 0
@@ -80,6 +407,7 @@ structure EvalContext where
   i64Storage : String -> Int := fun _ => 0
   i128Storage : String -> Int := fun _ => 0
   u128Storage : String -> Nat := fun _ => 0
+  u512Storage : String -> Nat := fun _ => 0
   u8Storage : String -> Nat := fun _ => 0
   u16Storage : String -> Nat := fun _ => 0
   u32Storage : String -> Nat := fun _ => 0
@@ -91,7 +419,7 @@ structure EvalContext where
 namespace EvalContext
 
 def supportsRuntimeBinding : Ty -> Bool
-  | .felt252 | .u128 | .u256 | .bool => true
+  | .felt252 | .u128 | .u256 | .u512 | .bool => true
   | .i8 | .i16 | .i32 | .i64 | .i128 => true
   | .u8 | .u16 | .u32 | .u64 => true
   | .qm31 => true
@@ -109,6 +437,7 @@ def normalizeRuntimeValue (ty : Ty) : Ty.denote ty -> Ty.denote ty :=
   | .i64 => IntegerDomains.normalizeSigned 64
   | .i128 => IntegerDomains.normalizeSigned 128
   | .u128 => IntegerDomains.normalizeUnsigned 128
+  | .u512 => IntegerDomains.normalizeUnsigned 512
   | .u8 => IntegerDomains.normalizeUnsigned 8
   | .u16 => IntegerDomains.normalizeUnsigned 16
   | .u32 => IntegerDomains.normalizeUnsigned 32
@@ -139,6 +468,7 @@ def readVar (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
   | .i64 => ctx.i64Vars name
   | .i128 => ctx.i128Vars name
   | .u128 => ctx.u128Vars name
+  | .u512 => ctx.u512Vars name
   | .u8 => ctx.u8Vars name
   | .u16 => ctx.u16Vars name
   | .u32 => ctx.u32Vars name
@@ -175,6 +505,7 @@ def readStorage (ctx : EvalContext) (ty : Ty) (name : String) : Ty.denote ty :=
   | .i64 => ctx.i64Storage name
   | .i128 => ctx.i128Storage name
   | .u128 => ctx.u128Storage name
+  | .u512 => ctx.u512Storage name
   | .u8 => ctx.u8Storage name
   | .u16 => ctx.u16Storage name
   | .u32 => ctx.u32Storage name
@@ -218,6 +549,8 @@ def bindVar (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote ty)
       { ctx with i128Vars := fun n => if n = name then value else ctx.i128Vars n }
   | .u128 =>
       { ctx with u128Vars := fun n => if n = name then value else ctx.u128Vars n }
+  | .u512 =>
+      { ctx with u512Vars := fun n => if n = name then value else ctx.u512Vars n }
   | .u8 =>
       { ctx with u8Vars := fun n => if n = name then value else ctx.u8Vars n }
   | .u16 =>
@@ -266,6 +599,8 @@ def bindStorage (ctx : EvalContext) (ty : Ty) (name : String) (value : Ty.denote
       { ctx with i128Storage := fun n => if n = name then value else ctx.i128Storage n }
   | .u128 =>
       { ctx with u128Storage := fun n => if n = name then value else ctx.u128Storage n }
+  | .u512 =>
+      { ctx with u512Storage := fun n => if n = name then value else ctx.u512Storage n }
   | .u8 =>
       { ctx with u8Storage := fun n => if n = name then value else ctx.u8Storage n }
   | .u16 =>
@@ -317,6 +652,7 @@ def runtimeValueToInt (srcTy : Ty) (value : Ty.denote srcTy) : Except String Int
   | .i64 => .ok value
   | .i128 => .ok value
   | .u128 => .ok (Int.ofNat value)
+  | .u512 => .ok (Int.ofNat value)
   | .u8 => .ok (Int.ofNat value)
   | .u16 => .ok (Int.ofNat value)
   | .u32 => .ok (Int.ofNat value)
@@ -355,6 +691,9 @@ def castIntToRuntime (srcTy dstTy : Ty) (raw : Int) : Except String (Ty.denote d
   | .u128 => do
       let natValue <- requireNonNegativeNat srcTy dstTy raw
       pure (IntegerDomains.normalizeUnsigned 128 natValue)
+  | .u512 => do
+      let natValue <- requireNonNegativeNat srcTy dstTy raw
+      pure (IntegerDomains.normalizeUnsigned 512 natValue)
   | .u256 => do
       let natValue <- requireNonNegativeNat srcTy dstTy raw
       pure (IntegerDomains.normalizeUnsigned 256 natValue)
@@ -471,19 +810,49 @@ def evalExpr (ctx : EvalContext) : IRExpr ty -> Ty.denote ty
   | .litU256 value => value
   | .litBool value => value
   | .litFelt252 value => value
+  | .litInt ty value => IntTySemantics.normalize ty value
   | .addFelt252 lhs rhs => evalExpr ctx lhs + evalExpr ctx rhs
   | .subFelt252 lhs rhs => evalExpr ctx lhs - evalExpr ctx rhs
   | .mulFelt252 lhs rhs => evalExpr ctx lhs * evalExpr ctx rhs
+  | .addInt ty lhs rhs => IntTySemantics.add ty (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .subInt ty lhs rhs => IntTySemantics.sub ty (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .mulInt ty lhs rhs => IntTySemantics.mul ty (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .divInt ty lhs rhs => IntTySemantics.div ty (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .modInt ty lhs rhs => IntTySemantics.mod ty (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .bitAndInt ty lhs rhs => IntTySemantics.bitAnd ty (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .bitOrInt ty lhs rhs => IntTySemantics.bitOr ty (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .bitXorInt ty lhs rhs => IntTySemantics.bitXor ty (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .shlInt ty lhs shift => IntTySemantics.shl ty (evalExpr ctx lhs) shift
+  | .shrInt ty lhs shift => IntTySemantics.shr ty (evalExpr ctx lhs) shift
   | .addU128 lhs rhs => evalExpr ctx lhs + evalExpr ctx rhs
   | .subU128 lhs rhs => evalExpr ctx lhs - evalExpr ctx rhs
   | .mulU128 lhs rhs => evalExpr ctx lhs * evalExpr ctx rhs
+  | .divU128 lhs rhs => IntegerDomains.unsignedDiv 128 (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .modU128 lhs rhs => IntegerDomains.unsignedMod 128 (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .bitAndU128 lhs rhs => IntegerDomains.unsignedBitAnd 128 (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .bitOrU128 lhs rhs => IntegerDomains.unsignedBitOr 128 (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .bitXorU128 lhs rhs => IntegerDomains.unsignedBitXor 128 (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .shlU128 lhs shift => IntegerDomains.unsignedShl 128 (evalExpr ctx lhs) shift
+  | .shrU128 lhs shift => IntegerDomains.unsignedShr 128 (evalExpr ctx lhs) shift
   | .addU256 lhs rhs => evalExpr ctx lhs + evalExpr ctx rhs
   | .subU256 lhs rhs => evalExpr ctx lhs - evalExpr ctx rhs
   | .mulU256 lhs rhs => evalExpr ctx lhs * evalExpr ctx rhs
+  | .divU256 lhs rhs => IntegerDomains.unsignedDiv 256 (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .modU256 lhs rhs => IntegerDomains.unsignedMod 256 (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .bitAndU256 lhs rhs => IntegerDomains.unsignedBitAnd 256 (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .bitOrU256 lhs rhs => IntegerDomains.unsignedBitOr 256 (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .bitXorU256 lhs rhs => IntegerDomains.unsignedBitXor 256 (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .shlU256 lhs shift => IntegerDomains.unsignedShl 256 (evalExpr ctx lhs) shift
+  | .shrU256 lhs shift => IntegerDomains.unsignedShr 256 (evalExpr ctx lhs) shift
+  | .u256FromLimbs low high => IntegerDomains.u256FromLimbs (evalExpr ctx low) (evalExpr ctx high)
+  | .u256Low value => IntegerDomains.u256Low (evalExpr ctx value)
+  | .u256High value => IntegerDomains.u256High (evalExpr ctx value)
   | @IRExpr.eq ty lhs rhs =>
       by
         let _ : DecidableEq (Ty.denote ty) := Ty.denoteDecidableEq ty
         exact decide (evalExpr ctx lhs = evalExpr ctx rhs)
+  | .ltInt ty lhs rhs => IntTySemantics.lt ty (evalExpr ctx lhs) (evalExpr ctx rhs)
+  | .leInt ty lhs rhs => IntTySemantics.le ty (evalExpr ctx lhs) (evalExpr ctx rhs)
   | .ltU128 lhs rhs => evalExpr ctx lhs < evalExpr ctx rhs
   | .leU128 lhs rhs => evalExpr ctx lhs <= evalExpr ctx rhs
   | .ltU256 lhs rhs => evalExpr ctx lhs < evalExpr ctx rhs
@@ -495,6 +864,15 @@ def evalExpr (ctx : EvalContext) : IRExpr ty -> Ty.denote ty
       let ctx' := EvalContext.bindVar ctx boundTy name value
       evalExpr ctx' body
 
+def unsupportedLaneOpMessage (opName : String) (ty : Ty) : String :=
+  s!"unsupported {opName} operation for type '{Ty.toCairo ty}'"
+
+def divisionByZeroLaneMessage (ty : Ty) : String :=
+  s!"division by zero in {Ty.toCairo ty} lane"
+
+def moduloByZeroLaneMessage (ty : Ty) : String :=
+  s!"modulo by zero in {Ty.toCairo ty} lane"
+
 def evalExprStrict (ctx : EvalContext) : IRExpr ty -> Except String (Ty.denote ty)
   | .var name => EvalContext.readVarStrict ctx ty name
   | .storageRead name => EvalContext.readStorageStrict ctx ty name
@@ -502,6 +880,7 @@ def evalExprStrict (ctx : EvalContext) : IRExpr ty -> Except String (Ty.denote t
   | .litU256 value => .ok (IntegerDomains.normalizeUnsigned 256 value)
   | .litBool value => .ok value
   | .litFelt252 value => .ok value
+  | .litInt ty value => .ok (IntTySemantics.normalize ty value)
   | .addFelt252 lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
@@ -514,6 +893,80 @@ def evalExprStrict (ctx : EvalContext) : IRExpr ty -> Except String (Ty.denote t
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
       pure (left * right)
+  | .addInt ty lhs rhs => do
+      if !(IntTySemantics.isSupportedIntTy ty) then
+        .error (unsupportedLaneOpMessage "add" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        let right <- evalExprStrict ctx rhs
+        pure (IntTySemantics.add ty left right)
+  | .subInt ty lhs rhs => do
+      if !(IntTySemantics.isSupportedIntTy ty) then
+        .error (unsupportedLaneOpMessage "sub" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        let right <- evalExprStrict ctx rhs
+        pure (IntTySemantics.sub ty left right)
+  | .mulInt ty lhs rhs => do
+      if !(IntTySemantics.isSupportedIntTy ty) then
+        .error (unsupportedLaneOpMessage "mul" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        let right <- evalExprStrict ctx rhs
+        pure (IntTySemantics.mul ty left right)
+  | .divInt ty lhs rhs => do
+      if !(IntTySemantics.supportsDivMod ty) then
+        .error (unsupportedLaneOpMessage "division" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        let right <- evalExprStrict ctx rhs
+        if IntTySemantics.isZero ty right then
+          .error (divisionByZeroLaneMessage ty)
+        else
+          pure (IntTySemantics.div ty left right)
+  | .modInt ty lhs rhs => do
+      if !(IntTySemantics.supportsDivMod ty) then
+        .error (unsupportedLaneOpMessage "modulo" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        let right <- evalExprStrict ctx rhs
+        if IntTySemantics.isZero ty right then
+          .error (moduloByZeroLaneMessage ty)
+        else
+          pure (IntTySemantics.mod ty left right)
+  | .bitAndInt ty lhs rhs => do
+      if !(IntTySemantics.supportsBitwise ty) then
+        .error (unsupportedLaneOpMessage "bitwise-and" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        let right <- evalExprStrict ctx rhs
+        pure (IntTySemantics.bitAnd ty left right)
+  | .bitOrInt ty lhs rhs => do
+      if !(IntTySemantics.supportsBitwise ty) then
+        .error (unsupportedLaneOpMessage "bitwise-or" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        let right <- evalExprStrict ctx rhs
+        pure (IntTySemantics.bitOr ty left right)
+  | .bitXorInt ty lhs rhs => do
+      if !(IntTySemantics.supportsBitwise ty) then
+        .error (unsupportedLaneOpMessage "bitwise-xor" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        let right <- evalExprStrict ctx rhs
+        pure (IntTySemantics.bitXor ty left right)
+  | .shlInt ty lhs shift => do
+      if !(IntTySemantics.supportsBitwise ty) then
+        .error (unsupportedLaneOpMessage "shift-left" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        pure (IntTySemantics.shl ty left shift)
+  | .shrInt ty lhs shift => do
+      if !(IntTySemantics.supportsBitwise ty) then
+        .error (unsupportedLaneOpMessage "shift-right" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        pure (IntTySemantics.shr ty left shift)
   | .addU128 lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
@@ -526,6 +979,38 @@ def evalExprStrict (ctx : EvalContext) : IRExpr ty -> Except String (Ty.denote t
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
       pure (IntegerDomains.unsignedMul 128 left right)
+  | .divU128 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      if right = 0 then
+        .error "division by zero in u128 lane"
+      else
+        pure (IntegerDomains.unsignedDiv 128 left right)
+  | .modU128 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      if right = 0 then
+        .error "modulo by zero in u128 lane"
+      else
+        pure (IntegerDomains.unsignedMod 128 left right)
+  | .bitAndU128 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (IntegerDomains.unsignedBitAnd 128 left right)
+  | .bitOrU128 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (IntegerDomains.unsignedBitOr 128 left right)
+  | .bitXorU128 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (IntegerDomains.unsignedBitXor 128 left right)
+  | .shlU128 lhs shift => do
+      let left <- evalExprStrict ctx lhs
+      pure (IntegerDomains.unsignedShl 128 left shift)
+  | .shrU128 lhs shift => do
+      let left <- evalExprStrict ctx lhs
+      pure (IntegerDomains.unsignedShr 128 left shift)
   | .addU256 lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
@@ -538,11 +1023,67 @@ def evalExprStrict (ctx : EvalContext) : IRExpr ty -> Except String (Ty.denote t
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
       pure (IntegerDomains.unsignedMul 256 left right)
+  | .divU256 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      if right = 0 then
+        .error "division by zero in u256 lane"
+      else
+        pure (IntegerDomains.unsignedDiv 256 left right)
+  | .modU256 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      if right = 0 then
+        .error "modulo by zero in u256 lane"
+      else
+        pure (IntegerDomains.unsignedMod 256 left right)
+  | .bitAndU256 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (IntegerDomains.unsignedBitAnd 256 left right)
+  | .bitOrU256 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (IntegerDomains.unsignedBitOr 256 left right)
+  | .bitXorU256 lhs rhs => do
+      let left <- evalExprStrict ctx lhs
+      let right <- evalExprStrict ctx rhs
+      pure (IntegerDomains.unsignedBitXor 256 left right)
+  | .shlU256 lhs shift => do
+      let left <- evalExprStrict ctx lhs
+      pure (IntegerDomains.unsignedShl 256 left shift)
+  | .shrU256 lhs shift => do
+      let left <- evalExprStrict ctx lhs
+      pure (IntegerDomains.unsignedShr 256 left shift)
+  | .u256FromLimbs low high => do
+      let lowValue <- evalExprStrict ctx low
+      let highValue <- evalExprStrict ctx high
+      pure (IntegerDomains.u256FromLimbs lowValue highValue)
+  | .u256Low value => do
+      let raw <- evalExprStrict ctx value
+      pure (IntegerDomains.u256Low raw)
+  | .u256High value => do
+      let raw <- evalExprStrict ctx value
+      pure (IntegerDomains.u256High raw)
   | @IRExpr.eq ty lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
       let _ : DecidableEq (Ty.denote ty) := Ty.denoteDecidableEq ty
       pure (decide (left = right))
+  | .ltInt ty lhs rhs => do
+      if !(IntTySemantics.isSupportedIntTy ty) then
+        .error (unsupportedLaneOpMessage "lt" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        let right <- evalExprStrict ctx rhs
+        pure (IntTySemantics.lt ty left right)
+  | .leInt ty lhs rhs => do
+      if !(IntTySemantics.isSupportedIntTy ty) then
+        .error (unsupportedLaneOpMessage "le" ty)
+      else
+        let left <- evalExprStrict ctx lhs
+        let right <- evalExprStrict ctx rhs
+        pure (IntTySemantics.le ty left right)
   | .ltU128 lhs rhs => do
       let left <- evalExprStrict ctx lhs
       let right <- evalExprStrict ctx rhs
@@ -577,26 +1118,85 @@ def resourceCost : IRExpr ty -> ResourceCarriers
   | .litU256 _ => {}
   | .litBool _ => {}
   | .litFelt252 _ => {}
+  | .litInt _ _ => {}
   | .addFelt252 lhs rhs =>
       ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
   | .subFelt252 lhs rhs =>
       ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
   | .mulFelt252 lhs rhs =>
       ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .addInt _ lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .subInt _ lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .mulInt _ lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .divInt _ lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .modInt _ lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .bitAndInt _ lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .bitOrInt _ lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .bitXorInt _ lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .shlInt _ lhs _ =>
+      ResourceCarriers.bumpGas <| resourceCost lhs
+  | .shrInt _ lhs _ =>
+      ResourceCarriers.bumpGas <| resourceCost lhs
   | .addU128 lhs rhs =>
       ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
   | .subU128 lhs rhs =>
       ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
   | .mulU128 lhs rhs =>
       ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .divU128 lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .modU128 lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .bitAndU128 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .bitOrU128 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .bitXorU128 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .shlU128 lhs _ =>
+      ResourceCarriers.bumpGas <| resourceCost lhs
+  | .shrU128 lhs _ =>
+      ResourceCarriers.bumpGas <| resourceCost lhs
   | .addU256 lhs rhs =>
       ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
   | .subU256 lhs rhs =>
       ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
   | .mulU256 lhs rhs =>
       ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .divU256 lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .modU256 lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .bitAndU256 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .bitOrU256 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .bitXorU256 lhs rhs =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .shlU256 lhs _ =>
+      ResourceCarriers.bumpGas <| resourceCost lhs
+  | .shrU256 lhs _ =>
+      ResourceCarriers.bumpGas <| resourceCost lhs
+  | .u256FromLimbs low high =>
+      ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost low) (resourceCost high)
+  | .u256Low value =>
+      ResourceCarriers.bumpGas <| resourceCost value
+  | .u256High value =>
+      ResourceCarriers.bumpGas <| resourceCost value
   | .eq lhs rhs =>
       ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .ltInt _ lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
+  | .leInt _ lhs rhs =>
+      ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
   | .ltU128 lhs rhs =>
       ResourceCarriers.bumpRangeCheck <| ResourceCarriers.bumpGas <| ResourceCarriers.merge (resourceCost lhs) (resourceCost rhs)
   | .leU128 lhs rhs =>

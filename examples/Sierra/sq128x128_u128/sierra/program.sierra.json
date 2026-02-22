@@ -31,9 +31,9 @@
     "args":
     [{"id": 10524190115006036691,
       "debug_name": "sq128x128AddRaw::param::__range_check"},
-     {"id": 11781514595653034246, "debug_name": "sq128x128AddRaw::param::aRaw"},
-     {"id": 8126247667559813445,
-      "debug_name": "sq128x128AddRaw::param::bRaw"}]}},
+     {"id": 3933057412415194770, "debug_name": "sq128x128AddRaw::param::aLane"},
+     {"id": 11503077306844944811,
+      "debug_name": "sq128x128AddRaw::param::bLane"}]}},
   {"Invocation":
    {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
     "branches": [{"target": "Fallthrough", "results": []}],
@@ -139,9 +139,10 @@
     "args":
     [{"id": 7111786070796655688,
       "debug_name": "sq128x128SubRaw::param::__range_check"},
-     {"id": 11310171320284369623, "debug_name": "sq128x128SubRaw::param::aRaw"},
-     {"id": 18198978933077032532,
-      "debug_name": "sq128x128SubRaw::param::bRaw"}]}},
+     {"id": 15063184738545328573,
+      "debug_name": "sq128x128SubRaw::param::aLane"},
+     {"id": 17536587533367597600,
+      "debug_name": "sq128x128SubRaw::param::bLane"}]}},
   {"Invocation":
    {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
     "branches": [{"target": "Fallthrough", "results": []}],
@@ -239,9 +240,9 @@
        {"id": 2359220304394765981,
         "debug_name": "sq128x128MulRaw::tmp::u128_mul_guarantee_raw::2"}]}],
     "args":
-    [{"id": 1338571014116280971, "debug_name": "sq128x128MulRaw::param::aRaw"},
-     {"id": 2054069458774987208,
-      "debug_name": "sq128x128MulRaw::param::bRaw"}]}},
+    [{"id": 230134540784152809, "debug_name": "sq128x128MulRaw::param::aLane"},
+     {"id": 11570518457571294940,
+      "debug_name": "sq128x128MulRaw::param::bLane"}]}},
   {"Invocation":
    {"libfunc_id": {"id": 8180805564406204157, "debug_name": "drop_u128"},
     "branches": [{"target": "Fallthrough", "results": []}],
@@ -319,10 +320,10 @@
     "args":
     [{"id": 6196737185304722652,
       "debug_name": "sq128x128DeltaRaw::param::__range_check"},
-     {"id": 16045457652980742224,
-      "debug_name": "sq128x128DeltaRaw::param::bRaw"},
-     {"id": 15329677733345213971,
-      "debug_name": "sq128x128DeltaRaw::param::aRaw"}]}},
+     {"id": 11147465861503745972,
+      "debug_name": "sq128x128DeltaRaw::param::bLane"},
+     {"id": 9302851406153712673,
+      "debug_name": "sq128x128DeltaRaw::param::aLane"}]}},
   {"Invocation":
    {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
     "branches": [{"target": "Fallthrough", "results": []}],
@@ -432,10 +433,10 @@
     "args":
     [{"id": 10291826400154328030,
       "debug_name": "sq128x128AffineKernel::param::__range_check"},
-     {"id": 7467404092286278349,
-      "debug_name": "sq128x128AffineKernel::param::aRaw"},
-     {"id": 9779437244546339886,
-      "debug_name": "sq128x128AffineKernel::param::bRaw"}]}},
+     {"id": 490505372480392387,
+      "debug_name": "sq128x128AffineKernel::param::aLane"},
+     {"id": 5180760282657711562,
+      "debug_name": "sq128x128AffineKernel::param::bLane"}]}},
   {"Invocation":
    {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
     "branches": [{"target": "Fallthrough", "results": []}],
@@ -522,10 +523,10 @@
     [{"id": 15555072241150670348,
       "debug_name":
       "sq128x128AffineKernel::tmp::u128_add_range_check_merged::4"},
-     {"id": 14106642249023000891,
-      "debug_name": "sq128x128AffineKernel::param::cRaw"},
-     {"id": 16468127322714921684,
-      "debug_name": "sq128x128AffineKernel::param::dRaw"}]}},
+     {"id": 17245018564152384761,
+      "debug_name": "sq128x128AffineKernel::param::cLane"},
+     {"id": 10852602919467337632,
+      "debug_name": "sq128x128AffineKernel::param::dLane"}]}},
   {"Invocation":
    {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
     "branches": [{"target": "Fallthrough", "results": []}],
@@ -664,8 +665,8 @@
       "debug_name": "sq128x128AffineKernel::tmp::u128_mul_range_check_out::16"},
      {"id": 9141276455071717346,
       "debug_name": "sq128x128AffineKernel::tmp::store_temp::17"},
-     {"id": 10517124024971223833,
-      "debug_name": "sq128x128AffineKernel::param::eRaw"}]}},
+     {"id": 7358283388725389383,
+      "debug_name": "sq128x128AffineKernel::param::eLane"}]}},
   {"Invocation":
    {"libfunc_id": {"id": 3328301606880823183, "debug_name": "branch_align"},
     "branches": [{"target": "Fallthrough", "results": []}],
@@ -801,12 +802,12 @@
       "debug_name": "sq128x128AddRaw::param::__range_check"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 11781514595653034246,
-      "debug_name": "sq128x128AddRaw::param::aRaw"}},
+     {"id": 3933057412415194770,
+      "debug_name": "sq128x128AddRaw::param::aLane"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 8126247667559813445,
-      "debug_name": "sq128x128AddRaw::param::bRaw"}}],
+     {"id": 11503077306844944811,
+      "debug_name": "sq128x128AddRaw::param::bLane"}}],
    "id": {"id": 9117438678557898484, "debug_name": "sq128x128AddRaw"},
    "entry_point": 0},
   {"signature":
@@ -824,12 +825,12 @@
       "debug_name": "sq128x128SubRaw::param::__range_check"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 11310171320284369623,
-      "debug_name": "sq128x128SubRaw::param::aRaw"}},
+     {"id": 15063184738545328573,
+      "debug_name": "sq128x128SubRaw::param::aLane"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 18198978933077032532,
-      "debug_name": "sq128x128SubRaw::param::bRaw"}}],
+     {"id": 17536587533367597600,
+      "debug_name": "sq128x128SubRaw::param::bLane"}}],
    "id": {"id": 12683949750100641091, "debug_name": "sq128x128SubRaw"},
    "entry_point": 11},
   {"signature":
@@ -847,11 +848,11 @@
       "debug_name": "sq128x128MulRaw::param::__range_check"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 1338571014116280971, "debug_name": "sq128x128MulRaw::param::aRaw"}},
+     {"id": 230134540784152809, "debug_name": "sq128x128MulRaw::param::aLane"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 2054069458774987208,
-      "debug_name": "sq128x128MulRaw::param::bRaw"}}],
+     {"id": 11570518457571294940,
+      "debug_name": "sq128x128MulRaw::param::bLane"}}],
    "id": {"id": 12994859415595946159, "debug_name": "sq128x128MulRaw"},
    "entry_point": 22},
   {"signature":
@@ -869,12 +870,12 @@
       "debug_name": "sq128x128DeltaRaw::param::__range_check"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 15329677733345213971,
-      "debug_name": "sq128x128DeltaRaw::param::aRaw"}},
+     {"id": 9302851406153712673,
+      "debug_name": "sq128x128DeltaRaw::param::aLane"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 16045457652980742224,
-      "debug_name": "sq128x128DeltaRaw::param::bRaw"}}],
+     {"id": 11147465861503745972,
+      "debug_name": "sq128x128DeltaRaw::param::bLane"}}],
    "id": {"id": 9369379763022797399, "debug_name": "sq128x128DeltaRaw"},
    "entry_point": 29},
   {"signature":
@@ -895,23 +896,23 @@
       "debug_name": "sq128x128AffineKernel::param::__range_check"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 7467404092286278349,
-      "debug_name": "sq128x128AffineKernel::param::aRaw"}},
+     {"id": 490505372480392387,
+      "debug_name": "sq128x128AffineKernel::param::aLane"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 9779437244546339886,
-      "debug_name": "sq128x128AffineKernel::param::bRaw"}},
+     {"id": 5180760282657711562,
+      "debug_name": "sq128x128AffineKernel::param::bLane"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 14106642249023000891,
-      "debug_name": "sq128x128AffineKernel::param::cRaw"}},
+     {"id": 17245018564152384761,
+      "debug_name": "sq128x128AffineKernel::param::cLane"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 16468127322714921684,
-      "debug_name": "sq128x128AffineKernel::param::dRaw"}},
+     {"id": 10852602919467337632,
+      "debug_name": "sq128x128AffineKernel::param::dLane"}},
     {"ty": {"id": 10698497612269247729, "debug_name": "u128"},
      "id":
-     {"id": 10517124024971223833,
-      "debug_name": "sq128x128AffineKernel::param::eRaw"}}],
+     {"id": 7358283388725389383,
+      "debug_name": "sq128x128AffineKernel::param::eLane"}}],
    "id": {"id": 8460224676857738633, "debug_name": "sq128x128AffineKernel"},
    "entry_point": 40}]}

@@ -13,6 +13,18 @@
       ]
     },
     {
+      "backend_contract": "SQ128x128TypedLaneContract",
+      "backend_module": "sq128x128_u128.Example",
+      "id": "sq128x128_u128",
+      "lean_test_file": "tests/lean/sierra_sq128x128_typed_differential.lean",
+      "replay_command": "lake env lean tests/lean/sierra_sq128x128_typed_differential.lean && scripts/test/run_backend_parity_case.sh sq128x128_u128.Example SQ128x128TypedLaneContract sq128x128_u128",
+      "vector_profiles": [
+        "normal",
+        "boundary",
+        "failure"
+      ]
+    },
+    {
       "backend_contract": "SierraU128RangeCheckedContract",
       "backend_module": "MyLeanSierraU128RangeChecked",
       "id": "u128_range_checked",

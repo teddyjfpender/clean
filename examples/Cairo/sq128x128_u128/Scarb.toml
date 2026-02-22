@@ -1,5 +1,5 @@
 [package]
-name = "s_q128x128_u128_contract"
+name = "s_q128x128_typed_lane_contract"
 version = "0.1.0"
 edition = "2024_07"
 

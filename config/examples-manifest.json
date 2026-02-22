@@ -372,12 +372,16 @@
         "benchmark_dir": "examples/Benchmark/sq128x128_u128"
       },
       "differential": {
-        "kind": "none",
-        "vector_profiles": [],
-        "replay_command": null,
-        "lean_test_file": null,
-        "backend_module": null,
-        "backend_contract": null
+        "kind": "composite",
+        "vector_profiles": [
+          "normal",
+          "boundary",
+          "failure"
+        ],
+        "replay_command": "lake env lean tests/lean/sierra_sq128x128_typed_differential.lean && scripts/test/run_backend_parity_case.sh sq128x128_u128.Example SQ128x128TypedLaneContract sq128x128_u128",
+        "lean_test_file": "tests/lean/sierra_sq128x128_typed_differential.lean",
+        "backend_module": "sq128x128_u128.Example",
+        "backend_contract": "SQ128x128TypedLaneContract"
       },
       "benchmark": {
         "kind": "gas_script",
@@ -393,7 +397,8 @@
         ],
         "capability_ids": [
           "cap.integer.u128.mul.wrapping",
-          "cap.integer.u128.add.wrapping"
+          "cap.integer.u128.add.wrapping",
+          "cap.integer.u128.sub.wrapping"
         ]
       }
     },

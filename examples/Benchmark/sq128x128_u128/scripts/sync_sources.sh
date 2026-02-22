@@ -5,20 +5,53 @@ BENCH_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ROOT_DIR="$(cd "$BENCH_DIR/../../.." && pwd)"
 
 GENERATED_SRC="$ROOT_DIR/examples/Cairo/sq128x128_u128/src/lib.cairo"
-BASELINE_TYPES_SRC="$ROOT_DIR/examples/Cairo-Baseline/sq128x128_u128/src/types.cairo"
-BASELINE_ARITH_SRC="$ROOT_DIR/examples/Cairo-Baseline/sq128x128_u128/src/arithmetic.cairo"
+UPSTREAM_SRC_DIR="${SQ128_UPSTREAM_DIR:-$ROOT_DIR/examples/Cairo-Baseline/sq128x128_u128/.artifacts/upstream-sq128-main}"
 
 GENERATED_DST="$BENCH_DIR/src/generated_function.cairo"
-BASELINE_TYPES_DST="$BENCH_DIR/src/baseline_types.cairo"
-BASELINE_ARITH_DST="$BENCH_DIR/src/baseline_arithmetic.cairo"
 BASELINE_FUNCTION_DST="$BENCH_DIR/src/baseline_function.cairo"
+UPSTREAM_DST_ROOT="$BENCH_DIR/src/upstream"
+UPSTREAM_DST_SQ128="$UPSTREAM_DST_ROOT/sq128"
 
-for p in "$GENERATED_SRC" "$BASELINE_TYPES_SRC" "$BASELINE_ARITH_SRC"; do
+required_generated=(
+  "$GENERATED_SRC"
+)
+
+required_upstream=(
+  "$UPSTREAM_SRC_DIR/common.cairo"
+  "$UPSTREAM_SRC_DIR/sq128.cairo"
+  "$UPSTREAM_SRC_DIR/advanced.cairo"
+  "$UPSTREAM_SRC_DIR/arithmetic.cairo"
+  "$UPSTREAM_SRC_DIR/constructors.cairo"
+  "$UPSTREAM_SRC_DIR/internal.cairo"
+  "$UPSTREAM_SRC_DIR/traits.cairo"
+  "$UPSTREAM_SRC_DIR/types.cairo"
+)
+
+for p in "${required_generated[@]}"; do
   if [[ ! -f "$p" ]]; then
-    echo "error: missing source: $p" >&2
+    echo "error: missing generated source: $p" >&2
     exit 1
   fi
 done
+
+for p in "${required_upstream[@]}"; do
+  if [[ ! -f "$p" ]]; then
+    echo "error: missing upstream source: $p" >&2
+    echo "hint: run examples/Cairo-Baseline/sq128x128_u128/scripts/pull_upstream_sq128.sh" >&2
+    exit 1
+  fi
+done
+
+mkdir -p "$UPSTREAM_DST_SQ128"
+
+cp "$UPSTREAM_SRC_DIR/common.cairo" "$UPSTREAM_DST_ROOT/common.cairo"
+cp "$UPSTREAM_SRC_DIR/sq128.cairo" "$UPSTREAM_DST_ROOT/sq128.cairo"
+cp "$UPSTREAM_SRC_DIR/advanced.cairo" "$UPSTREAM_DST_SQ128/advanced.cairo"
+cp "$UPSTREAM_SRC_DIR/arithmetic.cairo" "$UPSTREAM_DST_SQ128/arithmetic.cairo"
+cp "$UPSTREAM_SRC_DIR/constructors.cairo" "$UPSTREAM_DST_SQ128/constructors.cairo"
+cp "$UPSTREAM_SRC_DIR/internal.cairo" "$UPSTREAM_DST_SQ128/internal.cairo"
+cp "$UPSTREAM_SRC_DIR/traits.cairo" "$UPSTREAM_DST_SQ128/traits.cairo"
+cp "$UPSTREAM_SRC_DIR/types.cairo" "$UPSTREAM_DST_SQ128/types.cairo"
 
 python3 - "$GENERATED_SRC" "$GENERATED_DST" <<'PY'
 import re
@@ -53,56 +86,116 @@ impl_open = impl_match.end() - 1
 impl_close = find_matching_brace(source, impl_open)
 impl_block = source[impl_match.start():impl_close + 1]
 
-fn_match = re.search(r"fn\s+sq128x128_affine_kernel\s*\((?P<params>.*?)\)\s*->\s*(?P<ret>[A-Za-z0-9_]+)\s*\{", impl_block, re.S)
-if not fn_match:
-    fail("failed to locate function sq128x128_affine_kernel in generated impl")
-fn_open = fn_match.end() - 1
-fn_close = find_matching_brace(impl_block, fn_open)
-fn_source = impl_block[fn_match.start():fn_close + 1]
+function_names = [
+    "sq128x128_add_raw",
+    "sq128x128_sub_raw",
+    "sq128x128_mul_raw",
+    "sq128x128_delta_raw",
+    "sq128x128_affine_kernel",
+]
 
-brace_index = fn_source.find("{")
-signature = fn_source[:brace_index].strip()
-body = fn_source[brace_index:]
-sig_match = re.match(r"fn\s+sq128x128_affine_kernel\s*\((?P<params>.*)\)\s*->\s*(?P<ret>[A-Za-z0-9_]+)", signature, re.S)
-if not sig_match:
-    fail("failed to parse function signature")
-params_text = sig_match.group("params")
-ret_ty = sig_match.group("ret")
+chunks: list[str] = [
+    "// Synced from examples/Cairo/sq128x128_u128/src/lib.cairo",
+    "// Extracted generated functions with `self: @ContractState` removed.",
+    "",
+]
 
-parts = [p.strip() for p in params_text.split(",") if p.strip()]
-filtered = [p for p in parts if not re.fullmatch(r"self\s*:\s*@ContractState", " ".join(p.split()))]
-rendered_params = ", ".join(filtered)
+for fn_name in function_names:
+    pattern = re.compile(
+        rf"fn\s+{re.escape(fn_name)}\s*\((?P<params>.*?)\)\s*->\s*(?P<ret>[A-Za-z0-9_]+)\s*\{{",
+        re.S,
+    )
+    fn_match = pattern.search(impl_block)
+    if not fn_match:
+        fail(f"failed to locate function {fn_name} in generated impl")
 
-out = (
-    "// Synced from examples/Cairo/sq128x128_u128/src/lib.cairo\n"
-    "// Extracted function: sq128x128_affine_kernel (self removed)\n\n"
-    f"pub fn sq128x128_affine_kernel_generated({rendered_params}) -> {ret_ty} {body}\n"
-)
-out_path.write_text(out, encoding="utf-8")
-PY
+    fn_open = fn_match.end() - 1
+    fn_close = find_matching_brace(impl_block, fn_open)
+    fn_source = impl_block[fn_match.start():fn_close + 1]
 
-cp "$BASELINE_TYPES_SRC" "$BASELINE_TYPES_DST"
-python3 - "$BASELINE_ARITH_SRC" "$BASELINE_ARITH_DST" <<'PY'
-import sys
-from pathlib import Path
+    brace_index = fn_source.find("{")
+    signature = fn_source[:brace_index].strip()
+    body = fn_source[brace_index:]
 
-src = Path(sys.argv[1]).read_text(encoding="utf-8")
-src = src.replace("super::types", "super::baseline_types")
-Path(sys.argv[2]).write_text(src, encoding="utf-8")
+    sig_match = re.match(
+        rf"fn\s+{re.escape(fn_name)}\s*\((?P<params>.*)\)\s*->\s*(?P<ret>[A-Za-z0-9_]+)",
+        signature,
+        re.S,
+    )
+    if not sig_match:
+        fail(f"failed to parse function signature for {fn_name}")
+
+    params_text = sig_match.group("params")
+    ret_ty = sig_match.group("ret")
+    parts = [p.strip() for p in params_text.split(",") if p.strip()]
+    filtered = [p for p in parts if not re.fullmatch(r"self\s*:\s*@ContractState", " ".join(p.split()))]
+    rendered_params = ", ".join(filtered)
+
+    chunks.append(f"pub fn {fn_name}_generated({rendered_params}) -> {ret_ty} {body}")
+    chunks.append("")
+
+out_path.write_text("\n".join(chunks).rstrip() + "\n", encoding="utf-8")
 PY
 
 cat > "$BASELINE_FUNCTION_DST" <<'EOF2'
-// Wrapper to keep benchmark call-sites stable.
-use super::baseline_arithmetic::sq128x128_affine_kernel_baseline;
+// Wrappers over freshly pulled upstream SQ128 modules.
+
+use super::upstream::sq128::{
+    SQ128x128,
+    U128IntoSQ128x128,
+    add_unchecked,
+    delta,
+    mul_down_unchecked,
+    sub_unchecked,
+    to_raw,
+};
+
+const TWO_POW_64: u128 = 0x1_0000_0000_0000_0000_u128;
+
+fn sq_to_u128_integer_unchecked(value: SQ128x128) -> u128 {
+    let raw = to_raw(value);
+    assert(raw.neg == false, 'sq_neg');
+    assert(raw.limb0 == 0_u64, 'sq_frac0');
+    assert(raw.limb1 == 0_u64, 'sq_frac1');
+    raw.limb2.into() + raw.limb3.into() * TWO_POW_64
+}
+
+pub fn sq128x128_add_raw_baseline_fn(a_raw: u128, b_raw: u128) -> u128 {
+    let a: SQ128x128 = a_raw.into();
+    let b: SQ128x128 = b_raw.into();
+    sq_to_u128_integer_unchecked(add_unchecked(a, b))
+}
+
+pub fn sq128x128_sub_raw_baseline_fn(a_raw: u128, b_raw: u128) -> u128 {
+    let a: SQ128x128 = a_raw.into();
+    let b: SQ128x128 = b_raw.into();
+    sq_to_u128_integer_unchecked(sub_unchecked(a, b))
+}
+
+pub fn sq128x128_mul_raw_baseline_fn(a_raw: u128, b_raw: u128) -> u128 {
+    let a: SQ128x128 = a_raw.into();
+    let b: SQ128x128 = b_raw.into();
+    sq_to_u128_integer_unchecked(mul_down_unchecked(a, b))
+}
+
+pub fn sq128x128_delta_raw_baseline_fn(a_raw: u128, b_raw: u128) -> u128 {
+    let a: SQ128x128 = a_raw.into();
+    let b: SQ128x128 = b_raw.into();
+    sq_to_u128_integer_unchecked(delta(a, b))
+}
 
 pub fn sq128x128_affine_kernel_baseline_fn(
-    a_raw: u128, b_raw: u128, c_raw: u128, d_raw: u128, e_raw: u128
+    a_raw: u128, b_raw: u128, c_raw: u128, d_raw: u128, e_raw: u128,
 ) -> u128 {
-    sq128x128_affine_kernel_baseline(a_raw, b_raw, c_raw, d_raw, e_raw)
+    let sum_ab = sq128x128_add_raw_baseline_fn(a_raw, b_raw);
+    let delta_cd = sq128x128_sub_raw_baseline_fn(c_raw, d_raw);
+    let mul_term = sq128x128_mul_raw_baseline_fn(sum_ab, delta_cd);
+    sq128x128_add_raw_baseline_fn(mul_term, e_raw)
 }
 EOF2
 
 echo "synced: $GENERATED_DST"
-echo "synced: $BASELINE_TYPES_DST"
-echo "synced: $BASELINE_ARITH_DST"
 echo "synced: $BASELINE_FUNCTION_DST"
+echo "synced: $UPSTREAM_DST_ROOT/common.cairo"
+echo "synced: $UPSTREAM_DST_ROOT/sq128.cairo"
+echo "synced: $UPSTREAM_DST_SQ128/{advanced,arithmetic,constructors,internal,traits,types}.cairo"

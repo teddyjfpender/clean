@@ -109,26 +109,95 @@ partial def emitExpr (fnName : String) (env : Env) : IRExpr ty -> EmitM (Env × 
   | .litFelt252 value => do
       let outVar <- emitFeltConst fnName value
       pure (env, outVar)
+  | .litInt .u128 value => do
+      let outVar <- emitU128Const fnName value
+      pure (env, outVar)
+  | .litInt ty _ =>
+      unsupportedExpr fnName s!"typed literal lowering is not yet implemented for '{Ty.toCairo ty}'"
   | .addFelt252 lhs rhs =>
       emitFeltBinary fnName "felt252_add" "felt_add" env lhs rhs
   | .subFelt252 lhs rhs =>
       emitFeltBinary fnName "felt252_sub" "felt_sub" env lhs rhs
   | .mulFelt252 lhs rhs =>
       emitFeltBinary fnName "felt252_mul" "felt_mul" env lhs rhs
+  | .addInt .u128 lhs rhs =>
+      emitU128OverflowingWrapping fnName env lhs rhs "u128_overflowing_add" "u128_add"
+  | .addInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer add lowering is not yet implemented for '{Ty.toCairo ty}'"
+  | .subInt .u128 lhs rhs =>
+      emitU128OverflowingWrapping fnName env lhs rhs "u128_overflowing_sub" "u128_sub"
+  | .subInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer sub lowering is not yet implemented for '{Ty.toCairo ty}'"
+  | .mulInt .u128 lhs rhs =>
+      emitU128MulWrapping fnName env lhs rhs
+  | .mulInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer mul lowering is not yet implemented for '{Ty.toCairo ty}'"
+  | .divInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer div lowering is not yet implemented for '{Ty.toCairo ty}'"
+  | .modInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer mod lowering is not yet implemented for '{Ty.toCairo ty}'"
+  | .bitAndInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer bit-and lowering is not yet implemented for '{Ty.toCairo ty}'"
+  | .bitOrInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer bit-or lowering is not yet implemented for '{Ty.toCairo ty}'"
+  | .bitXorInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer bit-xor lowering is not yet implemented for '{Ty.toCairo ty}'"
+  | .shlInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer shl lowering is not yet implemented for '{Ty.toCairo ty}'"
+  | .shrInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer shr lowering is not yet implemented for '{Ty.toCairo ty}'"
   | .addU128 lhs rhs =>
       emitU128OverflowingWrapping fnName env lhs rhs "u128_overflowing_add" "u128_add"
   | .subU128 lhs rhs =>
       emitU128OverflowingWrapping fnName env lhs rhs "u128_overflowing_sub" "u128_sub"
   | .mulU128 lhs rhs =>
       emitU128MulWrapping fnName env lhs rhs
+  | .divU128 _ _ =>
+      u128ArithUnsupported fnName "div"
+  | .modU128 _ _ =>
+      u128ArithUnsupported fnName "mod"
+  | .bitAndU128 _ _ =>
+      u128ArithUnsupported fnName "bit_and"
+  | .bitOrU128 _ _ =>
+      u128ArithUnsupported fnName "bit_or"
+  | .bitXorU128 _ _ =>
+      u128ArithUnsupported fnName "bit_xor"
+  | .shlU128 _ _ =>
+      u128ArithUnsupported fnName "shl"
+  | .shrU128 _ _ =>
+      u128ArithUnsupported fnName "shr"
   | .addU256 _ _ =>
       u256ArithUnsupported fnName "add"
   | .subU256 _ _ =>
       u256ArithUnsupported fnName "sub"
   | .mulU256 _ _ =>
       u256ArithUnsupported fnName "mul"
+  | .divU256 _ _ =>
+      u256ArithUnsupported fnName "div"
+  | .modU256 _ _ =>
+      u256ArithUnsupported fnName "mod"
+  | .bitAndU256 _ _ =>
+      u256ArithUnsupported fnName "bit_and"
+  | .bitOrU256 _ _ =>
+      u256ArithUnsupported fnName "bit_or"
+  | .bitXorU256 _ _ =>
+      u256ArithUnsupported fnName "bit_xor"
+  | .shlU256 _ _ =>
+      u256ArithUnsupported fnName "shl"
+  | .shrU256 _ _ =>
+      u256ArithUnsupported fnName "shr"
+  | .u256FromLimbs _ _ =>
+      u256ArithUnsupported fnName "from_limbs"
+  | .u256Low _ =>
+      u256ArithUnsupported fnName "low"
+  | .u256High _ =>
+      u256ArithUnsupported fnName "high"
   | .eq _ _ =>
       unsupportedExpr fnName "equality lowering is currently supported only for top-level return expressions"
+  | .ltInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer lt lowering is not yet implemented for '{Ty.toCairo ty}'"
+  | .leInt ty _ _ =>
+      unsupportedExpr fnName s!"typed integer le lowering is not yet implemented for '{Ty.toCairo ty}'"
   | .ltU128 _ _ =>
       unsupportedExpr fnName "ltU128 lowering is not yet implemented"
   | .leU128 _ _ =>

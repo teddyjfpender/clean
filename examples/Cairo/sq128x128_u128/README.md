@@ -1,7 +1,7 @@
 # Generated Starknet Contract
 
-Contract: `SQ128x128U128Contract`
-Package: `s_q128x128_u128_contract`
+Contract: `SQ128x128TypedLaneContract`
+Package: `s_q128x128_typed_lane_contract`
 CASM enabled: `false`
 
 ## Build
